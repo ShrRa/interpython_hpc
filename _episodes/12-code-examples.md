@@ -128,8 +128,9 @@ __global__ void add(int *a, int *b, int *c, int N) {
         c[index] = a[index] + b[index];
 }
 ```
-
+~~~
 > ## Exercise: Show which parts of the code execute on GPU vs CPU (host vs device). Introduce concepts like memory copy and kernel launch.
+~~~
 {: .challenge}
 
 > **Reference**: [NVIDIA CUDA Samples](https://github.com/NVIDIA/cuda-samples)
