@@ -143,31 +143,45 @@ __global__ void add(int *a, int *b, int *c, int N) {
 
 GPUs have thousands of small cores and are highly effective for data-parallel problems.
 
-### CPU vs GPU Architecture
+## Comparing CPU and GPU Approaches
 
-- CPUs: Few powerful cores, better for sequential tasks.
-- GPUs: Many lightweight cores, ideal for parallel workloads.
+| Feature      | CPU (OpenMP/MPI)          | GPU (CUDA)                  |
+|--------------|---------------------------|-----------------------------|
+| Cores        | Few (2–64)                | Thousands (1024–10000+)     |
+| Memory       | Shared / distributed      | Device-local (needs transfer)|
+| Programming  | Easier to debug           | Requires more setup         |
+| Performance  | Good for logic-heavy tasks| Excellent for large, data-parallel problems |
 
-> **Figure Suggestion**: Diagram comparing CPU vs GPU architecture, e.g., from [CUDA C Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html)
+> **Figure**: Bar chart showing performance on matrix multiplication or vector addition.
 
 ---
 
-## Simple CUDA GPU Code Example
+## High-Level Libraries for Portability
 
-Here’s a basic CUDA example for vector addition:
+High-level libraries allow easier GPU programming in Python:
 
-```cuda
-__global__ void add(int *a, int *b, int *c, int N) {
-    int index = threadIdx.x + blockIdx.x * blockDim.x;
-    if (index < N)
-        c[index] = a[index] + b[index];
-}
+- **Numba**: JIT compiler for Python; supports GPU via `@cuda.jit`
+- **CuPy**: NumPy-like API for NVIDIA GPUs
+- **Dask**: Parallel computing with familiar APIs
+
+Example using Numba:
+
+```python
+from numba import cuda
+import numpy as np
+
+@cuda.jit
+def add_vectors(a, b, c):
+    i = cuda.grid(1)
+    if i < a.size:
+        c[i] = a[i] + b[i]
 ```
 
-> ## Exercise: Show which parts of the code execute on GPU vs CPU (host vs device). Introduce concepts like memory copy and kernel launch.
-{: .challenge}
+> **Exercise**: Write a Numba or CuPy version of vector addition and compare speed with NumPy.
 
-> **Reference**: [NVIDIA CUDA Samples](https://github.com/NVIDIA/cuda-samples)
+> **References**:
+- [Numba CUDA Docs](https://numba.readthedocs.io/en/stable/cuda/)
+- [CuPy Documentation](https://docs.cupy.dev/)
 
 ---
 
