@@ -46,7 +46,8 @@ print(f"Sum: {total}, Time taken: {end - start:.4f} seconds")
 - This code runs on a single core.
 - Useful to measure baseline performance.
 
-> **Exercise**: Modify the above to use a manual loop with `for` instead of `np.sum`, and compare the performance.
+> ## Exercise: Modify the above to use a manual loop with `for` instead of `np.sum`, and compare the performance.
+{: .challenge}
 
 > **Reference**: [Carpentries Python loops lesson](https://swcarpentry.github.io/python-novice-inflammation/05-loop.html)
 
@@ -96,7 +97,8 @@ if rank == 0:
 - MPI enables message passing across multiple processes.
 - Common in supercomputers and clusters.
 
-> **Exercise**: Modify serial array summation using OpenMP (C) or `multiprocessing` (Python).
+> ## Exercise: Modify serial array summation using OpenMP (C) or `multiprocessing` (Python).
+{: .challenge}
 
 > **References**:
 - [OpenMP Examples](https://www.openmp.org/resources/examples/)
