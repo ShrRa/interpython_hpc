@@ -1,20 +1,6 @@
 ---
 title: "Intro code examples"
 start: False
-teaching: 5
-exercises: 0
-questions:
-- "Question 1"
-objectives:
-- "Objective 1"
-keypoints:
-- "Keypoint 1"
----
-
-- Introducing code examples (CPU and GPU ones), brief explanation of HPC coding
-
----
-title: "Introducing Code Examples (CPU and GPU) and Brief Explanation of HPC Coding"
 teaching: 30
 exercises: 20
 questions:
