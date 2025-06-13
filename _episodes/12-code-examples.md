@@ -113,7 +113,8 @@ GPUs have thousands of small cores and are highly effective for data-parallel pr
 - CPUs: Few powerful cores, better for sequential tasks.
 - GPUs: Many lightweight cores, ideal for parallel workloads.
 
-> ## **Figure Suggestion**: Diagram comparing CPU vs GPU architecture, e.g., from [CUDA C Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html)
+> ## Figure Suggestion: Diagram comparing CPU vs GPU architecture, e.g., from [CUDA C Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html)
+{: .callout}
 
 ---
 
@@ -128,9 +129,8 @@ __global__ void add(int *a, int *b, int *c, int N) {
         c[index] = a[index] + b[index];
 }
 ```
-~~~
+
 > ## Exercise: Show which parts of the code execute on GPU vs CPU (host vs device). Introduce concepts like memory copy and kernel launch.
-~~~
 {: .challenge}
 
 > **Reference**: [NVIDIA CUDA Samples](https://github.com/NVIDIA/cuda-samples)
