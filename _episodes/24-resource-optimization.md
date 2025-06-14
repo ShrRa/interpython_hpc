@@ -22,7 +22,7 @@ keypoints:
 By the end of this lesson, you will be able to:
 
 
-## 8.1 Understanding Resource Requirements
+## Understanding Resource Requirements
 
 Different computational tasks have varying resource requirements. Understanding these patterns is crucial for efficient HPC usage.
 
@@ -72,7 +72,7 @@ watch -n 1 nvidia-smi
 | GPU        | `gpu`            | `--gpus`, `--cpus-per-task`   | Deep learning training      |
 
 ---
-## 8.2 Sequential Job Optimization
+## Sequential Job Optimization
 
 Sequential jobs run on a single CPU core and are suitable for tasks that cannot be parallelized.
 
@@ -172,7 +172,11 @@ echo "Node: $SLURM_NODELIST"
 echo "Job completed at $(date)"
 ```
 
-## 8.3 Parallel Job Optimization
+> ## Exercise: Profile Your Code
+> Compile and run the sequential matrix multiplication. Use `time` and `htop` to monitor resource usage. Identify whether it's CPU-bound or memory-bound
+{: .challenge}
+
+## Parallel Job Optimization
 
 Parallel jobs can utilize multiple CPU cores across one or more nodes to accelerate computation.
 
@@ -281,7 +285,11 @@ echo "Number of OpenMP threads: $OMP_NUM_THREADS"
 echo "Job completed at $(date)"
 ```
 
-## 8.4 GPU Job Optimization
+> ## Exercise: Optimize Parallel Performance
+> Compile the OpenMP version with different thread counts. Submit jobs with varying `--cpus-per-task` values. Plot performance vs. thread count
+{: .challenge}
+
+## GPU Job Optimization
 
 GPU jobs leverage graphics processing units for massively parallel computations.
 
@@ -455,6 +463,9 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+> ## Exercise: GPU vs CPU Comparison
+> Run the tensor operations script on both CPU and GPU. Compare execution times and memory usage. Calculate the speedup factor
+{: .challenge}
 
 ### Optimized GPU Job Script
 
@@ -492,7 +503,7 @@ python tensor_operations.py
 echo "Job completed at $(date)"
 ```
 
-## 8.5 Resource Monitoring and Performance Analysis
+## Resource Monitoring and Performance Analysis
 
 ### Monitoring Job Performance
 
@@ -578,7 +589,11 @@ if __name__ == "__main__":
     create_performance_chart()
 ```
 
-## 8.6 Best Practices and Common Pitfalls
+> ## Exercise: Resource Efficiency Analysis
+> Submit jobs with different resource allocations. Use `seff` to analyze job efficiency. Identify optimal resource configurations
+{: .challenge}
+
+## Best Practices and Common Pitfalls
 
 ### Resource Allocation Best Practices
 
@@ -629,27 +644,8 @@ if __name__ == "__main__":
    #SBATCH --gpus-per-node=1
    ```
 
-## Exercises
 
-### Exercise 1: Profile Your Code
-1. Compile and run the sequential matrix multiplication
-2. Use `time` and `htop` to monitor resource usage
-3. Identify whether it's CPU-bound or memory-bound
 
-### Exercise 2: Optimize Parallel Performance
-1. Compile the OpenMP version with different thread counts
-2. Submit jobs with varying `--cpus-per-task` values
-3. Plot performance vs. thread count
-
-### Exercise 3: GPU vs CPU Comparison
-1. Run the tensor operations script on both CPU and GPU
-2. Compare execution times and memory usage
-3. Calculate the speedup factor
-
-### Exercise 4: Resource Efficiency Analysis
-1. Submit jobs with different resource allocations
-2. Use `seff` to analyze job efficiency
-3. Identify optimal resource configurations
 
 ## Summary
 
