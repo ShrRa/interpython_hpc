@@ -30,19 +30,14 @@ Parallel programming allows us to split work across multiple CPUs or even GPUs. 
 
 ## Serial Code Example (CPU)
 
-Before diving into parallel computing or GPU acceleration, it's important to understand how performance can already be improved significantly on a CPU using efficient libraries. One of the most widely used tools for this in Python is NumPy.
-
-NumPy provides a fast and memory-efficient way to handle large numerical datasets using multi-dimensional arrays and vectorized operations. While regular Python lists are flexible, they are not optimized for heavy numerical tasks. Looping through data element by element can quickly become a bottleneck as the problem size grows.
-
-NumPy solves this problem by providing a powerful N-dimensional array object and tools for performing operations on these arrays efficiently. Under the hood, NumPy uses optimized C code, so operations are much faster than using standard Python loops.
-
-NumPy also supports vectorized operations, which means you can apply functions to entire arrays without writing explicit loops. This not only improves performance but also leads to cleaner and more readable code.
+### Introduction to NumPy
+Before diving into parallel computing or GPU acceleration, it's important to understand how performance can already be improved significantly on a CPU using efficient libraries. One of the most widely used tools for this in Python is `NumPy`. NumPy provides a fast and memory-efficient way to handle large numerical datasets using multi-dimensional arrays and vectorized operations. While regular Python lists are flexible, they are not optimized for heavy numerical tasks. Looping through data element by element can quickly become a bottleneck as the problem size grows. NumPy solves this problem by providing a powerful N-dimensional array object and tools for performing operations on these arrays efficiently. Under the hood, NumPy uses optimized C code, so operations are much faster than using standard Python loops. NumPy also supports vectorized operations, which means you can apply functions to entire arrays without writing explicit loops. This not only improves performance but also leads to cleaner and more readable code. 
 
 Using NumPy on the CPU is often the first step toward writing efficient scientific code. It's a strong foundation before we move on to parallel computing or GPU acceleration.
 
-Now, we'll see an example of how a simple numerical operation is implemented using NumPy on a single CPU core.
+> Now, we'll see an example of how a simple numerical operation is implemented using NumPy on a single CPU core.
 
-We begin with a simple example of serial computation: summing the elements of a large array.
+> We begin with a simple example of serial computation: summing the elements of a large array.
 
 ```python
 import numpy as np
