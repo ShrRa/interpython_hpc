@@ -24,16 +24,16 @@ The laptop or PC you're using right now probably has between 8 and 32 Gb of **RA
 **Should be explain this taxonomy, or it's redundant?**
 
 - Flynn’s taxonomy, uses four words:
-    -- **S** single.
-    -- **I** instruction.
-    -- **M** multiple.
-    -- **D** data.
+    * **S** single.
+    * **I** instruction.
+    * **M** multiple.
+    * **D** data.
 - These four letters are used to define four main and distinct types of computer architectures [Gebali, 2011]:
-    -- SISD single instruction single data. Single processor machines.
-    -- SIMD single instruction multiple data. Multiple processors. All processors
+    * SISD single instruction single data. Single processor machines.
+    * SIMD single instruction multiple data. Multiple processors. All processors
 execute the same instruction on different data.
-    -- MISD multiple instruction single data. Systolic arrays. Uncommon.
-    -- MIMD multiple instruction multiple data. Multicore processors and multithreaded multiprocessors. 
+    * MISD multiple instruction single data. Systolic arrays. Uncommon.
+    * MIMD multiple instruction multiple data. Multicore processors and multithreaded multiprocessors. 
 Each processor is running its instructions on its local data.
 In addition to the previous classifications, parallel computers can be further divided
 into two principal groups based on memory organization [Gebali, 2011]:
