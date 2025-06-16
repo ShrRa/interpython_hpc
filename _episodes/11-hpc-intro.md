@@ -43,6 +43,10 @@ into two principal groups based on memory organization [Gebali, 2011]:
 ### Supercomputers vs Computing Clusters. Terminology: nodes, load balancer
 
 ### Network topology for clusters
+Don't run computations on login node)
+
+### File system
+Scratch, temp, etc
 
 ## Which computer for which task?
 
