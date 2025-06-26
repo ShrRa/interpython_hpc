@@ -84,7 +84,85 @@ for (int i = 0; i < N; i++) {
 }
 ```
 
-Requires adding `#include <omp.h>` and compiling with `-fopenmp`.
+# OpenMP Parallel Loop Explanation
+
+**Requirements**:  
+- Add `#include <omp.h>` to your code
+- Compile with `-fopenmp` flag
+
+Since C programming is not a prerequisite for this workshop, let's break down the parallel loop code in detail.
+
+## Overview
+The code demonstrates how to run a loop in parallel using multiple CPU cores with OpenMP.
+
+## Code Breakdown
+
+### 1. Header Inclusion
+```c
+#include <omp.h>
+```
+**Purpose**:
+- Includes the OpenMP library
+- Required for all OpenMP functions and directives
+- Without this, the compiler won't recognize OpenMP commands
+
+### 2. Compiler Directive
+```c
+#pragma omp parallel for
+```
+**What it does**:
+- Special instruction for the compiler (not regular code)
+- Means: "Run this loop in parallel using multiple CPU cores"
+- The compiler automatically handles dividing the work
+
+### 3. Parallel Loop
+```c
+for (int i = 0; i < N; i++) {
+    a[i] = b[i] + c[i];
+}
+```
+**Operation**:
+- Performs element-wise addition of arrays `b` and `c`
+- Stores results in array `a`
+
+## How OpenMP Executes This
+
+1. **Detects available CPU cores** (e.g., finds 4 or 8 cores)
+2. **Divides the loop iterations** among the cores
+3. **Processes chunks simultaneously** (each core works on its portion)
+4. **Combines results** when all cores finish
+
+## Real-World Analogy
+
+Imagine sending 100 emails:
+
+- **Without OpenMP**: One person sends all 100 emails sequentially
+- **With OpenMP**: 4 people each send 25 emails at the same time (about 4× faster)
+
+## Exercise: Parallelization Challenge
+
+> Consider this loop:
+> 
+> ~~~c
+> for (int i = 1; i < N; i++) {
+>   a[i] = a[i-1] + b[i];
+> }
+> ~~~
+{: .challenge}
+
+Can this be parallelized with OpenMP? Why or why not?
+
+> ## Solution
+>
+> No, this cannot be safely parallelized because each iteration depends on the result of the previous iteration (`a[i-1]`). 
+> 
+> OpenMP requires loop iterations to be independent for parallel execution. Here, since each `a[i]` relies on `a[i-1]`, the loop has a **sequential dependency**, also known as a **loop-carried dependency**. 
+> 
+> This prevents naive parallelization with OpenMP's `#pragma omp parallel for`.
+>
+> However, this type of problem can be parallelized using more advanced techniques like a **parallel prefix sum (scan)** algorithm, which restructures the computation to allow parallel execution in logarithmic steps instead of linear.
+{: .solution}
+
 
 ### MPI: Distributed Memory Model
 
@@ -203,7 +281,7 @@ def add_vectors(a, b, c):
 
 ---
 
-## Simple CUDA GPU Code Example
+<!-- ## Simple CUDA GPU Code Example
 
 Here’s a basic CUDA example for vector addition:
 
@@ -213,12 +291,7 @@ __global__ void add(int *a, int *b, int *c, int N) {
     if (index < N)
         c[index] = a[index] + b[index];
 }
-```
-
-> ## Exercise: Show which parts of the code execute on GPU vs CPU (host vs device). Introduce concepts like memory copy and kernel launch.
-{: .challenge}
-
-> **Reference**: [NVIDIA CUDA Samples](https://github.com/NVIDIA/cuda-samples)
+``` -->
 
 ---
 
@@ -238,6 +311,11 @@ __global__ void add(int *a, int *b, int *c, int N) {
 | Memory       | Shared / distributed      | Device-local (needs transfer)|
 | Programming  | Easier to debug           | Requires more setup         |
 | Performance  | Good for logic-heavy tasks| Excellent for large, data-parallel problems |
+
+> ## Exercise: Show which parts of the code execute on GPU vs CPU (host vs device). Introduce concepts like memory copy and kernel launch.
+{: .challenge}
+
+> **Reference**: [NVIDIA CUDA Samples](https://github.com/NVIDIA/cuda-samples)
 
 > **Figure**: Bar chart showing performance on matrix multiplication or vector addition.
 
