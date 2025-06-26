@@ -72,6 +72,35 @@ watch -n 1 nvidia-smi
 | GPU        | `gpu`            | `--gpus`, `--cpus-per-task`   | Deep learning training      |
 
 ---
+
+## Example
+
+For understanding how we can utilise different resources available on the HPC for the same computational task, we take the example of a python code which calculates the Gravitational Deflection Angle defined in the following way: 
+
+### Deflection Angle Formula
+
+For light passing near a massive object, the deflection angle (α) in the weak-field approximation is given by:
+
+```
+α = 4GM / (c²b)
+```
+
+Where:
+
+- G = Gravitational constant (6.67430 × 10⁻¹¹ m³ kg⁻¹ s⁻²)
+- M = Mass of the lensing object (in kilograms)
+- c = Speed of light (299792458 m/s)
+- b = Impact parameter (the closest approach distance of the light ray to the mass, in meters)
+
+## Computational Task Description
+
+Compute the deflection angle over a grid of:
+
+- Mass values: From 1 to 1000 solar masses (10³⁰ to 10³³ kg)
+- Impact parameters: From 10⁹ to 10¹² meters
+
+Generate a 2D array where each entry corresponds to the deflection angle for a specific pair of mass and impact parameter. Now we will look at how we will implement this for the different resources available on the HPC. 
+
 ## Sequential Job Optimization
 
 Sequential jobs run on a single CPU core and are suitable for tasks that cannot be parallelized.
@@ -94,9 +123,70 @@ Sequential jobs run on a single CPU core and are suitable for tasks that cannot 
 - `#SBATCH -e errorfile.%J`: Redirects error messages to separate file
 - `#SBATCH --partition=serial`: Specifies the queue/partition for sequential jobs
 
-### Example: Matrix Multiplication (Sequential)
+### Example: Sequential
+```python
+import numpy as np
+import time
+import matplotlib.pyplot as plt
+import os
+import matplotlib.colors as colors
 
-```c
+# Constants
+G = 6.67430e-11
+c = 299792458
+M_sun = 1.98847e30
+
+# Parameter grid
+mass_grid = np.linspace(1, 1000, 10000)  # Solar masses
+impact_grid = np.linspace(1e9, 1e12, 10000)  # meters
+
+result = np.zeros((len(mass_grid), len(impact_grid)))
+
+# Timing
+start = time.time()
+
+# Sequential computation
+for i, M in enumerate(mass_grid):
+    for j, b in enumerate(impact_grid):
+        result[i, j] = (4 * G * M * M_sun) / (c**2 * b)
+
+end = time.time()
+
+print(f"CPU Sequential time: {end - start:.3f} seconds")
+
+result = np.save("result_cpu.npy", result)
+mass_grid = np.save("mass_grid_cpu.npy", mass_grid)
+impact_grid = np.save("impact_grid_cpu.npy", impact_grid)
+
+# Load data
+result = np.load("result_cpu.npy")
+mass_grid = np.load("mass_grid_cpu.npy")
+impact_grid = np.load("impact_grid_cpu.npy")
+
+# Create meshgrid
+M, B = np.meshgrid(mass_grid / 1.989e30, impact_grid / 1e9, indexing='ij')
+
+# Create output directory
+os.makedirs("plots", exist_ok=True)
+
+plt.figure(figsize=(8,6))
+pcm = plt.pcolormesh(B, M, result,
+                      norm=colors.LogNorm(vmin=result[result > 0].min(), vmax=result.max()),
+                      shading='auto', cmap='plasma')
+
+plt.colorbar(pcm, label='Deflection Angle (radians, log scale)')
+plt.xlabel('Impact Parameter (Gm)')
+plt.ylabel('Mass (Solar Masses)')
+plt.title('Gravitational Deflection Angle - CPU')
+
+plt.tight_layout()
+plt.savefig("plots/deflection_angle_cpu.png", dpi=300)
+plt.close()
+
+print("CPU plot saved in 'plots/deflection_angle_cpu.png'")
+```
+
+<!-- ```c
 // matrix_mult_sequential.c
 #include <stdio.h>
 #include <stdlib.h>
@@ -150,7 +240,7 @@ int main() {
     
     return 0;
 }
-```
+``` -->
 
 ### Optimized Sequential Job Script
 
@@ -198,9 +288,91 @@ mpirun -np 48 ./mpi_program           # Run with 48 MPI processes (2 nodes × 24
 - `#SBATCH -n 24`: Specifies 24 CPU cores per node
 - `mpirun -np 48`: Launches 48 MPI processes total (2 × 24)
 
-### Example: Matrix Multiplication (OpenMP Parallel)
+### Example: OpenMP Parallel
 
-```c
+```python
+from mpi4py import MPI
+import numpy as np
+import time
+import os 
+import matplotlib.pyplot as plt
+import matplotlib.colors as colors
+
+# MPI setup
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+size = comm.Get_size()
+
+# Constants
+G = 6.67430e-11
+c = 299792458
+M_sun = 1.98847e30
+
+# Parameter grid (same on all ranks)
+mass_grid = np.linspace(1, 1000, 10000)  # Solar masses
+impact_grid = np.linspace(1e9, 1e12, 10000)  # meters
+
+# Distribute mass grid among ranks
+chunk_size = len(mass_grid) // size
+start_idx = rank * chunk_size
+end_idx = (rank + 1) * chunk_size if rank != size - 1 else len(mass_grid)
+
+local_mass = mass_grid[start_idx:end_idx]
+local_result = np.zeros((len(local_mass), len(impact_grid)))
+
+# Timing
+local_start = time.time()
+
+# Compute local chunk
+for i, M in enumerate(local_mass):
+    for j, b in enumerate(impact_grid):
+        local_result[i, j] = (4 * G * M * M_sun) / (c**2 * b)
+
+local_end = time.time()
+print(f"Rank {rank} local time: {local_end - local_start:.3f} seconds")
+
+# Gather results
+result = None
+if rank == 0:
+    result = np.zeros((len(mass_grid), len(impact_grid)))
+
+comm.Gather(local_result, result, root=0)
+
+if rank == 0:
+    total_time = local_end - local_start
+    print(f"MPI total time (wall time): {total_time:.3f} seconds")
+    result = np.save("result_mpi.npy", result)
+    mass_grid = np.save("mass_grid_mpi.npy", mass_grid)
+    impact_grid = np.save("impact_grid_mpi.npy", impact_grid)
+
+# Load data
+result = np.load("result_mpi.npy")
+mass_grid = np.load("mass_grid_mpi.npy")
+impact_grid = np.load("impact_grid_mpi.npy")
+
+# Create meshgrid
+M, B = np.meshgrid(mass_grid / 1.989e30, impact_grid / 1e9, indexing='ij')
+
+# Create output directory
+os.makedirs("plots", exist_ok=True)
+
+plt.figure(figsize=(8,6))
+pcm = plt.pcolormesh(B, M, result,
+                      norm=colors.LogNorm(vmin=result[result > 0].min(), vmax=result.max()),
+                      shading='auto', cmap='plasma')
+
+plt.colorbar(pcm, label='Deflection Angle (radians, log scale)')
+plt.xlabel('Impact Parameter (Gm)')
+plt.ylabel('Mass (Solar Masses)')
+plt.title('Gravitational Deflection Angle - MPI')
+
+plt.tight_layout()
+plt.savefig("plots/deflection_angle_mpi.png", dpi=300)
+plt.close()
+
+print("MPI plot saved in 'plots/deflection_angle_mpi.png'")
+```
+<!-- ```c
 // matrix_mult_openmp.c
 #include <stdio.h>
 #include <stdlib.h>
@@ -255,8 +427,8 @@ int main() {
     free(A); free(B); free(C);
     
     return 0;
-}
-```
+} -->
+<!-- ``` -->
 
 ### Optimized Parallel Job Script
 
@@ -314,9 +486,91 @@ GPU jobs leverage graphics processing units for massively parallel computations.
 - `--mem 25G`: Allocates sufficient memory for GPU operations
 - `--cpus-per-task=4`: Provides CPU cores to feed data to GPU
 
-### Example: Matrix Multiplication (CUDA)
+### Example: CUDA Implementation
 
-```cuda
+```python
+from mpi4py import MPI
+import numpy as np
+import time
+import os 
+import matplotlib.pyplot as plt
+import matplotlib.colors as colors
+
+# MPI setup
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+size = comm.Get_size()
+
+# Constants
+G = 6.67430e-11
+c = 299792458
+M_sun = 1.98847e30
+
+# Parameter grid (same on all ranks)
+mass_grid = np.linspace(1, 1000, 10000)  # Solar masses
+impact_grid = np.linspace(1e9, 1e12, 10000)  # meters
+
+# Distribute mass grid among ranks
+chunk_size = len(mass_grid) // size
+start_idx = rank * chunk_size
+end_idx = (rank + 1) * chunk_size if rank != size - 1 else len(mass_grid)
+
+local_mass = mass_grid[start_idx:end_idx]
+local_result = np.zeros((len(local_mass), len(impact_grid)))
+
+# Timing
+local_start = time.time()
+
+# Compute local chunk
+for i, M in enumerate(local_mass):
+    for j, b in enumerate(impact_grid):
+        local_result[i, j] = (4 * G * M * M_sun) / (c**2 * b)
+
+local_end = time.time()
+print(f"Rank {rank} local time: {local_end - local_start:.3f} seconds")
+
+# Gather results
+result = None
+if rank == 0:
+    result = np.zeros((len(mass_grid), len(impact_grid)))
+
+comm.Gather(local_result, result, root=0)
+
+if rank == 0:
+    total_time = local_end - local_start
+    print(f"MPI total time (wall time): {total_time:.3f} seconds")
+    result = np.save("result_mpi.npy", result)
+    mass_grid = np.save("mass_grid_mpi.npy", mass_grid)
+    impact_grid = np.save("impact_grid_mpi.npy", impact_grid)
+
+# Load data
+result = np.load("result_mpi.npy")
+mass_grid = np.load("mass_grid_mpi.npy")
+impact_grid = np.load("impact_grid_mpi.npy")
+
+# Create meshgrid
+M, B = np.meshgrid(mass_grid / 1.989e30, impact_grid / 1e9, indexing='ij')
+
+# Create output directory
+os.makedirs("plots", exist_ok=True)
+
+plt.figure(figsize=(8,6))
+pcm = plt.pcolormesh(B, M, result,
+                      norm=colors.LogNorm(vmin=result[result > 0].min(), vmax=result.max()),
+                      shading='auto', cmap='plasma')
+
+plt.colorbar(pcm, label='Deflection Angle (radians, log scale)')
+plt.xlabel('Impact Parameter (Gm)')
+plt.ylabel('Mass (Solar Masses)')
+plt.title('Gravitational Deflection Angle - MPI')
+
+plt.tight_layout()
+plt.savefig("plots/deflection_angle_mpi.png", dpi=300)
+plt.close()
+
+print("MPI plot saved in 'plots/deflection_angle_mpi.png'")
+```
+<!-- ```cuda
 // matrix_mult_cuda.cu
 #include <stdio.h>
 #include <cuda_runtime.h>
@@ -462,7 +716,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
+``` -->
 > ## Exercise: GPU vs CPU Comparison
 > Run the tensor operations script on both CPU and GPU. Compare execution times and memory usage. Calculate the speedup factor
 {: .challenge}

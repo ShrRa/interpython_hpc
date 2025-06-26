@@ -92,10 +92,9 @@ for (int i = 0; i < N; i++) {
 
 Since C programming is not a prerequisite for this workshop, let's break down the parallel loop code in detail.
 
-## Overview
-The code demonstrates how to run a loop in parallel using multiple CPU cores with OpenMP.
-
 ## Code Breakdown
+
+The code demonstrates how to run a loop in parallel using multiple CPU cores with OpenMP.
 
 ### 1. Header Inclusion
 ```c
@@ -148,9 +147,10 @@ Imagine sending 100 emails:
 >   a[i] = a[i-1] + b[i];
 > }
 > ~~~
+> Can this be parallelized with OpenMP? Why or why not?
 {: .challenge}
 
-Can this be parallelized with OpenMP? Why or why not?
+
 
 > ## Solution
 >
