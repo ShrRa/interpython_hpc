@@ -10,17 +10,15 @@ objectives:
 - Monitor and analyze resource utilization
 - Apply best practices for efficient resource allocation
 keypoints:
-- "Keypoint 1"
+- Different computational models (sequential, parallel, GPU) significantly impact runtime and efficiency.
+- Sequential CPU execution is simple but inefficient for large parameter spaces.
+- Parallel CPU (e.g., MPI or OpenMP) reduces runtime by distributing tasks but is limited by CPU core counts and communication overhead.
+- GPU computing can drastically accelerate tasks with massively parallel workloads like grid-based simulations.
+- Choosing the right computational model depends on the problem structure, resource availability, and cost-efficiency.
+- Effective Slurm job scripts should match the workload to the hardware: CPUs for serial/parallel, GPUs for highly parallelizable tasks.
+- Monitoring tools (like `nvidia-smi`, `seff`, `top`) help validate whether the resource request matches the actual usage.
+- Optimizing resource usage minimizes wait times in shared environments and improves overall throughput.
 ---
-
-- Resource optimization (+practical session: running CPU and GPU code examples)
-
-# Resource Optimization
-
-## Learning Objectives
-
-By the end of this lesson, you will be able to:
-
 
 ## Understanding Resource Requirements
 
@@ -71,6 +69,53 @@ watch -n 1 nvidia-smi
 | Parallel   | `defaultq`       | `-N`, `-n`, `mpirun`          | MPI simulation              |
 | GPU        | `gpu`            | `--gpus`, `--cpus-per-task`   | Deep learning training      |
 
+---
+
+> ## Choosing the Right Node
+>
+> - **GPU Node**: For massively parallel computations on GPUs (e.g., CUDA, TensorFlow, PyTorch).
+> - **SMP Node**: For jobs needing large shared memory (big matrices, in-memory data) or multi-threaded code (OpenMP, R, Python multiprocessing).
+> - **Regular Node**: For MPI-based distributed jobs or simple CPU tasks.
+> **Flowchart for Choosing Nodes:**
+> {:.callout}
+
+                       ┌──────────────────────────────┐
+                       │  Does your job require GPUs? │
+                       └─────────────┬────────────────┘
+                                     │
+                              Yes ───┴──► ✅ Use GPU Node
+                                     │
+                                     No
+                                     │
+          ┌─────────────────────────────────────────────────────┐
+          │ Does your job need a very large shared memory space │
+          │ (e.g., >128 GB RAM shared across cores)?            │
+          └───────────────┬────────────────────────────────────┘
+                           │
+                    Yes ───┴──► ✅ Use SMP Node
+                           │
+                           No
+                           │
+        ┌────────────────────────────────────────────────────┐
+        │ Is your code written for distributed memory        │
+        │ (MPI, runs on multiple nodes with message passing)?│
+        └───────────────┬────────────────────────────────────┘
+                         │
+                  Yes ───┴──► ✅ Use Regular Nodes (MPI Parallel)
+                         │
+                         No
+                         │
+        ┌──────────────────────────────────────────────┐
+        │ Does your code use threading/OpenMP/parallel  │
+        │ tasks within one node (but not MPI)?          │
+        └───────────────┬──────────────────────────────┘
+                         │
+                  Yes ───┴──► ✅ Use SMP Node or Regular Node with
+                                 many CPUs (depends on RAM needs)
+                         │
+                         No
+                         │
+                  ► ✅ Use Regular CPU Node (Sequential)
 ---
 
 ## Example
