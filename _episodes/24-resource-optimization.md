@@ -44,7 +44,7 @@ Different computational tasks have varying resource requirements. Understanding 
 - Machine learning, scientific simulations, image processing
 - Require appropriate GPU resources and memory
 
-### Resource Profiling
+<!-- ### Resource Profiling
 
 Before optimizing, you need to understand your program's resource usage:
 
@@ -60,7 +60,7 @@ nvidia-smi
 
 # Watch GPU usage continuously
 watch -n 1 nvidia-smi
-```
+``` -->
 
 ---
 ## Types of Jobs and Resources
@@ -636,11 +636,6 @@ plt.close()
 
 print("CUDA plot saved in 'plots/deflection_angle_cuda.png'")
 ```
-
-> ## Exercise: GPU vs CPU Comparison
-> Run the tensor operations script on both CPU and GPU. Compare execution times and memory usage. Calculate the speedup factor
-{: .challenge}
-
 ### Optimized GPU Job Script
 
 ```bash
@@ -675,6 +670,12 @@ if torch.cuda.is_available():
 # --------- Run the Python Script ---------
 python Gravitational_Lensing_GPU.py
 ```
+
+> ## Exercise: GPU vs CPU Comparison
+> Run the tensor operations script on both CPU and GPU. Compare execution times and memory usage. Calculate the speedup factor
+{: .challenge}
+
+---
 
 <!-------------------------------------------- Section-4 ------------------------------------------------------------------>
 
@@ -750,11 +751,11 @@ done
 echo "------ Monitoring Ended at $(date) ------" >> "$LOG_FILE"
 echo "✅ Resource monitoring completed."
 ```
+--- 
 
+## Understanding Outputs - `top` CPU and Memory Monitoring
 
-# Understanding Outputs - `top` CPU and Memory Monitoring
-
-## Example Output:
+### Example Output:
 
 ```
 --- CPU and Memory Usage (top) ---
@@ -765,9 +766,9 @@ MiB Mem : 515188.2 total, 482815.2 free,  17501.5 used,  14871.5 buff/cache
 MiB Swap:   4096.0 total,   4072.2 free,     23.8 used. 493261.3 avail Mem
 ```
 
-## Explanation:
+### Explanation:
 
-### Header Line - System Uptime and Load Average
+#### Header Line - System Uptime and Load Average
 
 ```
 top - 17:53:49 up 175 days,  9:41,  0 users,  load average: 1.01, 1.06, 1.08
@@ -780,7 +781,7 @@ top - 17:53:49 up 175 days,  9:41,  0 users,  load average: 1.01, 1.06, 1.08
 
   * A load of 1.00 means one CPU core is fully utilized.
 
-### Task Summary
+#### Task Summary
 
 ```
 Tasks: 765 total,   1 running, 764 sleeping,   0 stopped,   0 zombie
@@ -792,7 +793,7 @@ Tasks: 765 total,   1 running, 764 sleeping,   0 stopped,   0 zombie
 * **0 stopped** - Stopped processes.
 * **0 zombie** - Zombie processes (defunct).
 
-### CPU Usage
+#### CPU Usage
 
 ```
 %Cpu(s):  2.2 us,  0.1 sy,  0.0 ni, 97.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
@@ -809,7 +810,7 @@ Tasks: 765 total,   1 running, 764 sleeping,   0 stopped,   0 zombie
 | **si** | Software interrupts - 0.0%         |
 | **st** | Steal time (virtualization) - 0.0% |
 
-### Memory Usage
+#### Memory Usage
 
 ```
 MiB Mem : 515188.2 total, 482815.2 free,  17501.5 used,  14871.5 buff/cache
@@ -822,7 +823,7 @@ MiB Mem : 515188.2 total, 482815.2 free,  17501.5 used,  14871.5 buff/cache
 | **used**       | Used by programs (17501.5 MiB)       |
 | **buff/cache** | Disk cache and buffers (14871.5 MiB) |
 
-### Swap Usage
+#### Swap Usage
 
 ```
 MiB Swap:   4096.0 total,   4072.2 free,     23.8 used. 493261.3 avail Mem
@@ -837,9 +838,9 @@ MiB Swap:   4096.0 total,   4072.2 free,     23.8 used. 493261.3 avail Mem
 
 * These explanations cover the descriptions of each of the different parameters given by the `top` output. 
 
-# Understanding Outputs - `nvidia-smi` CPU and Memory Monitoring
+## Understanding Outputs - `nvidia-smi` CPU and Memory Monitoring
 
-## Example `nvidia-smi` Output:
+### Example `nvidia-smi` Output:
 
 ```
 ------ Wed Jul  2 17:12:23 IST 2025 ------
@@ -867,15 +868,15 @@ Wed Jul  2 17:12:23 2025
 
 ...
 
-## Explanation of `nvidia-smi` Output:
+### Explanation of `nvidia-smi` Output:
 
-### GPU Summary Header
+#### GPU Summary Header
 
 * **NVIDIA-SMI Version:** 560.35.05 — Monitoring tool version.
 * **Driver Version:** 560.35.05 — NVIDIA driver version installed.
 * **CUDA Version:** 12.6 — CUDA toolkit compatibility version.
 
-### GPU Info Section
+#### GPU Info Section
 
 | Field                    | Meaning                                      |
 | ------------------------ | -------------------------------------------- |
@@ -894,7 +895,7 @@ Wed Jul  2 17:12:23 2025
 | **Compute M.**           | Compute mode (Default)                       |
 | **MIG M.**               | Multi-Instance GPU mode (Disabled)           |
 
-### Processes Section
+#### Processes Section
 
 | Field            | Meaning                      |
 | ---------------- | ---------------------------- |
@@ -905,6 +906,9 @@ Wed Jul  2 17:12:23 2025
 | **GPU Memory**   | 1284MiB used by this process |
 
 * These explanations cover the descriptions of each of the different parameters given by the `nvidia-smi` output. 
+
+---
+
 ### Performance Comparison Script
 
 ```python
