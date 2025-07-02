@@ -5,19 +5,19 @@ exercises: 0
 questions:
 - "Question 1"
 objectives:
-- Understand different types of computational workloads and their resource requirements
-- Write optimized Slurm job scripts for sequential, parallel, and GPU workloads
-- Monitor and analyze resource utilization
-- Apply best practices for efficient resource allocation
+- "Understand different types of computational workloads and their resource requirements"
+- "Write optimized Slurm job scripts for sequential, parallel, and GPU workloads"
+- "Monitor and analyze resource utilization"
+- "Apply best practices for efficient resource allocation"
 keypoints:
-- Different computational models (sequential, parallel, GPU) significantly impact runtime and efficiency.
-- Sequential CPU execution is simple but inefficient for large parameter spaces.
-- Parallel CPU (e.g., MPI or OpenMP) reduces runtime by distributing tasks but is limited by CPU core counts and communication overhead.
-- GPU computing can drastically accelerate tasks with massively parallel workloads like grid-based simulations.
-- Choosing the right computational model depends on the problem structure, resource availability, and cost-efficiency.
-- Effective Slurm job scripts should match the workload to the hardware: CPUs for serial/parallel, GPUs for highly parallelizable tasks.
-- Monitoring tools (like `nvidia-smi`, `seff`, `top`) help validate whether the resource request matches the actual usage.
-- Optimizing resource usage minimizes wait times in shared environments and improves overall throughput.
+- "Different computational models (sequential, parallel, GPU) significantly impact runtime and efficiency."
+- "Sequential CPU execution is simple but inefficient for large parameter spaces."
+- "Parallel CPU (e.g., MPI or OpenMP) reduces runtime by distributing tasks but is limited by CPU core counts and communication overhead."
+- "GPU computing can drastically accelerate tasks with massively parallel workloads like grid-based simulations."
+- "Choosing the right computational model depends on the problem structure, resource availability, and cost-efficiency."
+- "Effective Slurm job scripts should match the workload to the hardware: CPUs for serial/parallel, GPUs for highly parallelizable tasks."
+- "Monitoring tools (like `nvidia-smi`, `seff`, `top`) help validate whether the resource request matches the actual usage."
+- "Optimizing resource usage minimizes wait times in shared environments and improves overall throughput."
 ---
 
 ## Understanding Resource Requirements
@@ -78,7 +78,7 @@ watch -n 1 nvidia-smi
 > - **Regular Node**: For MPI-based distributed jobs or simple CPU tasks.
 > **Flowchart for Choosing Nodes:**
 > {:.callout}
-
+```pgsql
                        ┌──────────────────────────────┐
                        │  Does your job require GPUs? │
                        └─────────────┬────────────────┘
@@ -90,7 +90,7 @@ watch -n 1 nvidia-smi
           ┌─────────────────────────────────────────────────────┐
           │ Does your job need a very large shared memory space │
           │ (e.g., >128 GB RAM shared across cores)?            │
-          └───────────────┬────────────────────────────────────┘
+          └───────────────┬─────────────────────────────────────┘
                            │
                     Yes ───┴──► ✅ Use SMP Node
                            │
@@ -106,8 +106,8 @@ watch -n 1 nvidia-smi
                          No
                          │
         ┌──────────────────────────────────────────────┐
-        │ Does your code use threading/OpenMP/parallel  │
-        │ tasks within one node (but not MPI)?          │
+        │ Does your code use threading/OpenMP/parallel │
+        │ tasks within one node (but not MPI)?         │
         └───────────────┬──────────────────────────────┘
                          │
                   Yes ───┴──► ✅ Use SMP Node or Regular Node with
@@ -116,6 +116,7 @@ watch -n 1 nvidia-smi
                          No
                          │
                   ► ✅ Use Regular CPU Node (Sequential)
+```
 ---
 
 ## Example
