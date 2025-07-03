@@ -53,7 +53,8 @@ print(f"Sum: {total}, Time taken: {end - start:.4f} seconds")
 - This code runs on a single core.
 - Useful to measure baseline performance.
 
-> ## Exercise: Modify the above to use a manual loop with `for` instead of `np.sum`, and compare the performance.
+> ## Exercise: 
+> Modify the above to use a manual loop with `for` instead of `np.sum`, and compare the performance.
 {: .challenge}
 
 > ## Solution
@@ -205,7 +206,8 @@ if rank == 0:
 - MPI enables message passing across multiple processes.
 - Common in supercomputers and clusters.
 
-> ## Exercise: Modify serial array summation using OpenMP (C) or `multiprocessing` (Python).
+> ## Exercise: 
+> Modify serial array summation using OpenMP (C) or `multiprocessing` (Python).
 {: .challenge}
 
 > **References**:
@@ -292,7 +294,9 @@ def add_vectors(a, b, c):
         c[i] = a[i] + b[i]
 ```
 
-> **Exercise**: Write a Numba or CuPy version of vector addition and compare speed with NumPy.
+> **Exercise**: 
+> Write a Numba or CuPy version of vector addition and compare speed with NumPy.
+{: .challenge}
 
 > **References**:
 > - [Numba CUDA Docs](https://numba.readthedocs.io/en/stable/cuda/)
