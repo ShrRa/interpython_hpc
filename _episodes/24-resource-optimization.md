@@ -1,9 +1,11 @@
 ---
 title: "Resource optimization"
-teaching: 5
-exercises: 0
+start: False
+teaching: 30
+exercises: 10
 questions:
-- "Question 1"
+- "What is the difference between requesting for CPU and GPU resources using Slurm?"
+- "How can I optimize my slurm script to avail the best resources for my specific task?"
 objectives:
 - "Understand different types of computational workloads and their resource requirements"
 - "Write optimized Slurm job scripts for sequential, parallel, and GPU workloads"
