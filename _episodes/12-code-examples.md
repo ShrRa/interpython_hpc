@@ -25,7 +25,7 @@ Most users begin with simple serial code, which runs sequentially on one process
 Parallel programming allows us to split work across multiple CPUs or even GPUs. High-Performance Computing (HPC) relies on this concept to solve problems faster.
 
 > **Figure Suggestion**: Plot showing execution time of serial vs parallel implementation for increasing problem sizes (e.g., matrix size or loop iterations).
-{: .note}
+{: .testimonial}
 
 
 ---
@@ -219,7 +219,7 @@ if rank == 0:
 > **References**:
 > - [OpenMP Examples](https://www.openmp.org/resources/examples/)
 > - [mpi4py Documentation](https://mpi4py.readthedocs.io/en/stable/)
-{: .note}
+{: .testimonial}
 ---
 
 ## GPU Programming Concepts
@@ -307,7 +307,7 @@ def add_vectors(a, b, c):
 > **References**:
 > - [Numba CUDA Docs](https://numba.readthedocs.io/en/stable/cuda/)
 > - [CuPy Documentation](https://docs.cupy.dev/)
-{: .note}
+{: .testimonial}
 ---
 
 <!-- ## Simple CUDA GPU Code Example
@@ -346,10 +346,10 @@ __global__ void add(int *a, int *b, int *c, int N) {
 {: .challenge}
 
 > **Reference**: [NVIDIA CUDA Samples](https://github.com/NVIDIA/cuda-samples)
-{: .note}
+{: .testimonial}
 
 > **Figure**: Bar chart showing performance on matrix multiplication or vector addition.
-{: .note}
+{: .testimonial}
 
 ---
 
