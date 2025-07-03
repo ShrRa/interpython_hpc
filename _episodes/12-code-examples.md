@@ -25,7 +25,7 @@ Most users begin with simple serial code, which runs sequentially on one process
 Parallel programming allows us to split work across multiple CPUs or even GPUs. High-Performance Computing (HPC) relies on this concept to solve problems faster.
 
 > **Figure Suggestion**: Plot showing execution time of serial vs parallel implementation for increasing problem sizes (e.g., matrix size or loop iterations).
-{: .tip}
+{: .note}
 
 
 ---
@@ -33,11 +33,16 @@ Parallel programming allows us to split work across multiple CPUs or even GPUs. 
 ## Serial Code Example (CPU)
 
 ### Introduction to NumPy
-Before diving into parallel computing or GPU acceleration, it's important to understand how performance can already be improved significantly on a CPU using efficient libraries. One of the most widely used tools for this in Python is `NumPy`. NumPy provides a fast and memory-efficient way to handle large numerical datasets using multi-dimensional arrays and vectorized operations. While regular Python lists are flexible, they are not optimized for heavy numerical tasks. Looping through data element by element can quickly become a bottleneck as the problem size grows. NumPy solves this problem by providing a powerful N-dimensional array object and tools for performing operations on these arrays efficiently. Under the hood, NumPy uses optimized C code, so operations are much faster than using standard Python loops. NumPy also supports vectorized operations, which means you can apply functions to entire arrays without writing explicit loops. This not only improves performance but also leads to cleaner and more readable code. 
+Before diving into parallel computing or GPU acceleration, it's important to understand how performance can already be improved significantly on a CPU using efficient libraries. 
+- One of the most widely used tools for this in Python is `NumPy`. NumPy provides a fast and memory-efficient way to handle large numerical datasets using multi-dimensional arrays and vectorized operations. 
+- While regular Python lists are flexible, they are not optimized for heavy numerical tasks. Looping through data element by element can quickly become a bottleneck as the problem size grows. 
+- NumPy solves this problem by providing a powerful N-dimensional array object and tools for performing operations on these arrays efficiently. 
+- Under the hood, NumPy uses optimized C code, so operations are much faster than using standard Python loops. 
+- NumPy also supports vectorized operations, which means you can apply functions to entire arrays without writing explicit loops. This not only improves performance but also leads to cleaner and more readable code. 
+- Using NumPy on the CPU is often the first step toward writing efficient scientific code. 
+- It's a strong foundation before we move on to parallel computing or GPU acceleration. Now, we'll see an example of how a simple numerical operation is implemented using NumPy on a single CPU core.
 
-Using NumPy on the CPU is often the first step toward writing efficient scientific code. It's a strong foundation before we move on to parallel computing or GPU acceleration. Now, we'll see an example of how a simple numerical operation is implemented using NumPy on a single CPU core.
-
- ### Example: Summing the elements of a large array using Serial Computation
+### Example: Summing the elements of a large array using Serial Computation
 
 ```python
 import numpy as np
@@ -94,9 +99,9 @@ Parallel programming on CPUs is primarily achieved through two widely-used model
 
 ### OpenMP: Shared Memory Model
 
-OpenMP was first introduced in 1997 as a collaborative effort between hardware vendors, software developers, and academia. The goal was to standardize a simple, portable API for shared-memory parallel programming in C, C++, and Fortran. Over time, OpenMP has evolved to support nested parallelism, SIMD (vectorization), and offloading to GPUs, while remaining easy to integrate into existing code through compiler directives (e.g., #pragma omp parallel).
+OpenMP was first introduced in October 1997 as a collaborative effort between hardware vendors, software developers, and academia. The goal was to standardize a simple, portable API for shared-memory parallel programming in C, C++, and Fortran. Over time, OpenMP has evolved to support nested parallelism, Single Instruction Multiple Data (vectorization), and offloading to GPUs, while remaining easy to integrate into existing code through compiler directives.
 
-OpenMP is now maintained by the OpenMP Architecture Review Board, which includes organizations like Intel, AMD, and NVIDIA.     OpenMP allows you to parallelize loops in C/C++ or Fortran using compiler directives.
+OpenMP is now maintained by the OpenMP Architecture Review Board, which includes organizations like Arm, AMD, IBM, Intel, Cray, HP, Fujitsu, Nvidia, NEC, Red Hat, Texas Instruments, and Oracle Corporation. OpenMP allows you to parallelize loops in C/C++ or Fortran using compiler directives.
 
 ```c
 #include <omp.h>
@@ -160,6 +165,7 @@ Imagine sending 100 emails:
 - **Without OpenMP**: One person sends all 100 emails sequentially
 - **With OpenMP**: 4 people each send 25 emails at the same time (about 4× faster)
 
+---
 > ## Exercise: Parallelization Challenge
 >
 > Consider this loop:
@@ -213,7 +219,7 @@ if rank == 0:
 > **References**:
 > - [OpenMP Examples](https://www.openmp.org/resources/examples/)
 > - [mpi4py Documentation](https://mpi4py.readthedocs.io/en/stable/)
-{: .tip}
+{: .note}
 ---
 
 ## GPU Programming Concepts
@@ -301,7 +307,7 @@ def add_vectors(a, b, c):
 > **References**:
 > - [Numba CUDA Docs](https://numba.readthedocs.io/en/stable/cuda/)
 > - [CuPy Documentation](https://docs.cupy.dev/)
-{: .tip}
+{: .note}
 ---
 
 <!-- ## Simple CUDA GPU Code Example
@@ -335,14 +341,15 @@ __global__ void add(int *a, int *b, int *c, int N) {
 | Programming  | Easier to debug           | Requires more setup         |
 | Performance  | Good for logic-heavy tasks| Excellent for large, data-parallel problems |
 
-> ## Exercise: Show which parts of the code execute on GPU vs CPU (host vs device). Introduce concepts like memory copy and kernel launch.
+> ## Exercise: 
+> Show which parts of the code execute on GPU vs CPU (host vs device). Introduce concepts like memory copy and kernel launch.
 {: .challenge}
 
 > **Reference**: [NVIDIA CUDA Samples](https://github.com/NVIDIA/cuda-samples)
-{: .tip}
+{: .note}
 
 > **Figure**: Bar chart showing performance on matrix multiplication or vector addition.
-{: .tip}
+{: .note}
 
 ---
 
@@ -353,7 +360,8 @@ To understand and improve performance, profiling tools are essential.
 - **CPU**: `gprof`, `perf`, `cProfile`
 - **GPU**: `nvprof`, Nsight Systems, Nsight Compute
 
-> ## Exercise: Time your serial and parallel code. Where is the bottleneck?
+> ## Exercise: 
+> Time your serial and parallel code. Where is the bottleneck?
 {: .challenge}
 
 > **Optional Reference**: [NVIDIA Nsight Tools](https://developer.nvidia.com/nsight-systems)
