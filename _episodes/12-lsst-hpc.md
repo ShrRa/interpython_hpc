@@ -11,11 +11,14 @@ keypoints:
 - "Keypoint 1"
 ---
 
-- Different types of HPC facilities, how to choose one, LSST HPC infrastructure
+## What are the IDACs
+- IDACs idea: computational facilities from all over the world contribute their CPU hours and storage space
+- Different types of IDACs: full DR storage, light IDACs, computation-only...
 
-## Intro
-
-## Paragraph 1
+## IDACs roster
+A table with IDAC website, CPUs/GPU/Storage space data, Status (operational, construction, planned...), LSST and other surveys data stored,
+access info (command line/GUI), access policy (automated upon registration, personal contact needed, restricted to certain countries, etc), 
+additional information (e.g. no Jupyter or best suited for LSST epoch image analysis).
 
 
 {% include links.md %}
