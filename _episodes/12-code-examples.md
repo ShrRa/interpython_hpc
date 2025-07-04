@@ -218,7 +218,7 @@ mpirun -n 4 python your_script.py
 > Modify serial array summation using OpenMP (C) or `multiprocessing` (Python).
 {: .challenge}
 
-> **References**:
+> ## References:
 > - [OpenMP Tutorials](https://www.openmp.org/resources/tutorials-articles/)
 > - [mpi4py library Documentation](https://mpi4py.readthedocs.io/en/stable/)
 {: .testimonial}
@@ -337,7 +337,7 @@ print("Time taken on GPU:", gpu_time, "seconds")
 > Write a Numba or CuPy version of vector addition and compare speed with NumPy.
 {: .challenge}
 
-> **References**:
+> ## References:
 > - [Numba-CUDA Docs](https://nvidia.github.io/numba-cuda/)
 > - [CuPy Documentation](https://docs.cupy.dev/)
 {: .testimonial}
