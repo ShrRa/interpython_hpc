@@ -364,6 +364,7 @@ To understand and improve performance, profiling tools are essential.
 {: .challenge}
 
 > **Optional Reference**: [NVIDIA Nsight Tools](https://developer.nvidia.com/nsight-systems)
+{. :testimonial}
 
 ---
 

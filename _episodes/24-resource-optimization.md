@@ -78,47 +78,11 @@ watch -n 1 nvidia-smi
 > - **GPU Node**: For massively parallel computations on GPUs (e.g., CUDA, TensorFlow, PyTorch).
 > - **SMP Node**: For jobs needing large shared memory (big matrices, in-memory data) or multi-threaded code (OpenMP, R, Python multiprocessing).
 > - **Regular Node**: For MPI-based distributed jobs or simple CPU tasks.
-> **Flowchart for Choosing Nodes:**
+> **Decision chart for Choosing Nodes:**
+> ![Decision chart for choosing node types](../fig/Job_Decision_Node_Tree.png)
 > {:.callout}
-```pgsql
-                       ┌──────────────────────────────┐
-                       │  Does your job require GPUs? │
-                       └─────────────┬────────────────┘
-                                     │
-                              Yes ───┴──► ✅ Use GPU Node
-                                     │
-                                     No
-                                     │
-          ┌─────────────────────────────────────────────────────┐
-          │ Does your job need a very large shared memory space │
-          │ (e.g., >128 GB RAM shared across cores)?            │
-          └───────────────┬─────────────────────────────────────┘
-                           │
-                    Yes ───┴──► ✅ Use SMP Node
-                           │
-                           No
-                           │
-        ┌────────────────────────────────────────────────────┐
-        │ Is your code written for distributed memory        │
-        │ (MPI, runs on multiple nodes with message passing)?│
-        └───────────────┬────────────────────────────────────┘
-                         │
-                  Yes ───┴──► ✅ Use Regular Nodes (MPI Parallel)
-                         │
-                         No
-                         │
-        ┌──────────────────────────────────────────────┐
-        │ Does your code use threading/OpenMP/parallel │
-        │ tasks within one node (but not MPI)?         │
-        └───────────────┬──────────────────────────────┘
-                         │
-                  Yes ───┴──► ✅ Use SMP Node or Regular Node with
-                                 many CPUs (depends on RAM needs)
-                         │
-                         No
-                         │
-                  ► ✅ Use Regular CPU Node (Sequential)
-```
+
+
 ---
 
 ## Example
