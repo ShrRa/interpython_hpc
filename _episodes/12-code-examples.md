@@ -25,7 +25,7 @@ Most users begin with simple serial code, which runs sequentially on one process
 Parallel programming allows us to split work across multiple CPUs or even GPUs. High-Performance Computing (HPC) relies on this concept to solve problems faster.
 
 > **Figure Suggestion**: Plot showing execution time of serial vs parallel implementation for increasing problem sizes (e.g., matrix size or loop iterations).
-{: .testimonial}
+{: .callout}
 
 
 ---
@@ -55,9 +55,6 @@ end = time.time()
 print(f"Sum: {total}, Time taken: {end - start:.4f} seconds")
 ```
 
-- This code runs on a single core.
-- Useful to measure baseline performance.
-
 > ## Exercise: 
 > Modify the above to use a manual loop with `for` instead of `np.sum`, and compare the performance.
 {: .challenge}
@@ -84,6 +81,7 @@ print(f"Sum: {total}, Time taken: {end - start:.4f} seconds")
 {: .solution}
 
 > **Reference**: [Carpentries Python loops lesson](https://swcarpentry.github.io/python-novice-inflammation/05-loop.html)
+{: .testimonial}
 
 ---
 
@@ -91,18 +89,17 @@ print(f"Sum: {total}, Time taken: {end - start:.4f} seconds")
 
 ### Introduction to OpenMP and MPI
 
-Parallel programming on CPUs is primarily achieved through two widely-used models:
+#### Parallel programming on CPUs is primarily achieved through two widely-used models:
 
-- **OpenMP (Open Multi-Processing)**: Used for shared-memory parallelism. It enables multi-threading where each thread has access to the same memory space. Ideal for multicore processors on a single node.
-- **MPI (Message Passing Interface)**: Used for distributed-memory parallelism. Processes run on separate memory spaces (often on different nodes) and communicate via message passing. Suitable for large-scale HPC clusters.
+### OpenMP (Open Multi-Processing)
 
-
-### OpenMP: Shared Memory Model
+OpenMP is used for shared-memory parallelism. It enables multi-threading where each thread has access to the same memory space. It is ideal for multicore processors on a single node.
 
 OpenMP was first introduced in October 1997 as a collaborative effort between hardware vendors, software developers, and academia. The goal was to standardize a simple, portable API for shared-memory parallel programming in C, C++, and Fortran. Over time, OpenMP has evolved to support nested parallelism, Single Instruction Multiple Data (vectorization), and offloading to GPUs, while remaining easy to integrate into existing code through compiler directives.
 
 OpenMP is now maintained by the OpenMP Architecture Review Board, which includes organizations like Arm, AMD, IBM, Intel, Cray, HP, Fujitsu, Nvidia, NEC, Red Hat, Texas Instruments, and Oracle Corporation. OpenMP allows you to parallelize loops in C/C++ or Fortran using compiler directives.
 
+### Example: Running a loop in parallel using OpenMP    
 ```c
 #include <omp.h>
 #pragma omp parallel for
@@ -111,19 +108,17 @@ for (int i = 0; i < N; i++) {
 }
 ```
 
-## OpenMP Parallel Loop Explanation
+Since C programming is not a prerequisite for this workshop, let's break down the parallel loop code in detail.
 
 **Requirements**:  
 - Add `#include <omp.h>` to your code
 - Compile with `-fopenmp` flag
 
-Since C programming is not a prerequisite for this workshop, let's break down the parallel loop code in detail.
-
-## Code Breakdown
+### Code Breakdown
 
 The code demonstrates how to run a loop in parallel using multiple CPU cores with OpenMP.
 
-### 1. Header Inclusion
+#### 1. Header Inclusion
 ```c
 #include <omp.h>
 ```
@@ -132,7 +127,7 @@ The code demonstrates how to run a loop in parallel using multiple CPU cores wit
 - Required for all OpenMP functions and directives
 - Without this, the compiler won't recognize OpenMP commands
 
-### 2. Compiler Directive
+#### 2. Compiler Directive
 ```c
 #pragma omp parallel for
 ```
@@ -141,7 +136,7 @@ The code demonstrates how to run a loop in parallel using multiple CPU cores wit
 - Means: "Run this loop in parallel using multiple CPU cores"
 - The compiler automatically handles dividing the work
 
-### 3. Parallel Loop
+#### 3. Parallel Loop
 ```c
 for (int i = 0; i < N; i++) {
     a[i] = b[i] + c[i];
@@ -151,14 +146,14 @@ for (int i = 0; i < N; i++) {
 - Performs element-wise addition of arrays `b` and `c`
 - Stores results in array `a`
 
-### How OpenMP Executes This
+#### How OpenMP Executes This
 
 1. **Detects available CPU cores** (e.g., finds 4 or 8 cores)
 2. **Divides the loop iterations** among the cores
 3. **Processes chunks simultaneously** (each core works on its portion)
 4. **Combines results** when all cores finish
 
-### Real-World Analogy
+#### Real-World Analogy
 
 Imagine sending 100 emails:
 
@@ -190,11 +185,15 @@ Imagine sending 100 emails:
 {: .solution}
 
 
-### MPI: Distributed Memory Model
+### MPI (Message Passing Interface)
+
+MPI is used for distributed-memory parallelism. Processes run on separate memory spaces (often on different nodes) and communicate via message passing. It is suitable for large-scale HPC clusters.
 
 MPI emerged earlier, in the early 1990s, as the need for a standardized message-passing interface became clear in the growing field of distributed-memory computing. Before MPI, various parallel systems used their own vendor-specific libraries, making code difficult to port across machines.
 
-In 1994, the first official MPI standard (MPI-1) was published by the MPI Forum, a collective of academic institutions, government labs, and industry partners. Since then, MPI has become the de facto standard for scalable parallel computing across multiple nodes, and it continues to evolve with versions like MPI-2 and MPI-3, which add support for features like parallel I/O and dynamic process management. MPI is suited for parallelism across nodes (e.g., cluster computing).
+In June 1994, the first official MPI standard (MPI-1) was published by the MPI Forum, a collective of academic institutions, government labs, and industry partners. Since then, MPI has become the de facto standard for scalable parallel computing across multiple nodes, and it continues to evolve with versions like MPI-2, MPI-3, MPI-4, and finally MPI-5 released on June 5 2025 which add support for features like parallel I/O and dynamic process management. 
+
+### Example: Implementation of MPI using the mpi4py library in python
 
 ```python
 from mpi4py import MPI
@@ -224,7 +223,7 @@ if rank == 0:
 
 ## GPU Programming Concepts
 
-GPUs, or Graphics Processing Units, are composed of thousands of lightweight processing cores that are optimized for handling multiple operations simultaneously. This parallel architecture makes them particularly effective for data-parallel problems, where the same operation is performed independently across large datasets—such as matrix multiplications, vector operations, or image processing tasks.
+GPUs, or Graphics Processing Units, are composed of thousands of lightweight processing cores that are optimized for handling multiple operations simultaneously. This parallel architecture makes them particularly effective for data-parallel problems, where the same operation is performed independently across large datasets such as matrix multiplications, vector operations, or image processing tasks.
 
 Originally designed to accelerate the rendering of complex graphics and visual effects in computer games, GPUs are inherently well-suited for high-throughput computations involving large tensors and multidimensional arrays. Their architecture enables them to perform numerous arithmetic operations in parallel, which has made them increasingly valuable in scientific computing, deep learning, and simulations.
 
@@ -232,23 +231,23 @@ Even without explicit parallel programming, many modern libraries and frameworks
 
 ## Introduction to CUDA
 
-In HPC systems, **CUDA** (Compute Unified Device Architecture), a parallel computing platform and programming model developed by **NVIDIA** is the most widely used platform for GPU programming. CUDA allows developers to write highly parallel code that runs directly on the GPU, providing fine-grained control over memory usage, thread management, and performance optimization. It allows developers to harness the power of **NVIDIA GPUs** for general-purpose computing, known as GPGPU (General-Purpose computing on Graphics Processing Units).
+In HPC systems, CUDA (Compute Unified Device Architecture), a parallel computing platform and programming model developed by NVIDIA is the most widely used platform for GPU programming. CUDA allows developers to write highly parallel code that runs directly on the GPU, providing fine-grained control over memory usage, thread management, and performance optimization. It allows developers to harness the power of NVIDIA GPUs for general-purpose computing, known as GPGPU (General-Purpose computing on Graphics Processing Units).
 
 ### A Brief History
 
-- **Introduced by NVIDIA in 2006**, CUDA was the first platform to provide direct access to the GPU's virtual instruction set and parallel computational elements.
+- Introduced by NVIDIA in 2006, CUDA was the first platform to provide direct access to the GPU's virtual instruction set and parallel computational elements.
 - Before CUDA, GPUs were primarily used for rendering graphics, and general-purpose computations required indirect use through graphics APIs like OpenGL or DirectX.
 - CUDA revolutionized scientific computing, deep learning, and high-performance computing (HPC) by enabling massive parallelism and accelerating workloads previously limited to CPUs.
 
 ### How CUDA Works
 
-CUDA allows developers to write **C, C++, Fortran, and Python** code that runs on the GPU.
+CUDA allows developers to write C, C++, Fortran, and Python code that runs on the GPU.
 
-- A CUDA program typically runs **on both the CPU (host)** and **the GPU (device)**.
-- Computational tasks (kernels) are written to execute in parallel across thousands of lightweight **CUDA threads**.
+- A CUDA program typically runs on both the CPU (host) and the GPU (device).
+- Computational tasks (kernels) are written to execute in parallel across thousands of lightweight CUDA threads.
 - These threads are organized hierarchically into:
-  - **Grids** of **Blocks**
-  - **Blocks** of **Threads**
+  - Grids of Blocks
+  - Blocks of Threads
 
 This hierarchical design allows fine-grained control over memory and computation.
 
@@ -287,7 +286,7 @@ High-level libraries allow easier GPU programming in Python:
 - **CuPy**: NumPy-like API for NVIDIA GPUs
 - **Dask**: Parallel computing with familiar APIs
 
-Example using Numba:
+### Example: Add vectors utlising CUDA using the numba python library 
 
 ```python
 from numba import cuda
@@ -300,7 +299,7 @@ def add_vectors(a, b, c):
         c[i] = a[i] + b[i]
 ```
 
-> **Exercise**: 
+> ## Exercise: 
 > Write a Numba or CuPy version of vector addition and compare speed with NumPy.
 {: .challenge}
 
@@ -349,7 +348,7 @@ __global__ void add(int *a, int *b, int *c, int N) {
 {: .testimonial}
 
 > **Figure**: Bar chart showing performance on matrix multiplication or vector addition.
-{: .testimonial}
+{: .callout}
 
 ---
 
@@ -377,12 +376,5 @@ To understand and improve performance, profiling tools are essential.
 - Choose your tool based on problem size, complexity, and hardware.
 
 ---
-
-## Next Episode
-
-➡️ **Command Line for HPC and Other Remote Facilities**
-
-
-
 
 {% include links.md %}

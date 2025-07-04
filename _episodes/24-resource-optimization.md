@@ -1044,6 +1044,7 @@ plt.show()
    #SBATCH --gpus-per-node=1
    ```
 
+---
 ## Summary
 
 Resource optimization in HPC involves understanding your workload characteristics and matching them with appropriate resource allocations. Key takeaways:
@@ -1057,5 +1058,6 @@ Resource optimization in HPC involves understanding your workload characteristic
 
 Efficient resource utilization not only improves your job performance but also ensures fair access to shared HPC resources for all users.
 
+---
 
 {% include links.md %}
