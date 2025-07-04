@@ -1024,8 +1024,8 @@ Efficient resource utilization not only improves your job performance but also e
 >
 > Now that you've learned how to submit jobs using Slurm and request computational resources effectively, revisit the following exercises from the earlier lesson:
 >
-> - [Exercise 1: MPI using `mpi4py`](../_episodes/12-code-examples.md/index.html)
-> - [Exercise 2: GPU vector addition with `numba-cuda`](../_episodes/12-code-examples.md/index.html)
+> - [Exercise: MPI using `mpi4py`](https://meet-vyas-dev.github.io/interpython_hpc/12-code-examples/index.html)
+> - [Exercise: GPU vector addition with `numba-cuda`](https://meet-vyas-dev.github.io/interpython_hpc/12-code-examples/index.html)
 >
 > Try running them now on your cluster using the appropriate Slurm script and resource flags.
 {: .prereq}
