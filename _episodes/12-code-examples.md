@@ -205,16 +205,22 @@ if rank == 0:
     print(all_data)
 ```
 
-- MPI enables message passing across multiple processes.
-- Common in supercomputers and clusters.
+> **Note**: You won't be able to run this code in your current environment. This example requires a Slurm job submission script to launch MPI processes across nodes. Detailed instructions on how to configure Slurm scripts and request resources are provided in [Section 2: HPC Bura - Resource Optimization ](../_episodes/24-resource-optimization.md).
+{: .prereq}
+
+Typically one would run this file after having a slurm script with the required resources followed by this command
+
+```bash
+mpirun -n 4 python your_script.py
+```
 
 > ## Exercise: 
 > Modify serial array summation using OpenMP (C) or `multiprocessing` (Python).
 {: .challenge}
 
 > **References**:
-> - [OpenMP Examples](https://www.openmp.org/resources/examples/)
-> - [mpi4py Documentation](https://mpi4py.readthedocs.io/en/stable/)
+> - [OpenMP Tutorials](https://www.openmp.org/resources/tutorials-articles/)
+> - [mpi4py library Documentation](https://mpi4py.readthedocs.io/en/stable/)
 {: .testimonial}
 ---
 
@@ -286,22 +292,53 @@ High-level libraries allow easier GPU programming in Python:
 ### Example: Add vectors utlising CUDA using the numba python library 
 
 ```python
-from numba import cuda
+from numba_cuda import cuda
 import numpy as np
+import time
 
 @cuda.jit
 def add_vectors(a, b, c):
     i = cuda.grid(1)
     if i < a.size:
         c[i] = a[i] + b[i]
+
+# Setup input arrays
+N = 1_000_000
+a = np.arange(N, dtype=np.float32)
+b = np.arange(N, dtype=np.float32)
+c = np.zeros_like(a)
+
+# Copy arrays to device
+d_a = cuda.to_device(a)
+d_b = cuda.to_device(b)
+d_c = cuda.device_array_like(a)
+
+# Configure the kernel
+threads_per_block = 256
+blocks_per_grid = (N + threads_per_block - 1) // threads_per_block
+
+# Launch the kernel
+start = time.time()
+add_vectors[blocks_per_grid, threads_per_block](d_a, d_b, d_c)
+cuda.synchronize()  # Wait for GPU to finish
+gpu_time = time.time() - start
+
+# Copy result back to host
+d_c.copy_to_host(out=c)
+
+# Verify results
+print("First 5 results:", c[:5])
+print("Time taken on GPU:", gpu_time, "seconds")
 ```
+
+> **Note**: This code also requires GPU access and Slurm job submission to be executed properly. You will revisit this exercise after completing [Section 2: HPC Bura - Resource Optimization ](../_episodes/24-resource-optimization.md), which introduces how to configure resources and submit jobs.
 
 > ## Exercise: 
 > Write a Numba or CuPy version of vector addition and compare speed with NumPy.
 {: .challenge}
 
 > **References**:
-> - [Numba CUDA Docs](https://numba.readthedocs.io/en/stable/cuda/)
+> - [Numba-CUDA Docs](https://nvidia.github.io/numba-cuda/)
 > - [CuPy Documentation](https://docs.cupy.dev/)
 {: .testimonial}
 ---
@@ -361,7 +398,7 @@ To understand and improve performance, profiling tools are essential.
 {: .challenge}
 
 > **Optional Reference**: [NVIDIA Nsight Tools](https://developer.nvidia.com/nsight-systems)
-{. :testimonial}
+{: .testimonial}
 
 ---
 
