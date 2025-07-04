@@ -1022,7 +1022,7 @@ Efficient resource utilization not only improves your job performance but also e
 > Try running them now on your cluster using the appropriate Slurm script and resource flags.
 {: .prereq}
 
-> ## ✅ Solution 1: Slurm Submission Script for Exercise 1 (MPI with `mpi4py`)
+> ## Solution 1: Slurm Submission Script for Exercise MPI with `mpi4py`
 >
 > The following script can be used to submit your MPI-based Python program (`mpi_hpc_ws.py`) on an HPC cluster using Slurm:
 >
@@ -1053,10 +1053,10 @@ Efficient resource utilization not only improves your job performance but also e
 > mpirun -np 4 python mpi_hpc_ws.py
 > ```
 >
-> 📌 **Make sure** your virtual environment has `mpi4py` installed and that your system has access to the OpenMPI runtime via `mpirun`. Adjust the number of nodes and tasks depending on the cluster policies.
+> Make sure your virtual environment has `mpi4py` installed and that your system has access to the OpenMPI runtime via `mpirun`. Adjust the number of nodes and tasks depending on the cluster policies.
 {: .solution}
 
-> ## ✅ Solution 2: Slurm Submission Script for Exercise 2 (GPU with `numba-cuda`)
+> ## Solution 2: Slurm Submission Script for Exercise GPU with `numba-cuda`
 >
 > The following script can be used to submit a GPU-accelerated Python job (`numba_cuda_test.py`) using Slurm:
 >
@@ -1088,7 +1088,7 @@ Efficient resource utilization not only improves your job performance but also e
 > python numba_cuda_test.py
 > ```
 >
-> 📌 **Make sure** your virtual environment includes `numba-cuda` to access the GPU. 
+> Make sure your virtual environment includes `numba-cuda` to access the GPU. 
 >
 {: .solution}
 
