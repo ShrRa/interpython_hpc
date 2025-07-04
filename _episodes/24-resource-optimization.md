@@ -24,7 +24,7 @@ keypoints:
 
 ## Understanding Resource Requirements
 
-Different computational tasks have varying resource requirements. Understanding these patterns is crucial for efficient HPC usage.
+#### Different computational tasks have varying resource requirements. Understanding these patterns is crucial for efficient HPC usage.
 
 ### Types of Workloads
 
@@ -71,16 +71,14 @@ watch -n 1 nvidia-smi
 | Parallel   | `defaultq`       | `-N`, `-n`, `mpirun`          | MPI simulation              |
 | GPU        | `gpu`            | `--gpus`, `--cpus-per-task`   | Deep learning training      |
 
----
 
-> ## Choosing the Right Node
->
-> - **GPU Node**: For massively parallel computations on GPUs (e.g., CUDA, TensorFlow, PyTorch).
-> - **SMP Node**: For jobs needing large shared memory (big matrices, in-memory data) or multi-threaded code (OpenMP, R, Python multiprocessing).
-> - **Regular Node**: For MPI-based distributed jobs or simple CPU tasks.
-> **Decision chart for Choosing Nodes:**
-> ![Decision chart for choosing node types](../fig/Job_Decision_Node_Tree.png)
-> {:.callout}
+## Choosing the Right Node
+- **GPU Node**: For massively parallel computations on GPUs (e.g., CUDA, TensorFlow, PyTorch).
+- **SMP Node**: For jobs needing large shared memory (big matrices, in-memory data) or multi-threaded code (OpenMP, R, Python multiprocessing).
+- **Regular Node**: For MPI-based distributed jobs or simple CPU tasks.
+**Decision chart for Choosing Nodes:**
+![Decision chart for choosing node types](../fig/Job_Decision_Node_Tree.png)
+
 
 
 ---
@@ -255,7 +253,7 @@ int main() {
 }
 ``` -->
 
-### Sequential Job Script for the Above Example
+### Sequential Job Script for the Example
 
 <!-- ```bash
 #!/bin/bash
@@ -476,7 +474,7 @@ int main() {
 } -->
 <!-- ``` -->
 
-### Optimized Parallel Job Script
+### Parallel Job Script for the Example
 
 <!-- ```bash
 #!/bin/bash
@@ -648,7 +646,7 @@ plt.close()
 
 print("CUDA plot saved in 'plots/deflection_angle_cuda.png'")
 ```
-### Optimized GPU Job Script
+### GPU Job Script for the Example
 
 ```bash
 #!/bin/bash
@@ -686,8 +684,6 @@ python Gravitational_Lensing_GPU.py
 > ## Exercise: GPU vs CPU Comparison
 > Run the tensor operations script on both CPU and GPU. Compare execution times and memory usage. Calculate the speedup factor
 {: .challenge}
-
----
 
 <!-------------------------------------------- Section-4 ------------------------------------------------------------------>
 
@@ -765,7 +761,7 @@ echo "✅ Resource monitoring completed."
 ```
 --- 
 
-## Understanding Outputs - `top` CPU and Memory Monitoring
+## Understanding Outputs - `top` - CPU and Memory Monitoring
 
 ### Example Output:
 
@@ -850,7 +846,7 @@ MiB Swap:   4096.0 total,   4072.2 free,     23.8 used. 493261.3 avail Mem
 
 * These explanations cover the descriptions of each of the different parameters given by the `top` output. 
 
-## Understanding Outputs - `nvidia-smi` CPU and Memory Monitoring
+## Understanding Outputs - `nvidia-smi` GPU Monitoring
 
 ### Example `nvidia-smi` Output:
 

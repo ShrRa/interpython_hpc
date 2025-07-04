@@ -27,9 +27,6 @@ Parallel programming allows us to split work across multiple CPUs or even GPUs. 
 > **Figure Suggestion**: Plot showing execution time of serial vs parallel implementation for increasing problem sizes (e.g., matrix size or loop iterations).
 {: .callout}
 
-
----
-
 ## Serial Code Example (CPU)
 
 ### Introduction to NumPy
