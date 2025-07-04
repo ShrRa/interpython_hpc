@@ -205,7 +205,7 @@ if rank == 0:
     print(all_data)
 ```
 
-> **Note**: You won't be able to run this code in your current environment. This example requires a Slurm job submission script to launch MPI processes across nodes. Detailed instructions on how to configure Slurm scripts and request resources are provided in [Section 2: HPC Bura - Resource Optimization ](../_episodes/24-resource-optimization.md).
+> **Note**: You won't be able to run this code in your current environment. This example requires a Slurm job submission script to launch MPI processes across nodes. Detailed instructions on how to configure Slurm scripts and request resources are provided in [Section 2: HPC Bura - Resource Optimization ](../_episodes/24-resource-optimization.md/index.html).
 {: .prereq}
 
 Typically one would run this file after having a slurm script with the required resources followed by this command
@@ -331,7 +331,7 @@ print("First 5 results:", c[:5])
 print("Time taken on GPU:", gpu_time, "seconds")
 ```
 
-> **Note**: This code also requires GPU access and Slurm job submission to be executed properly. You will revisit this exercise after completing [Section 2: HPC Bura - Resource Optimization ](../_episodes/24-resource-optimization.md), which introduces how to configure resources and submit jobs.
+> **Note**: This code also requires GPU access and Slurm job submission to be executed properly. You will revisit this exercise after completing [Section 2: HPC Bura - Resource Optimization ](../_episodes/24-resource-optimization.md/index.html), which introduces how to configure resources and submit jobs.
 
 > ## Exercise: 
 > Write a Numba or CuPy version of vector addition and compare speed with NumPy.
