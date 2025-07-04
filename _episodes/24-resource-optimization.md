@@ -669,14 +669,6 @@ module list
 # Activate virtualenv
 source npe/bin/activate
 
-# Confirm Python and GPU availability
-python -c "
-import torch
-print('CUDA Available:', torch.cuda.is_available())
-if torch.cuda.is_available():
-    print('Device:', torch.cuda.get_device_name(0))
-"
-
 # --------- Run the Python Script ---------
 python Gravitational_Lensing_GPU.py
 ```
@@ -1029,5 +1021,76 @@ Efficient resource utilization not only improves your job performance but also e
 >
 > Try running them now on your cluster using the appropriate Slurm script and resource flags.
 {: .prereq}
+
+> ## ✅ Solution 1: Slurm Submission Script for Exercise 1 (MPI with `mpi4py`)
+>
+> The following script can be used to submit your MPI-based Python program (`mpi_hpc_ws.py`) on an HPC cluster using Slurm:
+>
+> ```bash
+> #!/bin/bash
+> #SBATCH --job-name=mpi_hpc_ws
+> #SBATCH --output=mpi_%j.out
+> #SBATCH --error=mpi_%j.err
+> #SBATCH --partition=defaultq
+> #SBATCH --nodes=2
+> #SBATCH --ntasks=4
+> #SBATCH --time=00:10:00
+> #SBATCH --mem=16G
+>
+> # Load required modules
+> module purge
+> module load gnu12/12.3.0
+> module load openmpi4/4.1.6
+> module load Python/3.12.8
+> module list
+>
+> # Activate your Python environment 
+> source 'name_of_venv'/bin/activate # Here name_of_venv refers to the name of your virtual environment without the quotes
+>
+> python --version
+>
+> # Run the MPI job
+> mpirun -np 4 python mpi_hpc_ws.py
+> ```
+>
+> 📌 **Make sure** your virtual environment has `mpi4py` installed and that your system has access to the OpenMPI runtime via `mpirun`. Adjust the number of nodes and tasks depending on the cluster policies.
+{: .solution}
+
+> ## ✅ Solution 2: Slurm Submission Script for Exercise 2 (GPU with `numba-cuda`)
+>
+> The following script can be used to submit a GPU-accelerated Python job (`numba_cuda_test.py`) using Slurm:
+>
+> ```bash
+> #!/bin/bash
+> #SBATCH --job-name=Numba_Cuda
+> #SBATCH --output=Numba_Cuda_%j.out
+> #SBATCH --error=Numba_Cuda_%j.err
+> #SBATCH --partition=gpu
+> #SBATCH --nodes=1
+> #SBATCH --ntasks-per-node=1
+> #SBATCH --cpus-per-task=4
+> #SBATCH --mem=16G
+> #SBATCH --gpus-per-node=1
+> #SBATCH --time=00:10:00
+>
+> # --------- Load Environment ---------
+> module load Python/3.12.8
+> module load cuda/12.6.3
+> module list
+>
+> # --------- Check whether the GPU is available ---------
+> from numba import cuda
+> print("CUDA Available:", cuda.is_available())
+> # Activate virtual environment
+> source 'name_of_venv'/bin/activate # Here name_of_venv refers to the name of your virtual environment without the quotes
+>
+> # --------- Run the Python Script ---------
+> python numba_cuda_test.py
+> ```
+>
+> 📌 **Make sure** your virtual environment includes `numba-cuda` to access the GPU. 
+>
+{: .solution}
+
 
 {% include links.md %}
