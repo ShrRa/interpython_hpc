@@ -278,7 +278,7 @@ echo "Job completed at $(date)"
 #SBATCH --job-name=HPC_WS_SCPU # Provide a name for the job 
 #SBATCH --output=HPC_WS_SCPU_%j.out # Request the output file along with the job number
 #SBATCH --error=HPC_WS_SCPU_%j.err # Request the error file along with the job number
-#SBATCH --partition=dwfaultq 
+#SBATCH --partition=serial
 #SBATCH --nodes=1 # Request one CPU node
 #SBATCH --ntasks=1 # Request 1 core from the CPU node
 #SBATCH --time=-01:00:00 # Set time limit for the job
@@ -306,7 +306,7 @@ echo "Job completed at $(date)"
 ```
 
 > ## Exercise: Profile Your Code
-> Compile and run the sequential matrix multiplication. Use `time` and `htop` to monitor resource usage. Identify whether it's CPU-bound or memory-bound
+> Compile and run the sequential code. Use `htop` to monitor resource usage. Identify whether it's CPU-bound or memory-bound
 {: .challenge}
 
 <!-------------------------------------------- Section-2 ------------------------------------------------------------------>
@@ -327,7 +327,8 @@ Parallel jobs can utilize multiple CPU cores across one or more nodes to acceler
 mpirun -np 48 ./mpi_program           # Run with 48 MPI processes (2 nodes × 24 cores)
 ```
 
-**Key parameters:**
+**Changes from the sequential script:**
+- `#SBATCH --partition=defaultq` : Sets to the default partition
 - `#SBATCH -N 2`: Requests 2 compute nodes
 - `#SBATCH -n 24`: Specifies 24 CPU cores per node
 - `mpirun -np 48`: Launches 48 MPI processes total (2 × 24)
@@ -515,13 +516,13 @@ echo "Job completed at $(date)"
 # Load required modules
 module purge # Remove the list of pre loaded modules
 module load Python/3.9.1
-module load openmpi4/4.1.6
+module load openmpi4/default
 module list # List the modules
 
 # Create a python virtual environment 
 python3 -m venv name_of_your_venv
 
-# Activate your Python environment
+# Activate your Python virtual environment
 source name_of_your_venv/bin/activate
 
 echo "Starting Gravitational Lensing Deflection calculation of Sequential CPU..."
@@ -662,12 +663,12 @@ print("CUDA plot saved in 'plots/deflection_angle_cuda.png'")
 #SBATCH --time=06:00:00
 
 # --------- Load Environment ---------
-module load Python/3.12.8
-module load cuda/12.6.3
+module load Python/3.9.1
+module load cuda/11.2
 module list
 
-# Activate virtualenv
-source npe/bin/activate
+# Activate your Python virtual environment
+source name_of_your_venv/bin/activate
 
 # --------- Run the Python Script ---------
 python Gravitational_Lensing_GPU.py
@@ -1039,15 +1040,15 @@ Efficient resource utilization not only improves your job performance but also e
 >
 > # Load required modules
 > module purge
-> module load gnu12/12.3.0
-> module load openmpi4/4.1.6
-> module load Python/3.12.8
+> module load Python/3.9.1
 > module list
 >
-> # Activate your Python environment 
-> source 'name_of_venv'/bin/activate # Here name_of_venv refers to the name of your virtual environment without the quotes
->
-> python --version
+> 
+> Create a python virtual environment 
+> python3 -m venv name_of_your_venv
+> 
+> Activate your Python environment
+> source name_of_your_venv/bin/activate
 >
 > # Run the MPI job
 > mpirun -np 4 python mpi_hpc_ws.py
@@ -1074,8 +1075,8 @@ Efficient resource utilization not only improves your job performance but also e
 > #SBATCH --time=00:10:00
 >
 > # --------- Load Environment ---------
-> module load Python/3.12.8
-> module load cuda/12.6.3
+> module load Python/3.9.1
+> module load cuda/11.2
 > module list
 >
 > # --------- Check whether the GPU is available ---------
@@ -1088,7 +1089,7 @@ Efficient resource utilization not only improves your job performance but also e
 > python numba_cuda_test.py
 > ```
 >
-> Make sure your virtual environment includes `numba-cuda` to access the GPU. 
+> Make sure your virtual environment includes the `numba-cuda` python library to access the GPU. 
 >
 {: .solution}
 
