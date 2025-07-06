@@ -113,51 +113,32 @@ Since C programming is not a prerequisite for this workshop, let's break down th
 - Add `#include <omp.h>` to your code
 - Compile with `-fopenmp` flag
 
-### Code Breakdown
+> ### Explanation of the code
+>
+> - `#include <omp.h>`: Includes the OpenMP API header needed for all OpenMP functions and directives.
+> - `#pragma omp parallel for`: A **compiler directive** that tells the compiler to **parallelize the `for` loop** that follows.
+> - The `for` loop itself performs **element-wise addition** of two arrays (`b` and `c`), storing the result in array `a`.
+>
+> ### How OpenMP Executes This
+>
+> 1. OpenMP detects available CPU cores (e.g., 4 or 8).
+> 2. It splits the loop into chunks — one for each thread.
+> 3. Each core runs its chunk **simultaneously** (in parallel).
+> 4. The threads **synchronize automatically** once all work is done.
+>
+> ### Output
+>
+> The output is stored in array `a`, which will contain the sum of corresponding elements from arrays `b` and `c`. The execution is faster than running the loop sequentially.
+>
+> ### Real-World Analogy
+>
+> Suppose you need to send 100 emails:
+>
+> - **Without OpenMP**: One person sends all 100 emails one by one.
+> - **With OpenMP**: 4 people each send 25 emails **at the same time** — finishing in a quarter of the time.
+>
+{: .discussion}
 
-The code demonstrates how to run a loop in parallel using multiple CPU cores with OpenMP.
-
-#### 1. Header Inclusion
-```c
-#include <omp.h>
-```
-**Purpose**:
-- Includes the OpenMP library
-- Required for all OpenMP functions and directives
-- Without this, the compiler won't recognize OpenMP commands
-
-#### 2. Compiler Directive
-```c
-#pragma omp parallel for
-```
-**What it does**:
-- Special instruction for the compiler (not regular code)
-- Means: "Run this loop in parallel using multiple CPU cores"
-- The compiler automatically handles dividing the work
-
-#### 3. Parallel Loop
-```c
-for (int i = 0; i < N; i++) {
-    a[i] = b[i] + c[i];
-}
-```
-**Operation**:
-- Performs element-wise addition of arrays `b` and `c`
-- Stores results in array `a`
-
-#### How OpenMP Executes This
-
-1. **Detects available CPU cores** (e.g., finds 4 or 8 cores)
-2. **Divides the loop iterations** among the cores
-3. **Processes chunks simultaneously** (each core works on its portion)
-4. **Combines results** when all cores finish
-
-#### Real-World Analogy
-
-Imagine sending 100 emails:
-
-- **Without OpenMP**: One person sends all 100 emails sequentially
-- **With OpenMP**: 4 people each send 25 emails at the same time (about 4× faster)
 
 ---
 > ## Exercise: Parallelization Challenge
