@@ -24,7 +24,8 @@ Most users begin with simple serial code, which runs sequentially on one process
 
 Parallel programming allows us to split work across multiple CPUs or even GPUs. High-Performance Computing (HPC) relies on this concept to solve problems faster.
 
-> **Figure Suggestion**: Plot showing execution time of serial vs parallel implementation for increasing problem sizes (e.g., matrix size or loop iterations).
+> ## Figure Suggestion: 
+> Plot showing execution time of serial vs parallel implementation for increasing problem sizes (e.g., matrix size or loop iterations).
 {: .callout}
 
 ## Serial Code Example (CPU)
@@ -79,7 +80,7 @@ print(f"Sum: {total}, Time taken: {end - start:.4f} seconds")
 
 > ## Reference: 
 > [Carpentries Python loops lesson](https://swcarpentry.github.io/python-novice-inflammation/05-loop.html)
-{: .testimonial}
+{: .checklist}
 
 ---
 
@@ -206,7 +207,38 @@ if rank == 0:
     print(all_data)
 ```
 
-> **Note**: You won't be able to run this code in your current environment. This example requires a Slurm job submission script to launch MPI processes across nodes. Detailed instructions on how to configure Slurm scripts and request resources are provided in [Section 2: HPC Bura - Resource Optimization ](https://meet-vyas-dev.github.io/interpython_hpc/24-resource-optimization/index.html).
+> ## Explanation of the code
+>
+> This example demonstrates a basic use of `mpi4py` to perform a **gather operation** using the `MPI.COMM_WORLD` communicator.
+>
+> Each process:
+>
+> - Determines its **rank** (an integer from 0 to N-1, where N is the number of processes).
+> - Computes `rank ** 2` (the square of its rank).
+> - Uses `comm.gather()` to send the result to the **root process** (rank 0).
+>
+> Only the **root process** gathers the data and prints the complete list.
+>
+> ### Example Output (4 processes):
+>
+> - Rank 0 computes `0² = 0`
+> - Rank 1 computes `1² = 1`
+> - Rank 2 computes `2² = 4`
+> - Rank 3 computes `3² = 9`
+>
+> The root process (rank 0) gathers all results and prints:
+>
+> ```text
+> [0, 1, 4, 9]
+> ```
+>
+> Other ranks do not print anything.
+>
+> This example illustrates **point-to-root communication** — useful when one process needs to collect and process results from all workers.
+{: .discussion}
+
+> ## Note:
+> You won't be able to run this code in your current environment. This example requires a Slurm job submission script to launch MPI processes across nodes. Detailed instructions on how to configure Slurm scripts and request resources are provided in [Section 2: HPC Bura - Resource Optimization ](https://meet-vyas-dev.github.io/interpython_hpc/24-resource-optimization/index.html).
 {: .prereq}
 
 Typically one would run this file after having a slurm script with the required resources followed by this command
@@ -222,7 +254,7 @@ mpirun -n 4 python your_script.py
 > ## References:
 > - [OpenMP Tutorials](https://www.openmp.org/resources/tutorials-articles/)
 > - [mpi4py library Documentation](https://mpi4py.readthedocs.io/en/stable/)
-{: .testimonial}
+{: .checklist}
 ---
 
 ## GPU Programming Concepts
@@ -332,7 +364,9 @@ print("First 5 results:", c[:5])
 print("Time taken on GPU:", gpu_time, "seconds")
 ```
 
-> **Note**: This code also requires GPU access and Slurm job submission to be executed properly. You will revisit this exercise after completing [Section 2: HPC Bura - Resource Optimization ](https://meet-vyas-dev.github.io/interpython_hpc/24-resource-optimization/index.html), which introduces how to configure resources and submit jobs.
+> ## Note: 
+> This code also requires GPU access and Slurm job submission to be executed properly. You will revisit this exercise after completing [Section 2: HPC Bura - Resource Optimization ](https://meet-vyas-dev.github.io/interpython_hpc/24-resource-optimization/index.html), which introduces how to configure resources and submit jobs.
+{: .prereq}
 
 > ## Exercise: 
 > Write a Numba or CuPy version of vector addition and compare speed with NumPy.
@@ -341,7 +375,7 @@ print("Time taken on GPU:", gpu_time, "seconds")
 > ## References:
 > - [Numba-CUDA Docs](https://nvidia.github.io/numba-cuda/)
 > - [CuPy Documentation](https://docs.cupy.dev/)
-{: .testimonial}
+{: .checklist}
 ---
 
 <!-- ## Simple CUDA GPU Code Example
@@ -363,7 +397,8 @@ __global__ void add(int *a, int *b, int *c, int N) {
 - CPUs: Few powerful cores, better for sequential tasks.
 - GPUs: Many lightweight cores, ideal for parallel workloads.
 
-> ## Figure Suggestion: Diagram comparing CPU vs GPU architecture, e.g., from [CUDA C Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html)
+> ## Figure Suggestion: 
+> Diagram comparing CPU vs GPU architecture, e.g., from [CUDA C Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html)
 {: .callout}
 
 ## Comparing CPU and GPU Approaches
@@ -376,13 +411,14 @@ __global__ void add(int *a, int *b, int *c, int N) {
 | Performance  | Good for logic-heavy tasks| Excellent for large, data-parallel problems |
 
 > ## Exercise: 
-> Show which parts of the code execute on GPU vs CPU (host vs device). Introduce concepts like memory copy and kernel launch.
+> Show which parts of the code execute on GPU vs CPU (host vs device). Read about concepts like memory copy and kernel launch.
 {: .challenge}
 
 > **Reference**: [NVIDIA CUDA Samples](https://github.com/NVIDIA/cuda-samples)
-{: .testimonial}
+{: .checklist}
 
-> **Figure**: Bar chart showing performance on matrix multiplication or vector addition.
+> ## Figure:
+> Bar chart showing performance on matrix multiplication or vector addition.
 {: .callout}
 
 ---
@@ -399,7 +435,7 @@ To understand and improve performance, profiling tools are essential.
 {: .challenge}
 
 > **Optional Reference**: [NVIDIA Nsight Tools](https://developer.nvidia.com/nsight-systems)
-{: .testimonial}
+{: .checklist}
 
 ---
 
