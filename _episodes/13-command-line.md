@@ -23,6 +23,8 @@ keypoints:
 The shell or command line is a way to interact with a computer by typing text commands into a terminal or console window. This is in contrast to using a graphical user interface (GUI) with buttons and menus. Although many of the same tasks can be performed with both a shell interface or a GUI interface, the shell gives the most basic and universal access because it does not require any graphics. 
 Whether you're navigating a High Performance Computing (HPC) repo, inspecting  files, or debugging processing failures, these shell commands will be indispensable.
 
+You have already opened a shell to ssh into bura. Now that your shell is pointing to the bura file system, we will learn how to navigate it, manipulate files, and interrogate the machine for information about you, the file system, and the tasks it is running.
+
 # File Navigation
 When you view your file system via a graphical interface, you are used to clicking on one folder to look inside and then clicking on another folder inside that one. This folder (or directory) structure is called a directory tree. In the same way that you can click to navigate around your file system, you can type commands into the shell.
 
@@ -52,6 +54,12 @@ By default, `ls` does not show you any directories or files starting with `.`. T
 > TODO
 ```
 You will notice that you have a `.ssh` directory that you created when you set up your ssh keys.
+
+Another useful option is `-F` flag - this adds symbols to the output to identify different types of entries. For example it will put a `/` after directories. 
+
+> ## Using Multiple Flags
+> Sometimes you want to use more than one flag for a command (for example maybe you want to use the `-a` and `-F` flags) to show all hidden files and tell you which ones are directories. If the flag is a single letter then you can string them together like `ls -aF` or if you prefer you can write `ls -a -F`. The order you put the flags in doesn't matter.
+{: .callout}
 
 ## Creating a Directory
 When you start a project one of the first things you want to do is set up directories to organize it. For example, you may want a top level directory for the project and then sub-directories for data and code. You can create a new directory using the `mkdir` command (for make directory). Let's make a directory for the work we do in this course:
