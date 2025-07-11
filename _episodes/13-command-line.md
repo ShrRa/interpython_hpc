@@ -31,7 +31,7 @@ When you view your file system via a graphical interface, you are used to clicki
 ## What directory am I in?
 The `pwd` command stands for "print working directory". You can always use this command to ask the shell "where am I?" (you will be surprised how often this comes up).
 ```bash
-> pwd
+$ pwd
 ```
 ```output
 > TODO
@@ -40,7 +40,7 @@ The `pwd` command stands for "print working directory". You can always use this 
 ## What is in my directory?
 The `ls` command is short for listing - this lists all of the files and directories in the directory that you are currently in. This is really helpful if you are looking for something or can't remember the name of a file or directory. 
 ```bash
-> ls
+$ ls
 ```
 ```output
 > TODO
@@ -48,7 +48,7 @@ The `ls` command is short for listing - this lists all of the files and director
 
 By default, `ls` does not show you any directories or files starting with `.`. These are called hidden files and directories. If you want to see everything, even the hidden files, you can use the `-a` flag (for all).
 ```bash
-> ls -a
+$ ls -a
 ```
 ```output
 > TODO
@@ -62,9 +62,9 @@ Another useful option is `-F` flag - this adds symbols to the output to identify
 {: .callout}
 
 ## Creating a Directory
-When you start a project one of the first things you want to do is set up directories to organize it. For example, you may want a top level directory for the project and then sub-directories for data and code. You can create a new directory using the `mkdir` command (for make directory). Let's make a directory for the work we do in this course:
+When you start a project one of the first things you want to do is set up directories to organize it. For example, you may want a top level directory for the project and then sub-directories for data and code. When you log onto another computer you should not put everything in your home directory. A little organization at the beginning can save you a lot of time later when you try to figure out which files belong to what project. You can create a new directory using the `mkdir` command (for make directory). Let's make a directory for the work we do in this course:
 ```bash
-> mkdir hpc_course
+$ mkdir hpc_course
 ```
 
 > ## Spaces in directory names
@@ -74,7 +74,7 @@ When you start a project one of the first things you want to do is set up direct
 ## Changing Directories
 Creating a directory does not move you into the new directory. To change directories you use the `cd` command. For example:
 ```bash
-> cd hpc_course
+$ cd hpc_course
 ```
 
 To move backwards (or up) a directory (for example to move back to your home directory) use `cd ../`
@@ -83,7 +83,7 @@ To move backwards (or up) a directory (for example to move back to your home dir
 > Move into your `hpc_course` directory. Verify that you are in the correct directory, then create two new directories: code and data. Verify that your directories have been created.
 {: .challenge}
 
->## Solution
+> ## Solution
 > ```bash
 > cd hpc_course
 > pwd
