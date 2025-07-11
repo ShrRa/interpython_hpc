@@ -3,54 +3,96 @@ title: "Command line basics"
 teaching: XX
 exercises: YY
 questions:
-- "What command line skills do I need to work with data on High Performing Computing (HPC)?"
+- "How can I change directories from the command line?"
+- "How can I create directories and files from the command line?"
+- "How can I view my identity?"
+- "How can I create and move files?"
+- "How can I who is doing what on a computer or HPC?"
+- "How can I print to the shell?"
 objectives:
-- "Learn essential CLI commands used in  data management and processing on HPC"
+- "Learn essential shell commands used in data management and processing on a High Performance Computing Environment"
 keypoints:
-- "Basic CLI skills enable efficient navigation and manipulation of  data repositories"
-- "Use *man* to explore arguments for command-line tools"
+- "Shell skills enable efficient navigation and manipulation local and remote file systems"
+- "The shell can be used to identify who you are and what you have access to"
+- "The shell can be used to determine who is doing what is being done on a computing resource?"
 ---
 
 
-## The top 10 basic commands to learn
+# Introducing the Shell
 
-CLI stands for Command Line Interface.
+The shell or command line is a way to interact with a computer by typing text commands into a terminal or console window. This is in contrast to using a graphical user interface (GUI) with buttons and menus. Although many of the same tasks can be performed with both a shell interface or a GUI interface, the shell gives the most basic and universal access because it does not require any graphics. 
+Whether you're navigating a High Performance Computing (HPC) repo, inspecting  files, or debugging processing failures, these shell commands will be indispensable.
 
-It is a way to interact with a computer program by typing text commands into a terminal or console window, instead of using a graphical user interface (GUI) with buttons and menus.
+# File Navigation
+When you view your file system via a graphical interface, you are used to clicking on one folder to look inside and then clicking on another folder inside that one. This folder (or directory) structure is called a directory tree. In the same way that you can click to navigate around your file system, you can type commands into the shell.
 
-When working with large  datasets, pipeline logs, and configuration files — mastering the command line is essential. Whether you're navigating a High Performance Computing (HPC) repo, 
-inspecting  files, or debugging processing failures, these Unix commands will be indispensable.
+## What directory am I in?
+The `pwd` command stands for "print working directory". You can always use this command to ask the shell "where am I?" (you will be surprised how often this comes up).
+```bash
+> pwd
+```
+```output
+> TODO
+```
 
-The following are general-purpose commands, and we may add LSST-specific notes where applicable.
+## What is in my directory?
+The `ls` command is short for listing - this lists all of the files and directories in the directory that you are currently in. This is really helpful if you are looking for something or can't remember the name of a file or directory. 
+```bash
+> ls
+```
+```output
+> TODO
+```
 
+By default, `ls` does not show you any directories or files starting with `.`. These are called hidden files and directories. If you want to see everything, even the hidden files, you can use the `-a` flag (for all).
+```bash
+> ls -a
+```
+```output
+> TODO
+```
+You will notice that you have a `.ssh` directory that you created when you set up your ssh keys.
 
-Working with LSST data often involves accessing large-scale datasets stored in hierarchical directories, using symbolic links for shared data, and scripting reproducible data analysis pipelines. 
-These are the fundamental commands every LSST astronomer should know.
+## Creating a Directory
+When you start a project one of the first things you want to do is set up directories to organize it. For example, you may want a top level directory for the project and then sub-directories for data and code. You can create a new directory using the `mkdir` command (for make directory). Let's make a directory for the work we do in this course:
+```bash
+> mkdir hpc_course
+```
 
+> ## Spaces in directory names
+> You may have noticed that we separate different parts of a command with spaces. The command line uses spaces to parse each part of the command. For this reason, you should not create directories with spaces in them, because if you then try to do something with them from the command line you need to add special characters to group the multiple words together. It is common to use underscores or dashes between words. 
+{: .callout}
 
-> ### File Preparation:needed to run for later exercsies
->
+## Changing Directories
+Creating a directory does not move you into the new directory. To change directories you use the `cd` command. For example:
+```bash
+> cd hpc_course
+```
+
+To move backwards (or up) a directory (for example to move back to your home directory) use `cd ../`
+
+> ## Exercise
+> Move into your `hpc_course` directory. Verify that you are in the correct directory, then create two new directories: code and data. Verify that your directories have been created.
+{: .challenge}
+
+>## Solution
 > ```bash
-> # Make a dummy data directory and populate it
-> mkdir -p 1.IntroHPC/1.CLI
-> echo "dummy input" > 1.IntroHPC/1.CLI/test.in
-> echo "file list" > 1.IntroHPC/1.CLI/test.files
-> touch 1.IntroHPC/1.CLI/14si.pspnc
+> cd hpc_course
+> pwd
+> mkdir code
+> mkdir data
+> ls
 > ```
->
+{: .solution}
+
+> ## Using tab to auto-complete
+> It can be tiring to type out the name of every file and every directory and it can also be frustrating when you mistype a word. The shell will auto-complete a filename or directory name if you have typed enough of the word to uniquely define it by pressing the tab button. If there is more than one possibility, press the tab button twice to display the different options.
+{: .callout}
 
 
-### Directory and File Operations
 
->**Setup** (run once before these examples):
-> ```bash
 
-> mkdir -p lsst_data/raw
-> cd lsst_data
-> touch image01.fits
-> echo "instrument: LATISS" > config.yaml
-> echo -e "INFO: Init\nFATAL: Calibration failed" > job.log
-> ```
+
 
 #### `ls`
 List contents of a directory. Useful flags:
@@ -68,21 +110,6 @@ $ ls -alF
   - `@` for symbolic links
   - `*` for executables
 
-
-
-#### `pwd`, `cd`
-To check and change the current directory:
-```bash
-$ pwd
-$ cd /lsst_data/raw
-```
-
-#### `mkdir`, `tree`
-Create directories and visualize structure:
-```bash
-$ mkdir -p repo/gen3/raw/20240101
-$ tree repo/gen3
-```
 
 
 ### File Manipulation
