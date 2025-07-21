@@ -97,7 +97,57 @@ To move backwards (or up) a directory (for example to move back to your home dir
 > It can be tiring to type out the name of every file and every directory and it can also be frustrating when you mistype a word. The shell will auto-complete a filename or directory name if you have typed enough of the word to uniquely define it by pressing the tab button. If there is more than one possibility, press the tab button twice to display the different options.
 {: .callout}
 
+## Going backwards
+Once you have gone into a directory, how do you get out? `../` is the shells way of saying "go back a directory". For example, we are currently in the `hpc_course` directory. If you type `cd ../` you will be in your home directory.
+```bash
+$ pwd
+$ cd ../
+$ pwd
+$ ls
+$ cd hpc_course
+```
 
+
+# File Manipulation
+Let's create a simple script that prints "hello world" to the screen. We will use the editor nano. The great thing about nano is that it tells you how to save and exit in the screen, it is also ideal for ssh as it opens directly in the shell window you are using. 
+```bash
+$ nano shell_example.sh
+```
+In the window that pops up, let's type `echo "hello world`. Then press control-o to save (Write out) and control-x to exit. 
+Oops - we just create that script in our top level directory and it belongs in our code directory (because it is a piece of code). We can move the file to the code directory with the `mv` command. The format is `mv` thing-you-want-to-move where-you-want-to-move-it
+```bash
+$ mv shell_example.sh code
+```
+`mv` can also be used to rename a file, you can think of this as moving it from one file name to another filename. In this case where-you-want-to-move-it is the new name of the file. Let's rename the file to something more descriptive `hello_world.sh`. Don't forget we moved the file to our code directory, so we have to go there first before we can rename it.
+```bash
+$ ls
+$ cd code
+$ ls
+$ mv shell_example.sh hello_world.sh
+```
+Instead of moving or renaming a file, you can create a copy of the file with the `cp` command. The format is the same as `mv`
+```bash
+$ cp hello_world.sh hello_world_copy.sh
+```
+> ## including paths in cp and mv
+> You do not always have to be in a directory to copy or move a file. If the file you want to move is not in your current directory, you can refer to the file you want to move with both the path from your current directory and the filename. Similarly, where you want to move a file can also include a path. Let's say I was in my `hpc_course` directory and I want to copy my hello_world.sh file to hello_world_3.sh. The format looks like this: 
+> ```bash
+> $ pwd
+> $ cd ../
+> $ cp code/hello_world.sh code/hello_world_3.sh
+> ```
+{: .callout}
+
+## deleting files
+You may accidentally create file and want to delete it. This can be done with the `rm` command which stands for remove. Be careful, the `rm` command permantly deletes a file - this is not like putting it in the trash can or recycle bin where you can recover it. For that reason, we recommend you use the `-i` flag which double checks with you before it deletes a file. Now we can remove our hello_world_3.sh file.
+
+```bash
+$ cd code
+$ rm -i hello_world_3.sh
+```
+
+Still working below this section
+--------------------------------
 
 
 
@@ -118,33 +168,8 @@ $ ls -alF
   - `@` for symbolic links
   - `*` for executables
 
-
-
-### File Manipulation
-
-#### `cp`, `mv`, `rm`
-Basic operations:
-```bash
-$ cp image01.fits image02.fits
-$ mv image02.fits image_raw.fits
-$ rm image_raw.fits
-```
-
-#### `ln`
-Create symbolic links to avoid data duplication:
-```bash
-$ ln -s /datasets/lsst/raw/image01.fits ./image01.fits
-```
-
 ### Viewing and Extracting Data
 
-#### `cat`, `less`, `grep`
-View and search YAML config or log files:
-```bash
-$ cat config.yaml
-$ less job.log
-$ grep "FATAL" job.log
-```
 
 ### Permissions and Metadata
 
