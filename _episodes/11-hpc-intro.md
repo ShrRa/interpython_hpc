@@ -83,15 +83,21 @@ In addition to these categories, parallel computers can also be organized by mem
 1. **Multiprocessors:** Shared-memory systems in which all processors access a single, unified memory space. Communication between processors occurs via this shared memory, which can simplify programming but may lead to data access errors if many processors try to use the same data simultaneously. Cores within the same processor in a personal PC use this memory system.
 2. **Multicomputers:** Distributed-memory systems in which each processor has its own private memory. Processors communicate by passing messages over a network, which avoids memory contention but requires explicit communication management in software. This is how memory is handled in clusters.
 
-
 > ## SIMD in Practice: GPUs
-> 
 > A key modern example of SIMD architecture is the **GPU** (Graphics Processing Unit).
+>
+> GPUs were originally designed for computer graphics—an inherently parallel task (e.g., calculating the color of millions of pixels at once).
+> Researchers soon realized this massive parallelism could also be applied to general-purpose scientific computing, such as physics simulations
+> and training AI models, leading to the term **GPGPU** (General-Purpose GPU). These architectures offer significant speedups for *data-parallel* workloads.
+> The trade-off is that GPUs have a different memory hierarchy than CPUs, with less cache per core, so performance can be limited for algorithms that
+> require frequent or irregular communication between threads.
 > 
-> GPUs were originally designed for computer graphics—an inherently parallel task (e.g., calculating the color of millions of pixels at once). Researchers soon realized this massive parallelism could also be applied to general-purpose scientific computing, such as physics simulations and training AI models, leading to the term **GPGPU** (General-Purpose GPU). These architectures offer significant speedups for *data-parallel* workloads. The trade-off is that GPUs have a different memory hierarchy than CPUs, with less cache per core, so performance can be limited for algorithms that require frequent or irregular communication between threads.
+> A CPU consists of a small number of powerful cores optimized for complex, sequential tasks. A GPU, in contrast, contains thousands of simpler cores
+> optimized for high-throughput, data-parallel problems. For this reason, nearly all modern supercomputers are **hybrid systems** that combine CPUs and GPUs,
+> leveraging the strengths of each.
 > 
-> A CPU consists of a small number of powerful cores optimized for complex, sequential tasks. A GPU, in contrast, contains thousands of simpler cores optimized for high-throughput, data-parallel problems. For this reason, nearly all modern supercomputers are **hybrid systems** that combine CPUs and GPUs, leveraging the strengths of each.
-> {: .callout}
+{: .callout}
+
 
 ### Supercomputers vs. Computing Clusters
 
@@ -121,15 +127,12 @@ Common HPC topologies include:
 
 Less common HPC topologies include bus, ring, star, hypercube, fully connected, crossbar, and multistage interconnection networks.
 
----
-
 > ## Never Run Computations on the Login Node!
 > When you connect to an HPC cluster, you land on a *login node*. This shared resource is for compiling code **??????**, managing files, and submitting jobs to the workload manager, but not for heavy computation.  
 > Running an intensive program on the login node will slow it down for everyone, and is a classic mistake for new users.  
 > Submit your job through the workload manager (e.g., `sbatch` in SLURM) so it runs on compute nodes.
+> 
 {: .callout}
-
----
 
 ### File System
 
@@ -142,10 +145,10 @@ HPC clusters typically provide multiple storage locations, each serving differen
     - Jobs needing higher-performance storage than personal directories
 - **Shared:** Storage accessible to multiple users, often for research groups. Commonly used as a shared working directory and generally backed up regularly.
 
-
 > ### Other types of storage
 > Large HPC facilities may have more complex storage organization. For example, there may exist *project* and *archive* storages, dedicated to storing large volumes of data that are not accessed often and can tolerate large lags of access time. One of the slowest, but also cheapest and most reliable storage types are magnetic tape libraries. They are commonly used for storing archival (processed with obsolete versions of pipelines) data releases of astronomical surveys, and this system is likely to be implemented for LSST as well.
 > Some HPC systems also have an archive tier that is really slow—think tape libraries—intended for “stick it in a vault, retrieve once every six months” kind of usage
+> 
 {: .callout}
 
 **?????**
