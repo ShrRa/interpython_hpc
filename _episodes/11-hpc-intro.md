@@ -145,7 +145,7 @@ HPC clusters typically provide multiple storage locations, each serving differen
     - Jobs needing higher-performance storage than personal directories
 - **Shared:** Storage accessible to multiple users, often for research groups. Commonly used as a shared working directory and generally backed up regularly.
 
-> ### Other types of storage
+> ## Other types of storage
 > Large HPC facilities may have more complex storage organization. For example, there may exist *project* and *archive* storages, dedicated to storing large volumes of data that are not accessed often and can tolerate large lags of access time. One of the slowest, but also cheapest and most reliable storage types are magnetic tape libraries. They are commonly used for storing archival (processed with obsolete versions of pipelines) data releases of astronomical surveys, and this system is likely to be implemented for LSST as well.
 > Some HPC systems also have an archive tier that is really slow—think tape libraries—intended for “stick it in a vault, retrieve once every six months” kind of usage
 > 
