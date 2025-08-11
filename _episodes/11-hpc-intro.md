@@ -10,121 +10,139 @@ keypoints:
 - "Keypoint 1"
 ---
 
-Simple, inexpensive computing tasks are typically performed **sequentially**, *i.e.*, where instructions are completed one after another in the order that they appear in the code, which is the default paradigm in most programming languages. For larger tasks that require many tasks to be executed, it is often more efficient to take advantage of the intrinisically parallel nature of most processors, which are designed to execute multiple processes simultaneously. Many common programming languages, including Python, support software that is executed in **parallel**, where multiple CPU cores are employed to perform tasks independently.
+Simple, inexpensive computing tasks are typically performed **sequentially**, i.e., instructions are executed one after another in the order they appear in the code. This is the default paradigm in most programming languages. For larger problems that involve many tasks, it is often more efficient to exploit the intrinsically parallel nature of modern processors, which are designed to execute multiple processes simultaneously. Many programming languages, including Python, support parallel execution, where multiple CPU cores perform tasks independently.
 
-In modern computing, parallel programming has become more and more essential as computational tasks become more demanding. From protein folding in experimental drug development to galaxy formation and evolution, complex simulations rely on parallel computing to solve some of the most difficult problems in science. Parallel programming, hardware architecture, and systems admininstration come together in the multidisciplinary field of **high-performance computing** (HPC). In constrast to running code locally on your home machine, high-performance computing involves connecting to a cluster of computers elsewhere in the world that are networked together in order to run many operations in parallel.  
+As computational demands grow, parallel programming has become increasingly essential. From protein folding in drug discovery to simulations of galaxy formation and evolution, many complex problems in science rely on parallel computing. Parallel programming, hardware architecture, and systems administration intersect in the multidisciplinary field of **high-performance computing (HPC)**. Unlike running code locally on a personal computer, HPC typically involves connecting to a cluster of networked computers, sometimes located all over the world, designed to work together on large-scale tasks.
 
-## Intro
+The efficiency of a supercomputer in application to different tasks depends not only on the number of processors it carries aboard, but also on its **architecture** (or, in case of a cluster, on the **network architecture**). In this episode we'll briefly consider the terminology and classifications used to describe supercomputers of different types.
 
 ### Computer Architectures
 
-Historically, computer architectures can be divided into two categories -- von Neumann and Harvard. In the former, a computer system contains the following components:
+Historically, computer architectures are often classified into two categories: **von Neumann** and **Harvard**.  
+In the von Neumann design, a computer system contains the following components:
 
 - Arithmetic/logic unit (ALU)
 - Control unit (CU)
 - Memory unit (MU)
 - Input/output (I/O) devices
 
-The ALU takes in data from local memory from the MU and performs calculations, and the CU interprets instructions and directs the flow of data to and from the I/O devices, as shown in the diagram below. The MU contains all of the memory and instructions, which creates a performance bottleneck related to data transfer.
+The ALU retrieves data from the MU and performs calculations, while the CU interprets instructions and directs the flow of data to and from the I/O devices, as shown in the diagram below.  
+In this architecture, the MU stores both data and instructions, which creates a performance bottleneck due to limited data transfer bandwidth, commonly referred to as the *von Neumann bottleneck*.
 
-    ![von Neumann diagram](../fig/vonneumann.png)
-    <br>
-    <sub>Diagram of von Neumann architecture, from (\cite{https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025})</sub>
+![von Neumann diagram](../fig/vonneumann.png){: .image-with-shadow width="500px"}
+<p style="text-align: center;">Diagram of von Neumann architecture, from <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025</a></p>
 
-The Harvard architecture is a variant of the von Neumann design, where instruction and data storage are physically separated, which allows simulataneous access to instructions and memory. This partially overcomes the von Neumann bottleneck, and most modern central processing units (CPU) adopt this architecture.
+The Harvard architecture is a variant of the von Neumann design in which instruction and data storage are *physically separated*.  
+This allows simultaneous access to both instructions and data, partially overcoming the von Neumann bottleneck.  
 
-    ![Harvard diagram](../fig/harvard.png)
-    <br>
-    <sub>Diagram of Harvard architecture, from (\cite{https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025})</sub>
+Most modern central processing units (CPUs) use a **modified Harvard architecture**, in which instructions and data have separate caches but share the same main memory.  
+This hybrid approach combines some of the performance benefits of Harvard with the flexibility of von Neumann.
+
+
+![Harvard diagram](../fig/harvard.png){: .image-with-shadow width="500px"}
+<p style="text-align: center;">Diagram of Harvard architecture, from <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025</a></p>
 
 ### Performance
 
-Computational peformance is largely determed by three components:
+Three main components have the greatest impact on computational performance:
 
-- **CPU:** CPU performance is quantified by frequency, or "clock speed." This is determines how quickly a CPU executes the instructions passed to it in terms of CPU cycles per second. For example a CPU with a clock speed of 3.5 GHz peforms 3.5 billion cycles each second. Some CPUs have multiple **cores** that support parallelization by executing multiple instructions simultaneously (\cite{https://www.intel.com/content/www/us/en/gaming/resources/cpu-clock-speed.html})
+- **CPU:** CPU performance is often quantified by frequency, or "clock speed," which determines how quickly a CPU executes instructions in terms of cycles per second. For example, a CPU with a clock speed of 3.5 GHz performs 3.5 billion cycles each second. Many CPUs have multiple **cores**, enabling parallel execution of multiple instructions simultaneously ([Intel](https://www.intel.com/content/www/us/en/gaming/resources/cpu-clock-speed.html)).
 
-- **RAM:** Random access memory (RAM) is a computer's short-term memory and stores the data a computer needs to run applications and open files. Faster RAM allows data to flow to and from your CPU more rapidly, and more RAM capacity helps the CPU complete complex operations simultaneously (\cite{https://www.intel.com/content/www/us/en/tech-tips-and-tricks/computer-ram.html}). 
+- **RAM:** Random access memory (RAM) is a computer's short-term memory, storing the data needed to run applications and open files. Faster RAM allows data to move to and from the CPU more quickly, and larger RAM capacity enables the CPU to handle more complex operations simultaneously ([Intel](https://www.intel.com/content/www/us/en/tech-tips-and-tricks/computer-ram.html)).
 
-- **Hard drive:** In contrast to RAM, a computer's hard drive is for long term data storage. Hard drives are characterized by their capacity and performance. Higher-capacity drives can hold more data and higher-performance drives read and write data faster. Hard disk drives (HDD) tend to offer more capacity at a lower cost, while solid state drives (SSDs) offer better performance and reliability. 
+- **Hard drive:** In contrast to RAM, a computer's hard drive is used for long-term data storage. Hard drives are characterized by both their capacity and performance. Higher-capacity drives can store more data, while higher-performance drives can read and write data faster. Hard disk drives (HDDs) generally offer more capacity for a lower cost, whereas solid state drives (SSDs) provide better performance and reliability.
 
-Processing astronomical data, building models and running simulations requires significant computational power.
-The laptop or PC you're using right now probably has between 8 and 32 Gb of **RAM**, a processor with 4-10 **cores**, and a **hard drive** that can store between 256 Gb and 1 Tb of data. But what happens if you need to process a dataset that is larger than 1 Tb, or if your model that has to be loaded into the RAM is larger than 32 Gb, or if the simulation you are running will take a month to calculate on your CPU? You need a bigger computer, or you need many computers working in parallel.
-  
-## Flynn's Taxonomy: a framework for parallel computing
-When we talk about parallel computing, it's helpful to have a framework to classify different types of computer architectures. The most common one is Flynn's Taxonomy, which was proposed in 1966 (\cite{https://ieeexplore.ieee.org/document/1447203}). It gives a simple vocabulary for describing how computers handle tasks, and will help us in understanding how certain programming models are better for certain problems.
+Processing astronomical data, building models, and running simulations requires significant computational power.  
+The laptop or PC you are using right now likely has between **8 GB** and **32 GB** of RAM, a processor with **4–10 cores**, and a hard drive that can store **256 GB–1 TB** of data.  
 
-Flynn’s taxonomy uses four words:
-*   **S**ingle
-*   **I**nstruction
-*   **M**ultiple
-*   **D**ata
+But what if you need to process a dataset larger than 1 TB, or load a model into RAM that exceeds 32 GB, or run a simulation that would take a month to complete on your CPU?  
+In that case, you need a bigger computer, or many computers working in parallel.
 
-These are combined to describe four main architectures (\cite{https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025}). For a thorough overview on these, you can refer to the HIPOWERED book. Let us go over them briefly,
+### Flynn's Taxonomy: A Framework for Parallel Computing
 
-*   **SISD (Single Instruction, Single Data):** This is a traditional serial computer, and is also called a von Neumann computer. It executes one instruction at a time on a single piece of data. Your laptop, when running a simple, non-parallel program, is acting as a SISD machine.
-*   **SIMD (Single Instruction, Multiple Data):** This is a parallel architecture where multiple processors all execute the *same instruction* at the same time, but each one works on a *different piece of data*. This is the key to massive data parallelism.
-*   **MISD (Multiple Instruction, Single Data):** Each processor uses a different instruction on the same piece of data. This architecture is very rare in practice.
-*   **MIMD (Multiple Instruction, Multiple Data):** This is the most common type of parallel computer today. It has multiple processors, and each one can execute different instructions on different data, all at the same time. This is the architecture of a multi-core processor and of entire computing clusters.
+When discussing parallel computing, it is helpful to have a framework for classifying different types of computer architectures.  
+The most widely used is **Flynn's Taxonomy**, proposed in 1966 ([Flynn, 1966](https://ieeexplore.ieee.org/document/1447203)).  
+It provides a simple vocabulary for describing how computers handle tasks and will help us understand why certain programming models are better suited to certain problems.
 
-In addition to these, a separate way in which parallel computers can be organized are:
-1. Multiprocessors: Computers with shared memory.
-2. Multicomputers: Computers with distributed memory.
+Flynn’s taxonomy is based on four terms:
 
-### SIMD in Practice: GPUs
+- **S**ingle  
+- **I**nstruction  
+- **M**ultiple  
+- **D**ata  
 
-An important example of SIMD architecture in modern computing is the GPU (Graphics Processing Unit).
+These combine to define four main architectures ([HiPowered book](https://cnrm.uniri.hr/upload/2023/03/hipowered_book.pdf)):
 
-GPUs were originally designed for computer graphics, which is an inherently parallel task (for e.g., calculating the color of millions of pixels at once). Researchers soon realized this massive parallelism could be used for general-purpose scientific computing, including physics simulations and training AI models, leading to the term GPGPU (General-Purpose GPU). These allow for significant speedups in "data-parallel" models. The trade-off is that GPUs have a different memory hierarchy (with less cache per core compared to CPUs), meaning performance can be limited by algorithms that require frequent or irregular communication between threads.
+- **SISD (Single Instruction, Single Data):** A traditional serial computer, also called a von Neumann machine. It executes one instruction at a time on a single piece of data. A laptop running a simple, non-parallel program is operating in SISD mode.
+- **SIMD (Single Instruction, Multiple Data):** A parallel architecture in which multiple processors execute the *same instruction* simultaneously, but each works on a *different piece of data*. This approach enables massive data parallelism.
+- **MISD (Multiple Instruction, Single Data):** Each processor executes a different instruction on the same piece of data. This architecture is very uncommon.
+- **MIMD (Multiple Instruction, Multiple Data):** The most common type of parallel computer today. Multiple processors execute different instructions on different data at the same time. Multi-core processors, like the one sitting in your PC, and computing clusters fall into this category.
 
-A CPU consists of a few very powerful cores optimized for complex, sequential tasks. A GPU, in contrast, is made of thousands of simpler cores that are masters of efficiency for data-parallel problems. Because of this, nearly all modern supercomputers are hybrid systems that use both CPUs and GPUs, leveraging the strengths of each.
+In addition to these categories, parallel computers can also be organized by memory model:
+
+1. **Multiprocessors:** Shared-memory systems in which all processors access a single, unified memory space. Communication between processors occurs via this shared memory, which can simplify programming but may lead to data access errors if many processors try to use the same data simultaneously. Cores within the same processor in a personal PC use this memory system.
+2. **Multicomputers:** Distributed-memory systems in which each processor has its own private memory. Processors communicate by passing messages over a network, which avoids memory contention but requires explicit communication management in software. This is how memory is handled in clusters.
+
+
+> ## SIMD in Practice: GPUs
+> 
+> A key modern example of SIMD architecture is the **GPU** (Graphics Processing Unit).
+> 
+> GPUs were originally designed for computer graphics—an inherently parallel task (e.g., calculating the color of millions of pixels at once). Researchers soon realized this massive parallelism could also be applied to general-purpose scientific computing, such as physics simulations and training AI models, leading to the term **GPGPU** (General-Purpose GPU). These architectures offer significant speedups for *data-parallel* workloads. The trade-off is that GPUs have a different memory hierarchy than CPUs, with less cache per core, so performance can be limited for algorithms that require frequent or irregular communication between threads.
+> 
+> A CPU consists of a small number of powerful cores optimized for complex, sequential tasks. A GPU, in contrast, contains thousands of simpler cores optimized for high-throughput, data-parallel problems. For this reason, nearly all modern supercomputers are **hybrid systems** that combine CPUs and GPUs, leveraging the strengths of each.
+> {: .callout}
 
 ### Supercomputers vs. Computing Clusters
 
-In the early days of HPC, a "supercomputer" was often a single, monolithic machine with custom vector processors. Today, that has completely changed, the vast majority of systems are clusters. Let us define some terms associated with this,
-*   **Cluster:** A cluster is a collection of many individual, standard (SISD) computers (often called nodes) connected by a very fast, high-performance network. A modern supercomputer is a massive cluster. These are classified as multicomputers as they were originally built by connecting multiple SISD computers.
-*   **Node:** A node is a single computer within the cluster. It has its own processors (CPUs), memory (RAM), and sometimes its own accelerators (GPUs). A typical compute node in a cluster today has two CPUs with multiple cores each.
-*   **Workload Manager (or Scheduler):**  The entire cluster is managed by a special piece of software called a workload manager or scheduler, such as SLURM or PBS. Its job is to manage all the resources, handle a queue of jobs from many users, and decide when and where jobs will run. When submitting a job, it is the scheduler which reserves a set of nodes for the job for a certain amount of time.
+In the early days of HPC, a “supercomputer” was typically a single, monolithic machine with custom vector processors.  
+Today, the vast majority of systems are **clusters**. 
+
+- **Cluster:** A collection of many individual computers, so-called *nodes*, connected by a high-bandwidth network. Early clusters were built from single-core SISD machines, but modern nodes are almost always MIMD systems. 
+- **Node:** A single computer within the cluster. It has its own processors (CPUs), memory (RAM), and often accelerators (GPUs). A typical compute node in a current cluster might have two CPUs with multiple cores each. **??????**
+- **Workload Manager (Scheduler):** Software that manages the entire cluster, such as SLURM or PBS. It allocates resources, handles the job queue, and decides when and where jobs run. When you submit a job, the scheduler reserves a set of nodes for a specific time.
 
 ### Network Topology for Clusters
 
-Since a cluster is just a collection of nodes, the way these nodes are connected (called the **network topology**) is critical to performance. If any program needs to send data between nodes frequently, a slow or inefficient network will create a major bottleneck.
+Since a cluster is a collection of nodes, the characteristics of the connections between them, namely, the bandwidth and the **network topology**, is critical to performance.  
+If a program requires frequent communication between nodes, a slow or inefficient network will cause major bottlenecks.
 
-Common topologies for HPC include:
+Common HPC topologies include:
 
-*   **Mesh:** Nodes are arranged in a two or three-dimensional grid, with each node connected to its nearest neighbors. This structure is illustrated in Figure 1 below, which shows examples of a 2D mesh, a 3D mesh, and a 2D torus (where the edges of the mash wrap around to connect the boundaries, forming a torus). 
+- **Mesh:** Nodes are arranged in a two- or three-dimensional grid, with each node connected to its nearest neighbors. Figure 1 shows examples of a 2D mesh, a 3D mesh, and a 2D torus (where the edges wrap around to connect boundaries, forming a torus).
 
-    ![Schematic figure of mesh topology](../fig/11_mesh.png)
-    <br>
-    <sub>Figure 1: 2D and 3D meshes: a) 2D mesh, b) 3D mesh, c) 2D torus.</sub>
+    ![Schematic figure of mesh topology](../fig/11_mesh.png){: .image-with-shadow width="500px"}  
+    <p style="text-align: center;">Figure 1: 2D and 3D meshes: a) 2D mesh, b) 3D mesh, c) 2D torus.</p>
 
-*   **Fat Tree:** The fat tree topology, shown in Figure 2, is widely used in large clusters. It is a hierarchical tree structure, but with "fatter" (higher bandwidth) links closer to the root to prevent network congestion when many nodes communicate simultaneously.
+- **Fat Tree:** A hierarchical tree structure with “fatter” (higher-bandwidth) links closer to the root to prevent congestion when many nodes communicate at once (Figure 2).
 
-    ![Schematic figure of fat tree topology](../fig/11_fattree.png)
-    <br>
-    <sub>Figure 2: Fat tree topology.</sub>
+    ![Schematic figure of fat tree topology](../fig/11_fattree.png){: .image-with-shadow width="500px"}  
+    <p style="text-align: center;">Figure 2: Fat tree topology.</p>
 
+Less common HPC topologies include bus, ring, star, hypercube, fully connected, crossbar, and multistage interconnection networks.
 
-Other topologies which are less common for an HPC include Bus, Ring, Star, Hypercube, Fully connected, Crossbar and Multistage interconnection. More information can be found in the HiPowered book.
+---
 
 > ## Never Run Computations on the Login Node!
-> When you connect to an HPC cluster, you land on a login node. This node is a shared resource for all users to compile code, manage files, and submit jobs to the workload manager. It is not designed for heavy computation!
-> Running an intensive program on the login node will slow it down for everyone and is a classic mistake for new users. Your job must be submitted through the workload manager (e.g., using `sbatch` in SLURM) to run on the compute nodes.
+> When you connect to an HPC cluster, you land on a *login node*. This shared resource is for compiling code **??????**, managing files, and submitting jobs to the workload manager, but not for heavy computation.  
+> Running an intensive program on the login node will slow it down for everyone, and is a classic mistake for new users.  
+> Submit your job through the workload manager (e.g., `sbatch` in SLURM) so it runs on compute nodes.
 {: .callout}
 
-### File system
+---
 
-HPC clusters use a few different locations and formats for storage. 
+### File System
 
-- **Home directories:** HPC clusters allocate personal storage to individual users, though typically with limited capacity. This is a good place to store scripts and configuration files.
+HPC clusters typically provide multiple storage locations, each serving different purposes:
 
-- **Scratch:** Scratch space is temporary storage that offers signifcantly larger capacity for active jobs and processing that is not backed up and usually deleted after job completion. Using scratch space is appropriate for: 
+- **Home directories:** Personal storage for each user, usually with limited capacity. Suitable for scripts, configuration files, and small datasets.
+- **Scratch:** Temporary high-capacity storage for active jobs. Not backed up and typically cleared after job completion. Ideal for:
+    - Jobs requiring large storage during execution
+    - Datasets too large for personal storage but not needed permanently
+    - Jobs needing higher-performance storage than personal directories
+- **Shared:** Storage accessible to multiple users, often for research groups. Commonly used as a shared working directory and generally backed up regularly.
 
-    - Jobs that require large storage capacity while running
-    - Data sets that do not fit in personal storage but are not permanently needed
-    - Jobs that need higher-performance storage than provided by personal storage
-
-- **Shared:** Shared storage is accessible to multiple users. These spaces tend to be allocated to members of a research groups as a common working directory and are continuously backed up. 
-
+**?????**
 \cite{https://www.hpc.iastate.edu/guides/nova/storage#:~:text=Home%20directories%20(/home),used%20for%20high%20volume%20access.})
 \cite{https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=140938}
 
