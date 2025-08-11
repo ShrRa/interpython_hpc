@@ -18,17 +18,17 @@ keypoints:
 ---
 
 
-# Introducing the Shell
+## Introducing the Shell
 
 The shell or command line is a way to interact with a computer by typing text commands into a terminal or console window. This is in contrast to using a graphical user interface (GUI) with buttons and menus. Although many of the same tasks can be performed with both a shell interface or a GUI interface, the shell gives the most basic and universal access because it does not require any graphics. 
 Whether you're navigating a High Performance Computing (HPC) repo, inspecting  files, or debugging processing failures, these shell commands will be indispensable.
 
 You have already opened a shell to ssh into bura. Now that your shell is pointing to the bura file system, we will learn how to navigate it, manipulate files, and interrogate the machine for information about you, the file system, and the tasks it is running.
 
-# File Navigation
+## File Navigation
 When you view your file system via a graphical interface, you are used to clicking on one folder to look inside and then clicking on another folder inside that one. This folder (or directory) structure is called a directory tree. In the same way that you can click to navigate around your file system, you can type commands into the shell.
 
-## What directory am I in?
+### What directory am I in?
 The `pwd` command stands for "print working directory". You can always use this command to ask the shell "where am I?" (you will be surprised how often this comes up).
 ```bash
 $ pwd
@@ -37,7 +37,7 @@ $ pwd
 > edu02
 ```
 
-## What is in my directory?
+### What is in my directory?
 The `ls` command is short for listing - this lists all of the files and directories in the directory that you are currently in. This is really helpful if you are looking for something or can't remember the name of a file or directory. 
 ```bash
 $ ls
@@ -62,7 +62,7 @@ Another useful option is `-F` flag - this adds symbols to the output to identify
 > Sometimes you want to use more than one flag for a command (for example maybe you want to use the `-a` and `-F` flags) to show all hidden files and tell you which ones are directories. If the flag is a single letter then you can string them together like `ls -aF` or if you prefer you can write `ls -a -F`. The order you put the flags in doesn't matter.
 {: .callout}
 
-## Creating a Directory
+### Creating a Directory
 When you start a project one of the first things you want to do is set up directories to organize it. For example, you may want a top level directory for the project and then sub-directories for data and code. When you log onto another computer you should not put everything in your home directory. A little organization at the beginning can save you a lot of time later when you try to figure out which files belong to what project. You can create a new directory using the `mkdir` command (for make directory). Let's make a directory for the work we do in this course:
 ```bash
 $ mkdir hpc_course
@@ -72,7 +72,7 @@ $ mkdir hpc_course
 > You may have noticed that we separate different parts of a command with spaces. The command line uses spaces to parse each part of the command. For this reason, you should not create directories with spaces in them, because if you then try to do something with them from the command line you need to add special characters to group the multiple words together. It is common to use underscores or dashes between words. 
 {: .callout}
 
-## Changing Directories
+### Changing Directories
 Creating a directory does not move you into the new directory. To change directories you use the `cd` command. For example:
 ```bash
 $ cd hpc_course
@@ -82,23 +82,25 @@ To move backwards (or up) a directory (for example to move back to your home dir
 
 > ## Exercise
 > Move into your `hpc_course` directory. Verify that you are in the correct directory, then create two new directories: code and data. Verify that your directories have been created.
+>> ## Solution
+>> ~~~
+>> ```bash
+>> cd hpc_course
+>> pwd
+>> mkdir code
+>> mkdir data
+>> ls
+>> ```
+>> ~~~
+>>{: .output}
+> {: .solution}
 {: .challenge}
-
-> ## Solution
-> ```bash
-> cd hpc_course
-> pwd
-> mkdir code
-> mkdir data
-> ls
-> ```
-{: .solution}
 
 > ## Using tab to auto-complete
 > It can be tiring to type out the name of every file and every directory and it can also be frustrating when you mistype a word. The shell will auto-complete a filename or directory name if you have typed enough of the word to uniquely define it by pressing the tab button. If there is more than one possibility, press the tab button twice to display the different options.
 {: .callout}
 
-## Going backwards
+### Going backwards
 Once you have gone into a directory, how do you get out? `../` is the shells way of saying "go back a directory". For example, we are currently in the `hpc_course` directory. If you type `cd ../` you will be in your home directory.
 ```bash
 $ pwd
@@ -109,7 +111,7 @@ $ cd hpc_course
 ```
 
 
-# File Manipulation
+## File Manipulation
 Let's create a simple script that prints "hello world" to the screen. We will use the editor nano. The great thing about nano is that it tells you how to save and exit in the screen, it is also ideal for ssh as it opens directly in the shell window you are using. 
 ```bash
 $ nano shell_example.sh
@@ -139,7 +141,7 @@ $ cp hello_world.sh hello_world_copy.sh
 > ```
 {: .callout}
 
-## deleting files
+### deleting files
 You may accidentally create file and want to delete it. This can be done with the `rm` command which stands for remove. Be careful, the `rm` command permantly deletes a file - this is not like putting it in the trash can or recycle bin where you can recover it. For that reason, we recommend you use the `-i` flag which double checks with you before it deletes a file. Now we can remove our hello_world_3.sh file.
 
 ```bash
@@ -149,20 +151,22 @@ $ rm -i hello_world_3.sh
 
 > ## Exercise
 > Use nano to edit your hello_world_copy.sh file to print something else. Rename your file to something descriptive of what it prints. 
+>> ## Solution
+>> ~~~
+>> ```bash
+>> nano hello_world_copy.sh
+>> ```
+>> change "hello world" to "training script"
+>> Save and exit
+>> ```
+>> ```bash
+>> mv hello_world_copy.sh training.sh
+>> ~~~
+>> {: .output}
+>{: .solution}
 {: .challenge}
 
-> ## Solution
-> ```bash
-> nano hello_world_copy.sh
-> ```
-> change "hello world" to "training script"
-> Save and exit
-> ```
-> ```bash
-> mv hello_world_copy.sh training.sh
-{: .solution}
-
-# File permissions - who owns what?
+## File permissions - who owns what?
 Different files on different systems belong to different people and you don't want anyone to be able to do anything to any file. File permissions restrict access to files and directories based on an individual or a defined group. This is like having a locked office door. There are 3 types of permissions: read (r), write (w), and execute (x). Reading a file allows you to look at the file (or directory) but not modify it. Write permissions allow you to modify the file (or directory). Execute allows you to execute a script. There are also 3 sets of permissions to set: permissions for the owner of the file, permissions for the group that the file belongs to, and permissions for everyone else. Let us take a look at the permissions of the files in our directory. To view the current permissions you can type:
 
 ```bash
@@ -189,17 +193,19 @@ $ ls -l hello_world.sh
 ```
 > ## Exercise
 > What are the permissions on the training.sh? Who owns the file? What group does it belong to? Modify the permissions to remove the groups ability to read the file. Double check that the permissions changed. Then add the permissions back.
+>> ## Solution
+>> ~~~
+>> ```bash
+>> $ chmod g-r training.sh
+>> $ ls -l
+>> $ chmod g+r training.sh
+>> ```
+>> ~~~
+>>{: .output}
+>{: .solution}
 {: .challenge}
 
-> ## Solution
-> ```bash
-> $ chmod g-r training.sh
-> $ ls -l
-> $ chmod g+r training.sh
-> ```
-{: .solution}
-
-# Understanding what is happening on the whole system
+## Understanding what is happening on the whole system
 Later in this lesson you will learn how to monitor specific tasks that you run on the HPC. Sometimes you want information about the file system or what processes are running outside of the HPC task manager.
 When you are working on an HPC you are using a shared resource. It can be helpful to know how much of that resource you are using. You can do this with the `du -h <directory>` command. The -h makes the output format human readable (e.g. the size is in Kb, Mb, Gb). First, we will look at the size of our home directory.
 
@@ -215,7 +221,7 @@ $ du -h /home/edu02
 
 Another really useful command is seeing what processes are running and who is running them. You can do with the `top` command. The important parts of the output are the PID (process id), USER (who is running the process), %CPU (what percentage of the CPU is being used by that process), %MEM (what percentage of the memory is being used by that process), TIME (how long has the process been running), and COMMAND (what is the command that was run). If you are worried something you did is taking too long or the computer is running slower than you expect, running `top` is a really good way to get an overview of who is doing what on the system. Note that this will continue to run until you tell it to stop. Type `q` to exit.
 
-# Getting files to and from the HPC
+## Getting files to and from the HPC
 HPCs are a great resouce for computing - but they are not a long term storage solution. You will want to move the files from the HPC to a file system that you control. You may also want to prototype a script locally and then move it to the HPC and run it. There are three ways you can move files back and forth: `scp`, `rsync`, and using GitHub (or other version control).
 
 `scp` stands for secure copy. The command format is `scp <what you want to copy> <where to put it>` and these paths are always specified from where you are. Because you will be going from one system to another - one of the locations will include both the address to the system and the path, separated by a colon. For this part, we will exit Bura. You can do that by typing `exit`.
@@ -234,13 +240,15 @@ Finally, if you are using version control to track your development and have a r
 
 > ## Exercise
 > Use `scp` or `rsync` to move the files you downloaded for this course to Bura.
+>> ## Solution
+>> ~~~
+>> ```bash
+>> $ TODO
+>> ```
+>> ~~~
+>> {: .output}
+>{: .solution}
 {: .challenge}
-
-> ## Solution
-> ```bash
-> $ TODO
-> ```
-{: .solution}
 
 ## Printing to the screen
 Sometime you want to write a message to the screen. This can be done with the `echo` command with the fomat `echo <thing to print>`. For example, to print "hello world":
