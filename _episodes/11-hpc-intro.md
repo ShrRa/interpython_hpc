@@ -27,15 +27,15 @@ Historically, computer architectures can be divided into two categories -- von N
 
 The ALU takes in data from local memory from the MU and performs calculations, and the CU interprets instructions and directs the flow of data to and from the I/O devices, as shown in the diagram below. The MU contains all of the memory and instructions, which creates a performance bottleneck related to data transfer.
 
-    ![von Neumann diagram](../fig/vonneumann.png)
-    <br>
-    <sub>Diagram of von Neumann architecture, from (\cite{https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025})</sub>
+![von Neumann diagram](../fig/vonneumann.png)
+<br>
+<sub>Diagram of von Neumann architecture, from (\cite{https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025})</sub>
 
 The Harvard architecture is a variant of the von Neumann design, where instruction and data storage are physically separated, which allows simulataneous access to instructions and memory. This partially overcomes the von Neumann bottleneck, and most modern central processing units (CPU) adopt this architecture.
 
-    ![Harvard diagram](../fig/harvard.png)
-    <br>
-    <sub>Diagram of Harvard architecture, from (\cite{https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025})</sub>
+![Harvard diagram](../fig/harvard.png)
+<br>
+<sub>Diagram of Harvard architecture, from (\cite{https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025})</sub>
 
 ### Performance
 
