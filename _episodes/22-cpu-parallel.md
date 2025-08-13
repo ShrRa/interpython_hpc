@@ -1,5 +1,5 @@
 ---
-title: "Intro code examples"
+title: "Parallelising our code for CPU"
 start: False
 teaching: 30
 exercises: 20
