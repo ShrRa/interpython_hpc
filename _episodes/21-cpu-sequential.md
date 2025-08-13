@@ -1,8 +1,8 @@
 ---
 title: "Intro code examples"
 start: False
-teaching: 30
-exercises: 20
+teaching: 15
+exercises: 0
 questions:
 - "What are our options to speed up our code?"
 objectives:
