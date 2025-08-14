@@ -94,6 +94,12 @@ Currently Loaded Modulefiles:
 ~~~
 {: .output}
 
+If you want to unload a module, you can use the command `module unload`
+
+```bash
+$ module unload python/Python-3.10.5
+```
+
 If you want to start fresh and unload all your currently loaded modules, you can use `module purge`.
 
 ```bash 
@@ -163,18 +169,18 @@ To exit the environment, simply use the `deactivate` command.
 $
 ```
 
-## Exercise: Practice Makes Perfect
-
-Use the following steps to practice basic HPC environment and Python virtual environment commands.
-
-### Challenge
-
-1. Use `module spider` to find the available versions of `cmake`.
-2. Create a directory for a new project called `my_test_project`.
-3. Move into that directory.
-4. Create and activate a Python virtual environment inside it named `test_env`.
-5. Deactivate the environment.
-
+> ## Exercise: Parallelization Challenge
+>
+> Use the following steps to practice basic HPC environment and Python virtual environment commands.
+>
+> ### Challenge
+>
+> 1. Use `module spider` to find the available versions of `cmake`.
+> 2. Create a directory for a new project called `my_test_project`.
+> 3. Move into that directory.
+> 4. Create and activate a Python virtual environment inside it named `test_env`.
+> 5. Deactivate the environment.
+>
 > ## Solution
 >
 > ```bash
@@ -184,7 +190,6 @@ Use the following steps to practice basic HPC environment and Python virtual env
 > $ python -m venv test_env
 > $ source test_env/bin/activate
 > (test_env) $ deactivate
-> $
 > ```
 {: .solution}
 {: .challenge}
