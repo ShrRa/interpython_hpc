@@ -32,6 +32,17 @@ OpenMP was first introduced in October 1997 as a collaborative effort between ha
 
 OpenMP is now maintained by the OpenMP Architecture Review Board, which includes organizations like Arm, AMD, IBM, Intel, Cray, HP, Fujitsu, Nvidia, NEC, Red Hat, Texas Instruments, and Oracle Corporation. OpenMP allows you to parallelize loops in C/C++ or Fortran using compiler directives.
 
+> ## Terminology
+> #### Nested Parallelism
+> - Nested parallelism occurs when a parallel task itself spawns additional parallel tasks. For example, imagine a program where each thread is responsible for a different data block, and within each block, more threads are launched to handle sub-tasks. This is useful when dealing with hierarchical or recursive algorithms but must be managed carefully to avoid performance penalties due to thread overhead.
+> 
+> #### Single Instruction, Multiple Data (SIMD) – Vectorization
+> - SIMD is a form of data-level parallelism where the same instruction operates on multiple data elements simultaneously. For instance, instead of adding two numbers at a time, SIMD allows processors to add pairs of numbers in parallel using wide registers (like 128-bit or 256-bit). Vectorized operations using NumPy or compiler intrinsics take advantage of this under the hood to speed up loops.
+> 
+> #### Offloading to GPUs
+> - Offloading refers to transferring compute-intensive tasks from the CPU to the GPU, which is optimized for parallel processing. This is particularly effective for operations that can be executed simultaneously on thousands of threads, like matrix multiplications in deep learning or simulations in scientific computing. Tools like CUDA, OpenCL, or libraries like CuPy and PyTorch help achieve this in Python.
+{: .callout}
+
 ### Example: Running a loop in parallel using OpenMP    
 ```c
 #include <omp.h>
@@ -47,7 +58,38 @@ Since C programming is not a prerequisite for this workshop, let's break down th
 - Add `#include <omp.h>` to your code
 - Compile with `-fopenmp` flag
 
-> ### Explanation of the code
+Before we look at the explanation of the C code, we will first look at the Python Equivalent of this code
+
+### Python Equivalent of the Code Logic 
+ ```python 
+def add_arrays(b, c):
+     """
+     Takes two lists `b` and `c`, adds corresponding elements, 
+     and returns the resulting list `a` where a[i] = b[i] + c[i].
+     """
+    # Make sure both lists are the same length
+    assert len(b) == len(c), "Input arrays must be the same length"
+
+    # Create an output list of the same size
+    a = [0.0 for _ in range(len(b))]
+
+    # Loop through and compute a[i] = b[i] + c[i]
+    for i in range(len(b)):
+        a[i] = b[i] + c[i]
+
+    return a
+
+ # Example usage
+ N = 100000
+ b = [i * 0.1 for i in range(N)]
+ c = [i * 0.2 for i in range(N)]
+
+ a = add_arrays(b, c)
+
+ # Print first few values to verify
+ print(a[:10])
+```
+> ## Explanation of the C code
 >
 > - `#include <omp.h>`: Includes the OpenMP API header needed for all OpenMP functions and directives.
 > - `#pragma omp parallel for`: A **compiler directive** that tells the compiler to **parallelize the `for` loop** that follows.
@@ -62,7 +104,7 @@ Since C programming is not a prerequisite for this workshop, let's break down th
 >
 > ### Output
 >
-> The output is stored in array `a`, which will contain the sum of corresponding elements from arrays `b` and `c`. The execution is faster than running the loop sequentially.
+> - The output is stored in array `a`, which will contain the sum of corresponding elements from arrays `b` and `c`. The execution is faster than running the loop sequentially.
 >
 > ### Real-World Analogy
 >
@@ -147,20 +189,40 @@ if rank == 0:
 > [0, 1, 4, 9]
 > ```
 >
-> Other ranks do not print anything.
+> - Other ranks do not print anything.
 >
-> This example illustrates **point-to-root communication** — useful when one process needs to collect and process results from all workers.
+> This example illustrates **point-to-root communication** which is useful when one process needs to collect and process results from all workers.
 {: .discussion}
 
-> ## Note:
-> You won't be able to run this code in your current environment. This example requires a Slurm job submission script to launch MPI processes across nodes. Detailed instructions on how to configure Slurm scripts and request resources are provided in [Section 2: HPC Bura - Resource Optimization ](https://meet-vyas-dev.github.io/interpython_hpc/24-resource-optimization/index.html).
-{: .prereq}
-
-Typically one would run this file after having a slurm script with the required resources followed by this command
+## Slurm Script to execute the code 
 
 ```bash
-mpirun -n 4 python your_script.py
+#!/bin/bash
+#SBATCH --job-name=mpi_hpc_ws
+#SBATCH --output=mpi_%j.out
+#SBATCH --error=mpi_%j.err
+#SBATCH --partition=defaultq
+#SBATCH --nodes=2
+#SBATCH --ntasks=4
+#SBATCH --time=00:10:00
+#SBATCH --mem=16G
+
+# Load required modules
+module purge # Remove the list of pre loaded modules
+module load Python/3.9.1 
+module list # List the modules
+ 
+# Create a python virtual environment 
+python3 -m venv name_of_your_venv
+ 
+# Activate your Python environment
+source name_of_your_venv/bin/activate
+
+# Run the MPI job
+mpirun -np 4 python mpi_hpc_ws.py
 ```
+
+Make sure your virtual environment has `mpi4py` installed and that your system has access to the OpenMPI runtime via `mpirun`. Adjust the number of nodes and tasks depending on the cluster policies.
 
 > ## Exercise: 
 > Modify serial array summation using OpenMP (C) or `multiprocessing` (Python).
