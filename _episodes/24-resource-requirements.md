@@ -44,26 +44,21 @@ keypoints:
 - Machine learning, scientific simulations, image processing
 - Require appropriate GPU resources and memory
 
-<!-- ### Resource Profiling
-
-Before optimizing, you need to understand your program's resource usage:
-
-```bash
-# Monitor CPU and memory usage
-htop
-
-# Time a program and get resource statistics  
-/usr/bin/time -v ./your_program
-
-# Monitor GPU usage (if available)
-nvidia-smi
-
-# Watch GPU usage continuously
-watch -n 1 nvidia-smi
-``` -->
-
 ---
 ## Types of Jobs and Resources
+
+When you run work on an HPC cluster, your job’s **type** determines how it will be scheduled and what resources it will use. Broadly, jobs fall into three categories:  
+
+- **Serial jobs**  
+  These use a single CPU core (or sometimes a single thread) to run all calculations. They don’t require communication between multiple processes. They’re ideal for workloads like simple data analysis, single-threaded simulations, or testing code.  
+
+- **Parallel jobs**  
+  These use multiple CPU cores — sometimes across multiple nodes — to run tasks simultaneously. Parallel jobs often use MPI (Message Passing Interface) or OpenMP explained in the previous section to coordinate work. They’re suited for large-scale simulations or computations that can be split into many parts running at once.  
+
+- **GPU jobs**  
+  These use Graphics Processing Units to accelerate certain types of workloads, especially those involving heavy numerical computation like deep learning, image processing, or large matrix operations. GPU jobs often also use CPU cores for parts of the workflow.  
+
+Once you know your job type, you can select the correct **SLURM partition** (queue) and request the right resources:  
 
 | Job Type   | SLURM Partition | Key SLURM Options              | Example Use Case            |
 |------------|------------------|-------------------------------|-----------------------------|
@@ -73,11 +68,15 @@ watch -n 1 nvidia-smi
 
 
 ## Choosing the Right Node
-- **GPU Node**: For massively parallel computations on GPUs (e.g., CUDA, TensorFlow, PyTorch).
-- **SMP Node**: For jobs needing large shared memory (big matrices, in-memory data) or multi-threaded code (OpenMP, R, Python multiprocessing).
 - **Regular Node**: For MPI-based distributed jobs or simple CPU tasks.
+- **SMP Node** (*Symmetric Multiprocessing*): For jobs needing large shared memory (big matrices, in-memory data) or    multi-threaded code (OpenMP, R, Python multiprocessing).  
+  - In an SMP system, multiple CPUs (cores) share the same physical memory and can access it at the same speed. This architecture is ideal when tasks need frequent access to a common memory space without the communication overhead of distributed systems.
+- **GPU Node**: For massively parallel computations on GPUs (e.g., CUDA, TensorFlow, PyTorch).
+
+
 **Decision chart for Choosing Nodes:**
 ![Decision chart for choosing node types](../fig/Job_Decision_Node_Tree.png)
+
 
 
 {% include links.md %}
