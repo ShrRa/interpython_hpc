@@ -30,9 +30,7 @@ So what can we do? There are two main approaches:
 
   -- Use hardware with more processors to implement highly parallelized code. It can be a supercomputer with multiple CPU cores, or a computer with GPUs with thousands of smaller cores.
 
-> ## Figure Suggestion: 
-> Plot showing execution time of serial vs parallel implementation for increasing problem sizes (e.g., matrix size or loop iterations).
-{: .callout}
+![Serial vs. Parallel Performance Comparison](../fig/serial_parallel_comparision.png)
 
 ## Serial vs. Vectorized Code
 
