@@ -191,7 +191,7 @@ $
 > $ source test_env/bin/activate
 > (test_env) $ deactivate
 > ```
-{: .solution}
+> {: .solution}
 {: .challenge}
 
 ## Installing Project Packages with `pip`
