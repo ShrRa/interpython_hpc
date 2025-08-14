@@ -1,6 +1,6 @@
 ---
-title: "Slurm"
-teaching: 5
+title: "Introduction to Slurm workload manager"
+teaching: 50
 exercises: 0
 questions:
 - "Question 1"
@@ -64,36 +64,20 @@ Man pages exist for all Slurm daemons, commands, and API functions. The command 
 To have a look to more general commands
 [SLURM Quick Start Summary (PDF)](https://slurm.schedmd.com/pdfs/summary.pdf)
 
-
-# 🧪 Slurm Basic Command Examples
-
-This document provides basic examples of Slurm commands, showing both the input and expected output.  
----
-
 ## 1. View Available Resources
 
 ```bash
 # Display the status of partitions (queues) and nodes
 sinfo
 ```
-### Expected Output:
+Expected Output:
 ```bash
 PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
 debug        up   infinite      2   idle node[01-02]
 batch        up   infinite      4   idle node[03-06]
 ```
 
-## 2. Submit a Simple Command
-
-# Run the 'hostname' command on a compute node
-```bash
-srun hostname
-```
-### Expected Output:
-```bash
-node03
-```
-## 3. Submit a Job Script
+### 3. Submit a Job Script
 First, create a script file named job.sh:
 ```bash
 #!/bin/bash
@@ -108,7 +92,7 @@ Then submit the job:
 ```bash
 sbatch job.sh
 ```
-### Expected Output:
+
 ```bash
 Submitted batch job 1234
 ```
@@ -117,7 +101,7 @@ Submitted batch job 1234
 ```bash
 squeue
 ```
-### Expected Output:
+Expected Output:
 ```bash
 JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 1234     batch  test_job   alice  R       0:01      1 node03
@@ -137,7 +121,7 @@ Expected Output:
 # Show accounting info about completed jobs
 sacct
 ```
-### Expected Output:
+Expected Output:
 ```bash
        JobID    JobName  Partition    State  ExitCode
 ------------ ---------- ---------- -------- ---------
@@ -145,7 +129,7 @@ sacct
 
 ```
 
-# 🔍 Deep Dive: `sbatch` – Submit Jobs to SLURM
+###  Deep Dive: `sbatch` – Submit Jobs to SLURM
 
 The `sbatch` command is used to **submit batch job scripts** to the SLURM job scheduler.
 
@@ -153,7 +137,7 @@ A **batch job** is a script that specifies what commands to run, what resources 
 
 ---
 
-## 📌 Basic Syntax
+## Basic Syntax
 
 ```bash
 sbatch [options] your_job_script.sh
@@ -205,7 +189,7 @@ You can submit commands directly without creating a file:
 sbatch --wrap="hostname && sleep 60"
 ```
 
-## 🔁 4. Array Jobs in SLURM
+### Array Jobs in SLURM
 
 Sometimes you need to run the **same job multiple times** with slight variations — for example, processing 10 different input files or running a simulation with different parameters.
 
@@ -216,7 +200,7 @@ Each job will have a **unique task ID** accessible with the variable `$SLURM_ARR
 
 ---
 
-### 🧪 Example: Simple Job Array
+### Example: Simple Job Array
 
 Create a job script named `array_job.sh`:
 
@@ -246,67 +230,6 @@ echo "This is array task $SLURM_ARRAY_TASK_ID"
   * logs/job_1234_10.out
 
 
-# Exercise Task: Run a Python Matrix Inversion Job on SLURM
-
-**Objective:**  
-Use SLURM to run a Python program on the cluster that:
-
-- Generates a random square matrix,
-- Calculates its inverse,
-- Prints both the matrix and its inverse.
----
-
-<details>
-<summary>🔽 Click here to show the full exercise instructions</summary>
-
-### 1. Prepare Your Python Script
-
-Create a file named `matrix_inverse.py` with this content:
-
-```python
-import numpy as np
-
-N = 3
-X = np.random.randn(N, N)
-print("X =\n", X)
-print("Inverse(X) =\n", np.linalg.inv(X))
-```
-
-
-### 2. Create Your SLURM Batch Script
-Create a file named job.slurm:
-
-```bash
-#!/bin/bash
-#SBATCH --job-name=matrix_inv        # Name for the job
-#SBATCH --output=matrix_out.txt      # Where standard output goes
-#SBATCH --error=matrix_err.txt       # Where error messages go
-#SBATCH --partition=your_partition   # e.g., short, batch, etc.
-#SBATCH --nodes=1                    # Use one compute node
-#SBATCH --ntasks-per-node=1         # Run one task on that node
-#SBATCH --cpus-per-task=1           # Use one CPU core
-#SBATCH --time=00:05:00             # Time limit: 5 minutes
-
-module load python                  # Load Python environment or module
-
-python matrix_inverse.py           # Execute the Python script
-```
-
-📌 Replace your_partition with a valid queue name on your cluster (e.g., debug, batch) 
-
-### 3. Submit the Job
-Run:
-
-```bash
-sbatch job.slurm
-```
-Expected output:
-```text
-Submitted batch job 5678
-```
-
-Here, 5678 is the job ID assigned by Slurm.
-
 ### 4. Monitor Progress
 To see the job’s status:
 
@@ -318,19 +241,9 @@ squeue --job 5678
 Once the job finishes, view the results:
 
 ```bash
-cat matrix_out.txt
-cat matrix_err.txt
+cat out.txt
+cat err.txt
 ```
-
-You should see the random matrix and its inverse printed in matrix_out.txt. matrix_err.txt should be empty unless an error occurred.
-
-### 6. Next Steps (Optional)
-* Modify the script to experiment with different matrix sizes, e.g., N = 5.
-
-* Try array jobs: run multiple matrix inversions in parallel with varying N values.
-
-* Add resource options: for example, #SBATCH --mem=2G to request 2 GB of memory.
-
 
 
 {% include links.md %}
