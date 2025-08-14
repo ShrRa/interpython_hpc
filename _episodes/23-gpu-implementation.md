@@ -44,8 +44,14 @@ CUDA allows developers to write C, C++, Fortran, and Python code that runs on th
 - These threads are organized hierarchically into:
   - Grids of Blocks
   - Blocks of Threads
+- This can be visualised in the following form
 
-This hierarchical design allows fine-grained control over memory and computation.
+![CUDA heirarchy visulation lower level](../fig/cuda_blocks.png)
+![CUDA Kernel Execution on GPU](../fig/cuda_kernel_execution.png)
+
+> ## Figure Source:
+> - [CUDA Kernel Execution](https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/)
+{: .checklist}
 
 ### Key Features
 
@@ -59,6 +65,13 @@ This hierarchical design allows fine-grained control over memory and computation
 - **Host code**: Runs on the CPU, manages memory, and launches kernels.
 - **Device code (kernel)**: Runs on the GPU.
 - **Memory management**: Host/device memory allocations and transfers.
+
+### To execute any CUDA program, there are three main steps:
+
+- Copy the input data from host memory to device memory, also known as host-to-device transfer.
+- Load the GPU program and execute, caching data on-chip for performance.
+- Copy the results from device memory to host memory, also called device-to-host transfer.
+
 
 ### Checking CUDA availability before running code
 
@@ -124,9 +137,38 @@ print("First 5 results:", c[:5])
 print("Time taken on GPU:", gpu_time, "seconds")
 ```
 
-> ## Note: 
-> This code also requires GPU access and Slurm job submission to be executed properly. You will revisit this exercise after completing [Section 2: HPC Bura - Resource Optimization ](https://meet-vyas-dev.github.io/interpython_hpc/24-resource-optimization/index.html), which introduces how to configure resources and submit jobs.
-{: .prereq}
+## Slurm Script to execute the code 
+
+The following script can be used to submit a GPU-accelerated Python job (`numba_cuda_test.py`) using Slurm:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=Numba_Cuda
+#SBATCH --output=Numba_Cuda_%j.out
+#SBATCH --error=Numba_Cuda_%j.err
+#SBATCH --partition=gpu
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
+#SBATCH --gpus-per-node=1
+#SBATCH --time=00:10:00
+
+# --------- Load Environment ---------
+module load Python/3.9.1
+module load cuda/11.2
+module list
+
+# --------- Check whether the GPU is available ---------
+from numba import cuda
+print("CUDA Available:", cuda.is_available())
+# Activate virtual environment
+source 'name_of_venv'/bin/activate # Here name_of_venv refers to the name of your virtual environment without the quotes
+
+# --------- Run the Python Script ---------
+ python numba_cuda_test.py
+```
+Make sure your virtual environment includes the `numba-cuda` python library to access the GPU. 
 
 > ## Exercise: 
 > Write a Numba or CuPy version of vector addition and compare speed with NumPy.
