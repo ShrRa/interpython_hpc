@@ -1,0 +1,796 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2025-08-14 14:49:06 -0700">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" />
+    
+    <link rel="license" href="#license-info" />
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/incubator/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/incubator/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/favicons/incubator/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/incubator/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/favicons/incubator/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/favicons/incubator/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/favicons/incubator/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/incubator/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="The Carpentries Incubator - Introduction to High Performance Computing for astronomical software development"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/favicons/incubator/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/assets/favicons/incubator/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/assets/favicons/incubator/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/assets/favicons/incubator/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/assets/favicons/incubator/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+  <title>
+  Command line basics &ndash; Introduction to High Performance Computing for astronomical software development
+  </title>
+
+  </head>
+  <body>
+    
+
+
+
+
+
+
+
+<div class="panel panel-default life-cycle">
+  <div id="life-cycle" class="panel-body pre-alpha">
+    This lesson is still being designed and assembled (Pre-Alpha version)
+  </div>
+</div>
+
+
+
+
+
+    <div class="container">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      <a href="/index.html" class="pull-left">
+        <img class="navbar-logo" src="/assets/img/incubator-logo-blue.svg" alt="The Carpentries Incubator logo" />
+      </a>
+      
+
+      
+      <a class="navbar-brand" href="/index.html">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="/CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="/setup.html">Setup</a></li>
+
+        
+        
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="/00-setting-the-scene/index.html">Setting the Scene</a></li>
+            
+            
+            <li><a href="/10-section1-intro/index.html">Section 1: HPC basics</a></li>
+            
+            
+            <li><a href="/11-hpc-intro/index.html">HPC Intro</a></li>
+            
+            
+            <li><a href="/12-lsst-hpc/index.html">LSST HPC facilities and opportunities</a></li>
+            
+            
+            <li><a href="/13-bura-access/index.html">Bura access</a></li>
+            
+            
+            <li><a href="/14-command-line/index.html">Command line basics</a></li>
+            
+            
+            <li><a href="/15-bura-setup/index.html">Bura Setup</a></li>
+            
+            
+            <li><a href="/15-slurm/index.html">Introduction to Slurm workload manager</a></li>
+            
+            
+            <li><a href="/20-section2-intro/index.html">Section 2: HPC Bura</a></li>
+            
+            
+            <li><a href="/21-cpu-sequential/index.html">Intro code examples</a></li>
+            
+            
+            <li><a href="/22-cpu-parallel/index.html">Parallelising our code for CPU</a></li>
+            
+            
+            <li><a href="/23-gpu-implementation/index.html">Implementing code examples for running on GPU</a></li>
+            
+            
+            <li><a href="/24-resource-requirements/index.html">Resource requirements</a></li>
+            
+            
+            <li><a href="/25-resource-monitoring-example/index.html">Resource optimization</a></li>
+            
+            
+            <li><a href="/26-performance-analysis/index.html">Performance analysis tools</a></li>
+            
+            
+            <li><a href="/30-wrap-up/index.html">Wrap-up</a></li>
+            
+            
+            <li><a href="/cli_lesson_monolithic_rm_warning_real_example/index.html">Command line interface (CLI) </a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="/aio/index.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+        
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/reference.html">Reference</a></li>
+            
+            
+            
+              <li><a href="/about/index.html">About</a></li>
+            
+            
+            
+            
+              <li><a href="/git-intro/index.html">Additional Material: Git Intro</a></li>
+            
+            
+            
+            
+              <li><a href="/figures/index.html">Figures</a></li>
+            
+            
+            
+            
+              <li><a href="/guide/index.html">Instructor Notes</a></li>
+            
+            
+            
+            
+              <li><a href="/common-issues/index.html">Common Issues, Fixes & Tips</a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href="/quiz/index.html">Quiz</a></li>
+            
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="/LICENSE.html">License</a></li>
+	
+	<li><a href="/edit//_episodes/14-command-line.md" data-checker-ignore>Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+      
+
+
+<div class="alert alert-info text-center" role="alert">
+  This lesson is part of
+  <a href="https://github.com/carpentries-incubator/proposals/#the-carpentries-incubator" data-checker-ignore>
+    The Carpentries Incubator</a>, a place to share and use each other's
+  Carpentries-style lessons. <strong>This lesson has not been reviewed by and is
+  not endorsed by The Carpentries</strong>.
+</div>
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/13-bura-access/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="/">Introduction to High Performance Computing for astronomical software development</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/15-bura-setup/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Command line basics</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 45 min
+      <br/>
+      <strong>Exercises:</strong> 15 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>How can I change directories from the command line?</p>
+</li>
+	
+	<li><p>How can I create directories and files from the command line?</p>
+</li>
+	
+	<li><p>How can I view my identity?</p>
+</li>
+	
+	<li><p>How can I create and move files?</p>
+</li>
+	
+	<li><p>How can I who is doing what on a computer or HPC?</p>
+</li>
+	
+	<li><p>How can I print to the shell?</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>Learn essential shell commands used in data management and processing on a High Performance Computing Environment</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="introducing-the-shell">Introducing the Shell</h2>
+
+<p>The shell or command line is a way to interact with a computer by typing text commands into a terminal or console window. This is in contrast to using a graphical user interface (GUI) with buttons and menus. Although many of the same tasks can be performed with both a shell interface or a GUI interface, the shell gives the most basic and universal access because it does not require any graphics. 
+Whether you’re navigating a High Performance Computing (HPC) repo, inspecting  files, or debugging processing failures, these shell commands will be indispensable.</p>
+
+<p>You have already opened a shell to ssh into bura. Now that your shell is pointing to the bura file system, we will learn how to navigate it, manipulate files, and interrogate the machine for information about you, the file system, and the tasks it is running.</p>
+
+<h2 id="file-navigation">File Navigation</h2>
+<p>When you view your file system via a graphical interface, you are used to clicking on one folder to look inside and then clicking on another folder inside that one. This folder (or directory) structure is called a directory tree. In the same way that you can click to navigate around your file system, you can type commands into the shell.</p>
+
+<h3 id="what-directory-am-i-in">What directory am I in?</h3>
+<p>The <code class="language-plaintext highlighter-rouge">pwd</code> command stands for “print working directory”. You can always use this command to ask the shell “where am I?” (you will be surprised how often this comes up).</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">pwd</span>
+</code></pre></div></div>
+<pre><code class="language-output">&gt; edu02
+</code></pre>
+
+<h3 id="what-is-in-my-directory">What is in my directory?</h3>
+<p>The <code class="language-plaintext highlighter-rouge">ls</code> command is short for listing - this lists all of the files and directories in the directory that you are currently in. This is really helpful if you are looking for something or can’t remember the name of a file or directory.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span>
+</code></pre></div></div>
+<pre><code class="language-output">&gt; ekran.txt     mc.slurm   program.c    sc
+&gt; JobArr.slurm  mpi.slurm  program.exe  sc.slurm
+</code></pre>
+
+<p>By default, <code class="language-plaintext highlighter-rouge">ls</code> does not show you any directories or files starting with <code class="language-plaintext highlighter-rouge">.</code>. These are called hidden files and directories. If you want to see everything, even the hidden files, you can use the <code class="language-plaintext highlighter-rouge">-a</code> flag (for all).</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-a</span>
+</code></pre></div></div>
+<pre><code class="language-output">&gt; .   .bash_history  JobArr.slurm  mpi.slurm  program.exe  sc.slurm
+&gt; ..  ekran.txt      mc.slurm      program.c  sc
+</code></pre>
+
+<p>Another useful option is <code class="language-plaintext highlighter-rouge">-F</code> flag - this adds symbols to the output to identify different types of entries. For example it will put a <code class="language-plaintext highlighter-rouge">/</code> after directories.</p>
+
+<blockquote class="callout">
+  <h2 id="using-multiple-flags">Using Multiple Flags</h2>
+  <p>Sometimes you want to use more than one flag for a command (for example maybe you want to use the <code class="language-plaintext highlighter-rouge">-a</code> and <code class="language-plaintext highlighter-rouge">-F</code> flags) to show all hidden files and tell you which ones are directories. If the flag is a single letter then you can string them together like <code class="language-plaintext highlighter-rouge">ls -aF</code> or if you prefer you can write <code class="language-plaintext highlighter-rouge">ls -a -F</code>. The order you put the flags in doesn’t matter.</p>
+</blockquote>
+
+<h3 id="creating-a-directory">Creating a Directory</h3>
+<p>When you start a project one of the first things you want to do is set up directories to organize it. For example, you may want a top level directory for the project and then sub-directories for data and code. When you log onto another computer you should not put everything in your home directory. A little organization at the beginning can save you a lot of time later when you try to figure out which files belong to what project. You can create a new directory using the <code class="language-plaintext highlighter-rouge">mkdir</code> command (for make directory). Let’s make a directory for the work we do in this course:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>hpc_course
+</code></pre></div></div>
+
+<blockquote class="callout">
+  <h2 id="spaces-in-directory-names">Spaces in directory names</h2>
+  <p>You may have noticed that we separate different parts of a command with spaces. The command line uses spaces to parse each part of the command. For this reason, you should not create directories with spaces in them, because if you then try to do something with them from the command line you need to add special characters to group the multiple words together. It is common to use underscores or dashes between words.</p>
+</blockquote>
+
+<h3 id="changing-directories">Changing Directories</h3>
+<p>Creating a directory does not move you into the new directory. To change directories you use the <code class="language-plaintext highlighter-rouge">cd</code> command. For example:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>hpc_course
+</code></pre></div></div>
+
+<p>To move backwards (or up) a directory (for example to move back to your home directory) use <code class="language-plaintext highlighter-rouge">cd ../</code></p>
+
+<blockquote class="challenge">
+  <h2 id="exercise">Exercise</h2>
+  <p>Move into your <code class="language-plaintext highlighter-rouge">hpc_course</code> directory. Verify that you are in the correct directory, then create two new directories: code and data. Verify that your directories have been created.</p>
+  <blockquote class="solution">
+    <h2 id="solution">Solution</h2>
+    <div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```bash
+cd hpc_course
+pwd
+mkdir code
+mkdir data
+ls
+```
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote class="callout">
+  <h2 id="using-tab-to-auto-complete">Using tab to auto-complete</h2>
+  <p>It can be tiring to type out the name of every file and every directory and it can also be frustrating when you mistype a word. The shell will auto-complete a filename or directory name if you have typed enough of the word to uniquely define it by pressing the tab button. If there is more than one possibility, press the tab button twice to display the different options.</p>
+</blockquote>
+
+<h3 id="going-backwards">Going backwards</h3>
+<p>Once you have gone into a directory, how do you get out? <code class="language-plaintext highlighter-rouge">../</code> is the shells way of saying “go back a directory”. For example, we are currently in the <code class="language-plaintext highlighter-rouge">hpc_course</code> directory. If you type <code class="language-plaintext highlighter-rouge">cd ../</code> you will be in your home directory.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">pwd</span>
+<span class="nv">$ </span><span class="nb">cd</span> ../
+<span class="nv">$ </span><span class="nb">pwd</span>
+<span class="nv">$ </span><span class="nb">ls</span>
+<span class="nv">$ </span><span class="nb">cd </span>hpc_course
+</code></pre></div></div>
+
+<h2 id="file-manipulation">File Manipulation</h2>
+<p>Let’s create a simple script that prints “hello world” to the screen. We will use the editor nano. The great thing about nano is that it tells you how to save and exit in the screen, it is also ideal for ssh as it opens directly in the shell window you are using.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>nano shell_example.sh
+</code></pre></div></div>
+<p>In the window that pops up, let’s type <code class="language-plaintext highlighter-rouge">echo "hello world</code>. Then press control-o to save (Write out) and control-x to exit. 
+Oops - we just create that script in our top level directory and it belongs in our code directory (because it is a piece of code). We can move the file to the code directory with the <code class="language-plaintext highlighter-rouge">mv</code> command. The format is <code class="language-plaintext highlighter-rouge">mv</code> thing-you-want-to-move where-you-want-to-move-it</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mv </span>shell_example.sh code
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">mv</code> can also be used to rename a file, you can think of this as moving it from one file name to another filename. In this case where-you-want-to-move-it is the new name of the file. Let’s rename the file to something more descriptive <code class="language-plaintext highlighter-rouge">hello_world.sh</code>. Don’t forget we moved the file to our code directory, so we have to go there first before we can rename it.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span>
+<span class="nv">$ </span><span class="nb">cd </span>code
+<span class="nv">$ </span><span class="nb">ls</span>
+<span class="nv">$ </span><span class="nb">mv </span>shell_example.sh hello_world.sh
+</code></pre></div></div>
+<p>Instead of moving or renaming a file, you can create a copy of the file with the <code class="language-plaintext highlighter-rouge">cp</code> command. The format is the same as <code class="language-plaintext highlighter-rouge">mv</code></p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cp </span>hello_world.sh hello_world_copy.sh
+</code></pre></div></div>
+<blockquote class="callout">
+  <h2 id="including-paths-in-cp-and-mv">including paths in cp and mv</h2>
+  <p>You do not always have to be in a directory to copy or move a file. If the file you want to move is not in your current directory, you can refer to the file you want to move with both the path from your current directory and the filename. Similarly, where you want to move a file can also include a path. Let’s say I was in my <code class="language-plaintext highlighter-rouge">hpc_course</code> directory and I want to copy my hello_world.sh file to hello_world_3.sh. The format looks like this:</p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">pwd</span>
+<span class="nv">$ </span><span class="nb">cd</span> ../
+<span class="nv">$ </span><span class="nb">cp </span>code/hello_world.sh code/hello_world_3.sh
+</code></pre></div>  </div>
+</blockquote>
+
+<h3 id="deleting-files">deleting files</h3>
+<p>You may accidentally create file and want to delete it. This can be done with the <code class="language-plaintext highlighter-rouge">rm</code> command which stands for remove. Be careful, the <code class="language-plaintext highlighter-rouge">rm</code> command permantly deletes a file - this is not like putting it in the trash can or recycle bin where you can recover it. For that reason, we recommend you use the <code class="language-plaintext highlighter-rouge">-i</code> flag which double checks with you before it deletes a file. Now we can remove our hello_world_3.sh file.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>code
+<span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-i</span> hello_world_3.sh
+</code></pre></div></div>
+
+<blockquote class="challenge">
+  <h2 id="exercise-1">Exercise</h2>
+  <p>Use nano to edit your hello_world_copy.sh file to print something else. Rename your file to something descriptive of what it prints.</p>
+  <blockquote class="solution">
+    <h2 id="solution-1">Solution</h2>
+    <div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```bash
+nano hello_world_copy.sh
+```
+change "hello world" to "training script"
+Save and exit
+```
+```bash
+mv hello_world_copy.sh training.sh
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<h2 id="file-permissions---who-owns-what">File permissions - who owns what?</h2>
+<p>Different files on different systems belong to different people and you don’t want anyone to be able to do anything to any file. File permissions restrict access to files and directories based on an individual or a defined group. This is like having a locked office door. There are 3 types of permissions: read (r), write (w), and execute (x). Reading a file allows you to look at the file (or directory) but not modify it. Write permissions allow you to modify the file (or directory). Execute allows you to execute a script. There are also 3 sets of permissions to set: permissions for the owner of the file, permissions for the group that the file belongs to, and permissions for everyone else. Let us take a look at the permissions of the files in our directory. To view the current permissions you can type:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span>
+</code></pre></div></div>
+<pre><code class="language-output">&gt; TODO
+</code></pre>
+<p>The output has the following format <code class="language-plaintext highlighter-rouge">&lt;type&gt;&lt;permissions&gt; &lt;link&gt; &lt;owner&gt; &lt;group&gt; &lt;size&gt; &lt;date modified&gt; &lt;name&gt;</code>. The first character is the type - we will skip this and go directly to the 9 characters after that. The first three are the permissions for the owner. They will always be listed in the order read, write, and execute. If the letter is there than that permission is enabled. For instance if the first three charcters were <code class="language-plaintext highlighter-rouge">rw-</code> then the owner would have permission to read and write a file or directory but not permission to execute it. The next three characters are the groups permissions. Anyone who belongs to the group listed in the fourth column is assigned these permissions. The permissions work the same way as the owner’s permissions. For instance, if the middle three characters are <code class="language-plaintext highlighter-rouge">r-x</code> then anyone in the group has permission to view the file and to execute it, but not to modify it. Finally, the last three charcters are for everyone else.</p>
+
+<blockquote class="callout">
+  <h2 id="what-groups-do-i-belong-to">What groups do I belong to?</h2>
+  <p>To figure out what groups you are part of (which can be useful to understand if you have permission to do something) you can type</p>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">groups</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>You modify the permissions on a file or directory using the <code class="language-plaintext highlighter-rouge">chmod</code> command. You pass to this command whose permissions you want to modify, owner (o), group (g), everyone else (o), or all users (a), what permission you want to modify (r, w, or x) and whether you want to add (+) that permission or remove (-) it. For example, to give everyone else the ability to execute our hello_world.sh script we would type:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> hello_world.sh
+<span class="nv">$ </span><span class="nb">chmod </span>o+x hello_world.sh
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-l</span> hello_world.sh
+</code></pre></div></div>
+<blockquote class="challenge">
+  <h2 id="exercise-2">Exercise</h2>
+  <p>What are the permissions on the training.sh? Who owns the file? What group does it belong to? Modify the permissions to remove the groups ability to read the file. Double check that the permissions changed. Then add the permissions back.</p>
+  <blockquote class="solution">
+    <h2 id="solution-2">Solution</h2>
+    <div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```bash
+$ chmod g-r training.sh
+$ ls -l
+$ chmod g+r training.sh
+```
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<h2 id="understanding-what-is-happening-on-the-whole-system">Understanding what is happening on the whole system</h2>
+<p>Later in this lesson you will learn how to monitor specific tasks that you run on the HPC. Sometimes you want information about the file system or what processes are running outside of the HPC task manager.
+When you are working on an HPC you are using a shared resource. It can be helpful to know how much of that resource you are using. You can do this with the <code class="language-plaintext highlighter-rouge">du -h &lt;directory&gt;</code> command. The -h makes the output format human readable (e.g. the size is in Kb, Mb, Gb). First, we will look at the size of our home directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">du</span> <span class="nt">-h</span> /home/edu02
+</code></pre></div></div>
+<pre><code class="language-output">&gt; 40K	/home/edu02
+</code></pre>
+<blockquote class="callout">
+  <h2 id="interrupting-a-command">Interrupting a command</h2>
+  <p>Help! you forgot to add a directory and now it is printing the size of every file. <code class="language-plaintext highlighter-rouge">ctl+c</code> will interrupt the command and return your cursor and command line.</p>
+</blockquote>
+
+<p>Another really useful command is seeing what processes are running and who is running them. You can do with the <code class="language-plaintext highlighter-rouge">top</code> command. The important parts of the output are the PID (process id), USER (who is running the process), %CPU (what percentage of the CPU is being used by that process), %MEM (what percentage of the memory is being used by that process), TIME (how long has the process been running), and COMMAND (what is the command that was run). If you are worried something you did is taking too long or the computer is running slower than you expect, running <code class="language-plaintext highlighter-rouge">top</code> is a really good way to get an overview of who is doing what on the system. Note that this will continue to run until you tell it to stop. Type <code class="language-plaintext highlighter-rouge">q</code> to exit.</p>
+
+<h2 id="getting-files-to-and-from-the-hpc">Getting files to and from the HPC</h2>
+<p>HPCs are a great resouce for computing - but they are not a long term storage solution. You will want to move the files from the HPC to a file system that you control. You may also want to prototype a script locally and then move it to the HPC and run it. There are three ways you can move files back and forth: <code class="language-plaintext highlighter-rouge">scp</code>, <code class="language-plaintext highlighter-rouge">rsync</code>, and using GitHub (or other version control).</p>
+
+<p><code class="language-plaintext highlighter-rouge">scp</code> stands for secure copy. The command format is <code class="language-plaintext highlighter-rouge">scp &lt;what you want to copy&gt; &lt;where to put it&gt;</code> and these paths are always specified from where you are. Because you will be going from one system to another - one of the locations will include both the address to the system and the path, separated by a colon. For this part, we will exit Bura. You can do that by typing <code class="language-plaintext highlighter-rouge">exit</code>.</p>
+
+<p>Now we will use <code class="language-plaintext highlighter-rouge">scp</code> to copy our <code class="language-plaintext highlighter-rouge">hello_world.sh</code> script to our local directory (<code class="language-plaintext highlighter-rouge">.</code>). After executing the <code class="language-plaintext highlighter-rouge">scp</code> command you will be asked for your password. Use your ssh password.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>scp edu02@172.16.55.121:/home/edu02/hpc_course/hello_world.sh <span class="nb">.</span>
+</code></pre></div></div>
+<pre><code class="language-output">&gt; edu02@172.16.55.121's password: 
+&gt; hello_world.sh                                     100%  130     0.1KB/s   00:01
+</code></pre>
+<p>Another option for moving files is <code class="language-plaintext highlighter-rouge">rsync</code>. This actually checks that the file or directory has been updated and only moves new things. The format is the same as <code class="language-plaintext highlighter-rouge">scp</code>: <code class="language-plaintext highlighter-rouge">rsync &lt;what you want to copy&gt; &lt;where to put it&gt;</code>.</p>
+
+<p>Finally, if you are using version control to track your development and have a remote server (e.g. GitHub, Bitbucket). Then you can use this to create another copy of your repository on the HPC and transfer files via the remote server.</p>
+
+<blockquote>
+  <h2 id="exercise-3">Exercise</h2>
+  <p>Use <code class="language-plaintext highlighter-rouge">scp</code> or <code class="language-plaintext highlighter-rouge">rsync</code> to move the files you downloaded for this course to Bura.</p>
+  <blockquote class="solution">
+    <h2 id="solution-3">Solution</h2>
+    <p>~~~</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>TODO
+</code></pre></div>    </div>
+    <p class="output">~~~[</p>
+  </blockquote>
+  <p>{: .challenge}]()</p>
+</blockquote>
+
+<h2 id="printing-to-the-screen">Printing to the screen</h2>
+<p>Sometime you want to write a message to the screen. This can be done with the <code class="language-plaintext highlighter-rouge">echo</code> command with the fomat <code class="language-plaintext highlighter-rouge">echo &lt;thing to print&gt;</code>. For example, to print “hello world”:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"hello world"</span>
+</code></pre></div></div>
+<pre><code class="language-output">&gt; hello world
+</code></pre>
+
+
+
+
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>Shell skills enable efficient navigation and manipulation local and remote file systems</p>
+</li>
+    
+    <li><p>The shell can be used to identify who you are and what you have access to</p>
+</li>
+    
+    <li><p>The shell can be used to determine what is happening on a system and how you are using the system</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/13-bura-access/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/15-bura-setup/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+
+      
+      
+
+
+
+
+
+
+<footer>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6 license" id="license-info" align="left">
+	
+        Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> 2025 by <a href="/CITATION">the authors</a>.
+	
+    </div>
+    <div class="col-md-6 help-links" align="right">
+	
+	<a href="/edit//_episodes/14-command-line.md" data-checker-ignore>Edit on GitHub</a>
+	
+	/
+	<a href="/blob//CONTRIBUTING.md" data-checker-ignore>Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob//CITATION" data-checker-ignore>Cite</a>
+	/
+	<a href="mailto:shr.razim@gmail.com">Contact</a>
+    </div>
+  </div>
+  <p class="text-muted text-right">
+    <small><i>Using <a href="https://github.com/carpentries/carpentries-theme/">The Carpentries theme</a> &mdash; Site last built on: 2025-08-14 14:49:06 -0700.</i></small>
+  </p>
+</footer>
+
+      
+    </div>
+    
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/lesson.js"></script>
+
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(["setDomains", ["*.lessons.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io"]]);
+  _paq.push(["setDoNotTrack", true]);
+  _paq.push(["disableCookies"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src='//cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+<script src="/assets/js/anchor.min.js"></script>
+<script>
+    anchors.add();
+</script>
+
+  </body>
+</html>

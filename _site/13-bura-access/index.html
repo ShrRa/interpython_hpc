@@ -1,0 +1,737 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2025-08-14 14:49:06 -0700">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" />
+    
+    <link rel="license" href="#license-info" />
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/incubator/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/incubator/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/favicons/incubator/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/incubator/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/favicons/incubator/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/favicons/incubator/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/favicons/incubator/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/incubator/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="The Carpentries Incubator - Introduction to High Performance Computing for astronomical software development"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/favicons/incubator/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/assets/favicons/incubator/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/assets/favicons/incubator/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/assets/favicons/incubator/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/assets/favicons/incubator/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+  <title>
+  Bura access &ndash; Introduction to High Performance Computing for astronomical software development
+  </title>
+
+  </head>
+  <body>
+    
+
+
+
+
+
+
+
+<div class="panel panel-default life-cycle">
+  <div id="life-cycle" class="panel-body pre-alpha">
+    This lesson is still being designed and assembled (Pre-Alpha version)
+  </div>
+</div>
+
+
+
+
+
+    <div class="container">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      <a href="/index.html" class="pull-left">
+        <img class="navbar-logo" src="/assets/img/incubator-logo-blue.svg" alt="The Carpentries Incubator logo" />
+      </a>
+      
+
+      
+      <a class="navbar-brand" href="/index.html">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="/CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="/setup.html">Setup</a></li>
+
+        
+        
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="/00-setting-the-scene/index.html">Setting the Scene</a></li>
+            
+            
+            <li><a href="/10-section1-intro/index.html">Section 1: HPC basics</a></li>
+            
+            
+            <li><a href="/11-hpc-intro/index.html">HPC Intro</a></li>
+            
+            
+            <li><a href="/12-lsst-hpc/index.html">LSST HPC facilities and opportunities</a></li>
+            
+            
+            <li><a href="/13-bura-access/index.html">Bura access</a></li>
+            
+            
+            <li><a href="/14-command-line/index.html">Command line basics</a></li>
+            
+            
+            <li><a href="/15-bura-setup/index.html">Bura Setup</a></li>
+            
+            
+            <li><a href="/15-slurm/index.html">Introduction to Slurm workload manager</a></li>
+            
+            
+            <li><a href="/20-section2-intro/index.html">Section 2: HPC Bura</a></li>
+            
+            
+            <li><a href="/21-cpu-sequential/index.html">Intro code examples</a></li>
+            
+            
+            <li><a href="/22-cpu-parallel/index.html">Parallelising our code for CPU</a></li>
+            
+            
+            <li><a href="/23-gpu-implementation/index.html">Implementing code examples for running on GPU</a></li>
+            
+            
+            <li><a href="/24-resource-requirements/index.html">Resource requirements</a></li>
+            
+            
+            <li><a href="/25-resource-monitoring-example/index.html">Resource optimization</a></li>
+            
+            
+            <li><a href="/26-performance-analysis/index.html">Performance analysis tools</a></li>
+            
+            
+            <li><a href="/30-wrap-up/index.html">Wrap-up</a></li>
+            
+            
+            <li><a href="/cli_lesson_monolithic_rm_warning_real_example/index.html">Command line interface (CLI) </a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="/aio/index.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+        
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/reference.html">Reference</a></li>
+            
+            
+            
+              <li><a href="/about/index.html">About</a></li>
+            
+            
+            
+            
+              <li><a href="/git-intro/index.html">Additional Material: Git Intro</a></li>
+            
+            
+            
+            
+              <li><a href="/figures/index.html">Figures</a></li>
+            
+            
+            
+            
+              <li><a href="/guide/index.html">Instructor Notes</a></li>
+            
+            
+            
+            
+              <li><a href="/common-issues/index.html">Common Issues, Fixes & Tips</a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href="/quiz/index.html">Quiz</a></li>
+            
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="/LICENSE.html">License</a></li>
+	
+	<li><a href="/edit//_episodes/13-bura-access.md" data-checker-ignore>Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+      
+
+
+<div class="alert alert-info text-center" role="alert">
+  This lesson is part of
+  <a href="https://github.com/carpentries-incubator/proposals/#the-carpentries-incubator" data-checker-ignore>
+    The Carpentries Incubator</a>, a place to share and use each other's
+  Carpentries-style lessons. <strong>This lesson has not been reviewed by and is
+  not endorsed by The Carpentries</strong>.
+</div>
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/12-lsst-hpc/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="/">Introduction to High Performance Computing for astronomical software development</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/14-command-line/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Bura access</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 20 min
+      <br/>
+      <strong>Exercises:</strong> 5 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>How to access the Bura High Performance Computing Cluster</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>Log onto the Bura cluster</p>
+</li>
+	
+	<li><p>Gain familiarity with Bura’s computing resources and capabilities</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<ul>
+  <li>HPC Bura, how to access it. Different authorization schemes used by the astronomical HPC facilities (+practical session: logging in to the Bura)</li>
+</ul>
+
+<h2 id="intro">Intro</h2>
+
+<p>Bura is a supercomputer at the Center for Advanced Computing and Modelling (CNRM), University
+ of Rijeka, Croatia.  Access to this cluster is available to the Rubin Data Rights community
+ through the LSST International In Kind Program.  The goal of this episode is to describe 
+Bura’s architecture and capabilities, and outline the procedure necessary to access the cluster. 
+More detailed information on Bura, including tutorials, can be found <a href="https://cnrm.uniri.hr/bura/">here</a>.</p>
+
+<h2 id="the-bura-supercomputer">The Bura Supercomputer</h2>
+
+<p>Bura has a hybrid architecture consisting of three components:</p>
+
+<ul>
+  <li>
+    <p><strong>Cluster</strong>: The system consists of 288 compute nodes, each of which consists of two Xeon E5 
+processors (with 24 physical cores and 48 threads per node). This gives a total of 6912 processor cores which can support 
+up to 13824 threads. Each node has 64 GB of memory and 320 GB of Solid State Drive (SSD) 
+disk space .  In total, the nodes have 18 TB of memory and 95 TB of disk space.</p>
+  </li>
+  <li>
+    <p><strong>GPGPU (General-purpose computing on Graphical Processing Units)</strong>: This component consists of 
+four nodes, two comprising Xeon E5 processors (each with 8 cores/node) and two based on 
+NVIDIA Tesla K40 general purpose GPUs.  64 GB of RAM is available, with 320 GB of SSD disk space.</p>
+  </li>
+  <li>
+    <p><strong>SMP (Symmetric Multiprocessing)</strong>: The third component is a multiprocessor system with a 
+large amount of shared memory. The SMP component consists of 16 Xeon E7-8867 processors giving a 
+total of 256 physical cores per node.  These have 6 TB of memory and 245 TB of local storage. 
+Two SMP nodes are available.</p>
+  </li>
+</ul>
+
+<p>In addition to the computing nodes, Bura provides some large data storage areas, both of which 
+are accessible from all three components. The first is a 13 TB /home area, and the 
+second is an 868 TB /scatch space. The latter is supported by a Lustre Infiniband parallel 
+distributed filesystem.</p>
+
+<h2 id="computing-on-bura">Computing on Bura</h2>
+
+<p>Bura is designed to provide a multi-user, powerful general-purpose computing environment that 
+can be used for a wide range of applications.</p>
+
+<p>It uses the <a href="https://lmod.readthedocs.io/en/latest/_">LMOD system</a> to dynamically manage user 
+environmental modules.  This is used to manage user environment variables as well as software 
+dependencies such as Python versions.</p>
+
+<p>Users can run computing tasks on Bura by submitted jobs to its SLURM workload manager. 
+<a href="https://slurm.schedmd.com/quickstart.html">SLURM</a> is an open-source task management system 
+that manages the available computing resources and dynamically schedules the computing tasks 
+submitted by multiple users.</p>
+
+<p>We will cover how to configure and run tasks on Bura in subsequent episodes.  Firstly, 
+we need to log into the system.</p>
+
+<h2 id="accessing-bura">Accessing Bura</h2>
+
+<p><img src="../assets/img/bura_access.png" alt="Access to Bura" class="image-with-shadow" width="700px" /></p>
+
+<p>There are two ways to access Bura:</p>
+<ul>
+  <li>Using a Virtual Private Network (VPN)</li>
+  <li>Through Bura’s web-based portal.</li>
+</ul>
+
+<h3 id="access-through-the-web-browser">Access through the web browser</h3>
+
+<p>You can access Bura simply by opening a new 
+window or tab in your browser and typing Bura’s URL into the address bar:</p>
+
+<p><a href="https://bura.uniri.hr">https://bura.uniri.hr</a></p>
+
+<p>You should then see the login screen below, where you can enter your user credentials, and click 
+the green “Login” button.</p>
+
+<p><img src="../assets/img/bura_web_login_screen.png" alt="Bura web portal login" class="image-with-shadow" width="700px" /></p>
+
+<p>When you have logged in successfully, you will see the following screen:</p>
+
+<p><img src="../assets/img/bura_web_landing_screen.png" alt="Bura web landing screen" class="image-with-shadow" width="700px" /></p>
+
+<p>Please note that there are a few known issues with this method of accessing Bura.</p>
+<ul>
+  <li>Some shortcuts don’t work due to the web browser,</li>
+  <li>Some lines may be missing.  If so, try pressing CTRL-C, and resize the window.</li>
+</ul>
+
+<p>The landing screen offers two options, and you can use either of the Bura2 or Bura3 ports.</p>
+
+<p><strong>FTP File transfer</strong></p>
+
+<p>You can transfer files to Bura’s storage areas by clicking on either of the FTP buttons. 
+This will take you to the file system navigator screen, where you can access or add files to 
+your user account’s storage area on Bura.</p>
+
+<p><img src="../assets/img/bura_web_ftp_screen.png" alt="Bura web FTP screen" class="image-with-shadow" width="700px" /></p>
+
+<p><strong>Starting a terminal session</strong></p>
+
+<p>From the landing page, you can click either of the buttons marked “&gt;_” to start a terminal
+ session which will take you to a Unix-like command prompt.</p>
+
+<p><img src="../assets/img/bura_web_terminal_session.png" alt="Bura web terminal session" class="image-with-shadow" width="700px" /></p>
+
+<p>From here you can start your computing jobs.  We will cover how to do that in upcoming episodes.</p>
+
+<h3 id="vpn-access">VPN Access</h3>
+
+<p>Alternatively, you can access Bura independently of the web portal by setting up a VPN 
+connection. This requires you to install VPN client software on the machine that you 
+will connect from.</p>
+
+<p>The preferred VPN client is Forticlient, which supports all major operating systems:</p>
+<ul>
+  <li>Windows XP, 7, Vista and 10</li>
+  <li>Linux Debian, Ubuntu, Centos, Fedora, Redhat and more</li>
+  <li>Android</li>
+  <li>iOS</li>
+  <li>Chromebook</li>
+</ul>
+
+<p><a href="https://www.fortinet.com/support/product-downloads#vpn">Click here to install Forticlient</a></p>
+
+<p><img src="../assets/img/bura_forticlient_download.png" alt="Bura Fortilient download page" class="image-with-shadow" width="700px" /></p>
+
+<p>Once you have install Forticlient, open the app and use the GUI to add a new connection 
+configuration. The details needed for this configuration were emailed to all workshop 
+participants in advance.</p>
+
+<p>Once the VPN is configured and saved, click the “Connect” slider to open the VPN 
+connection.</p>
+
+<p>Note that it is inadvisable to have multiple VPNs running at the same time, so if the 
+connection is problematic, check to make sure you do not have a different VPN running 
+in the background.</p>
+
+<h3 id="ssh-client">SSH Client</h3>
+
+<p>Once you have a secure VPN connection open, it is analogous to creating a secure, private
+tunnel from your machine to Bura.  Traffic, i.e. your commands, can then be sent securely 
+to Bura using the Secure Shell protocol, or SSH.</p>
+
+<p>There are a number of SSH client software packages available for different platforms.<br />
+Here we list just a few, but you are welcome to use your preferred client:</p>
+
+<ul>
+  <li>PuTTY (also SuperPutty, PuTTY Tray, KiTTY)</li>
+  <li>Bitvise</li>
+  <li>MobaXterm (free and pro versions available)</li>
+  <li>SmarTTY (free)</li>
+  <li>Dameware SSH Client (free and paid versions available)</li>
+  <li>mRemoteNG (free)</li>
+  <li>Terminals (free)</li>
+</ul>
+
+<p>Whichever client you choose, you should configure the ‘host’ parameter to the IP address 
+of either one of the two Bura login nodes (these were sent to workshop participants by 
+email).</p>
+
+<p>Once you log in with your SSH client you should reach a terminal session and the Bura 
+commandline prompt.</p>
+
+<blockquote class="challenge">
+  <h2 id="exercise">Exercise</h2>
+  <p>Securely log into the Bura cluster through either one of the options described above. Open a terminal session and use the commandline tools described in the previous exercise to list the contents of your home directory and create a new file.</p>
+  <blockquote class="solution">
+    <h2 id="solution">Solution</h2>
+    <div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ls
+-bash-4.2$ ls
+ekran.txt  JobArr.slurm  mc.slurm  mpi.slurm  program.c  program.exe  sc  sc.slurm
+$ nano
+(Click CTRL-X to exit and save the file with a filename of your choice.)
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+
+
+
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>Bura is a powerful supercomputer with CPU, GPGPU and SMP components</p>
+</li>
+    
+    <li><p>Bura can be accessed via a portal through a web-browser, or by installing VPN software and an SSH client</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/12-lsst-hpc/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/14-command-line/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+
+      
+      
+
+
+
+
+
+
+<footer>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6 license" id="license-info" align="left">
+	
+        Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> 2025 by <a href="/CITATION">the authors</a>.
+	
+    </div>
+    <div class="col-md-6 help-links" align="right">
+	
+	<a href="/edit//_episodes/13-bura-access.md" data-checker-ignore>Edit on GitHub</a>
+	
+	/
+	<a href="/blob//CONTRIBUTING.md" data-checker-ignore>Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob//CITATION" data-checker-ignore>Cite</a>
+	/
+	<a href="mailto:shr.razim@gmail.com">Contact</a>
+    </div>
+  </div>
+  <p class="text-muted text-right">
+    <small><i>Using <a href="https://github.com/carpentries/carpentries-theme/">The Carpentries theme</a> &mdash; Site last built on: 2025-08-14 14:49:06 -0700.</i></small>
+  </p>
+</footer>
+
+      
+    </div>
+    
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/lesson.js"></script>
+
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(["setDomains", ["*.lessons.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io"]]);
+  _paq.push(["setDoNotTrack", true]);
+  _paq.push(["disableCookies"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src='//cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+<script src="/assets/js/anchor.min.js"></script>
+<script>
+    anchors.add();
+</script>
+
+  </body>
+</html>
