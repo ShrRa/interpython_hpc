@@ -180,20 +180,6 @@ Make sure your virtual environment includes the `numba-cuda` python library to a
 {: .checklist}
 ---
 
-<!-- ## Simple CUDA GPU Code Example
-
-Here’s a basic CUDA example for vector addition:
-
-```cuda
-__global__ void add(int *a, int *b, int *c, int N) {
-    int index = threadIdx.x + blockIdx.x * blockDim.x;
-    if (index < N)
-        c[index] = a[index] + b[index];
-}
-``` -->
-
----
-
 ### CPU vs GPU Architecture
 
 - CPUs: Few powerful cores, better for sequential tasks.
@@ -217,26 +203,6 @@ __global__ void add(int *a, int *b, int *c, int N) {
 {: .challenge}
 
 > **Reference**: [NVIDIA CUDA Samples](https://github.com/NVIDIA/cuda-samples)
-{: .checklist}
-
-> ## Figure:
-> Bar chart showing performance on matrix multiplication or vector addition.
-{: .callout}
-
----
-
-## Code Profiling (Optional)
-
-To understand and improve performance, profiling tools are essential.
-
-- **CPU**: `gprof`, `perf`, `cProfile`
-- **GPU**: `nvprof`, Nsight Systems, Nsight Compute
-
-> ## Exercise: 
-> Time your serial and parallel code. Where is the bottleneck?
-{: .challenge}
-
-> **Optional Reference**: [NVIDIA Nsight Tools](https://developer.nvidia.com/nsight-systems)
 {: .checklist}
 
 ---
