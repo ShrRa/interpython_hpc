@@ -245,6 +245,12 @@ Now we will load all the modules we will need to perform exercises in the next s
 and activate your virtual environment before running your slurm script. 
 {: .callout}
 
+Since the python module is already loaded and the virtual environment is already activated leading to this stage in the episode, we will now load the remaining modules 
+
+```bash 
+$ module load mpi/intel-2021.5
+$ module load gcc/gcc-13.2.0
+```
 
 You are now ready to move on to the next section. This setup ensures that your work is self-contained and reproducible.
 

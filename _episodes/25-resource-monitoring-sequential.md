@@ -130,6 +130,66 @@ print("CPU plot saved in 'plots/deflection_angle_cpu.png'")
  ~~~
  {: .output}
 
+
+### Sequential Job Script for the Example
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=HPC_WS_SCPU # Provide a name for the job 
+#SBATCH --output=HPC_WS_SCPU_%j.out # Request the output file along with the job number
+#SBATCH --error=HPC_WS_SCPU_%j.err # Request the error file along with the job number
+#SBATCH --partition=serial
+#SBATCH --nodes=1 # Request one CPU node
+#SBATCH --ntasks=1 # Request 1 core from the CPU node
+#SBATCH --time=-01:00:00 # Set time limit for the job
+#SBATCH --mem=16G #Request 16GB memory 
+
+# Load required modules
+module purge # Remove the list of pre loaded modules
+module load Python/3.9.1
+module list
+
+# Create a python virtual environment 
+python3 -m venv name_of_your_venv
+
+# Activate your Python environment
+source name_of_your_venv/bin/activate
+
+echo "Starting Gravitational Lensing Deflection calculation of Sequential CPU..."
+echo "Job ID: $SLURM_JOB_ID"
+echo "Node: $SLURM_NODELIST"
+
+# Run the Python script (with logging)
+python Gravitational_Deflection_Angle_SCPU.py
+
+echo "Job completed at $(date)"
+```
+
+> ## Exercise: Profile Your Code
+> Compile and run the sequential code. Use `htop` to monitor resource usage. Identify whether it's CPU-bound or memory-bound
+{: .challenge}
+
+{% include links.md %}
+
+
+<!-- ```bash
+#!/bin/bash
+#SBATCH -J matrix_sequential
+#SBATCH -o matrix_seq_%J.out
+#SBATCH -e matrix_seq_%J.err
+#SBATCH --partition=serial
+#SBATCH --time=00:30:00              # Set time limit
+#SBATCH --mem=4G                     # Request 4GB memory
+
+echo "Starting sequential matrix multiplication..."
+echo "Job ID: $SLURM_JOB_ID"
+echo "Node: $SLURM_NODELIST"
+
+./matrix_mult_sequential
+
+echo "Job completed at $(date)"
+``` -->
+
 <!-- ```c
 // matrix_mult_sequential.c
 #include <stdio.h>
@@ -185,61 +245,3 @@ int main() {
     return 0;
 }
 ``` -->
-
-### Sequential Job Script for the Example
-
-<!-- ```bash
-#!/bin/bash
-#SBATCH -J matrix_sequential
-#SBATCH -o matrix_seq_%J.out
-#SBATCH -e matrix_seq_%J.err
-#SBATCH --partition=serial
-#SBATCH --time=00:30:00              # Set time limit
-#SBATCH --mem=4G                     # Request 4GB memory
-
-echo "Starting sequential matrix multiplication..."
-echo "Job ID: $SLURM_JOB_ID"
-echo "Node: $SLURM_NODELIST"
-
-./matrix_mult_sequential
-
-echo "Job completed at $(date)"
-``` -->
-
-```bash
-#!/bin/bash
-#SBATCH --job-name=HPC_WS_SCPU # Provide a name for the job 
-#SBATCH --output=HPC_WS_SCPU_%j.out # Request the output file along with the job number
-#SBATCH --error=HPC_WS_SCPU_%j.err # Request the error file along with the job number
-#SBATCH --partition=serial
-#SBATCH --nodes=1 # Request one CPU node
-#SBATCH --ntasks=1 # Request 1 core from the CPU node
-#SBATCH --time=-01:00:00 # Set time limit for the job
-#SBATCH --mem=16G #Request 16GB memory 
-
-# Load required modules
-module purge # Remove the list of pre loaded modules
-module load Python/3.9.1
-module list
-
-# Create a python virtual environment 
-python3 -m venv name_of_your_venv
-
-# Activate your Python environment
-source name_of_your_venv/bin/activate
-
-echo "Starting Gravitational Lensing Deflection calculation of Sequential CPU..."
-echo "Job ID: $SLURM_JOB_ID"
-echo "Node: $SLURM_NODELIST"
-
-# Run the Python script (with logging)
-python Gravitational_Deflection_Angle_SCPU.py
-
-echo "Job completed at $(date)"
-```
-
-> ## Exercise: Profile Your Code
-> Compile and run the sequential code. Use `htop` to monitor resource usage. Identify whether it's CPU-bound or memory-bound
-{: .challenge}
-
-{% include links.md %}
