@@ -32,17 +32,39 @@ keypoints:
 - Mathematical calculations, simulations, data processing
 - Benefit from more CPU cores and higher clock speeds
 
+**Real-world astronomy example:**  
+Calculating theoretical stellar evolution tracks using the **MESA** code.  
+Each star's model requires intense numerical integration of stellar structure equations over millions of time steps, mostly using the CPU.
+
+---
+
 **Memory-bound workloads**: Tasks limited by memory access speed
 - Large dataset processing, in-memory databases
 - Require sufficient RAM and fast memory access
+
+**Real-world astronomy example:**  
+Processing full-sky Cosmic Microwave Background (CMB) maps from **Planck** at high resolution.  
+The HEALPix maps are large, and operations like spherical harmonic transforms require large amounts of RAM to store intermediate matrices. Another example would be to calc
+
+---
 
 **I/O-bound workloads**: Tasks limited by disk or network operations
 - File processing, database queries, data transfer
 - Benefit from fast storage and network connections
 
+**Real-world astronomy example:**  
+Stacking thousands of raw Rubin Observatory images to improve signal-to-noise ratio for faint galaxy detection.  
+The bottleneck is reading the large image files from storage and writing processed results back.
+
+---
+
 **GPU-accelerated workloads**: Tasks that can utilize parallel processing
 - Machine learning, scientific simulations, image processing
 - Require appropriate GPU resources and memory
+
+**Real-world astronomy example:**  
+Training a convolutional neural network to classify transient events in ZTF light curves.  
+The matrix multiplications and convolutions benefit greatly from GPU acceleration.
 
 ---
 ## Types of Jobs and Resources
@@ -73,9 +95,69 @@ Once you know your job type, you can select the correct **SLURM partition** (que
   - In an SMP system, multiple CPUs (cores) share the same physical memory and can access it at the same speed. This architecture is ideal when tasks need frequent access to a common memory space without the communication overhead of distributed systems.
 - **GPU Node**: For massively parallel computations on GPUs (e.g., CUDA, TensorFlow, PyTorch).
 
-
 **Decision chart for Choosing Nodes:**
 ![Decision chart for choosing node types](../fig/Job_Decision_Node_Tree.png)
+
+> ## Exercise: Classify the Job Type
+>
+> Using the decision chart above, classify each of the following tasks into **CPU-bound**, **Memory-bound**, **I/O-bound**, or **GPU-accelerated**, and suggest the most appropriate node type.
+>
+> 1. Running an MPI-based cosmological parameter estimation using **cobaya** utilizing the functionality of **camb** and **class**.
+> 2. Performing Bayesian inference on gravitational wave signals using **Bilby** with large nested sampling runs in parallel.
+> 3. Stacking multi-night Rubin Observatory images to search for faint Kuiper Belt objects.
+> 4. Training a deep learning model to classify galaxy morphologies from Hubble Space Telescope images.
+> 5. Computing high-resolution spherical harmonic transforms for a CMB map from **Planck**.
+>
+> **Discussion:**  
+> Compare your classifications with others in your group. Are there cases where more than one classification could apply? How would resource availability in the HPC cluster affect your choice?
+{: .challenge}
+
+## Solutions
+
+1. **MPI-based cosmological parameter estimation using **cobaya**  
+   - **Type:** CPU-bound (and parallel)  
+   - **Reason:** Heavy numerical force calculations; distributed memory with MPI.  
+   - **Node type:** Regular node (multi-node MPI).  
+   - **SLURM options:** Use `-N` and `-n` for number of nodes and MPI tasks.
+
+---
+
+2. **Bayesian inference on gravitational wave signals using Bilby with large nested sampling runs in parallel**  
+   - **Type:** CPU-bound (parallel, embarrassingly parallel per likelihood evaluation)  
+   - **Reason:** Many likelihood calls, heavy math, but minimal shared memory need.  
+   - **Node type:** Regular node (multi-core CPU), or SMP node if shared memory benefits.  
+   - **SLURM options:** `--cpus-per-task` for OpenMP or `-n` for MPI depending on sampler.
+
+---
+
+3. **Stacking multi-night Rubin Observatory images to search for faint Kuiper Belt objects**  
+   - **Type:** I/O-bound  
+   - **Reason:** Bottleneck is reading/writing large image files and combining them; CPU is secondary.  
+   - **Node type:** Regular node with fast storage access (or node close to data).  
+   - **SLURM options:** Focus on storage bandwidth rather than CPU count.
+
+---
+
+4. **Training a deep learning model to classify galaxy morphologies from Hubble Space Telescope images**  
+   - **Type:** GPU-accelerated  
+   - **Reason:** Convolutional neural networks run much faster on GPUs.  
+   - **Node type:** GPU node.  
+   - **SLURM options:** `--gpus` to request the number of GPUs, and `--cpus-per-task` for data preprocessing.
+
+---
+
+5. **Computing high-resolution spherical harmonic transforms for a CMB map from Planck**  
+   - **Type:** Memory-bound  
+   - **Reason:** Large intermediate matrices require significant RAM; speed limited by memory access.  
+   - **Node type:** SMP node (large shared memory).  
+   - **SLURM options:** `--mem` to request enough RAM; `--cpus-per-task` if multithreaded.
+
+---
+
+**Possible discussion points for participants:**
+- Some workloads are *mixed-type*: e.g., CMB transforms are both CPU-intensive and memory-bound.  
+- In practice, HPC resource choice may depend on **queue wait times** as well as technical fit.  
+- For I/O-bound tasks, software-level optimizations (e.g., caching, parallel I/O) can reduce bottlenecks.
 
 
 
