@@ -157,4 +157,5 @@ python Gravitational_Lensing_GPU.py
 > Run the tensor operations script on both CPU and GPU. Compare execution times and memory usage. Calculate the speedup factor
 {: .challenge}
 
+<!-- Just to check -->
 {% include links.md %}
