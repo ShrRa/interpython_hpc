@@ -1,5 +1,5 @@
 ---
-title: "Resource optimization"
+title: "Resource optimization and monitoring for Serial Jobs"
 start: False
 teaching: 30
 exercises: 10
