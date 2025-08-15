@@ -1,0 +1,984 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2025-08-14 17:22:32 -0700">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" />
+    
+    <link rel="license" href="#license-info" />
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/incubator/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/incubator/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/favicons/incubator/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/incubator/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/favicons/incubator/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/favicons/incubator/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/favicons/incubator/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/incubator/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="The Carpentries Incubator - Introduction to High Performance Computing for astronomical software development"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/favicons/incubator/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/assets/favicons/incubator/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/assets/favicons/incubator/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/assets/favicons/incubator/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/assets/favicons/incubator/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+  <title>
+  Introduction to Slurm workload manager &ndash; Introduction to High Performance Computing for astronomical software development
+  </title>
+
+  </head>
+  <body>
+    
+
+
+
+
+
+
+
+<div class="panel panel-default life-cycle">
+  <div id="life-cycle" class="panel-body pre-alpha">
+    This lesson is still being designed and assembled (Pre-Alpha version)
+  </div>
+</div>
+
+
+
+
+
+    <div class="container">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      <a href="/index.html" class="pull-left">
+        <img class="navbar-logo" src="/assets/img/incubator-logo-blue.svg" alt="The Carpentries Incubator logo" />
+      </a>
+      
+
+      
+      <a class="navbar-brand" href="/index.html">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="/CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="/setup.html">Setup</a></li>
+
+        
+        
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="/00-setting-the-scene/index.html">Setting the Scene</a></li>
+            
+            
+            <li><a href="/10-section1-intro/index.html">Section 1: HPC basics</a></li>
+            
+            
+            <li><a href="/11-hpc-intro/index.html">HPC Intro</a></li>
+            
+            
+            <li><a href="/12-lsst-hpc/index.html">LSST HPC facilities and opportunities</a></li>
+            
+            
+            <li><a href="/13-bura-access/index.html">Bura access</a></li>
+            
+            
+            <li><a href="/14-command-line/index.html">Command line basics</a></li>
+            
+            
+            <li><a href="/15-bura-setup/index.html">Bura Setup</a></li>
+            
+            
+            <li><a href="/15-slurm/index.html">Introduction to Slurm workload manager</a></li>
+            
+            
+            <li><a href="/20-section2-intro/index.html">Section 2: HPC Bura</a></li>
+            
+            
+            <li><a href="/21-cpu-sequential/index.html">Intro code examples</a></li>
+            
+            
+            <li><a href="/22-cpu-parallel/index.html">Parallelising our code for CPU</a></li>
+            
+            
+            <li><a href="/23-gpu-implementation/index.html">Implementing code examples for running on GPU</a></li>
+            
+            
+            <li><a href="/24-resource-requirements/index.html">Resource requirements</a></li>
+            
+            
+            <li><a href="/25-resource-monitoring-example/index.html">Resource optimization</a></li>
+            
+            
+            <li><a href="/26-performance-analysis/index.html">Performance analysis tools</a></li>
+            
+            
+            <li><a href="/30-wrap-up/index.html">Wrap-up</a></li>
+            
+            
+            <li><a href="/cli_lesson_monolithic_rm_warning_real_example/index.html">Command line interface (CLI) </a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="/aio/index.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+        
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/reference.html">Reference</a></li>
+            
+            
+            
+              <li><a href="/about/index.html">About</a></li>
+            
+            
+            
+            
+              <li><a href="/git-intro/index.html">Additional Material: Git Intro</a></li>
+            
+            
+            
+            
+              <li><a href="/figures/index.html">Figures</a></li>
+            
+            
+            
+            
+              <li><a href="/guide/index.html">Instructor Notes</a></li>
+            
+            
+            
+            
+              <li><a href="/common-issues/index.html">Common Issues, Fixes & Tips</a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href="/quiz/index.html">Quiz</a></li>
+            
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="/LICENSE.html">License</a></li>
+	
+	<li><a href="/edit//_episodes/15-slurm.md" data-checker-ignore>Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+      
+
+
+<div class="alert alert-info text-center" role="alert">
+  This lesson is part of
+  <a href="https://github.com/carpentries-incubator/proposals/#the-carpentries-incubator" data-checker-ignore>
+    The Carpentries Incubator</a>, a place to share and use each other's
+  Carpentries-style lessons. <strong>This lesson has not been reviewed by and is
+  not endorsed by The Carpentries</strong>.
+</div>
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/15-bura-setup/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="/">Introduction to High Performance Computing for astronomical software development</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/20-section2-intro/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Introduction to Slurm workload manager</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 50 min
+      <br/>
+      <strong>Exercises:</strong> 15 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>What is Slurm?</p>
+</li>
+	
+	<li><p>How do I run computing tasks using Slurm?</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>Understand the role and purpose of Slurm</p>
+</li>
+	
+	<li><p>Understand how to create and run a computing task using Slurm</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="intro">Intro</h2>
+<p>Slurm is an open source, fault-tolerant, and highly scalable cluster management and job 
+scheduling system for large and small Linux clusters. Slurm requires no kernel modifications 
+for its operation and is relatively self-contained. As a cluster workload manager, Slurm has 
+three key functions. First, it allocates exclusive and/or non-exclusive access to resources 
+(compute nodes) to users for some duration of time so they can perform work. Second, it 
+provides a framework for starting, executing, and monitoring work (normally a parallel job) 
+on the set of allocated nodes. Finally, it arbitrates contention for resources by managing 
+a queue of pending work.</p>
+
+<h2 id="mpi-message-passing-interface">MPI (Message Passing Interface)</h2>
+<p>In order to execute a set of software instructions simultaneously on multiple computing 
+nodes in parallel, we need to have a way of sending those instructions to the nodes.<br />
+There are standard libraries available for this purpose that use a standardized syntax and 
+are designed for use on parallel computing architectures like Bura.  This is known as a 
+Message Passing Interface or MPI.</p>
+
+<p>We will go into this topic in more detail later on, but for now it suffices to know that 
+there are different “flavors” of MPI available, and how you use each one depends on which
+type of MPI you are using.</p>
+
+<p>There are three fundamentally different modes of operation used by these various MPI 
+implementations.  Here is how they interact with the Slurm system:</p>
+
+<ul>
+  <li>Slurm directly launches the tasks and performs initialization of communications through the PMI2 or PMIx APIs. (Supported by most modern MPI implementations.)</li>
+  <li>Slurm creates a resource allocation for the job and then mpirun launches tasks using Slurm’s infrastructure (older versions of OpenMPI).</li>
+  <li>Slurm creates a resource allocation for the job and then mpirun launches tasks using some mechanism other than Slurm, such as SSH or RSH. These tasks are initiated outside of Slurm’s monitoring or control.</li>
+</ul>
+
+<h2 id="architecture">Architecture</h2>
+<p><a href="https://slurm.schedmd.com/quickstart.html">Slurm</a> is a system used to manage and organize work on a cluster — a group of computers 
+working together to perform complex tasks.</p>
+
+<p>At the core of Slurm is a central manager, called slurmctld, which keeps track of available 
+resources (like CPUs and memory) and assigns jobs to the appropriate computers. There can 
+also be a backup manager that takes over if the main one fails.</p>
+
+<p><img src="../assets/img/Slurm_system_components.png" alt="Components of a Slurm system" class="image-with-shadow" width="700px" /></p>
+
+<p>Each computer in the cluster (called a node) runs a program called slurmd. This acts like a 
+remote assistant: it waits for tasks, runs them, sends back results, and then waits for more.</p>
+
+<p>To keep a record of all activity, an optional component called slurmdbd can be used. It 
+stores accounting information — such as who used what resources and when — in a shared 
+database.</p>
+
+<p>Another optional component, slurmrestd, allows users and applications to communicate with 
+Slurm over the web using a REST API.</p>
+
+<p>Users can interact with Slurm from the terminal commandline using several simple commands.<br />
+Here are some of the most important ones:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">srun</code>: starts a job,</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">scancel</code>: cancels a running or queued job,</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">sinfo</code>: shows the current status of the system,</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">squeue</code>: displays information about jobs currently running or waiting,</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">sacct</code>: provides detailed reports on finished jobs.</p>
+  </li>
+</ul>
+
+<p>There’s also a graphical interface called <code class="language-plaintext highlighter-rouge">sview</code> that visually shows system and job status, including how the nodes are connected.</p>
+
+<p>Administrators can use tools like:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">scontrol</code>: to monitor or modify how the system is working,</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">sacctmgr</code>: to manage users, projects, and resource allocations.</p>
+  </li>
+</ul>
+
+<p>Finally, for developers, Slurm also offers APIs that allow software to interact with the system automatically.</p>
+
+<h2 id="slurm-commands">Slurm Commands</h2>
+<p>Let’s see some of these commands in action.  For reference you can find more details about 
+these commands and their options in the <a href="https://slurm.schedmd.com/pdfs/summary.pdf">SLURM Quick Start Summary (PDF)</a>. 
+From the commandline you can also type:</p>
+
+<pre><code class="language-commandline">$ man &lt;name of command&gt;
+</code></pre>
+<p>to get more information on all Slurm daemons, commands, and API functions.</p>
+
+<p>The command option –help also provides a brief summary of options. Note that the command 
+options are all case sensitive.</p>
+
+<h3 id="1-view-available-resources">1. View Available Resources</h3>
+<p>Before we begin a computing task, it is helpful to review what computing resources are 
+available.  The <code class="language-plaintext highlighter-rouge">sinfo</code> command reports the state of partitions and nodes managed by Slurm.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Display the status of partitions (queues) and nodes</span>
+sinfo
+</code></pre></div></div>
+<p>Expected Output:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
+debug        up   infinite      2   idle node[01-02]
+batch        up   infinite      4   idle node[03-06]
+</code></pre></div></div>
+
+<h3 id="2-submit-a-job-script">2. Submit a Job Script</h3>
+<p>Now let’s send a computing task to the Slurm for execution on Bura.</p>
+
+<p>First, create a script file named job.sh.  This script provides the Slurm controller 
+with all the information needed to execute the task, including any input data, what 
+commands to execute and where to store any output.  The script also controls the number 
+of <em>instances</em> of the job to be run in parallel.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH --job-name=test_job       # Name of the job</span>
+<span class="c">#SBATCH --output=output.txt       # Save output to this file</span>
+<span class="c">#SBATCH --time=00:01:00           # Set max execution time (HH:MM:SS)</span>
+<span class="c">#SBATCH --ntasks=1                # Number of tasks to run</span>
+
+<span class="nb">hostname</span>                          <span class="c"># Command to execute</span>
+</code></pre></div></div>
+<p>We can then submit this job to the Slurm system.  Slurm provides a number of ways of doing this.</p>
+
+<p><code class="language-plaintext highlighter-rouge">srun</code> is used to submit a job (an instance of a task) for execution.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>srun &lt;program&gt;
+</code></pre></div></div>
+
+<p>This command has a wide variety of options to specify resource requirements, which can be 
+configured using optional flags appended to the srun command.   Here are a few example of 
+useful flags - see the 
+<a href="https://slurm.schedmd.com/pdfs/summary.pdf">SLURM Quick Start Summary</a> for a more 
+comprehensive list.</p>
+
+<p>To begin a job at a specific time, e.g. 18:00:00</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun <span class="nt">--begin</span><span class="o">=</span>18:00:00 &lt;program&gt;
+</code></pre></div></div>
+
+<p>To require that a specific number of CPUs be allocated to the task:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun <span class="nt">--cpus-per-task</span><span class="o">=</span>&lt;Ncpus&gt; &lt;program&gt;
+</code></pre></div></div>
+
+<p>To control the number of instances of the task to be executed:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun <span class="nt">-n</span>&lt;Ntasks&gt; &lt;program&gt;
+</code></pre></div></div>
+
+<p>To assign a maximum time limit after which the job instance should be halted (measured in wall-clock time):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun <span class="nt">--time</span><span class="o">=</span>&lt;<span class="nb">time</span><span class="o">&gt;</span> &lt;program&gt;
+</code></pre></div></div>
+
+<p>It’s often more convenient to design a job script which can be parallelized over multiple
+processes if desired, and submit it for later execution.  The <code class="language-plaintext highlighter-rouge">sbatch</code> command exists 
+for this purpose:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbatch job.sh
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Submitted batch job 1234
+</code></pre></div></div>
+
+<h3 id="3-check-the-queue">3. Check the Queue</h3>
+<p>Having submitted a job, it is very helpful to be able to monitor the status of it.  We can do 
+that using the <code class="language-plaintext highlighter-rouge">squeue</code> command - this will show us the status of both running and pending jobs.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>squeue
+</code></pre></div></div>
+<p>Expected Output:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST<span class="o">(</span>REASON<span class="o">)</span>
+1234     batch  test_job   alice  R       0:01      1 node03
+</code></pre></div></div>
+
+<h3 id="4-cancel-a-job">4. Cancel a Job</h3>
+<p>But what do we do if we realise there is a problem with our job after we have submitted it?
+We can use the <code class="language-plaintext highlighter-rouge">scancel</code> command to cancel a job process.  To do so we first need the 
+jobid assigned to the job once it was submitted.  You can find this number from the output
+ of the <code class="language-plaintext highlighter-rouge">squeue</code> command.</p>
+
+<p>E.g., to cancel the job with ID 1234:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scancel 1234
+</code></pre></div></div>
+<p>Expected Output:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># No output if successful</span>
+</code></pre></div></div>
+
+<h3 id="5-view-job-history">5. View Job History</h3>
+<p>Another useful option is to review a listing of all previous jobs submitted, including
+those that have been completed (and therefore no longer appear in the output of squeue).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Show accounting info about completed jobs</span>
+sacct
+</code></pre></div></div>
+<p>Expected Output:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       JobID    JobName  Partition    State  ExitCode
+<span class="nt">------------</span> <span class="nt">----------</span> <span class="nt">----------</span> <span class="nt">--------</span> <span class="nt">---------</span>
+1234         test_job   batch       COMPLETED      0:0
+
+</code></pre></div></div>
+
+<h3 id="deep-dive-sbatch--submit-jobs-to-slurm">Deep Dive: <code class="language-plaintext highlighter-rouge">sbatch</code> – Submit Jobs to SLURM</h3>
+
+<p>Let’s take a closer look at the <code class="language-plaintext highlighter-rouge">sbatch</code> command used to <strong>submit batch job scripts</strong> to 
+the SLURM job scheduler.</p>
+
+<p>A <strong>batch job</strong> is a script that specifies what commands to run, what resources to 
+request, and other scheduling options. When submitted with <code class="language-plaintext highlighter-rouge">sbatch</code>, SLURM queues the 
+job and runs it on an available compute node.</p>
+
+<h4 id="basic-syntax">Basic Syntax</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbatch <span class="o">[</span>options] your_job_script.sh
+
+<span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH --job-name=my_job          # Name of the job</span>
+<span class="c">#SBATCH --output=out.txt           # File to write standard output</span>
+<span class="c">#SBATCH --error=err.txt            # File to write standard error</span>
+<span class="c">#SBATCH --time=00:10:00            # Time limit (HH:MM:SS)</span>
+<span class="c">#SBATCH --ntasks=1                 # Number of tasks</span>
+<span class="c">#SBATCH --mem=1G                   # Memory per node</span>
+<span class="c">#SBATCH --partition=short          # Partition to submit to</span>
+
+<span class="nb">echo</span> <span class="s2">"Running on </span><span class="si">$(</span><span class="nb">hostname</span><span class="si">)</span><span class="s2">"</span>
+<span class="nb">sleep </span>30
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--job-name=NAME</code></td>
+      <td>Sets the name of the job</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--output=FILE</code></td>
+      <td>Redirects stdout to <code class="language-plaintext highlighter-rouge">FILE</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--error=FILE</code></td>
+      <td>Redirects stderr to <code class="language-plaintext highlighter-rouge">FILE</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--time=HH:MM:SS</code></td>
+      <td>Sets the time limit for the job</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--ntasks=N</code></td>
+      <td>Number of tasks to run (usually 1 per core unless MPI is used)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--cpus-per-task=N</code></td>
+      <td>Number of CPU cores per task</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--mem=AMOUNT</code></td>
+      <td>Memory per node (e.g., <code class="language-plaintext highlighter-rouge">4G</code>, <code class="language-plaintext highlighter-rouge">2000M</code>)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--partition=NAME</code></td>
+      <td>Specifies which partition (queue) to submit to</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--mail-type=ALL</code></td>
+      <td>Sends emails on job start, end, failure, etc.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--mail-user=EMAIL</code></td>
+      <td>Email address to send notifications to</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">--dependency=afterok:ID</code></td>
+      <td>Runs this job only if job with ID completed successfully (<code class="language-plaintext highlighter-rouge">afterok</code>)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="useful-environment-variables">Useful Environment Variables</h4>
+<p>Inside your script, you can use these special variables:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$SLURM_JOB_ID</code></td>
+      <td>The ID of the job</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$SLURM_JOB_NAME</code></td>
+      <td>The name of the job</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$SLURM_SUBMIT_DIR</code></td>
+      <td>The directory from which the job was submitted</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$SLURM_ARRAY_TASK_ID</code></td>
+      <td>The task ID in an array job</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">$SLURM_NTASKS</code></td>
+      <td>Total number of tasks requested</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="inline-submission-without-script">Inline Submission (Without Script)</h4>
+<p>You can submit commands directly without creating a file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbatch <span class="nt">--wrap</span><span class="o">=</span><span class="s2">"hostname &amp;&amp; sleep 60"</span>
+</code></pre></div></div>
+
+<h3 id="array-jobs-in-slurm">Array Jobs in SLURM</h3>
+
+<p>Sometimes you need to run the <strong>same job multiple times</strong> with slight variations — for example, processing 10 different input files or running a simulation with different parameters.</p>
+
+<p>Instead of writing 10 separate job scripts or submitting the same script 10 times manually, you can use a <strong>job array</strong>.</p>
+
+<p>SLURM will treat each element in the array as a <strong>separate job</strong>, but with shared configuration.<br />
+Each job will have a <strong>unique task ID</strong> accessible with the variable <code class="language-plaintext highlighter-rouge">$SLURM_ARRAY_TASK_ID</code>.</p>
+
+<hr />
+
+<h4 id="example-simple-job-array">Example: Simple Job Array</h4>
+
+<p>Create a job script named <code class="language-plaintext highlighter-rouge">array_job.sh</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH --job-name=array_test               # Name of the job</span>
+<span class="c">#SBATCH --array=1-10                        # Define array range: 10 jobs with IDs from 1 to 10</span>
+<span class="c">#SBATCH --output=logs/job_%A_%a.out         # Output file pattern: %A = job ID, %a = array task ID</span>
+
+<span class="nb">echo</span> <span class="s2">"This is array task </span><span class="nv">$SLURM_ARRAY_TASK_ID</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>What this does:</p>
+
+<ul>
+  <li>
+    <p>This script will be launched 10 times (one per task).</p>
+  </li>
+  <li>
+    <p>Each task gets a different value of $SLURM_ARRAY_TASK_ID (1 to 10).</p>
+  </li>
+  <li>
+    <p>Each task will write its output to a different file, e.g.:</p>
+
+    <ul>
+      <li>
+        <p>logs/job_1234_1.out</p>
+      </li>
+      <li>
+        <p>logs/job_1234_2.out</p>
+      </li>
+      <li>
+        <p>…</p>
+      </li>
+      <li>
+        <p>logs/job_1234_10.out</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="monitor-progress">Monitor Progress</h4>
+<p>To see the job’s status:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>squeue <span class="nt">--job</span> 5678
+</code></pre></div></div>
+
+<h4 id="check-output">Check Output</h4>
+<p>Once the job finishes, view the results:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>out.txt
+<span class="nb">cat </span>err.txt
+</code></pre></div></div>
+
+<blockquote class="challenge">
+  <h2 id="exercise">Exercise</h2>
+  <p>Create your own Slurm script to run 4 instances of a Python script in parallel, outputting the results to a set of text files.</p>
+  <blockquote class="solution">
+    <h2 id="solution">Solution</h2>
+    <p>Use nano to create a Python script file to be run in parallel (saved to my_python_script.py), e.g.</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Simple example of a python script to be</span>
+<span class="c"># run as a Slurm job</span>
+
+<span class="c"># Do some calculation...</span>
+result <span class="o">=</span> 100 <span class="k">*</span> 1000
+
+<span class="c"># Output the results to stout. </span>
+<span class="c"># This will be captured by the job script and stored</span>
+print<span class="o">(</span>result<span class="o">)</span>
+</code></pre></div>    </div>
+
+    <p>Next, create a shell script file (saved to my_job_script.sh) to control the batch process:</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH --job-name=my_parallel_job         </span>
+<span class="c">#SBATCH --array=1-4                       </span>
+<span class="c">#SBATCH --output=logs/output_%A_%a.out      </span>
+
+python3 my_python_script.py 
+</code></pre></div>    </div>
+    <p>The use sbatch to submit the job:</p>
+    <div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sbatch my_job_script.sh
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+
+
+
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>Slurm is a system for managing computing clusters and scheduling computing jobs</p>
+</li>
+    
+    <li><p>Slurm provides a set of commands which can configure, submit and control jobs on the cluster from the commandline</p>
+</li>
+    
+    <li><p>Jobs can be parallelized using scripts which provide the configuration and commands to be run</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/15-bura-setup/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/20-section2-intro/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+
+      
+      
+
+
+
+
+
+
+<footer>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6 license" id="license-info" align="left">
+	
+        Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> 2025 by <a href="/CITATION">the authors</a>.
+	
+    </div>
+    <div class="col-md-6 help-links" align="right">
+	
+	<a href="/edit//_episodes/15-slurm.md" data-checker-ignore>Edit on GitHub</a>
+	
+	/
+	<a href="/blob//CONTRIBUTING.md" data-checker-ignore>Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob//CITATION" data-checker-ignore>Cite</a>
+	/
+	<a href="mailto:shr.razim@gmail.com">Contact</a>
+    </div>
+  </div>
+  <p class="text-muted text-right">
+    <small><i>Using <a href="https://github.com/carpentries/carpentries-theme/">The Carpentries theme</a> &mdash; Site last built on: 2025-08-14 17:22:32 -0700.</i></small>
+  </p>
+</footer>
+
+      
+    </div>
+    
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/lesson.js"></script>
+
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(["setDomains", ["*.lessons.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io"]]);
+  _paq.push(["setDoNotTrack", true]);
+  _paq.push(["disableCookies"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src='//cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+<script src="/assets/js/anchor.min.js"></script>
+<script>
+    anchors.add();
+</script>
+
+  </body>
+</html>

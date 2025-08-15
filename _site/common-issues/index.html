@@ -1,0 +1,606 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2025-08-14 17:22:32 -0700">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" />
+    
+    <link rel="license" href="#license-info" />
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/incubator/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/incubator/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/favicons/incubator/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/incubator/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/favicons/incubator/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/favicons/incubator/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/favicons/incubator/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/incubator/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="The Carpentries Incubator - Introduction to High Performance Computing for astronomical software development"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/favicons/incubator/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/assets/favicons/incubator/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/assets/favicons/incubator/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/assets/favicons/incubator/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/assets/favicons/incubator/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+  <title>
+  Common Issues, Fixes & Tips &ndash; Introduction to High Performance Computing for astronomical software development
+  </title>
+
+  </head>
+  <body>
+    
+
+
+
+
+
+
+
+<div class="panel panel-default life-cycle">
+  <div id="life-cycle" class="panel-body pre-alpha">
+    This lesson is still being designed and assembled (Pre-Alpha version)
+  </div>
+</div>
+
+
+
+
+
+    <div class="container">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      <a href="/index.html" class="pull-left">
+        <img class="navbar-logo" src="/assets/img/incubator-logo-blue.svg" alt="The Carpentries Incubator logo" />
+      </a>
+      
+
+      
+      <a class="navbar-brand" href="/index.html">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="/CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="/setup.html">Setup</a></li>
+
+        
+        
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="/00-setting-the-scene/index.html">Setting the Scene</a></li>
+            
+            
+            <li><a href="/10-section1-intro/index.html">Section 1: HPC basics</a></li>
+            
+            
+            <li><a href="/11-hpc-intro/index.html">HPC Intro</a></li>
+            
+            
+            <li><a href="/12-lsst-hpc/index.html">LSST HPC facilities and opportunities</a></li>
+            
+            
+            <li><a href="/13-bura-access/index.html">Bura access</a></li>
+            
+            
+            <li><a href="/14-command-line/index.html">Command line basics</a></li>
+            
+            
+            <li><a href="/15-bura-setup/index.html">Bura Setup</a></li>
+            
+            
+            <li><a href="/15-slurm/index.html">Introduction to Slurm workload manager</a></li>
+            
+            
+            <li><a href="/20-section2-intro/index.html">Section 2: HPC Bura</a></li>
+            
+            
+            <li><a href="/21-cpu-sequential/index.html">Intro code examples</a></li>
+            
+            
+            <li><a href="/22-cpu-parallel/index.html">Parallelising our code for CPU</a></li>
+            
+            
+            <li><a href="/23-gpu-implementation/index.html">Implementing code examples for running on GPU</a></li>
+            
+            
+            <li><a href="/24-resource-requirements/index.html">Resource requirements</a></li>
+            
+            
+            <li><a href="/25-resource-monitoring-example/index.html">Resource optimization</a></li>
+            
+            
+            <li><a href="/26-performance-analysis/index.html">Performance analysis tools</a></li>
+            
+            
+            <li><a href="/30-wrap-up/index.html">Wrap-up</a></li>
+            
+            
+            <li><a href="/cli_lesson_monolithic_rm_warning_real_example/index.html">Command line interface (CLI) </a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="/aio/index.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+        
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/reference.html">Reference</a></li>
+            
+            
+            
+              <li><a href="/about/index.html">About</a></li>
+            
+            
+            
+            
+              <li><a href="/git-intro/index.html">Additional Material: Git Intro</a></li>
+            
+            
+            
+            
+              <li><a href="/figures/index.html">Figures</a></li>
+            
+            
+            
+            
+              <li><a href="/guide/index.html">Instructor Notes</a></li>
+            
+            
+            
+            
+              <li><a href="/common-issues/index.html">Common Issues, Fixes & Tips</a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href="/quiz/index.html">Quiz</a></li>
+            
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="/LICENSE.html">License</a></li>
+	
+	<li><a href="/edit//_extras/common-issues.md" data-checker-ignore>Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+      
+
+
+<div class="alert alert-info text-center" role="alert">
+  This lesson is part of
+  <a href="https://github.com/carpentries-incubator/proposals/#the-carpentries-incubator" data-checker-ignore>
+    The Carpentries Incubator</a>, a place to share and use each other's
+  Carpentries-style lessons. <strong>This lesson has not been reviewed by and is
+  not endorsed by The Carpentries</strong>.
+</div>
+
+
+
+
+      
+
+
+
+
+
+<h1 class="maintitle"><a href="/index.html">Introduction to High Performance Computing for astronomical software development</a>: Common Issues, Fixes & Tips</h1>
+
+
+
+<article>
+<p>Here is a list of issues previous participants of the course encountered
+and some tips to help you with troubleshooting.</p>
+
+<h2 id="command-linegit-bash-issues">Command Line/Git Bash Issues</h2>
+
+<h3 id="python-hangs-in-git-bash">Python Hangs in Git Bash</h3>
+<p>Hanging issues with trying to run Python 3 in Git Bash on Windows
+(i.e. typing <code class="language-plaintext highlighter-rouge">python</code> in the shell, which causes it to just hang with no error message or output).
+The solution appears to be to use <code class="language-plaintext highlighter-rouge">winpty</code> -
+a Windows software package providing an interface similar to a Unix pty-master
+for communicating with Windows command line tools.
+Inside the shell type <code class="language-plaintext highlighter-rouge">alias python='winpty python.exe'</code>.
+This alias will be valid for the duration of the shell session.
+For a more permanent solution, from the shell do:
+<code class="language-plaintext highlighter-rouge">echo "alias python='winpty python.exe'" &gt;&gt; ~/.bashrc</code>
+(and from there on remember to invoke Python as <code class="language-plaintext highlighter-rouge">python</code>
+or whatever command you aliased it to).
+Read more details on the issue at
+<a href="https://stackoverflow.com/questions/32597209/python-not-working-in-the-command-line-of-git-bash">Stack Overflow</a>
+or <a href="https://superuser.com/questions/1403345/git-bash-not-running-python3-as-expected-hanging-issues">Superuser</a>.</p>
+
+<h3 id="customising-command-line-prompt">Customising Command Line Prompt</h3>
+<p>Minor annoyance with the ultra long prompt command line sometimes gives you -
+if you do not want a reminder of the current working directory,
+you can set it to just <code class="language-plaintext highlighter-rouge">$</code> by typing the following in your command line: <code class="language-plaintext highlighter-rouge">export PS1="$ "</code>.
+More details on command line prompt customisation can be found in this
+<a href="https://www.cyberciti.biz/tips/howto-linux-unix-bash-shell-setup-prompt.html">guide</a>.</p>
+
+<h2 id="gitgithub-issues">Git/GitHub Issues</h2>
+
+<h3 id="connection-issues-when-accessing-github-using-git-over-vpn-or-protected-networks---proxy-needed">Connection Issues When Accessing GitHub Using Git Over VPN or Protected Networks - Proxy Needed</h3>
+<p>When accessing external services and websites
+(such as GitHub using <code class="language-plaintext highlighter-rouge">git</code> or to
+<a href="../common-issues/index.html#connection-issues-when-installing-packages-with-pip-over-vpn-or-protected-networks---proxy-needed">install Python packages with <code class="language-plaintext highlighter-rouge">pip</code></a>),
+you may experience connection errors
+(e.g. similar to <code class="language-plaintext highlighter-rouge">fatal: unable to access '....': Failed connect to github.com</code>)
+or a connection that hangs.
+This may indicate that they need to configure a proxy server user by your organisation
+to tunnel SSH traffic through a HTTP proxy.</p>
+
+<p>To get <code class="language-plaintext highlighter-rouge">git</code> to work through a proxy server in Windows,
+you’ll need <code class="language-plaintext highlighter-rouge">connect.exe</code> program that comes with GitBash
+(which you should have installed as part of setup, so no additional installation is needed).
+If installed in the default location,
+this file should be found at <code class="language-plaintext highlighter-rouge">C:\Program Files\Git\mingw64\bin\connect.exe</code>.
+Next, you’ll need to modify your ssh config file (typically in <code class="language-plaintext highlighter-rouge">~/.ssh/config</code>)
+and add the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Host github.com
+    ProxyCommand "C:/Program Files/Git/mingw64/bin/connect.exe" -H &lt;proxy-server&gt;:&lt;proxy-port&gt; %h %p
+    TCPKeepAlive yes
+    IdentitiesOnly yes
+    User git
+    Port 22
+    Hostname github.com
+</code></pre></div></div>
+
+<p>Mac and Linux users can use the <a href="https://github.com/bryanpkc/corkscrew">Corkscrew tool</a>
+for tunneling SSH through HTTP proxies,
+which would have to be installed separately.
+Next, you’ll need to modify your SSH config file (typically in <code class="language-plaintext highlighter-rouge">~/.ssh/config</code>)
+and add the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Host github.com
+    ProxyCommand corkscrew &lt;proxy-server&gt; &lt;proxy-port&gt; %h %p
+    TCPKeepAlive yes
+    IdentitiesOnly yes
+    User git
+    Port 22
+    Hostname github.com
+</code></pre></div></div>
+
+<h3 id="creating-a-github-key-without-workflow-authorisation-scope">Creating a GitHub Key Without ‘Workflow’ Authorisation Scope</h3>
+<p>If a learner creates a GitHub authentication token
+but forgets to check ‘workflow’ scope
+(to allow the token to be used to update GitHub Action workflows)
+they will get the following error when trying to push a new workflow
+(when adding the <code class="language-plaintext highlighter-rouge">pytest</code> action in Section 2) to GitHub:</p>
+
+<div class="language-plaintext error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>! [remote rejected] test-suite -&gt; test-suite (refusing to allow an OAuth App to create or update workflow `.github/workflows/main.yml` without `workflow` scope`
+</code></pre></div></div>
+
+<p>The solution is to generate a new token with the correct scope/usage permissions
+and clear the local credential cache (if that’s where the token has been saved).
+In same cases, simply clearing credential cache was not enough and updating to Git 2.29 was needed.</p>
+
+<h3 id="please-tell-me-who-you-are-git-error"><code class="language-plaintext highlighter-rouge">Please tell me who you are</code> Git Error</h3>
+<p>If you experience the following error the first time you do a Git commit,
+you may not have configured your identity with Git on your machine:</p>
+
+<div class="language-plaintext error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatal: unable to auto-detect email address
+*** Please tell me who you are
+</code></pre></div></div>
+
+<p>This can be configured from the command line as follows:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> user.name <span class="s2">"Your Name"</span>
+<span class="nv">$ </span>git config <span class="nt">--global</span> user.email <span class="s2">"name@example.com"</span>
+</code></pre></div></div>
+
+<p>The option <code class="language-plaintext highlighter-rouge">--global</code> tells Git to use these settings “globally”
+(i.e. for every project that uses Git for version control on your machine).
+If you use different identifies for different projects,
+then you should not use the <code class="language-plaintext highlighter-rouge">--global</code> option.
+Make sure to use the same email address you used to open an account on GitHub
+that you are using for this course.</p>
+
+<p>At this point it may also be a good time to configure your favourite text editor with Git,
+if you have not already done so.
+For example, to use the editor <code class="language-plaintext highlighter-rouge">nano</code> with Git:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> core.editor <span class="s2">"nano -w"</span>
+</code></pre></div></div>
+
+<h2 id="python-pip-venv--installing-packages-issues">Python, <code class="language-plaintext highlighter-rouge">pip</code>, <code class="language-plaintext highlighter-rouge">venv</code> &amp; Installing Packages Issues</h2>
+
+<h3 id="issues-with-numpy-and-potentially-other-packages-on-new-m1-macs">Issues With Numpy (and Potentially Other Packages) on New M1 Macs</h3>
+<p>When using <code class="language-plaintext highlighter-rouge">numpy</code> package installed via <code class="language-plaintext highlighter-rouge">pip</code> on a command line on a new Apple M1 Mac,
+you get a failed installation with the error:</p>
+
+<div class="language-plaintext error highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+mach-o file, but is an incompatible architecture (have 'x86_64', need 'arm64e').
+...
+</code></pre></div></div>
+
+<p>Numpy is a package heavily optimised for performance,
+and many parts of it are written in C and compiled for specific architectures,
+such as Intel (x86_64, x86_32, etc.)
+or Apple’s M1 (arm64e).
+In this instance, <code class="language-plaintext highlighter-rouge">pip</code> is obtaining a version of <code class="language-plaintext highlighter-rouge">numpy</code> with the incorrect compiled binaries,
+instead of the ones needed for Apple’s M1 Mac.
+One way that was found to work was to install numpy via PyCharm into your environment instead,
+which seems able to determine the correct packages to download and install.</p>
+
+<h3 id="python-3-installed-but-not-found-when-using-python3-command">Python 3 Installed but not Found When Using <code class="language-plaintext highlighter-rouge">python3</code> Command</h3>
+<p>Python 3 installed on some Windows machines
+may not be accessible using the <code class="language-plaintext highlighter-rouge">python3</code> command from the command line,
+but works fine when invoked via the command <code class="language-plaintext highlighter-rouge">python</code>.</p>
+
+<h3 id="connection-issues-when-installing-packages-with-pip-over-vpn-or-protected-networks---proxy-needed">Connection Issues When Installing Packages With <code class="language-plaintext highlighter-rouge">pip</code> Over VPN or Protected Networks - Proxy Needed</h3>
+<p>If you encounter issues when trying to
+install packages with <code class="language-plaintext highlighter-rouge">pip</code> over your organisational network -
+it may be because your may need to
+<a href="https://stackoverflow.com/questions/30992717/proxy-awareness-with-pip">use a proxy</a>
+provided by your organisation.
+In order to get <code class="language-plaintext highlighter-rouge">pip</code> to use the proxy,
+you need to add an additional parameter when installing packages with <code class="language-plaintext highlighter-rouge">pip</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip3 <span class="nb">install</span> <span class="nt">--proxy</span> &lt;proxy-url&gt; &lt;name of package&gt;<span class="sb">`</span>
+</code></pre></div></div>
+
+<p>To keep these settings permanently,
+you may want to add the following to your <code class="language-plaintext highlighter-rouge">.zshrc</code>/<code class="language-plaintext highlighter-rouge">.bashrc</code> file
+to avoid having to specify the proxy for each session,
+and restart your command line terminal:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># call set_proxies to set proxies and unset_proxies to remove them
+set_proxies() {
+export {http,https,ftp}_proxy='&lt;proxy-url&gt;'
+export {HTTP,HTTPS,FTP}_PROXY='&lt;proxy-url&gt;'
+export NO_PROXY=localhost,127.0.0.1,10.96.0.0/12,192.168.99.0/24,192.168.39.0/24,192.168.64.2,.&lt;proxy-url&gt;, &lt;proxy-url&gt;
+}
+
+unset_proxies() {
+export {http,https,ftp}_proxy=
+export {HTTP,HTTPS,FTP}_PROXY=
+export NO_PROXY=
+}
+</code></pre></div></div>
+
+<h2 id="pycharm-issues">PyCharm Issues</h2>
+
+<h3 id="using-gitbash-from-pycharm">Using GitBash from PyCharm</h3>
+<p>To embed Git Bash in PyCharm as external tool and work with it in PyCharm window,
+from Settings
+select “Tools-&gt;Terminal-&gt;Shell path”
+and enter <code class="language-plaintext highlighter-rouge">“C:\Program Files\Git\bin\sh.exe” --login</code>.
+See <a href="https://stackoverflow.com/questions/20573213/embed-git-bash-in-pycharm-as-external-tool-and-work-with-it-in-pycharm-window-w">more details</a>
+on Stack Overflow.</p>
+
+<h3 id="virtual-environments-issue-no-such-option-build-dir">Virtual Environments Issue <code class="language-plaintext highlighter-rouge">"no such option: –build-dir"</code></h3>
+<p>Using PyCharm to add a package to a virtual environment created from the command line using <code class="language-plaintext highlighter-rouge">venv</code>
+can fail with error <code class="language-plaintext highlighter-rouge">"no such option: –build-dir"</code>,
+which appears to be caused by the latest version of <code class="language-plaintext highlighter-rouge">pip</code> (20.3)
+where the flag <code class="language-plaintext highlighter-rouge">-build-dir</code> was removed but is required by PyCharm to install packages.
+A workaround is to:</p>
+
+<ul>
+  <li>Close PyCharm</li>
+  <li>Downgrade the version of <code class="language-plaintext highlighter-rouge">pip</code> used by <code class="language-plaintext highlighter-rouge">venv</code>, e.g. in a command line terminal type:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>pip3 <span class="nb">install </span><span class="nv">pip</span><span class="o">==</span>20.2.4
+</code></pre></div>    </div>
+  </li>
+  <li>Restart PyCharm</li>
+</ul>
+
+<p>See <a href="https://youtrack.jetbrains.com/issue/PY-45712">the issue</a> for more details.
+This issue seems to only occur with older versions of PyCharm - recent versions should be fine.</p>
+
+<h3 id="invalid-yaml-issue">Invalid YAML Issue</h3>
+<p>If YAML is copy+pasted from the course material,
+it might not get pasted correctly in PyCharm and some extra indentation may occur.
+Annoyingly, PyCharm won’t flag this up as invalid YAML
+and learners may get all sort of different issues and errors with these files -
+e.g. ‘actions must start with run or uses’ with GitHub Actions workflows.</p>
+
+<p>An example of incorrect extra indentation:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>steps:
+    - name: foo
+      uses: bar
+</code></pre></div></div>
+
+<p>Instead of</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>steps:
+  - name: foo
+    uses: bar
+</code></pre></div></div>
+
+
+</article>
+
+
+      
+      
+
+
+
+
+
+
+<footer>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6 license" id="license-info" align="left">
+	
+        Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> 2025 by <a href="/CITATION">the authors</a>.
+	
+    </div>
+    <div class="col-md-6 help-links" align="right">
+	
+	<a href="/edit//_extras/common-issues.md" data-checker-ignore>Edit on GitHub</a>
+	
+	/
+	<a href="/blob//CONTRIBUTING.md" data-checker-ignore>Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob//CITATION" data-checker-ignore>Cite</a>
+	/
+	<a href="mailto:shr.razim@gmail.com">Contact</a>
+    </div>
+  </div>
+  <p class="text-muted text-right">
+    <small><i>Using <a href="https://github.com/carpentries/carpentries-theme/">The Carpentries theme</a> &mdash; Site last built on: 2025-08-14 17:22:32 -0700.</i></small>
+  </p>
+</footer>
+
+      
+    </div>
+    
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/lesson.js"></script>
+
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(["setDomains", ["*.lessons.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io"]]);
+  _paq.push(["setDoNotTrack", true]);
+  _paq.push(["disableCookies"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src='//cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+<script src="/assets/js/anchor.min.js"></script>
+<script>
+    anchors.add();
+</script>
+
+  </body>
+</html>

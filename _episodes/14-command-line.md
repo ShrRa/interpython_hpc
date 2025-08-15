@@ -245,10 +245,10 @@ Finally, if you are using version control to track your development and have a r
 >> ```bash
 >> $ TODO
 >> ```
->> ~~~
+>> ~~~[
 >> {: .output}
 >{: .solution}
-{: .challenge}
+{: .challenge}]()
 
 ## Printing to the screen
 Sometime you want to write a message to the screen. This can be done with the `echo` command with the fomat `echo <thing to print>`. For example, to print "hello world":

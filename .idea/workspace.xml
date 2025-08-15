@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1e05b87f-a875-4212-b3e0-14fd44058037" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/_episodes/15-slurm.md" beforeDir="false" afterPath="$PROJECT_DIR$/_episodes/15-slurm.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/00-setting-the-scene/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/00-setting-the-scene/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/10-section1-intro/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/10-section1-intro/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/11-hpc-intro/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/11-hpc-intro/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/12-lsst-hpc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/12-lsst-hpc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/13-bura-access/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/13-bura-access/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/14-command-line/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/14-command-line/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/15-bura-setup/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/15-bura-setup/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/15-slurm/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/15-slurm/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/20-section2-intro/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/20-section2-intro/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/21-cpu-sequential/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/21-cpu-sequential/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/22-cpu-parallel/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/22-cpu-parallel/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/23-gpu-implementation/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/23-gpu-implementation/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/24-resource-requirements/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/24-resource-requirements/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/25-resource-monitoring-example/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/25-resource-monitoring-example/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/26-performance-analysis/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/26-performance-analysis/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/30-wrap-up/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/30-wrap-up/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/CODE_OF_CONDUCT.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/CODE_OF_CONDUCT.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/GOVERNANCE.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/GOVERNANCE.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/LICENSE.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/LICENSE.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/about/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/about/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/aio/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/aio/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/cli_lesson_monolithic_rm_warning_real_example/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/cli_lesson_monolithic_rm_warning_real_example/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/common-issues/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/common-issues/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/figures/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/figures/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/git-intro/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/git-intro/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/guide/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/guide/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/nvidia-smi/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/nvidia-smi/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/quiz/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/quiz/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/reference.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/reference.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/setup.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/setup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/slides/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/slides/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="31HifjqSiCKdTHgAaHV28O2Fmg9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "gh-pages-wip",
+    "last_opened_file_path": "/Users/rstreet/software/interpython_hpc"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1e05b87f-a875-4212-b3e0-14fd44058037" name="Changes" comment="" />
+      <created>1755187503376</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1755187503376</updated>
+    </task>
+    <servers />
+  </component>
+</project>

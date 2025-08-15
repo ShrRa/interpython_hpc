@@ -1,0 +1,532 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2025-08-14 17:22:32 -0700">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" />
+    
+    <link rel="license" href="#license-info" />
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/incubator/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/incubator/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/favicons/incubator/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/incubator/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/favicons/incubator/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/favicons/incubator/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/favicons/incubator/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/incubator/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="The Carpentries Incubator - Introduction to High Performance Computing for astronomical software development"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/favicons/incubator/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/assets/favicons/incubator/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/assets/favicons/incubator/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/assets/favicons/incubator/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/assets/favicons/incubator/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+  <title>
+  Instructor Notes &ndash; Introduction to High Performance Computing for astronomical software development
+  </title>
+
+  </head>
+  <body>
+    
+
+
+
+
+
+
+
+<div class="panel panel-default life-cycle">
+  <div id="life-cycle" class="panel-body pre-alpha">
+    This lesson is still being designed and assembled (Pre-Alpha version)
+  </div>
+</div>
+
+
+
+
+
+    <div class="container">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      <a href="/index.html" class="pull-left">
+        <img class="navbar-logo" src="/assets/img/incubator-logo-blue.svg" alt="The Carpentries Incubator logo" />
+      </a>
+      
+
+      
+      <a class="navbar-brand" href="/index.html">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="/CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="/setup.html">Setup</a></li>
+
+        
+        
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="/00-setting-the-scene/index.html">Setting the Scene</a></li>
+            
+            
+            <li><a href="/10-section1-intro/index.html">Section 1: HPC basics</a></li>
+            
+            
+            <li><a href="/11-hpc-intro/index.html">HPC Intro</a></li>
+            
+            
+            <li><a href="/12-lsst-hpc/index.html">LSST HPC facilities and opportunities</a></li>
+            
+            
+            <li><a href="/13-bura-access/index.html">Bura access</a></li>
+            
+            
+            <li><a href="/14-command-line/index.html">Command line basics</a></li>
+            
+            
+            <li><a href="/15-bura-setup/index.html">Bura Setup</a></li>
+            
+            
+            <li><a href="/15-slurm/index.html">Introduction to Slurm workload manager</a></li>
+            
+            
+            <li><a href="/20-section2-intro/index.html">Section 2: HPC Bura</a></li>
+            
+            
+            <li><a href="/21-cpu-sequential/index.html">Intro code examples</a></li>
+            
+            
+            <li><a href="/22-cpu-parallel/index.html">Parallelising our code for CPU</a></li>
+            
+            
+            <li><a href="/23-gpu-implementation/index.html">Implementing code examples for running on GPU</a></li>
+            
+            
+            <li><a href="/24-resource-requirements/index.html">Resource requirements</a></li>
+            
+            
+            <li><a href="/25-resource-monitoring-example/index.html">Resource optimization</a></li>
+            
+            
+            <li><a href="/26-performance-analysis/index.html">Performance analysis tools</a></li>
+            
+            
+            <li><a href="/30-wrap-up/index.html">Wrap-up</a></li>
+            
+            
+            <li><a href="/cli_lesson_monolithic_rm_warning_real_example/index.html">Command line interface (CLI) </a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="/aio/index.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+        
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/reference.html">Reference</a></li>
+            
+            
+            
+              <li><a href="/about/index.html">About</a></li>
+            
+            
+            
+            
+              <li><a href="/git-intro/index.html">Additional Material: Git Intro</a></li>
+            
+            
+            
+            
+              <li><a href="/figures/index.html">Figures</a></li>
+            
+            
+            
+            
+              <li><a href="/guide/index.html">Instructor Notes</a></li>
+            
+            
+            
+            
+              <li><a href="/common-issues/index.html">Common Issues, Fixes & Tips</a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href="/quiz/index.html">Quiz</a></li>
+            
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="/LICENSE.html">License</a></li>
+	
+	<li><a href="/edit//_extras/guide.md" data-checker-ignore>Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+      
+
+
+<div class="alert alert-info text-center" role="alert">
+  This lesson is part of
+  <a href="https://github.com/carpentries-incubator/proposals/#the-carpentries-incubator" data-checker-ignore>
+    The Carpentries Incubator</a>, a place to share and use each other's
+  Carpentries-style lessons. <strong>This lesson has not been reviewed by and is
+  not endorsed by The Carpentries</strong>.
+</div>
+
+
+
+
+      
+
+
+
+
+
+<h1 class="maintitle"><a href="/index.html">Introduction to High Performance Computing for astronomical software development</a>: Instructor Notes</h1>
+
+
+
+<article>
+<blockquote class="callout">
+  <h2 id="common-issues--tips">Common Issues &amp; Tips</h2>
+  <p>Check out a <a href="../common-issues">list of issues</a> previous participants of the course encountered
+and some tips to help you with troubleshooting at the workshop.</p>
+</blockquote>
+
+<h2 id="course-design">Course Design</h2>
+<p>The course follows a narrative around
+a software development team working on an existing software project
+that is analysing patients’ inflammation data
+(from the <a href="https://software-carpentry.org/lessons">novice Software Carpentry Python course</a>.
+The course is meant to be delivered as a single unit
+as the course’s code examples and exercises built on top of previously covered topics and code -
+so skipping or missing bits of the course would cause students to
+get out of sync and cause them difficulties in following subsequent sections.</p>
+
+<p>A typical learner for the course is
+someone who has gained foundational software development skills in using Git,
+command line shell and Python
+(e.g. by attending prior courses or by self-learning),
+and has used these skills for individual code development and scripting.
+They are now joining the development team where they will require
+a number of software development tools and intermediate software development skills
+to engineer their code more properly
+taking into consideration the lifecycle of software,
+team ethic, writing software for stakeholders,
+and applying a process to understanding, designing, building, releasing, and maintaining software.</p>
+
+<p>The course has been separated into 5 sections:</p>
+
+<ul>
+  <li>Section 1: Setting Up Environment For Collaborative Code Development</li>
+  <li>Section 2: Ensuring Correctness of Software at Scale</li>
+  <li>Section 3: Developing Software to Meet Requirements</li>
+  <li>Section 4: Collaborative Software Development for Reuse</li>
+  <li>Section 5: Improving and Managing Software Over Its Lifetime</li>
+</ul>
+
+<p>Each section can be approximately delivered in a half-day (e.g. try to allow 4 hours per section).</p>
+
+<h2 id="course-delivery">Course Delivery</h2>
+<p>The course is intended primarily for self-learning
+but other modes of delivery are possible
+(e.g. mixing in elements of instructor-led coding-along).
+The way the course has been delivered so far is that
+students are organised in small groups from the outset
+and initially work individually through the material.
+In later sections,
+exercises involve more group work
+and people from the same group form small development teams
+and collaborate on a mini software project
+(to provide more in-depth practice for software development in teams).
+There is a bunch of helpers on hand who sit with learners in groups.
+This provides a more comfortable and less intimidating learning environment
+with learners more willing to engage and chat with their group colleagues about what they are doing
+and ask for help.</p>
+
+<p>The course can be delivered online or in-person.
+A good ratio is 4-6 learners to 1 helper.
+If you have a smaller number of helpers than groups -
+helpers can roam around to make sure groups are making progress.
+While this course can be live-coded by an instructor as well (in the earlier stages),
+we felt that intermediate-level learners are capable of
+going through the material on their own at a reasonable speed
+and would not require to code-along to the same extent as novice learners.
+In later stages, exercises require participants to develop code more individually
+so they can review and comment on each other’s code,
+so the codes need to be sufficiently different for these exercises to be effective.
+Having an instructor live-code would make everyone have exactly the same code on their machines
+and would not have the same effect.</p>
+
+<p>A workshop kicks off with everyone together at the start of each day.
+One of course leads/helpers provides workshop introduction
+and motivation to paint the bigger picture and set the scene for the whole workshop.
+In addition, a short intro to the section topics is provided on each day,
+to explain what the students will be learning and doing on that particular day.
+After that, participants are split into groups
+and go through the materials for that day on their own with helpers on hand.
+At the end of each section, all reconvene for a joint Q&amp;A session, feedback and wrap-up.
+If participants have not finished all exercises for a section,
+they are asked to finish them off before the next section starts
+to make sure everyone is in sync as much as possible and are working on similar things
+(though students will inevitably cover the material at different speeds).
+This synchronisation becomes particularly important for later workshop stages
+when students start with group exercises.</p>
+
+<h3 id="helpers-roles-and-responsibilities">Helpers Roles and Responsibilities</h3>
+<p>At the workshop, everyone in the training team is a helper.
+You may have more experienced helpers delivering introductions to the workshop and sections.
+Contact the course authors for intro slides you can reuse.</p>
+
+<p>Roles and responsibilities of helpers include:</p>
+
+<ul>
+  <li>Being familiar with the material</li>
+  <li>Facilitating groups/breakout rooms and helping people going through the material</li>
+  <li>Try to prepare a few questions/discussion points
+to take to groups/breakout rooms to make sure the groups are engaged
+(but note some learners may find discussions distracting so try to find a balance)</li>
+  <li>Taking notes on what works well and what not - throughout the workshop -
+from their individual perspective and perspectives of students:
+    <ul>
+      <li>Collecting general feelings and comments</li>
+      <li>Their thoughts as a potential student and instructor</li>
+    </ul>
+  </li>
+  <li>Noting mistakes, inconsistencies and learning obstacles in the materials</li>
+  <li>Recording issues or doing PRs in the lesson repository during or after of the workshop</li>
+  <li>Helping students get through the material
+but also being ready to answer questions on applying the material in learners’ domains,
+if possible</li>
+</ul>
+
+<h3 id="group-exercises">Group Exercises</h3>
+<p>Here is some advice on how best to sync and organise group exercises in later stages of the course.</p>
+
+<ul>
+  <li>For earlier workshop stages,
+where learners go through the material individually (though placed in groups),
+maintaining the same group composition is not all that important.
+However, it would be good to maintain the same teams once group exercises start,
+as group will chose one software project to be the “team project” to work on.</li>
+  <li>Take a note of who was in which group between different days
+(e.g. in a share document where people can sign up),
+as people tend to forget (especially for online workshop).</li>
+  <li>Some group exercises start in the middle (rather than at the beginning) of a section.
+This means that synchronisation is needed to make sure
+everyone starts at the same time during that particular session.
+As some students will naturally be ready faster,
+perhaps have a shared document for people to put their names down
+as they are ready to start with the group exercises,
+and organise them in teams based on the speed they are covering the material.
+Even if these groups change from previous days,
+it will ensure people’s idle time is minimised.</li>
+  <li>People may lose motivation in the later stages involving teamwork
+if some team members are missing -
+while this may be inevitable due to other commitments,
+make it clear during workshop advertising
+that people should try to commit workshop days/times.</li>
+  <li>Make it obvious to the learners that they should
+catch up with any unfinished material or exercises from the previous session
+before joining the next one -
+this is even more important for group exercises so the teams are not stalled.</li>
+</ul>
+
+
+</article>
+
+
+      
+      
+
+
+
+
+
+
+<footer>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6 license" id="license-info" align="left">
+	
+        Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> 2025 by <a href="/CITATION">the authors</a>.
+	
+    </div>
+    <div class="col-md-6 help-links" align="right">
+	
+	<a href="/edit//_extras/guide.md" data-checker-ignore>Edit on GitHub</a>
+	
+	/
+	<a href="/blob//CONTRIBUTING.md" data-checker-ignore>Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob//CITATION" data-checker-ignore>Cite</a>
+	/
+	<a href="mailto:shr.razim@gmail.com">Contact</a>
+    </div>
+  </div>
+  <p class="text-muted text-right">
+    <small><i>Using <a href="https://github.com/carpentries/carpentries-theme/">The Carpentries theme</a> &mdash; Site last built on: 2025-08-14 17:22:32 -0700.</i></small>
+  </p>
+</footer>
+
+      
+    </div>
+    
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/lesson.js"></script>
+
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(["setDomains", ["*.lessons.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io"]]);
+  _paq.push(["setDoNotTrack", true]);
+  _paq.push(["disableCookies"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src='//cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+<script src="/assets/js/anchor.min.js"></script>
+<script>
+    anchors.add();
+</script>
+
+  </body>
+</html>
