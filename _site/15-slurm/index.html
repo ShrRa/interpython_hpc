@@ -10,7 +10,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="last-modified" content="2025-08-14 14:49:06 -0700">
+    <meta http-equiv="last-modified" content="2025-08-14 17:19:25 -0700">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- meta "search-domain" used for google site search function google_search() -->
     <meta name="search-domain" value="">
@@ -387,7 +387,10 @@
       <strong>Questions</strong>
       <ul>
 	
-	<li><p>Question 1</p>
+	<li><p>What is Slurm?</p>
+</li>
+	
+	<li><p>How do I run computing tasks using Slurm?</p>
 </li>
 	
       </ul>
@@ -401,7 +404,10 @@
       <strong>Objectives</strong>
       <ul>
 	
-	<li><p>Objective 1</p>
+	<li><p>Understand the role and purpose of Slurm</p>
+</li>
+	
+	<li><p>Understand how to create and run a computing task using Slurm</p>
 </li>
 	
       </ul>
@@ -410,15 +416,29 @@
 
 </blockquote>
 
-<ul>
-  <li>Slurm as a workload manager (+practical session: how to use Slurm)</li>
-</ul>
-
 <h2 id="intro">Intro</h2>
-<p>Slurm is an open source, fault-tolerant, and highly scalable cluster management and job scheduling system for large and small Linux clusters. Slurm requires no kernel modifications for its operation and is relatively self-contained. As a cluster workload manager, Slurm has three key functions. First, it allocates exclusive and/or non-exclusive access to resources (compute nodes) to users for some duration of time so they can perform work. Second, it provides a framework for starting, executing, and monitoring work (normally a parallel job) on the set of allocated nodes. Finally, it arbitrates contention for resources by managing a queue of pending work.</p>
+<p>Slurm is an open source, fault-tolerant, and highly scalable cluster management and job 
+scheduling system for large and small Linux clusters. Slurm requires no kernel modifications 
+for its operation and is relatively self-contained. As a cluster workload manager, Slurm has 
+three key functions. First, it allocates exclusive and/or non-exclusive access to resources 
+(compute nodes) to users for some duration of time so they can perform work. Second, it 
+provides a framework for starting, executing, and monitoring work (normally a parallel job) 
+on the set of allocated nodes. Finally, it arbitrates contention for resources by managing 
+a queue of pending work.</p>
 
-<h2 id="mpi">MPI</h2>
-<p>MPI use depends upon the type of MPI being used. There are three fundamentally different modes of operation used by these various MPI implementations.</p>
+<h2 id="mpi-message-passing-interface">MPI (Message Passing Interface)</h2>
+<p>In order to execute a set of software instructions simultaneously on multiple computing 
+nodes in parallel, we need to have a way of sending those instructions to the nodes.<br />
+There are standard libraries available for this purpose that use a standardized syntax and 
+are designed for use on parallel computing architectures like Bura.  This is known as a 
+Message Passing Interface or MPI.</p>
+
+<p>We will go into this topic in more detail later on, but for now it suffices to know that 
+there are different “flavors” of MPI available, and how you use each one depends on which
+type of MPI you are using.</p>
+
+<p>There are three fundamentally different modes of operation used by these various MPI 
+implementations.  Here is how they interact with the Slurm system:</p>
 
 <ul>
   <li>Slurm directly launches the tasks and performs initialization of communications through the PMI2 or PMIx APIs. (Supported by most modern MPI implementations.)</li>
@@ -427,60 +447,76 @@
 </ul>
 
 <h2 id="architecture">Architecture</h2>
-<p>Slurm is a system used to manage and organize work on a cluster — a group of computers working together to perform complex tasks.</p>
+<p><a href="https://slurm.schedmd.com/quickstart.html">Slurm</a> is a system used to manage and organize work on a cluster — a group of computers 
+working together to perform complex tasks.</p>
 
-<p>At the core of Slurm is a central manager, called slurmctld, which keeps track of available resources (like CPUs and memory) and assigns jobs to the appropriate computers. There can also be a backup manager that takes over if the main one fails.</p>
+<p>At the core of Slurm is a central manager, called slurmctld, which keeps track of available 
+resources (like CPUs and memory) and assigns jobs to the appropriate computers. There can 
+also be a backup manager that takes over if the main one fails.</p>
 
-<p>Each computer in the cluster (called a node) runs a program called slurmd. This acts like a remote assistant: it waits for tasks, runs them, sends back results, and then waits for more.</p>
+<p><img src="../assets/img/Slurm_system_components.png" alt="Components of a Slurm system" class="image-with-shadow" width="700px" /></p>
 
-<p>To keep a record of all activity, an optional component called slurmdbd can be used. It stores accounting information — such as who used what resources and when — in a shared database.</p>
+<p>Each computer in the cluster (called a node) runs a program called slurmd. This acts like a 
+remote assistant: it waits for tasks, runs them, sends back results, and then waits for more.</p>
 
-<p>Another optional component, slurmrestd, allows users and applications to communicate with Slurm over the web using a REST API.</p>
+<p>To keep a record of all activity, an optional component called slurmdbd can be used. It 
+stores accounting information — such as who used what resources and when — in a shared 
+database.</p>
 
-<p>Users can interact with Slurm using several simple commands:</p>
+<p>Another optional component, slurmrestd, allows users and applications to communicate with 
+Slurm over the web using a REST API.</p>
+
+<p>Users can interact with Slurm from the terminal commandline using several simple commands.<br />
+Here are some of the most important ones:</p>
 
 <ul>
   <li>
-    <p>srun: starts a job,</p>
+    <p><code class="language-plaintext highlighter-rouge">srun</code>: starts a job,</p>
   </li>
   <li>
-    <p>scancel: cancels a running or queued job,</p>
+    <p><code class="language-plaintext highlighter-rouge">scancel</code>: cancels a running or queued job,</p>
   </li>
   <li>
-    <p>sinfo: shows the current status of the system,</p>
+    <p><code class="language-plaintext highlighter-rouge">sinfo</code>: shows the current status of the system,</p>
   </li>
   <li>
-    <p>squeue: displays information about jobs currently running or waiting,</p>
+    <p><code class="language-plaintext highlighter-rouge">squeue</code>: displays information about jobs currently running or waiting,</p>
   </li>
   <li>
-    <p>sacct: provides detailed reports on finished jobs.</p>
+    <p><code class="language-plaintext highlighter-rouge">sacct</code>: provides detailed reports on finished jobs.</p>
   </li>
 </ul>
 
-<p>There’s also a graphical interface called sview that visually shows system and job status, including how the nodes are connected.</p>
+<p>There’s also a graphical interface called <code class="language-plaintext highlighter-rouge">sview</code> that visually shows system and job status, including how the nodes are connected.</p>
 
 <p>Administrators can use tools like:</p>
 
 <ul>
   <li>
-    <p>scontrol: to monitor or modify how the system is working,</p>
+    <p><code class="language-plaintext highlighter-rouge">scontrol</code>: to monitor or modify how the system is working,</p>
   </li>
   <li>
-    <p>sacctmgr: to manage users, projects, and resource allocations.</p>
+    <p><code class="language-plaintext highlighter-rouge">sacctmgr</code>: to manage users, projects, and resource allocations.</p>
   </li>
 </ul>
 
 <p>Finally, for developers, Slurm also offers APIs that allow software to interact with the system automatically.</p>
 
-<p><img src="../fig/slurm_schema.gif" alt="" /></p>
+<h2 id="slurm-commands">Slurm Commands</h2>
+<p>Let’s see some of these commands in action.  For reference you can find more details about 
+these commands and their options in the <a href="https://slurm.schedmd.com/pdfs/summary.pdf">SLURM Quick Start Summary (PDF)</a>. 
+From the commandline you can also type:</p>
 
-<h2 id="commands">Commands</h2>
-<p>Man pages exist for all Slurm daemons, commands, and API functions. The command option –help also provides a brief summary of options. Note that the command options are all case sensitive.</p>
+<pre><code class="language-commandline">$ man &lt;name of command&gt;
+</code></pre>
+<p>to get more information on all Slurm daemons, commands, and API functions.</p>
 
-<p>To have a look to more general commands
-<a href="https://slurm.schedmd.com/pdfs/summary.pdf">SLURM Quick Start Summary (PDF)</a></p>
+<p>The command option –help also provides a brief summary of options. Note that the command 
+options are all case sensitive.</p>
 
-<h2 id="1-view-available-resources">1. View Available Resources</h2>
+<h3 id="1-view-available-resources">1. View Available Resources</h3>
+<p>Before we begin a computing task, it is helpful to review what computing resources are 
+available.  The <code class="language-plaintext highlighter-rouge">sinfo</code> command reports the state of partitions and nodes managed by Slurm.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Display the status of partitions (queues) and nodes</span>
 sinfo
@@ -491,8 +527,14 @@ debug        up   infinite      2   idle node[01-02]
 batch        up   infinite      4   idle node[03-06]
 </code></pre></div></div>
 
-<h3 id="3-submit-a-job-script">3. Submit a Job Script</h3>
-<p>First, create a script file named job.sh:</p>
+<h3 id="2-submit-a-job-script">2. Submit a Job Script</h3>
+<p>Now let’s send a computing task to the Slurm for execution on Bura.</p>
+
+<p>First, create a script file named job.sh.  This script provides the Slurm controller 
+with all the information needed to execute the task, including any input data, what 
+commands to execute and where to store any output.  The script also controls the number 
+of <em>instances</em> of the job to be run in parallel.</p>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="c">#SBATCH --job-name=test_job       # Name of the job</span>
 <span class="c">#SBATCH --output=output.txt       # Save output to this file</span>
@@ -501,32 +543,72 @@ batch        up   infinite      4   idle node[03-06]
 
 <span class="nb">hostname</span>                          <span class="c"># Command to execute</span>
 </code></pre></div></div>
-<p>Then submit the job:</p>
+<p>We can then submit this job to the Slurm system.  Slurm provides a number of ways of doing this.</p>
+
+<p><code class="language-plaintext highlighter-rouge">srun</code> is used to submit a job (an instance of a task) for execution.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>srun &lt;program&gt;
+</code></pre></div></div>
+
+<p>This command has a wide variety of options to specify resource requirements, which can be 
+configured using optional flags appended to the srun command.   Here are a few example of 
+useful flags - see the 
+<a href="https://slurm.schedmd.com/pdfs/summary.pdf">SLURM Quick Start Summary</a> for a more 
+comprehensive list.</p>
+
+<p>To begin a job at a specific time, e.g. 18:00:00</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun <span class="nt">--begin</span><span class="o">=</span>18:00:00 &lt;program&gt;
+</code></pre></div></div>
+
+<p>To require that a specific number of CPUs be allocated to the task:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun <span class="nt">--cpus-per-task</span><span class="o">=</span>&lt;Ncpus&gt; &lt;program&gt;
+</code></pre></div></div>
+
+<p>To control the number of instances of the task to be executed:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun <span class="nt">-n</span>&lt;Ntasks&gt; &lt;program&gt;
+</code></pre></div></div>
+
+<p>To assign a maximum time limit after which the job instance should be halted (measured in wall-clock time):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun <span class="nt">--time</span><span class="o">=</span>&lt;<span class="nb">time</span><span class="o">&gt;</span> &lt;program&gt;
+</code></pre></div></div>
+
+<p>It’s often more convenient to design a job script which can be parallelized over multiple
+processes if desired, and submit it for later execution.  The <code class="language-plaintext highlighter-rouge">sbatch</code> command exists 
+for this purpose:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbatch job.sh
 </code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Submitted batch job 1234
 </code></pre></div></div>
-<h2 id="4-check-the-queue">4. Check the Queue</h2>
-<h1 id="show-running-and-pending-jobs">Show running and pending jobs</h1>
+
+<h3 id="3-check-the-queue">3. Check the Queue</h3>
+<p>Having submitted a job, it is very helpful to be able to monitor the status of it.  We can do 
+that using the <code class="language-plaintext highlighter-rouge">squeue</code> command - this will show us the status of both running and pending jobs.</p>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>squeue
 </code></pre></div></div>
 <p>Expected Output:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST<span class="o">(</span>REASON<span class="o">)</span>
 1234     batch  test_job   alice  R       0:01      1 node03
 </code></pre></div></div>
-<ol>
-  <li>Cancel a Job
-    <h1 id="cancel-the-job-with-id-1234">Cancel the job with ID 1234</h1>
-  </li>
-</ol>
+
+<h3 id="4-cancel-a-job">4. Cancel a Job</h3>
+<p>But what do we do if we realise there is a problem with our job after we have submitted it?
+We can use the <code class="language-plaintext highlighter-rouge">scancel</code> command to cancel a job process.  To do so we first need the 
+jobid assigned to the job once it was submitted.  You can find this number from the output
+ of the <code class="language-plaintext highlighter-rouge">squeue</code> command.</p>
+
+<p>E.g., to cancel the job with ID 1234:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scancel 1234
 </code></pre></div></div>
 <p>Expected Output:</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># No output if successful</span>
 </code></pre></div></div>
-<h2 id="6-view-job-history">6. View Job History</h2>
+
+<h3 id="5-view-job-history">5. View Job History</h3>
+<p>Another useful option is to review a listing of all previous jobs submitted, including
+those that have been completed (and therefore no longer appear in the output of squeue).</p>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Show accounting info about completed jobs</span>
 sacct
 </code></pre></div></div>
@@ -539,13 +621,14 @@ sacct
 
 <h3 id="deep-dive-sbatch--submit-jobs-to-slurm">Deep Dive: <code class="language-plaintext highlighter-rouge">sbatch</code> – Submit Jobs to SLURM</h3>
 
-<p>The <code class="language-plaintext highlighter-rouge">sbatch</code> command is used to <strong>submit batch job scripts</strong> to the SLURM job scheduler.</p>
+<p>Let’s take a closer look at the <code class="language-plaintext highlighter-rouge">sbatch</code> command used to <strong>submit batch job scripts</strong> to 
+the SLURM job scheduler.</p>
 
-<p>A <strong>batch job</strong> is a script that specifies what commands to run, what resources to request, and other scheduling options. When submitted with <code class="language-plaintext highlighter-rouge">sbatch</code>, SLURM queues the job and runs it on an available compute node.</p>
+<p>A <strong>batch job</strong> is a script that specifies what commands to run, what resources to 
+request, and other scheduling options. When submitted with <code class="language-plaintext highlighter-rouge">sbatch</code>, SLURM queues the 
+job and runs it on an available compute node.</p>
 
-<hr />
-
-<h2 id="basic-syntax">Basic Syntax</h2>
+<h4 id="basic-syntax">Basic Syntax</h4>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbatch <span class="o">[</span>options] your_job_script.sh
 
@@ -617,7 +700,7 @@ sacct
   </tbody>
 </table>
 
-<h2 id="useful-environment-variables">Useful Environment Variables</h2>
+<h4 id="useful-environment-variables">Useful Environment Variables</h4>
 <p>Inside your script, you can use these special variables:</p>
 
 <table>
@@ -651,7 +734,7 @@ sacct
   </tbody>
 </table>
 
-<h2 id="inline-submission-without-script">Inline Submission (Without Script)</h2>
+<h4 id="inline-submission-without-script">Inline Submission (Without Script)</h4>
 <p>You can submit commands directly without creating a file:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbatch <span class="nt">--wrap</span><span class="o">=</span><span class="s2">"hostname &amp;&amp; sleep 60"</span>
@@ -668,7 +751,7 @@ Each job will have a <strong>unique task ID</strong> accessible with the variabl
 
 <hr />
 
-<h3 id="example-simple-job-array">Example: Simple Job Array</h3>
+<h4 id="example-simple-job-array">Example: Simple Job Array</h4>
 
 <p>Create a job script named <code class="language-plaintext highlighter-rouge">array_job.sh</code>:</p>
 
@@ -709,18 +792,49 @@ Each job will have a <strong>unique task ID</strong> accessible with the variabl
   </li>
 </ul>
 
-<h3 id="4-monitor-progress">4. Monitor Progress</h3>
+<h4 id="monitor-progress">Monitor Progress</h4>
 <p>To see the job’s status:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>squeue <span class="nt">--job</span> 5678
 </code></pre></div></div>
 
-<h3 id="5-check-output">5. Check Output</h3>
+<h4 id="check-output">Check Output</h4>
 <p>Once the job finishes, view the results:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>out.txt
 <span class="nb">cat </span>err.txt
 </code></pre></div></div>
+
+<blockquote class="challenge">
+  <h2 id="exercise">Exercise</h2>
+  <p>Create your own Slurm script to run 4 instances of a Python script in parallel, outputting the results to a set of text files.</p>
+  <blockquote class="solution">
+    <h2 id="solution">Solution</h2>
+    <p>Use nano to create a Python script file to be run in parallel (saved to my_python_script.py), e.g.</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Simple example of a python script to be</span>
+<span class="c"># run as a Slurm job</span>
+
+<span class="c"># Do some calculation...</span>
+result <span class="o">=</span> 100 <span class="k">*</span> 1000
+
+<span class="c"># Output the results to stout. </span>
+<span class="c"># This will be captured by the job script and stored</span>
+print<span class="o">(</span>result<span class="o">)</span>
+</code></pre></div>    </div>
+
+    <p>Next, create a shell script file (saved to my_job_script.sh) to control the batch process:</p>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH --job-name=my_parallel_job         </span>
+<span class="c">#SBATCH --array=1-4                       </span>
+<span class="c">#SBATCH --output=logs/output_%A_%a.out      </span>
+
+python3 my_python_script.py 
+</code></pre></div>    </div>
+    <p>The use sbatch to submit the job:</p>
+    <div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sbatch my_job_script.sh
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
 
 
 
@@ -731,7 +845,13 @@ Each job will have a <strong>unique task ID</strong> accessible with the variabl
   <h2>Key Points</h2>
   <ul>
     
-    <li><p>Keypoint 1</p>
+    <li><p>Slurm is a system for managing computing clusters and scheduling computing jobs</p>
+</li>
+    
+    <li><p>Slurm provides a set of commands which can configure, submit and control jobs on the cluster from the commandline</p>
+</li>
+    
+    <li><p>Jobs can be parallelized using scripts which provide the configuration and commands to be run</p>
 </li>
     
   </ul>
@@ -822,7 +942,7 @@ Each job will have a <strong>unique task ID</strong> accessible with the variabl
     </div>
   </div>
   <p class="text-muted text-right">
-    <small><i>Using <a href="https://github.com/carpentries/carpentries-theme/">The Carpentries theme</a> &mdash; Site last built on: 2025-08-14 14:49:06 -0700.</i></small>
+    <small><i>Using <a href="https://github.com/carpentries/carpentries-theme/">The Carpentries theme</a> &mdash; Site last built on: 2025-08-14 17:19:25 -0700.</i></small>
   </p>
 </footer>
 

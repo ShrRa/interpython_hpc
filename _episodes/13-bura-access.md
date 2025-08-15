@@ -12,8 +12,6 @@ keypoints:
 - "Bura can be accessed via a portal through a web-browser, or by installing VPN software and an SSH client"
 ---
 
-- HPC Bura, how to access it. Different authorization schemes used by the astronomical HPC facilities (+practical session: logging in to the Bura)
-
 ## Intro
 
 Bura is a supercomputer at the Center for Advanced Computing and Modelling (CNRM), University
