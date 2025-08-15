@@ -12,6 +12,9 @@ keypoints:
 
 Simple, inexpensive computing tasks are typically performed **sequentially**, i.e., instructions are executed one after another in the order they appear in the code. This is the default paradigm in most programming languages. For larger problems that involve many tasks, it is often more efficient to exploit the intrinsically parallel nature of modern processors, which are designed to execute multiple processes simultaneously. Many programming languages, including Python, support parallel execution, where multiple CPU cores perform tasks independently.
 
+![sequential versus parallel](../fig/Sequential-processing-vs-parallel-processing.jpg){: .image-with-shadow width="500px"}
+<p style="text-align: center;">Figure 1: Illustration of sequential vs. parallel processing. Credit: <a href="https://itrelease.com/2017/11/difference-serial-parallel-processing/">https://itrelease.com/2017/11/difference-serial-parallel-processing/</a></p>
+
 As computational demands grow, parallel programming has become increasingly essential. From protein folding in drug discovery to simulations of galaxy formation and evolution, many complex problems in science rely on parallel computing. Parallel programming, hardware architecture, and systems administration intersect in the multidisciplinary field of **high-performance computing (HPC)**. Unlike running code locally on a personal computer, HPC typically involves connecting to a cluster of networked computers, sometimes located all over the world, designed to work together on large-scale tasks.
 
 The efficiency of a supercomputer in application to different tasks depends not only on the number of processors it carries aboard, but also on its **architecture** (or, in case of a cluster, on the **network architecture**). In this episode we'll briefly consider the terminology and classifications used to describe supercomputers of different types.
@@ -30,7 +33,7 @@ The ALU retrieves data from the MU and performs calculations, while the CU inter
 In this architecture, the MU stores both data and instructions, which creates a performance bottleneck due to limited data transfer bandwidth, commonly referred to as the *von Neumann bottleneck*.
 
 ![von Neumann diagram](../fig/vonneumann.png){: .image-with-shadow width="500px"}
-<p style="text-align: center;">Diagram of von Neumann architecture, from <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025</a></p>
+<p style="text-align: center;">Figure 2: Diagram of von Neumann architecture, from <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025</a></p>
 
 The Harvard architecture is a variant of the von Neumann design in which instruction and data storage are *physically separated*.  
 This allows simultaneous access to both instructions and data, partially overcoming the von Neumann bottleneck.  
@@ -40,7 +43,7 @@ This hybrid approach combines some of the performance benefits of Harvard with t
 
 
 ![Harvard diagram](../fig/harvard.png){: .image-with-shadow width="500px"}
-<p style="text-align: center;">Diagram of Harvard architecture, from <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025</a></p>
+<p style="text-align: center;">Figure 3: Diagram of Harvard architecture, from <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025</a></p>
 
 ### Performance
 
@@ -105,7 +108,7 @@ In the early days of HPC, a “supercomputer” was typically a single, monolith
 Today, the vast majority of systems are **clusters**. 
 
 - **Cluster:** A collection of many individual computers, so-called *nodes*, connected by a high-bandwidth network. Early clusters were built from single-core SISD machines, but modern nodes are almost always MIMD systems. 
-- **Node:** A single computer within the cluster. It has its own processors (CPUs), memory (RAM), and often accelerators (GPUs). A typical compute node in a current cluster might have two CPUs with multiple cores each. **??????**
+- **Node:** A single computer within the cluster. It has its own processors (CPUs), memory (RAM), and often accelerators (GPUs). 
 - **Workload Manager (Scheduler):** Software that manages the entire cluster, such as SLURM or PBS. It allocates resources, handles the job queue, and decides when and where jobs run. When you submit a job, the scheduler reserves a set of nodes for a specific time.
 
 ### Network Topology for Clusters
@@ -113,24 +116,20 @@ Today, the vast majority of systems are **clusters**.
 Since a cluster is a collection of nodes, the characteristics of the connections between them, namely, the bandwidth and the **network topology**, is critical to performance.  
 If a program requires frequent communication between nodes, a slow or inefficient network will cause major bottlenecks.
 
-Common HPC topologies include:
+The most common HPC topologies are **meshes**, where nodes are arranged in a two- or three-dimensional grid, with each node connected to its nearest neighbors. Figure 3 shows examples of a 2D mesh, a 3D mesh, and a 2D torus (where the edges wrap around to connect boundaries, forming a torus).
 
-- **Mesh:** Nodes are arranged in a two- or three-dimensional grid, with each node connected to its nearest neighbors. Figure 1 shows examples of a 2D mesh, a 3D mesh, and a 2D torus (where the edges wrap around to connect boundaries, forming a torus).
+![Schematic figure of mesh topology](../fig/11_mesh.png){: .image-with-shadow width="500px"} <p style="text-align: center;">Figure 4: 2D and 3D meshes: a) 2D mesh, b) 3D mesh, c) 2D torus.</p>
 
-    ![Schematic figure of mesh topology](../fig/11_mesh.png){: .image-with-shadow width="500px"}  
-    <p style="text-align: center;">Figure 1: 2D and 3D meshes: a) 2D mesh, b) 3D mesh, c) 2D torus.</p>
+Less common HPC topologies include bus, ring, star, hypercube, tree, fully connected, crossbar, and multistage interconnection networks. These topologies are less favorable for general purpose tasks but compute clusters designed for specific use cases may adopt these designs.
 
-- **Fat Tree:** A hierarchical tree structure with “fatter” (higher-bandwidth) links closer to the root to prevent congestion when many nodes communicate at once (Figure 2).
+HPC networks are also separated into a user-facing **front end** and a computational **back end**. The networked compute nodes like those shown in Figure 4 are part of the back end and cannot be accessed directly by the user. Users instead interact with a *login node* when they conect to an HPC cluster. Here, users can submit jobs to the compute nodes via a workload manager (e.g. `sbatch` in SLURM).
 
-    ![Schematic figure of fat tree topology](../fig/11_fattree.png){: .image-with-shadow width="500px"}  
-    <p style="text-align: center;">Figure 2: Fat tree topology.</p>
-
-Less common HPC topologies include bus, ring, star, hypercube, fully connected, crossbar, and multistage interconnection networks.
+![Front end vs back end](../fig/login-compute-nodes.jpg){: .image-with-shadow width="500px"} <p style="text-align: center;">Figure 5: Separation between cluster front end and back end. Credit: <a href="https://docs.tacc.utexas.edu/basics/conduct/">https://docs.tacc.utexas.edu/basics/conduct/</a>
 
 > ## Never Run Computations on the Login Node!
-> When you connect to an HPC cluster, you land on a *login node*. This shared resource is for compiling code **??????**, managing files, and submitting jobs to the workload manager, but not for heavy computation.  
+> When you connect to an HPC cluster, you land on a *login node*. This shared resource is for compiling resource-light code, managing files, and submitting jobs to the workload manager, but not for heavy computation.  
 > Running an intensive program on the login node will slow it down for everyone, and is a classic mistake for new users.  
-> Submit your job through the workload manager (e.g., `sbatch` in SLURM) so it runs on compute nodes.
+> Submit your job through the workload manager so it runs on compute nodes.
 > 
 {: .callout}
 
@@ -151,9 +150,9 @@ HPC clusters typically provide multiple storage locations, each serving differen
 > 
 {: .callout}
 
-**?????**
-\cite{https://www.hpc.iastate.edu/guides/nova/storage#:~:text=Home%20directories%20(/home),used%20for%20high%20volume%20access.})
-\cite{https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=140938}
+<a href="https://www.hpc.iastate.edu/guides/nova/storage">https://www.hpc.iastate.edu/guides/nova/storage</a>.
+
+<a href="https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=140938">https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=140938</a>
 
 ## Which computer for which task?
 - If you have an algorithm that requires the output from step A to start step B… (sequential code)
