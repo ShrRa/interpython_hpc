@@ -129,10 +129,10 @@ Let's create a virtual environment for our workshop project. First, make sure yo
 $ module load python/Python-3.10.5
 ```
 
-Now, we can create the environment using Python's built-in venv module. Let's call our environment `hpc_workshop_env`.
+Now, we can create the environment using Python's built-in venv module. Let's call our environment `interpython`.
 
 ```bash
-$ python -m venv hpc_workshop_env
+$ python -m venv interpython
 ```
 
 If you now use `ls`, you will see a new directory has been created.
@@ -142,7 +142,7 @@ $ ls
 ```
 
 ~~~
-hpc_workshop_env
+interpython
 ~~~
 {: .output}
 
@@ -151,21 +151,21 @@ hpc_workshop_env
 Just creating the environment isn't enough; you have to activate it. Activating the environment modifies your shell's prompt to let you know it's active and points it to the Python and `pip` executables inside that specific environment.
 
 ```bash
-$ source hpc_workshop_env/bin/activate
+$ source interpython/bin/activate
 ```
 
 You'll know it worked because your command prompt will change to show the environment's name.
 
 ```bash
-(hpc_workshop_env) $
+(interpython) $
 ```
 
-Now, any Python packages you install will go into the `hpc_workshop_env` directory, leaving the system's Python installation clean.
+Now, any Python packages you install will go into the `interpython` directory, leaving the system's Python installation clean.
 
 To exit the environment, simply use the `deactivate` command.
 
 ```bash
-(hpc_workshop_env) $ deactivate
+(interpython) $ deactivate
 $
 ```
 
@@ -198,7 +198,7 @@ $
 
 Most Python projects depend on a set of external libraries. The standard way to manage these is with a `requirements.txt` file and Python's package installer, `pip`.
 
-First, let's create the requirements file. Make sure you are in your project directory (e.g., `hpc_workshop_env` is visible when you type `ls`). Use `nano` to create a file named `requirements.txt`.
+First, let's create the requirements file. Make sure you are in your project directory (e.g., `interpython` is visible when you type `ls`). Use `nano` to create a file named `requirements.txt`.
 
 ```bash 
 $ nano requirements.txt
@@ -227,16 +227,26 @@ Save the file and exit nano (press Ctrl+X, then Y, then Enter).
 Now, to install these packages, first activate your virtual environment. 
 
 ```bash 
-$ source hpc_workshop_env/bin/activate
+$ source interpython/bin/activate
 ```
 
 With the environment active, you can now use `pip` to install everything listed in your requirements file. The `-r `flag tells `pip` to read from a file.
 
 ```bash
-(hpc_workshop_env) $ pip install -r requirements.txt
+(interpython) $ pip install -r requirements.txt
 ```
 
-pip will connect to the internet, download all the specified packages and their dependencies, and install them into your hpc_workshop_env. You are now ready to move on to the next section. This setup ensures that your work is self-contained and reproducible.
+pip will connect to the internet, download all the specified packages and their dependencies, and install them into your interpython virtual environment. 
+
+Now we will load all the modules we will need to perform exercises in the next section. 
+
+> ## Note
+> One particular thing to note about bura is that you need to load all the necessary modules 
+and activate your virtual environment before running your slurm script. 
+{: .callout}
+
+
+You are now ready to move on to the next section. This setup ensures that your work is self-contained and reproducible.
 
 
 {% include links.md %}
