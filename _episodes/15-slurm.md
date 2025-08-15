@@ -1,7 +1,7 @@
 ---
 title: "Introduction to Slurm workload manager"
 teaching: 50
-exercises: 0
+exercises: 15
 questions:
 - "What is Slurm?"
 - "How do I run computing tasks using Slurm?"
