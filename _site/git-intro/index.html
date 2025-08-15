@@ -1,0 +1,903 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2025-08-14 17:22:32 -0700">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" />
+    
+    <link rel="license" href="#license-info" />
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/incubator/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/incubator/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/favicons/incubator/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/incubator/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/favicons/incubator/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/favicons/incubator/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/favicons/incubator/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/incubator/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="The Carpentries Incubator - Introduction to High Performance Computing for astronomical software development"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/favicons/incubator/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/assets/favicons/incubator/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/assets/favicons/incubator/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/assets/favicons/incubator/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/assets/favicons/incubator/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+  <title>
+  Additional Material: Git Intro &ndash; Introduction to High Performance Computing for astronomical software development
+  </title>
+
+  </head>
+  <body>
+    
+
+
+
+
+
+
+
+<div class="panel panel-default life-cycle">
+  <div id="life-cycle" class="panel-body pre-alpha">
+    This lesson is still being designed and assembled (Pre-Alpha version)
+  </div>
+</div>
+
+
+
+
+
+    <div class="container">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      <a href="/index.html" class="pull-left">
+        <img class="navbar-logo" src="/assets/img/incubator-logo-blue.svg" alt="The Carpentries Incubator logo" />
+      </a>
+      
+
+      
+      <a class="navbar-brand" href="/index.html">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="/CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="/setup.html">Setup</a></li>
+
+        
+        
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="/00-setting-the-scene/index.html">Setting the Scene</a></li>
+            
+            
+            <li><a href="/10-section1-intro/index.html">Section 1: HPC basics</a></li>
+            
+            
+            <li><a href="/11-hpc-intro/index.html">HPC Intro</a></li>
+            
+            
+            <li><a href="/12-lsst-hpc/index.html">LSST HPC facilities and opportunities</a></li>
+            
+            
+            <li><a href="/13-bura-access/index.html">Bura access</a></li>
+            
+            
+            <li><a href="/14-command-line/index.html">Command line basics</a></li>
+            
+            
+            <li><a href="/15-bura-setup/index.html">Bura Setup</a></li>
+            
+            
+            <li><a href="/15-slurm/index.html">Introduction to Slurm workload manager</a></li>
+            
+            
+            <li><a href="/20-section2-intro/index.html">Section 2: HPC Bura</a></li>
+            
+            
+            <li><a href="/21-cpu-sequential/index.html">Intro code examples</a></li>
+            
+            
+            <li><a href="/22-cpu-parallel/index.html">Parallelising our code for CPU</a></li>
+            
+            
+            <li><a href="/23-gpu-implementation/index.html">Implementing code examples for running on GPU</a></li>
+            
+            
+            <li><a href="/24-resource-requirements/index.html">Resource requirements</a></li>
+            
+            
+            <li><a href="/25-resource-monitoring-example/index.html">Resource optimization</a></li>
+            
+            
+            <li><a href="/26-performance-analysis/index.html">Performance analysis tools</a></li>
+            
+            
+            <li><a href="/30-wrap-up/index.html">Wrap-up</a></li>
+            
+            
+            <li><a href="/cli_lesson_monolithic_rm_warning_real_example/index.html">Command line interface (CLI) </a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="/aio/index.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+        
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/reference.html">Reference</a></li>
+            
+            
+            
+              <li><a href="/about/index.html">About</a></li>
+            
+            
+            
+            
+              <li><a href="/git-intro/index.html">Additional Material: Git Intro</a></li>
+            
+            
+            
+            
+              <li><a href="/figures/index.html">Figures</a></li>
+            
+            
+            
+            
+              <li><a href="/guide/index.html">Instructor Notes</a></li>
+            
+            
+            
+            
+              <li><a href="/common-issues/index.html">Common Issues, Fixes & Tips</a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href="/quiz/index.html">Quiz</a></li>
+            
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="/LICENSE.html">License</a></li>
+	
+	<li><a href="/edit//_extras/git-intro.md" data-checker-ignore>Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+      
+
+
+<div class="alert alert-info text-center" role="alert">
+  This lesson is part of
+  <a href="https://github.com/carpentries-incubator/proposals/#the-carpentries-incubator" data-checker-ignore>
+    The Carpentries Incubator</a>, a place to share and use each other's
+  Carpentries-style lessons. <strong>This lesson has not been reviewed by and is
+  not endorsed by The Carpentries</strong>.
+</div>
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/figures/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="/">Introduction to High Performance Computing for astronomical software development</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/guide/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Additional Material: Git Intro</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 15 min
+      <br/>
+      <strong>Exercises:</strong> 15 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>What is Git?</p>
+</li>
+	
+	<li><p>What are the main Git commands?</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>Initialize and clone repositories.</p>
+</li>
+	
+	<li><p>Make commit to a repository.</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="introduction">Introduction</h2>
+<p>This short episode is dedicated to Git and GitHub - two popular tools for keeping 
+track of the changes that happen in your code. A full explanation of Git and its features
+would require a separate workshop (you can have a look at e.g. this 
+<a href="https://swcarpentry.github.io/git-novice/index.html">Carpentries Git Novices workshop</a>), however,
+you will benefit even from using just few most popular features. In fact, in most cases
+these features are all that you’ll ever need!</p>
+
+<p><strong>Git</strong> is a free, collaborative, open-source version control system - a tool for recording the changes made to your
+working files, and giving you an opportunity to recover any previous version of these files. 
+Git does not upload all of the tracked files every time when you <strong>make a commit</strong> into a <strong>repository</strong> (or ‘repo’ for short); 
+instead it records only 
+the changed parts. This approach is computationally efficient and flexible, however, it requires some input from
+your side. Git does not work as an auto-backup; in order to be useful, you have to explicitly state,
+what are the changes that you want to save.</p>
+
+<p><img src="../fig/phd101212s.png" alt="Version control before Git" class="image-with-shadow" width="500px" /></p>
+
+<p><strong>GitHub</strong> is a cloud-based hosting platform for storing Git repositories. Apart from storing the repositories,
+it provides us with a number of additional functionalities:</p>
+<ul>
+  <li>You can add collaborators to your repositories and manage their rights;</li>
+  <li>You can let know the owners of other repositories about some bugs or ask for additional features (‘Issues’);</li>
+  <li>You can propose your changes to the repositories of other people, and other people can propose changes to your projects (‘Pull requests’);</li>
+  <li>You can edit your files right at the website;</li>
+  <li>You can add automatic actions that will trigger at each commit, such as launching tests or build a website from your updates files;</li>
+  <li>You can create private repository, that will be visible only for you;</li>
+  <li>And many more.</li>
+</ul>
+
+<p>Some of these features will be covered in the upcoming workshop. For now, let’s concentrate on the basics.</p>
+
+<h3 id="installing-git-on-your-pc">Installing Git on your PC</h3>
+
+<p>If you are using Windows or Linux OS, most likely, you already have Git available. 
+You can check if it’s true by running the following code in the terminal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nt">--version</span>
+</code></pre></div></div>
+<p>You should get the version of your Git installation, something like this:</p>
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git version 2.18.4
+</code></pre></div></div>
+
+<p>If you are using Mac OS or seem to not have Git on Windows or Linux, 
+<a href="https://carpentries.github.io/workshop-template/install_instructions/#git">here</a>
+you will find the instructions on how to fix this.</p>
+
+<h3 id="setting-up-a-github-account">Setting up a Github account</h3>
+<p>Setting up a GitHub account will take you some time, since you need not only 
+register on the website, but also generate an SSH key on your PC, add it to GitHub
+and set up an authentication method (which can be an app on your smartphone or text messages).
+You can find the instructions on how to register on 
+GitHub <a href="https://swcarpentry.github.io/git-novice/index.html#creating-a-github-account">here</a>.</p>
+
+<h3 id="connecting-the-git-on-your-pc-with-your-github-account">Connecting the Git on your PC with your GitHub account</h3>
+<p>Now you have the last step: you have to tell your Git installation what are your credentials
+on GitHub. You have to do it only once, when you use Git for the first time on your machine.
+To do this, in the terminal you have to configure the username and the email to which your GitHub
+account is connected.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> user.name <span class="s2">"Your Name"</span>
+<span class="nv">$ </span>git config <span class="nt">--global</span> user.email <span class="s2">"name@example.com"</span>
+</code></pre></div></div>
+
+<p>By using <code class="language-plaintext highlighter-rouge">--global</code> you are telling Git to use these credentials for all repositories.</p>
+
+<p>That’s it! Now you can start using GitHub.</p>
+
+<h2 id="basic-git-usage-workflow">Basic Git usage workflow</h2>
+
+<h3 id="creating-a-repository">Creating a repository</h3>
+<h4 id="git-init">git init</h4>
+<p>Let’s assume that you are starting a new software project called ‘Hello_world’ and you want to use
+GitHub for keeping track of your work. In this case, you should start with creating a new directory
+for this project:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd </span>location/of/your/project
+<span class="nv">$ </span><span class="nb">mkdir </span>hello_world
+<span class="nv">$ </span><span class="nb">cd </span>hello_world
+</code></pre></div></div>
+
+<p>Now we are inside your project directory, and it’s time to inform Git that its content
+should be tracked. We do it by <strong>creating a repository</strong> with the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init
+</code></pre></div></div>
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Initialized empty Git repository in /home/alex/hello_world/.git/
+</code></pre></div></div>
+
+<p>Let’s check if there is anything new in our project directory:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-a</span>
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.  ..  .git
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">ls -a</code> command tells your terminal to list all the directories and files in
+the folder, including the hidden ones, and indeed, we have a new hidden directory <code class="language-plaintext highlighter-rouge">.git</code>. 
+This directory contains everything needed for tracking the changes in your work folder.
+Pay attention, that it is <code class="language-plaintext highlighter-rouge">.git</code> directory that is called <code class="language-plaintext highlighter-rouge">repository</code>, and therefore, it
+is different from your ‘working’ or ‘project’ directory (which is in our case called ‘hello_world’).</p>
+
+<blockquote class="callout">
+  <h2 id="can-i-make-a-repo-out-of-already-existing-project">Can I make a repo out of already existing project?</h2>
+  <p>Sure you can! You can run <code class="language-plaintext highlighter-rouge">git init</code> in a folder with already existing files and proceed
+without any changes.</p>
+</blockquote>
+
+<h4 id="gitignore-and-readmemd">.gitignore and README.md</h4>
+<p>Next step is to create two important files:</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">.gitignore</code> - a text file that contains information about files that
+you don’t want to track. Git will ignore these files in the future;</li>
+  <li><code class="language-plaintext highlighter-rouge">README.md</code> - a markdown file that contains a description of your project.
+GitHub will show this information to those who visit the repository
+on your account page.</li>
+</ol>
+
+<p>You can create these two files in any text editor. In the first file you 
+can put specific file names, file extensions or whole directories that you 
+don’t want to track. For example, for a Python project you may want to add
+‘__pycache__’, which is a service directory, and for a data science project
+that creates some plots that you don’t want to be tracked you will add ‘*.png’ line. 
+For now, put a <code class="language-plaintext highlighter-rouge">*.csv</code> in the file and 
+save it in your <code class="language-plaintext highlighter-rouge">hello_world</code> directory under the name <code class="language-plaintext highlighter-rouge">.gitignore</code>. Then, in a new file
+type any text and save it under the name <code class="language-plaintext highlighter-rouge">test.csv</code>.</p>
+
+<p>Next, in a new file in the text editor write a description of your project, for example,
+‘This is a test project for GitHub’. Save this file under the name <code class="language-plaintext highlighter-rouge">README.md</code>.</p>
+
+<p>Now you’re ready to make your first commit!</p>
+
+<h4 id="first-commit">First commit</h4>
+<p>Within a repository, each file can be in one of three states:</p>
+<ul>
+  <li><strong>modified</strong> (but <strong>unstaged</strong>): the files in your working directory are changed, but 
+you didn’t put these changes into the repository;</li>
+  <li><strong>staged</strong>: you added the changed files in the <strong>staging area</strong> by using <code class="language-plaintext highlighter-rouge">git add name_of_the_file</code> command;</li>
+  <li>and <strong>committed</strong>: you put the staged files in the repo by using <code class="language-plaintext highlighter-rouge">git commit -m "Commit message"</code>.</li>
+</ul>
+
+<p>There are several technical reasons for separating staging area from the repository itself, but in general 
+this separation makes Git system more flexible, allowing you to create finer and more specific commits.</p>
+
+<p>Let’s start with checking the current state of the repository:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+
+	.gitignore
+	README.md
+
+nothing added to commit but untracked files present (use "git add" to track)
+</code></pre></div></div>
+
+<p>The output informs us about several things:</p>
+<ol>
+  <li>We are on git <strong>branch</strong> called <code class="language-plaintext highlighter-rouge">main</code>;</li>
+  <li>There no commits yet;</li>
+  <li>And we have two modified, but unstaged files: <code class="language-plaintext highlighter-rouge">.gitignore</code> and <code class="language-plaintext highlighter-rouge">README.md</code>.
+Pay attention, that <code class="language-plaintext highlighter-rouge">test.csv</code> does not appear on this list. Git ignores it,
+just as we specified in the <code class="language-plaintext highlighter-rouge">.gitignore</code>.</li>
+</ol>
+
+<blockquote class="callout">
+  <h2 id="git-branch-whats-git-branch">Git branch? What’s Git branch?</h2>
+  <p>In very simple terms, Git branch is an independent copy of the record of
+changes of your work. When you create and switch to a new branch, it creates an impression that
+you have an exact copy of your working directory. You can make whatever changes you like
+in this copy, and it won’t affect the original branch (until you <strong>merge</strong> this new branch
+into an old one). This is a great tool for situations when you need to develop a new feature without being afraid to
+break something that already exists, or for collaborative work, when several people are introducing changes
+simultaneously. We will cover this topic in a more detail in the upcoming workshop.</p>
+</blockquote>
+
+<p>Now we can add our new files in the staging area by typing:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add .gitignore README.md
+</code></pre></div></div>
+<p>or, in case we are sure that we want to add all changes at once, just</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add <span class="nt">--all</span>
+</code></pre></div></div>
+
+<p>If we type <code class="language-plaintext highlighter-rouge">git status</code> once again, we will see the following message:</p>
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached &lt;file&gt;..." to unstage)
+
+	new file:   .gitignore
+	new file:   README.md
+</code></pre></div></div>
+
+<p>And now we can make the commit:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Create .gitignore and README.md"</span>
+</code></pre></div></div>
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[main (root-commit) 610211e] Add files
+ 2 files changed, 2 insertions(+)
+ create mode 100644 .gitignore
+ create mode 100644 README.md
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">git status</code> reveals that there is nothing to commit anymore. Our local repository now contains 
+the relevant version of our files.</p>
+
+<blockquote class="callout">
+  <h2 id="the-rules-of-a-great-commit-message">The rules of a great commit message</h2>
+  <ol>
+    <li>Separate subject from body with a blank line</li>
+    <li>Limit the subject line to 50 characters</li>
+    <li>Do not end the subject line with a period</li>
+    <li>Capitalize the subject line and each paragraph</li>
+    <li>Use the imperative mood in the subject line</li>
+    <li>Wrap lines at 72 characters</li>
+    <li>Use the body to explain what and why vs. how</li>
+  </ol>
+
+  <p>To add a commit message with both a subject and a body you can use
+the following command: <code class="language-plaintext highlighter-rouge">git commit -m "message subject" -m "message body"</code>.</p>
+</blockquote>
+
+<p>Now we can use <code class="language-plaintext highlighter-rouge">git push</code> command to send these changes into GitHub for safekeeping…</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push
+</code></pre></div></div>
+<p>…and receive an error message:</p>
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatal: No configured push destination.
+Either specify the URL from the command-line or configure a remote repository using
+
+    git remote add &lt;name&gt; &lt;url&gt;
+
+and then push using the remote name
+
+    git push &lt;name&gt;
+</code></pre></div></div>
+
+<p>That’s because we need to create a remote repository for synchronizing it with our local repository.
+Let’s go to GitHub website and do this.</p>
+
+<h2 id="creating-a-remote-repository">Creating a remote repository</h2>
+<p>Open your account page on GitHub, go to <code class="language-plaintext highlighter-rouge">Repositories</code> tab and click on a green <code class="language-plaintext highlighter-rouge">New</code> button on the right side of the screen.
+<img src="../fig/00_gitIntro_1_new.svg" alt="GitHub new repo" class="image-with-shadow" width="800px" /></p>
+
+<p>In the opened window you need to specify the name of your repository, add a short description, choose if you want your repo to
+be public or private and hit the <code class="language-plaintext highlighter-rouge">Create repository</code> button in the bottom.
+<img src="../fig/00_gitIntro_2_settings.svg" alt="Settings of a new repo" class="image-with-shadow" width="500px" /></p>
+
+<p>You may notice that there is an option to create a <code class="language-plaintext highlighter-rouge">.gitignore</code> and <code class="language-plaintext highlighter-rouge">README.md</code> files at this step too, 
+as well as add a license for your project. Is it a good idea to do so? Absolutely! In fact, in most cases it is much more convenient than to
+do it manually in your local repo, since you can choose one of the <code class="language-plaintext highlighter-rouge">.gitignore</code> templates (e.g. one for Python projects)
+and edit the <code class="language-plaintext highlighter-rouge">README.md</code> using Markdown rendering right away. However, since our local copy of the repository already has these files,
+we will opt out of it.</p>
+
+<p>Finally, in the next screen GitHub offers us a list of options of how to connect this new remote repository
+with a local one on our PC. Since we want to push an already existing repo, we are choosing option 2:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote add origin git@github.com:User_Name/hello_world.git
+<span class="nv">$ </span>git branch <span class="nt">-M</span> main
+<span class="nv">$ </span>git push <span class="nt">-u</span> origin main
+</code></pre></div></div>
+
+<p>Depending on your security settings, you may need to enter your password, and then
+a message similar to this will appear:</p>
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 64 threads.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (6/6), 445 bytes | 445.00 KiB/s, done.
+Total 6 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+To github.com:User_Name/hello_world.git
+ * [new branch]      main -&gt; main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+</code></pre></div></div>
+
+<p>Now we can make sure that all the changes are indeed pushed into the remote
+repository. We can do this by ‘pulling’ information from the remote:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull
+</code></pre></div></div>
+
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Already up to date.
+</code></pre></div></div>
+<p>Getting a message <code class="language-plaintext highlighter-rouge">Already up to date.</code> means that your local and remote repositories are 
+the same. Well done!</p>
+
+<blockquote class="callout">
+  <h2 id="never-forget-to-use-git-pull-before-starting-your-work">Never forget to use ‘git pull’ before starting your work</h2>
+  <p>When there are several collaborators in your repo, it is possible that
+between your previous commit and the start of your work next day someone else already made changes
+in the repo. These situations rarely arise when the repo has clear and well-followed branch policies,
+but nevertheless, make a habit of executing <code class="language-plaintext highlighter-rouge">git pull</code> before starting your work,
+as it ensures that you are working on the up-to-date version of the code.</p>
+</blockquote>
+
+<h2 id="cloning-an-already-existing-repo">Cloning an already existing repo</h2>
+<p>In this last section, let’s cover the subject of how you can create a local repository
+out of already existing remote one. For this we’ll delete our <code class="language-plaintext highlighter-rouge">hello_world</code> folder.
+From the command line, you can do it by using this command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-rf</span> hello_world
+</code></pre></div></div>
+
+<p>Now go to the page of your repository on GitHub and click on the green <code class="language-plaintext highlighter-rouge">Code</code> button.
+In the drop-down widget you can copy the address of your repo.
+<img src="../fig/00_gitIntro_3_clone.svg" alt="Git clone" class="image-with-shadow" width="800px" /></p>
+
+<p>In the command line of your PC you can now run the <code class="language-plaintext highlighter-rouge">git clone</code> command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone git@github.com:ShrRa/hello_world.git
+</code></pre></div></div>
+<div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Cloning into 'hello_world'...
+Enter passphrase for key '/home/alex/.ssh/id_ed25519': 
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 7 (delta 2), reused 5 (delta 1), pack-reused 0
+Receiving objects: 100% (7/7), done.
+Resolving deltas: 100% (2/2), done.
+</code></pre></div></div>
+
+<p>And you can start working in this local repository in the same way as before.</p>
+
+<h2 id="the-recap">The recap</h2>
+<p>Let’s recall all the basic git commands and elements that we covered in this episode:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">git init</code>: execute in your project directory; initializes the repository.</li>
+  <li><code class="language-plaintext highlighter-rouge">.gitignore</code>: a text file stating which kinds of files won’t be tracked by Git.</li>
+  <li><code class="language-plaintext highlighter-rouge">README.md</code>: a Markdown file with project description and information.</li>
+  <li><code class="language-plaintext highlighter-rouge">git status</code>: shows the current state of your git repo.</li>
+  <li><code class="language-plaintext highlighter-rouge">git add file_name</code>: adds modified files into staging area.</li>
+  <li><code class="language-plaintext highlighter-rouge">git commit -m "Commit message"</code>: commit your staged changes into the repository.</li>
+  <li><code class="language-plaintext highlighter-rouge">git push</code>: pushes the changes into remote repo.</li>
+  <li><code class="language-plaintext highlighter-rouge">git pull</code>: pulls the latest changes from remote repo into the local one.</li>
+  <li><code class="language-plaintext highlighter-rouge">git clone</code>: clones a remote repository.</li>
+</ul>
+
+<p>That’s it!</p>
+
+
+
+
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>Git is a collaborative version control system that allows you to go back to any past version of your project.</p>
+</li>
+    
+    <li><p>Using Git is an extremely useful habit that saves a lot of time, especially when several people are working on the same project.</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/figures/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/guide/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+
+      
+      
+
+
+
+
+
+
+<footer>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6 license" id="license-info" align="left">
+	
+        Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> 2025 by <a href="/CITATION">the authors</a>.
+	
+    </div>
+    <div class="col-md-6 help-links" align="right">
+	
+	<a href="/edit//_extras/git-intro.md" data-checker-ignore>Edit on GitHub</a>
+	
+	/
+	<a href="/blob//CONTRIBUTING.md" data-checker-ignore>Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob//CITATION" data-checker-ignore>Cite</a>
+	/
+	<a href="mailto:shr.razim@gmail.com">Contact</a>
+    </div>
+  </div>
+  <p class="text-muted text-right">
+    <small><i>Using <a href="https://github.com/carpentries/carpentries-theme/">The Carpentries theme</a> &mdash; Site last built on: 2025-08-14 17:22:32 -0700.</i></small>
+  </p>
+</footer>
+
+      
+    </div>
+    
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/lesson.js"></script>
+
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(["setDomains", ["*.lessons.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io"]]);
+  _paq.push(["setDoNotTrack", true]);
+  _paq.push(["disableCookies"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src='//cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+<script src="/assets/js/anchor.min.js"></script>
+<script>
+    anchors.add();
+</script>
+
+  </body>
+</html>

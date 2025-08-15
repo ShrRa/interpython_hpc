@@ -1,0 +1,1147 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2025-08-14 17:22:32 -0700">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" />
+    
+    <link rel="license" href="#license-info" />
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/incubator/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/incubator/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/favicons/incubator/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/incubator/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/favicons/incubator/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/favicons/incubator/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/favicons/incubator/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/incubator/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="The Carpentries Incubator - Introduction to High Performance Computing for astronomical software development"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/favicons/incubator/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/assets/favicons/incubator/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/assets/favicons/incubator/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/assets/favicons/incubator/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/assets/favicons/incubator/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+  <title>
+  Resource optimization &ndash; Introduction to High Performance Computing for astronomical software development
+  </title>
+
+  </head>
+  <body>
+    
+
+
+
+
+
+
+
+<div class="panel panel-default life-cycle">
+  <div id="life-cycle" class="panel-body pre-alpha">
+    This lesson is still being designed and assembled (Pre-Alpha version)
+  </div>
+</div>
+
+
+
+
+
+    <div class="container">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      <a href="/index.html" class="pull-left">
+        <img class="navbar-logo" src="/assets/img/incubator-logo-blue.svg" alt="The Carpentries Incubator logo" />
+      </a>
+      
+
+      
+      <a class="navbar-brand" href="/index.html">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="/CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="/setup.html">Setup</a></li>
+
+        
+        
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="/00-setting-the-scene/index.html">Setting the Scene</a></li>
+            
+            
+            <li><a href="/10-section1-intro/index.html">Section 1: HPC basics</a></li>
+            
+            
+            <li><a href="/11-hpc-intro/index.html">HPC Intro</a></li>
+            
+            
+            <li><a href="/12-lsst-hpc/index.html">LSST HPC facilities and opportunities</a></li>
+            
+            
+            <li><a href="/13-bura-access/index.html">Bura access</a></li>
+            
+            
+            <li><a href="/14-command-line/index.html">Command line basics</a></li>
+            
+            
+            <li><a href="/15-bura-setup/index.html">Bura Setup</a></li>
+            
+            
+            <li><a href="/15-slurm/index.html">Introduction to Slurm workload manager</a></li>
+            
+            
+            <li><a href="/20-section2-intro/index.html">Section 2: HPC Bura</a></li>
+            
+            
+            <li><a href="/21-cpu-sequential/index.html">Intro code examples</a></li>
+            
+            
+            <li><a href="/22-cpu-parallel/index.html">Parallelising our code for CPU</a></li>
+            
+            
+            <li><a href="/23-gpu-implementation/index.html">Implementing code examples for running on GPU</a></li>
+            
+            
+            <li><a href="/24-resource-requirements/index.html">Resource requirements</a></li>
+            
+            
+            <li><a href="/25-resource-monitoring-example/index.html">Resource optimization</a></li>
+            
+            
+            <li><a href="/26-performance-analysis/index.html">Performance analysis tools</a></li>
+            
+            
+            <li><a href="/30-wrap-up/index.html">Wrap-up</a></li>
+            
+            
+            <li><a href="/cli_lesson_monolithic_rm_warning_real_example/index.html">Command line interface (CLI) </a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="/aio/index.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+        
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/reference.html">Reference</a></li>
+            
+            
+            
+              <li><a href="/about/index.html">About</a></li>
+            
+            
+            
+            
+              <li><a href="/git-intro/index.html">Additional Material: Git Intro</a></li>
+            
+            
+            
+            
+              <li><a href="/figures/index.html">Figures</a></li>
+            
+            
+            
+            
+              <li><a href="/guide/index.html">Instructor Notes</a></li>
+            
+            
+            
+            
+              <li><a href="/common-issues/index.html">Common Issues, Fixes & Tips</a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href="/quiz/index.html">Quiz</a></li>
+            
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="/LICENSE.html">License</a></li>
+	
+	<li><a href="/edit//_episodes/25-resource-monitoring-example.md" data-checker-ignore>Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+      
+
+
+<div class="alert alert-info text-center" role="alert">
+  This lesson is part of
+  <a href="https://github.com/carpentries-incubator/proposals/#the-carpentries-incubator" data-checker-ignore>
+    The Carpentries Incubator</a>, a place to share and use each other's
+  Carpentries-style lessons. <strong>This lesson has not been reviewed by and is
+  not endorsed by The Carpentries</strong>.
+</div>
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/24-resource-requirements/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="/">Introduction to High Performance Computing for astronomical software development</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/26-performance-analysis/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Resource optimization</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 30 min
+      <br/>
+      <strong>Exercises:</strong> 10 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="example">Example</h2>
+
+<p>For understanding how we can utilise different resources available on the HPC for the same computational task, we take the example of a python code which calculates the Gravitational Deflection Angle defined in the following way:</p>
+
+<h3 id="deflection-angle-formula">Deflection Angle Formula</h3>
+
+<p>For light passing near a massive object, the deflection angle (α) in the weak-field approximation is given by:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>α = 4GM / (c²b)
+</code></pre></div></div>
+
+<p>Where:</p>
+
+<ul>
+  <li>G = Gravitational constant (6.67430 × 10⁻¹¹ m³ kg⁻¹ s⁻²)</li>
+  <li>M = Mass of the lensing object (in kilograms)</li>
+  <li>c = Speed of light (299792458 m/s)</li>
+  <li>b = Impact parameter (the closest approach distance of the light ray to the mass, in meters)</li>
+</ul>
+
+<h2 id="computational-task-description">Computational Task Description</h2>
+
+<p>Compute the deflection angle over a grid of:</p>
+
+<ul>
+  <li>Mass values: From 1 to 1000 solar masses (10³⁰ to 10³³ kg)</li>
+  <li>Impact parameters: From 10⁹ to 10¹² meters</li>
+</ul>
+
+<p>Generate a 2D array where each entry corresponds to the deflection angle for a specific pair of mass and impact parameter. Now we will look at how we will implement this for the different resources available on the HPC.</p>
+
+<!-------------------------------------------- Section-1 ------------------------------------------------------------------>
+<h2 id="sequential-job-optimization">Sequential Job Optimization</h2>
+
+<p>Sequential jobs run on a single CPU core and are suitable for tasks that cannot be parallelized.</p>
+
+<h3 id="sequential-job-script-explained">Sequential Job Script Explained</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH -J jobname                    # Job name for identification</span>
+<span class="c">#SBATCH -o outfile.%J                 # Standard output file (%J = job ID)</span>
+<span class="c">#SBATCH -e errorfile.%J               # Standard error file (%J = job ID)</span>
+<span class="c">#SBATCH --partition=serial            # Use serial queue for single-core jobs</span>
+./[programme executable name]          <span class="c"># Execute your program</span>
+</code></pre></div></div>
+
+<p><strong>Script breakdown:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">#!/bin/bash</code>: Specifies bash shell for script execution</li>
+  <li><code class="language-plaintext highlighter-rouge">#SBATCH -J jobname</code>: Sets a descriptive job name for easy identification in queue</li>
+  <li><code class="language-plaintext highlighter-rouge">#SBATCH -o outfile.%J</code>: Redirects standard output to a file with job ID</li>
+  <li><code class="language-plaintext highlighter-rouge">#SBATCH -e errorfile.%J</code>: Redirects error messages to separate file</li>
+  <li><code class="language-plaintext highlighter-rouge">#SBATCH --partition=serial</code>: Specifies the queue/partition for sequential jobs</li>
+</ul>
+
+<h3 id="example-gravitational-deflection-angle-sequential-cpu">Example: Gravitational Deflection Angle Sequential CPU</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="n">colors</span>
+
+<span class="c1"># Constants
+</span><span class="n">G</span> <span class="o">=</span> <span class="mf">6.67430e-11</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">299792458</span>
+<span class="n">M_sun</span> <span class="o">=</span> <span class="mf">1.98847e30</span>
+
+<span class="c1"># Parameter grid
+</span><span class="n">mass_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>  <span class="c1"># Solar masses
+</span><span class="n">impact_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e9</span><span class="p">,</span> <span class="mf">1e12</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>  <span class="c1"># meters
+</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">mass_grid</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">impact_grid</span><span class="p">)))</span>
+
+<span class="c1"># Timing
+</span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="c1"># Sequential computation
+</span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mass_grid</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">impact_grid</span><span class="p">):</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="n">M_sun</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"CPU Sequential time: </span><span class="si">{</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s"> seconds"</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"result_cpu.npy"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+<span class="n">mass_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"mass_grid_cpu.npy"</span><span class="p">,</span> <span class="n">mass_grid</span><span class="p">)</span>
+<span class="n">impact_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"impact_grid_cpu.npy"</span><span class="p">,</span> <span class="n">impact_grid</span><span class="p">)</span>
+
+<span class="c1"># Load data
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"result_cpu.npy"</span><span class="p">)</span>
+<span class="n">mass_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"mass_grid_cpu.npy"</span><span class="p">)</span>
+<span class="n">impact_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"impact_grid_cpu.npy"</span><span class="p">)</span>
+
+<span class="c1"># Create meshgrid
+</span><span class="n">M</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">mass_grid</span> <span class="o">/</span> <span class="mf">1.989e30</span><span class="p">,</span> <span class="n">impact_grid</span> <span class="o">/</span> <span class="mf">1e9</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s">'ij'</span><span class="p">)</span>
+
+<span class="c1"># Create output directory
+</span><span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s">"plots"</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">pcm</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span>
+                      <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="p">.</span><span class="n">LogNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="n">result</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">].</span><span class="nb">min</span><span class="p">(),</span> <span class="n">vmax</span><span class="o">=</span><span class="n">result</span><span class="p">.</span><span class="nb">max</span><span class="p">()),</span>
+                      <span class="n">shading</span><span class="o">=</span><span class="s">'auto'</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'plasma'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">pcm</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Deflection Angle (radians, log scale)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Impact Parameter (Gm)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Mass (Solar Masses)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Gravitational Deflection Angle - CPU'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"plots/deflection_angle_cpu.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"CPU plot saved in 'plots/deflection_angle_cpu.png'"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<!-- ```c
+// matrix_mult_sequential.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int n = 1000;  // Matrix size
+    double **A, **B, **C;
+    
+    // Allocate memory for matrices
+    A = (double**)malloc(n * sizeof(double*));
+    B = (double**)malloc(n * sizeof(double*));
+    C = (double**)malloc(n * sizeof(double*));
+    
+    for(int i = 0; i < n; i++) {
+        A[i] = (double*)malloc(n * sizeof(double));
+        B[i] = (double*)malloc(n * sizeof(double));
+        C[i] = (double*)malloc(n * sizeof(double));
+    }
+    
+    // Initialize matrices
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            A[i][j] = (double)rand() / RAND_MAX;
+            B[i][j] = (double)rand() / RAND_MAX;
+            C[i][j] = 0.0;
+        }
+    }
+    
+    clock_t start = clock();
+    
+    // Matrix multiplication
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            for(int k = 0; k < n; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+    
+    clock_t end = clock();
+    double cpu_time = ((double)(end - start)) / CLOCKS_PER_SEC;
+    
+    printf("Sequential matrix multiplication completed in %f seconds\n", cpu_time);
+    
+    // Clean up memory
+    for(int i = 0; i < n; i++) {
+        free(A[i]); free(B[i]); free(C[i]);
+    }
+    free(A); free(B); free(C);
+    
+    return 0;
+}
+``` -->
+
+<h3 id="sequential-job-script-for-the-example">Sequential Job Script for the Example</h3>
+
+<!-- ```bash
+#!/bin/bash
+#SBATCH -J matrix_sequential
+#SBATCH -o matrix_seq_%J.out
+#SBATCH -e matrix_seq_%J.err
+#SBATCH --partition=serial
+#SBATCH --time=00:30:00              # Set time limit
+#SBATCH --mem=4G                     # Request 4GB memory
+
+echo "Starting sequential matrix multiplication..."
+echo "Job ID: $SLURM_JOB_ID"
+echo "Node: $SLURM_NODELIST"
+
+./matrix_mult_sequential
+
+echo "Job completed at $(date)"
+``` -->
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH --job-name=HPC_WS_SCPU # Provide a name for the job </span>
+<span class="c">#SBATCH --output=HPC_WS_SCPU_%j.out # Request the output file along with the job number</span>
+<span class="c">#SBATCH --error=HPC_WS_SCPU_%j.err # Request the error file along with the job number</span>
+<span class="c">#SBATCH --partition=serial</span>
+<span class="c">#SBATCH --nodes=1 # Request one CPU node</span>
+<span class="c">#SBATCH --ntasks=1 # Request 1 core from the CPU node</span>
+<span class="c">#SBATCH --time=-01:00:00 # Set time limit for the job</span>
+<span class="c">#SBATCH --mem=16G #Request 16GB memory </span>
+
+<span class="c"># Load required modules</span>
+module purge <span class="c"># Remove the list of pre loaded modules</span>
+module load Python/3.9.1
+module list
+
+<span class="c"># Create a python virtual environment </span>
+python3 <span class="nt">-m</span> venv name_of_your_venv
+
+<span class="c"># Activate your Python environment</span>
+<span class="nb">source </span>name_of_your_venv/bin/activate
+
+<span class="nb">echo</span> <span class="s2">"Starting Gravitational Lensing Deflection calculation of Sequential CPU..."</span>
+<span class="nb">echo</span> <span class="s2">"Job ID: </span><span class="nv">$SLURM_JOB_ID</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"Node: </span><span class="nv">$SLURM_NODELIST</span><span class="s2">"</span>
+
+<span class="c"># Run the Python script (with logging)</span>
+python Gravitational_Deflection_Angle_SCPU.py
+
+<span class="nb">echo</span> <span class="s2">"Job completed at </span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<blockquote class="challenge">
+  <h2 id="exercise-profile-your-code">Exercise: Profile Your Code</h2>
+  <p>Compile and run the sequential code. Use <code class="language-plaintext highlighter-rouge">htop</code> to monitor resource usage. Identify whether it’s CPU-bound or memory-bound</p>
+</blockquote>
+
+<!-------------------------------------------- Section-2 ------------------------------------------------------------------>
+<h2 id="parallel-job-optimization">Parallel Job Optimization</h2>
+
+<p>Parallel jobs can utilize multiple CPU cores across one or more nodes to accelerate computation.</p>
+
+<h3 id="parallel-job-script-explained">Parallel Job Script Explained</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH -J jobname                    # Job name</span>
+<span class="c">#SBATCH -o outfile.%J                 # Output file</span>
+<span class="c">#SBATCH -e errorfile.%J               # Error file</span>
+<span class="c">#SBATCH --partition=defaultq          # Parallel job queue</span>
+<span class="c">#SBATCH -N 2                          # Number of compute nodes</span>
+<span class="c">#SBATCH -n 24                         # Total number of CPU cores per node</span>
+mpirun <span class="nt">-np</span> 48 ./mpi_program           <span class="c"># Run with 48 MPI processes (2 nodes × 24 cores)</span>
+</code></pre></div></div>
+
+<p><strong>Changes from the sequential script:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">#SBATCH --partition=defaultq</code> : Sets to the default partition</li>
+  <li><code class="language-plaintext highlighter-rouge">#SBATCH -N 2</code>: Requests 2 compute nodes</li>
+  <li><code class="language-plaintext highlighter-rouge">#SBATCH -n 24</code>: Specifies 24 CPU cores per node</li>
+  <li><code class="language-plaintext highlighter-rouge">mpirun -np 48</code>: Launches 48 MPI processes total (2 × 24)</li>
+</ul>
+
+<h3 id="example-gravitational-deflection-angle-parallel-cpu">Example: Gravitational Deflection Angle Parallel CPU</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">os</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="n">colors</span>
+
+<span class="c1"># MPI setup
+</span><span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="p">.</span><span class="n">COMM_WORLD</span>
+<span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="p">.</span><span class="n">Get_rank</span><span class="p">()</span>
+<span class="n">size</span> <span class="o">=</span> <span class="n">comm</span><span class="p">.</span><span class="n">Get_size</span><span class="p">()</span>
+
+<span class="c1"># Constants
+</span><span class="n">G</span> <span class="o">=</span> <span class="mf">6.67430e-11</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">299792458</span>
+<span class="n">M_sun</span> <span class="o">=</span> <span class="mf">1.98847e30</span>
+
+<span class="c1"># Parameter grid (same on all ranks)
+</span><span class="n">mass_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>  <span class="c1"># Solar masses
+</span><span class="n">impact_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e9</span><span class="p">,</span> <span class="mf">1e12</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>  <span class="c1"># meters
+</span>
+<span class="c1"># Distribute mass grid among ranks
+</span><span class="n">chunk_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mass_grid</span><span class="p">)</span> <span class="o">//</span> <span class="n">size</span>
+<span class="n">start_idx</span> <span class="o">=</span> <span class="n">rank</span> <span class="o">*</span> <span class="n">chunk_size</span>
+<span class="n">end_idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">rank</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">chunk_size</span> <span class="k">if</span> <span class="n">rank</span> <span class="o">!=</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="n">mass_grid</span><span class="p">)</span>
+
+<span class="n">local_mass</span> <span class="o">=</span> <span class="n">mass_grid</span><span class="p">[</span><span class="n">start_idx</span><span class="p">:</span><span class="n">end_idx</span><span class="p">]</span>
+<span class="n">local_result</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">local_mass</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">impact_grid</span><span class="p">)))</span>
+
+<span class="c1"># Timing
+</span><span class="n">local_start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="c1"># Compute local chunk
+</span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">M</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">local_mass</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">impact_grid</span><span class="p">):</span>
+        <span class="n">local_result</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="n">M_sun</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">local_end</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Rank </span><span class="si">{</span><span class="n">rank</span><span class="si">}</span><span class="s"> local time: </span><span class="si">{</span><span class="n">local_end</span> <span class="o">-</span> <span class="n">local_start</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s"> seconds"</span><span class="p">)</span>
+
+<span class="c1"># Gather results
+</span><span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">mass_grid</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">impact_grid</span><span class="p">)))</span>
+
+<span class="n">comm</span><span class="p">.</span><span class="n">Gather</span><span class="p">(</span><span class="n">local_result</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">total_time</span> <span class="o">=</span> <span class="n">local_end</span> <span class="o">-</span> <span class="n">local_start</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"MPI total time (wall time): </span><span class="si">{</span><span class="n">total_time</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s"> seconds"</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"result_mpi.npy"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">mass_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"mass_grid_mpi.npy"</span><span class="p">,</span> <span class="n">mass_grid</span><span class="p">)</span>
+    <span class="n">impact_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"impact_grid_mpi.npy"</span><span class="p">,</span> <span class="n">impact_grid</span><span class="p">)</span>
+
+<span class="c1"># Load data
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"result_mpi.npy"</span><span class="p">)</span>
+<span class="n">mass_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"mass_grid_mpi.npy"</span><span class="p">)</span>
+<span class="n">impact_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"impact_grid_mpi.npy"</span><span class="p">)</span>
+
+<span class="c1"># Create meshgrid
+</span><span class="n">M</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">mass_grid</span> <span class="o">/</span> <span class="mf">1.989e30</span><span class="p">,</span> <span class="n">impact_grid</span> <span class="o">/</span> <span class="mf">1e9</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s">'ij'</span><span class="p">)</span>
+
+<span class="c1"># Create output directory
+</span><span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s">"plots"</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">pcm</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span>
+                      <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="p">.</span><span class="n">LogNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="n">result</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">].</span><span class="nb">min</span><span class="p">(),</span> <span class="n">vmax</span><span class="o">=</span><span class="n">result</span><span class="p">.</span><span class="nb">max</span><span class="p">()),</span>
+                      <span class="n">shading</span><span class="o">=</span><span class="s">'auto'</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'plasma'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">pcm</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Deflection Angle (radians, log scale)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Impact Parameter (Gm)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Mass (Solar Masses)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Gravitational Deflection Angle - MPI'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"plots/deflection_angle_mpi.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"MPI plot saved in 'plots/deflection_angle_mpi.png'"</span><span class="p">)</span>
+</code></pre></div></div>
+<!-- ```c
+// matrix_mult_openmp.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <omp.h>
+
+int main() {
+    int n = 1000;
+    double **A, **B, **C;
+    
+    // Allocate memory (same as sequential version)
+    A = (double**)malloc(n * sizeof(double*));
+    B = (double**)malloc(n * sizeof(double*));
+    C = (double**)malloc(n * sizeof(double*));
+    
+    for(int i = 0; i < n; i++) {
+        A[i] = (double*)malloc(n * sizeof(double));
+        B[i] = (double*)malloc(n * sizeof(double));
+        C[i] = (double*)malloc(n * sizeof(double));
+    }
+    
+    // Initialize matrices
+    #pragma omp parallel for
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            A[i][j] = (double)rand() / RAND_MAX;
+            B[i][j] = (double)rand() / RAND_MAX;
+            C[i][j] = 0.0;
+        }
+    }
+    
+    double start_time = omp_get_wtime();
+    
+    // Parallel matrix multiplication
+    #pragma omp parallel for
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            for(int k = 0; k < n; k++) {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+    
+    double end_time = omp_get_wtime();
+    
+    printf("OpenMP matrix multiplication completed in %f seconds\n", end_time - start_time);
+    printf("Number of threads used: %d\n", omp_get_max_threads());
+    
+    // Clean up memory
+    for(int i = 0; i < n; i++) {
+        free(A[i]); free(B[i]); free(C[i]);
+    }
+    free(A); free(B); free(C);
+    
+    return 0;
+} -->
+<!-- ``` -->
+
+<h3 id="parallel-job-script-for-the-example">Parallel Job Script for the Example</h3>
+
+<!-- ```bash
+#!/bin/bash
+#SBATCH -J matrix_openmp
+#SBATCH -o matrix_omp_%J.out
+#SBATCH -e matrix_omp_%J.err
+#SBATCH --partition=defaultq
+#SBATCH -N 1                         # Single node for shared memory
+#SBATCH --ntasks-per-node=1          # One task per node
+#SBATCH --cpus-per-task=24           # 24 CPU cores for OpenMP
+#SBATCH --time=00:15:00
+#SBATCH --mem=8G
+
+# Set number of OpenMP threads
+export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
+
+echo "Starting OpenMP matrix multiplication..."
+echo "Job ID: $SLURM_JOB_ID"
+echo "Node: $SLURM_NODELIST"
+echo "Number of OpenMP threads: $OMP_NUM_THREADS"
+
+./matrix_mult_openmp
+
+echo "Job completed at $(date)"
+``` -->
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH --job-name=HPC_WS_PCPU # Provide a name for the job </span>
+<span class="c">#SBATCH --output=HPC_WS_PCPU_%j.out # Request the output file along with the job number</span>
+<span class="c">#SBATCH --error=HPC_WS_PCPU_%j.err # Request the error file along with the job number</span>
+<span class="c">#SBATCH --partition=defaultq </span>
+<span class="c">#SBATCH --nodes=2 # Request two CPU nodes</span>
+<span class="c">#SBATCH --ntasks=4 # Request 2 cores from each CPU node</span>
+<span class="c">#SBATCH --time=-01:00:00 # Set time limit for the job</span>
+<span class="c">#SBATCH --mem=16G #Request 16GB memory </span>
+
+<span class="c"># Load required modules</span>
+module purge <span class="c"># Remove the list of pre loaded modules</span>
+module load Python/3.9.1
+module load openmpi4/default
+module list <span class="c"># List the modules</span>
+
+<span class="c"># Create a python virtual environment </span>
+python3 <span class="nt">-m</span> venv name_of_your_venv
+
+<span class="c"># Activate your Python virtual environment</span>
+<span class="nb">source </span>name_of_your_venv/bin/activate
+
+<span class="nb">echo</span> <span class="s2">"Starting Gravitational Lensing Deflection calculation of Sequential CPU..."</span>
+<span class="nb">echo</span> <span class="s2">"Job ID: </span><span class="nv">$SLURM_JOB_ID</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"Node: </span><span class="nv">$SLURM_NODELIST</span><span class="s2">"</span>
+
+<span class="c"># Run the Python script with MPI (with logging)</span>
+mpirun <span class="nt">-np</span> 4 python Gravitational_Lensing_PCPU.py
+
+<span class="nb">echo</span> <span class="s2">"Job completed at </span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<blockquote class="challenge">
+  <h2 id="exercise-optimize-parallel-performance">Exercise: Optimize Parallel Performance</h2>
+  <p>Compile the OpenMP version with different thread counts. Submit jobs with varying <code class="language-plaintext highlighter-rouge">--cpus-per-task</code> values. Plot performance vs. thread count</p>
+</blockquote>
+
+<!-------------------------------------------- Section-3 ------------------------------------------------------------------>
+<h2 id="gpu-job-optimization">GPU Job Optimization</h2>
+
+<p>GPU jobs leverage graphics processing units for massively parallel computations.</p>
+
+<h3 id="gpu-job-script-explained">GPU Job Script Explained</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH --nodes=1                     # Single node (GPUs are node-local)</span>
+<span class="c">#SBATCH --ntasks-per-node=1           # One task per node</span>
+<span class="c">#SBATCH --cpus-per-task=4             # CPU cores to support GPU</span>
+<span class="c">#SBATCH -o output-%J.out              # Output file with job ID</span>
+<span class="c">#SBATCH -e error-%J.err               # Error file with job ID</span>
+<span class="c">#SBATCH --partition=gpu               # GPU-enabled partition</span>
+<span class="c">#SBATCH --mem 32G                     # Memory allocation</span>
+<span class="c">#SBATCH --gpus-per-node=1             # Number of GPUs requested</span>
+./[programme executable name]          <span class="c"># GPU program execution</span>
+</code></pre></div></div>
+
+<p><strong>GPU-specific parameters:</strong></p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--partition=gpu</code>: Specifies GPU-enabled compute nodes</li>
+  <li><code class="language-plaintext highlighter-rouge">--gpus-per-node=1</code>: Requests one GPU per node</li>
+  <li><code class="language-plaintext highlighter-rouge">--mem 32G</code>: Allocates sufficient memory for GPU operations</li>
+  <li><code class="language-plaintext highlighter-rouge">--cpus-per-task=4</code>: Provides CPU cores to feed data to GPU</li>
+</ul>
+
+<h3 id="example-cuda-implementation">Example: CUDA Implementation</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">cuda</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="n">colors</span>
+
+
+<span class="c1"># Constants
+</span><span class="n">G</span> <span class="o">=</span> <span class="mf">6.67430e-11</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">299792458</span>
+
+<span class="c1"># Parameter grid
+</span><span class="n">mass_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e30</span><span class="p">,</span> <span class="mf">1e33</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="n">impact_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e9</span><span class="p">,</span> <span class="mf">1e12</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
+
+<span class="n">mass_grid_device</span> <span class="o">=</span> <span class="n">cuda</span><span class="p">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">mass_grid</span><span class="p">)</span>
+<span class="n">impact_grid_device</span> <span class="o">=</span> <span class="n">cuda</span><span class="p">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">impact_grid</span><span class="p">)</span>
+<span class="n">result_device</span> <span class="o">=</span> <span class="n">cuda</span><span class="p">.</span><span class="n">device_array</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">mass_grid</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">impact_grid</span><span class="p">)))</span>
+
+<span class="c1"># CUDA kernel
+</span><span class="o">@</span><span class="n">cuda</span><span class="p">.</span><span class="n">jit</span>
+<span class="k">def</span> <span class="nf">compute_deflection</span><span class="p">(</span><span class="n">mass_array</span><span class="p">,</span> <span class="n">impact_array</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">cuda</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">mass_array</span><span class="p">.</span><span class="n">size</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">impact_array</span><span class="p">.</span><span class="n">size</span><span class="p">:</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">mass_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">impact_array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="n">M</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># Setup thread/block dimensions
+</span><span class="n">threadsperblock</span> <span class="o">=</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">blockspergrid_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">mass_grid</span><span class="p">.</span><span class="n">size</span> <span class="o">+</span> <span class="n">threadsperblock</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">threadsperblock</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">blockspergrid_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">impact_grid</span><span class="p">.</span><span class="n">size</span> <span class="o">+</span> <span class="n">threadsperblock</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="n">threadsperblock</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">blockspergrid</span> <span class="o">=</span> <span class="p">(</span><span class="n">blockspergrid_x</span><span class="p">,</span> <span class="n">blockspergrid_y</span><span class="p">)</span>
+
+<span class="c1"># Run the kernel
+</span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">compute_deflection</span><span class="p">[</span><span class="n">blockspergrid</span><span class="p">,</span> <span class="n">threadsperblock</span><span class="p">](</span><span class="n">mass_grid_device</span><span class="p">,</span> <span class="n">impact_grid_device</span><span class="p">,</span> <span class="n">result_device</span><span class="p">)</span>
+<span class="n">cuda</span><span class="p">.</span><span class="n">synchronize</span><span class="p">()</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">result_device</span><span class="p">.</span><span class="n">copy_to_host</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"CUDA time: </span><span class="si">{</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s"> seconds"</span><span class="p">)</span>
+
+<span class="c1"># Save the result and grids
+</span><span class="n">np</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"result_cuda.npy"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+<span class="n">np</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"mass_grid_cuda.npy"</span><span class="p">,</span> <span class="n">mass_grid</span><span class="p">)</span>
+<span class="n">np</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"impact_grid_cuda.npy"</span><span class="p">,</span> <span class="n">impact_grid</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Result and grids saved as .npy files."</span><span class="p">)</span>
+
+<span class="c1"># Load data
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"result_cuda.npy"</span><span class="p">)</span>
+<span class="n">mass_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"mass_grid_cuda.npy"</span><span class="p">)</span>
+<span class="n">impact_grid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"impact_grid_cuda.npy"</span><span class="p">)</span>
+
+<span class="c1"># Create meshgrid
+</span><span class="n">M</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">mass_grid</span> <span class="o">/</span> <span class="mf">1.989e30</span><span class="p">,</span> <span class="n">impact_grid</span> <span class="o">/</span> <span class="mf">1e9</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s">'ij'</span><span class="p">)</span>
+
+<span class="c1"># Create output directory
+</span><span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s">"plots"</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">pcm</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span>
+                      <span class="n">norm</span><span class="o">=</span><span class="n">colors</span><span class="p">.</span><span class="n">LogNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="n">result</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">].</span><span class="nb">min</span><span class="p">(),</span> <span class="n">vmax</span><span class="o">=</span><span class="n">result</span><span class="p">.</span><span class="nb">max</span><span class="p">()),</span>
+                      <span class="n">shading</span><span class="o">=</span><span class="s">'auto'</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'plasma'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">pcm</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">'Deflection Angle (radians, log scale)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'Impact Parameter (Gm)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Mass (Solar Masses)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Gravitational Deflection Angle - CUDA'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">"plots/deflection_angle_cuda.png"</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"CUDA plot saved in 'plots/deflection_angle_cuda.png'"</span><span class="p">)</span>
+</code></pre></div></div>
+<h3 id="gpu-job-script-for-the-example">GPU Job Script for the Example</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH --job-name=HPC_WS_GPU  # Provide a name for the job </span>
+<span class="c">#SBATCH --output=HPC_WS_GPU_%j.out</span>
+<span class="c">#SBATCH --error=HPC_WS_GPU_%j.err</span>
+<span class="c">#SBATCH --partition=gpu</span>
+<span class="c">#SBATCH --nodes=1</span>
+<span class="c">#SBATCH --ntasks-per-node=1</span>
+<span class="c">#SBATCH --cpus-per-task=4 # Number of CPUs for data preparation </span>
+<span class="c">#SBATCH --mem=32G # Memmory allocation</span>
+<span class="c">#SBATCH --gpus-per-node=1</span>
+<span class="c">#SBATCH --time=06:00:00</span>
+
+<span class="c"># --------- Load Environment ---------</span>
+module load Python/3.9.1
+module load cuda/11.2
+module list
+
+<span class="c"># Activate your Python virtual environment</span>
+<span class="nb">source </span>name_of_your_venv/bin/activate
+
+<span class="c"># --------- Run the Python Script ---------</span>
+python Gravitational_Lensing_GPU.py
+</code></pre></div></div>
+
+<blockquote class="challenge">
+  <h2 id="exercise-gpu-vs-cpu-comparison">Exercise: GPU vs CPU Comparison</h2>
+  <p>Run the tensor operations script on both CPU and GPU. Compare execution times and memory usage. Calculate the speedup factor</p>
+</blockquote>
+
+
+
+
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/24-resource-requirements/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/26-performance-analysis/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+
+      
+      
+
+
+
+
+
+
+<footer>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6 license" id="license-info" align="left">
+	
+        Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> 2025 by <a href="/CITATION">the authors</a>.
+	
+    </div>
+    <div class="col-md-6 help-links" align="right">
+	
+	<a href="/edit//_episodes/25-resource-monitoring-example.md" data-checker-ignore>Edit on GitHub</a>
+	
+	/
+	<a href="/blob//CONTRIBUTING.md" data-checker-ignore>Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob//CITATION" data-checker-ignore>Cite</a>
+	/
+	<a href="mailto:shr.razim@gmail.com">Contact</a>
+    </div>
+  </div>
+  <p class="text-muted text-right">
+    <small><i>Using <a href="https://github.com/carpentries/carpentries-theme/">The Carpentries theme</a> &mdash; Site last built on: 2025-08-14 17:22:32 -0700.</i></small>
+  </p>
+</footer>
+
+      
+    </div>
+    
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/lesson.js"></script>
+
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(["setDomains", ["*.lessons.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io"]]);
+  _paq.push(["setDoNotTrack", true]);
+  _paq.push(["disableCookies"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src='//cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+<script src="/assets/js/anchor.min.js"></script>
+<script>
+    anchors.add();
+</script>
+
+  </body>
+</html>

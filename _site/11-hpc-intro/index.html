@@ -1,0 +1,731 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2025-08-14 17:22:32 -0700">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" />
+    
+    <link rel="license" href="#license-info" />
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/incubator/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/incubator/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/favicons/incubator/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/incubator/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/favicons/incubator/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/favicons/incubator/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/favicons/incubator/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/incubator/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="The Carpentries Incubator - Introduction to High Performance Computing for astronomical software development"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/favicons/incubator/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/assets/favicons/incubator/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/assets/favicons/incubator/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/assets/favicons/incubator/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/assets/favicons/incubator/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+  <title>
+  HPC Intro &ndash; Introduction to High Performance Computing for astronomical software development
+  </title>
+
+  </head>
+  <body>
+    
+
+
+
+
+
+
+
+<div class="panel panel-default life-cycle">
+  <div id="life-cycle" class="panel-body pre-alpha">
+    This lesson is still being designed and assembled (Pre-Alpha version)
+  </div>
+</div>
+
+
+
+
+
+    <div class="container">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      <a href="/index.html" class="pull-left">
+        <img class="navbar-logo" src="/assets/img/incubator-logo-blue.svg" alt="The Carpentries Incubator logo" />
+      </a>
+      
+
+      
+      <a class="navbar-brand" href="/index.html">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="/CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="/setup.html">Setup</a></li>
+
+        
+        
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="/00-setting-the-scene/index.html">Setting the Scene</a></li>
+            
+            
+            <li><a href="/10-section1-intro/index.html">Section 1: HPC basics</a></li>
+            
+            
+            <li><a href="/11-hpc-intro/index.html">HPC Intro</a></li>
+            
+            
+            <li><a href="/12-lsst-hpc/index.html">LSST HPC facilities and opportunities</a></li>
+            
+            
+            <li><a href="/13-bura-access/index.html">Bura access</a></li>
+            
+            
+            <li><a href="/14-command-line/index.html">Command line basics</a></li>
+            
+            
+            <li><a href="/15-bura-setup/index.html">Bura Setup</a></li>
+            
+            
+            <li><a href="/15-slurm/index.html">Introduction to Slurm workload manager</a></li>
+            
+            
+            <li><a href="/20-section2-intro/index.html">Section 2: HPC Bura</a></li>
+            
+            
+            <li><a href="/21-cpu-sequential/index.html">Intro code examples</a></li>
+            
+            
+            <li><a href="/22-cpu-parallel/index.html">Parallelising our code for CPU</a></li>
+            
+            
+            <li><a href="/23-gpu-implementation/index.html">Implementing code examples for running on GPU</a></li>
+            
+            
+            <li><a href="/24-resource-requirements/index.html">Resource requirements</a></li>
+            
+            
+            <li><a href="/25-resource-monitoring-example/index.html">Resource optimization</a></li>
+            
+            
+            <li><a href="/26-performance-analysis/index.html">Performance analysis tools</a></li>
+            
+            
+            <li><a href="/30-wrap-up/index.html">Wrap-up</a></li>
+            
+            
+            <li><a href="/cli_lesson_monolithic_rm_warning_real_example/index.html">Command line interface (CLI) </a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="/aio/index.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+        
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/reference.html">Reference</a></li>
+            
+            
+            
+              <li><a href="/about/index.html">About</a></li>
+            
+            
+            
+            
+              <li><a href="/git-intro/index.html">Additional Material: Git Intro</a></li>
+            
+            
+            
+            
+              <li><a href="/figures/index.html">Figures</a></li>
+            
+            
+            
+            
+              <li><a href="/guide/index.html">Instructor Notes</a></li>
+            
+            
+            
+            
+              <li><a href="/common-issues/index.html">Common Issues, Fixes & Tips</a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href="/quiz/index.html">Quiz</a></li>
+            
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="/LICENSE.html">License</a></li>
+	
+	<li><a href="/edit//_episodes/11-hpc-intro.md" data-checker-ignore>Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+      
+
+
+<div class="alert alert-info text-center" role="alert">
+  This lesson is part of
+  <a href="https://github.com/carpentries-incubator/proposals/#the-carpentries-incubator" data-checker-ignore>
+    The Carpentries Incubator</a>, a place to share and use each other's
+  Carpentries-style lessons. <strong>This lesson has not been reviewed by and is
+  not endorsed by The Carpentries</strong>.
+</div>
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/10-section1-intro/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="/">Introduction to High Performance Computing for astronomical software development</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/12-lsst-hpc/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">HPC Intro</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 5 min
+      <br/>
+      <strong>Exercises:</strong> 0 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li><p>Question 1</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+	<li><p>Objective 1</p>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<p>Simple, inexpensive computing tasks are typically performed <strong>sequentially</strong>, i.e., instructions are executed one after another in the order they appear in the code. This is the default paradigm in most programming languages. For larger problems that involve many tasks, it is often more efficient to exploit the intrinsically parallel nature of modern processors, which are designed to execute multiple processes simultaneously. Many programming languages, including Python, support parallel execution, where multiple CPU cores perform tasks independently.</p>
+
+<p>As computational demands grow, parallel programming has become increasingly essential. From protein folding in drug discovery to simulations of galaxy formation and evolution, many complex problems in science rely on parallel computing. Parallel programming, hardware architecture, and systems administration intersect in the multidisciplinary field of <strong>high-performance computing (HPC)</strong>. Unlike running code locally on a personal computer, HPC typically involves connecting to a cluster of networked computers, sometimes located all over the world, designed to work together on large-scale tasks.</p>
+
+<p>The efficiency of a supercomputer in application to different tasks depends not only on the number of processors it carries aboard, but also on its <strong>architecture</strong> (or, in case of a cluster, on the <strong>network architecture</strong>). In this episode we’ll briefly consider the terminology and classifications used to describe supercomputers of different types.</p>
+
+<h3 id="computer-architectures">Computer Architectures</h3>
+
+<p>Historically, computer architectures are often classified into two categories: <strong>von Neumann</strong> and <strong>Harvard</strong>.<br />
+In the von Neumann design, a computer system contains the following components:</p>
+
+<ul>
+  <li>Arithmetic/logic unit (ALU)</li>
+  <li>Control unit (CU)</li>
+  <li>Memory unit (MU)</li>
+  <li>Input/output (I/O) devices</li>
+</ul>
+
+<p>The ALU retrieves data from the MU and performs calculations, while the CU interprets instructions and directs the flow of data to and from the I/O devices, as shown in the diagram below.<br />
+In this architecture, the MU stores both data and instructions, which creates a performance bottleneck due to limited data transfer bandwidth, commonly referred to as the <em>von Neumann bottleneck</em>.</p>
+
+<p><img src="../fig/vonneumann.png" alt="von Neumann diagram" class="image-with-shadow" width="500px" /></p>
+<p style="text-align: center;">Diagram of von Neumann architecture, from <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025</a></p>
+
+<p>The Harvard architecture is a variant of the von Neumann design in which instruction and data storage are <em>physically separated</em>.<br />
+This allows simultaneous access to both instructions and data, partially overcoming the von Neumann bottleneck.</p>
+
+<p>Most modern central processing units (CPUs) use a <strong>modified Harvard architecture</strong>, in which instructions and data have separate caches but share the same main memory.<br />
+This hybrid approach combines some of the performance benefits of Harvard with the flexibility of von Neumann.</p>
+
+<p><img src="../fig/harvard.png" alt="Harvard diagram" class="image-with-shadow" width="500px" /></p>
+<p style="text-align: center;">Diagram of Harvard architecture, from <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025">https://onlinelibrary.wiley.com/doi/book/10.1002/9780470932025</a></p>
+
+<h3 id="performance">Performance</h3>
+
+<p>Three main components have the greatest impact on computational performance:</p>
+
+<ul>
+  <li>
+    <p><strong>CPU:</strong> CPU performance is often quantified by frequency, or “clock speed,” which determines how quickly a CPU executes instructions in terms of cycles per second. For example, a CPU with a clock speed of 3.5 GHz performs 3.5 billion cycles each second. Many CPUs have multiple <strong>cores</strong>, enabling parallel execution of multiple instructions simultaneously (<a href="https://www.intel.com/content/www/us/en/gaming/resources/cpu-clock-speed.html">Intel</a>).</p>
+  </li>
+  <li>
+    <p><strong>RAM:</strong> Random access memory (RAM) is a computer’s short-term memory, storing the data needed to run applications and open files. Faster RAM allows data to move to and from the CPU more quickly, and larger RAM capacity enables the CPU to handle more complex operations simultaneously (<a href="https://www.intel.com/content/www/us/en/tech-tips-and-tricks/computer-ram.html">Intel</a>).</p>
+  </li>
+  <li>
+    <p><strong>Hard drive:</strong> In contrast to RAM, a computer’s hard drive is used for long-term data storage. Hard drives are characterized by both their capacity and performance. Higher-capacity drives can store more data, while higher-performance drives can read and write data faster. Hard disk drives (HDDs) generally offer more capacity for a lower cost, whereas solid state drives (SSDs) provide better performance and reliability.</p>
+  </li>
+</ul>
+
+<p>Processing astronomical data, building models, and running simulations requires significant computational power.<br />
+The laptop or PC you are using right now likely has between <strong>8 GB</strong> and <strong>32 GB</strong> of RAM, a processor with <strong>4–10 cores</strong>, and a hard drive that can store <strong>256 GB–1 TB</strong> of data.</p>
+
+<p>But what if you need to process a dataset larger than 1 TB, or load a model into RAM that exceeds 32 GB, or run a simulation that would take a month to complete on your CPU?<br />
+In that case, you need a bigger computer, or many computers working in parallel.</p>
+
+<h3 id="flynns-taxonomy-a-framework-for-parallel-computing">Flynn’s Taxonomy: A Framework for Parallel Computing</h3>
+
+<p>When discussing parallel computing, it is helpful to have a framework for classifying different types of computer architectures.<br />
+The most widely used is <strong>Flynn’s Taxonomy</strong>, proposed in 1966 (<a href="https://ieeexplore.ieee.org/document/1447203">Flynn, 1966</a>).<br />
+It provides a simple vocabulary for describing how computers handle tasks and will help us understand why certain programming models are better suited to certain problems.</p>
+
+<p>Flynn’s taxonomy is based on four terms:</p>
+
+<ul>
+  <li><strong>S</strong>ingle</li>
+  <li><strong>I</strong>nstruction</li>
+  <li><strong>M</strong>ultiple</li>
+  <li><strong>D</strong>ata</li>
+</ul>
+
+<p>These combine to define four main architectures (<a href="https://cnrm.uniri.hr/upload/2023/03/hipowered_book.pdf">HiPowered book</a>):</p>
+
+<ul>
+  <li><strong>SISD (Single Instruction, Single Data):</strong> A traditional serial computer, also called a von Neumann machine. It executes one instruction at a time on a single piece of data. A laptop running a simple, non-parallel program is operating in SISD mode.</li>
+  <li><strong>SIMD (Single Instruction, Multiple Data):</strong> A parallel architecture in which multiple processors execute the <em>same instruction</em> simultaneously, but each works on a <em>different piece of data</em>. This approach enables massive data parallelism.</li>
+  <li><strong>MISD (Multiple Instruction, Single Data):</strong> Each processor executes a different instruction on the same piece of data. This architecture is very uncommon.</li>
+  <li><strong>MIMD (Multiple Instruction, Multiple Data):</strong> The most common type of parallel computer today. Multiple processors execute different instructions on different data at the same time. Multi-core processors, like the one sitting in your PC, and computing clusters fall into this category.</li>
+</ul>
+
+<p>In addition to these categories, parallel computers can also be organized by memory model:</p>
+
+<ol>
+  <li><strong>Multiprocessors:</strong> Shared-memory systems in which all processors access a single, unified memory space. Communication between processors occurs via this shared memory, which can simplify programming but may lead to data access errors if many processors try to use the same data simultaneously. Cores within the same processor in a personal PC use this memory system.</li>
+  <li><strong>Multicomputers:</strong> Distributed-memory systems in which each processor has its own private memory. Processors communicate by passing messages over a network, which avoids memory contention but requires explicit communication management in software. This is how memory is handled in clusters.</li>
+</ol>
+
+<blockquote class="callout">
+  <h2 id="simd-in-practice-gpus">SIMD in Practice: GPUs</h2>
+  <p>A key modern example of SIMD architecture is the <strong>GPU</strong> (Graphics Processing Unit).</p>
+
+  <p>GPUs were originally designed for computer graphics—an inherently parallel task (e.g., calculating the color of millions of pixels at once).
+Researchers soon realized this massive parallelism could also be applied to general-purpose scientific computing, such as physics simulations
+and training AI models, leading to the term <strong>GPGPU</strong> (General-Purpose GPU). These architectures offer significant speedups for <em>data-parallel</em> workloads.
+The trade-off is that GPUs have a different memory hierarchy than CPUs, with less cache per core, so performance can be limited for algorithms that
+require frequent or irregular communication between threads.</p>
+
+  <p>A CPU consists of a small number of powerful cores optimized for complex, sequential tasks. A GPU, in contrast, contains thousands of simpler cores
+optimized for high-throughput, data-parallel problems. For this reason, nearly all modern supercomputers are <strong>hybrid systems</strong> that combine CPUs and GPUs,
+leveraging the strengths of each.</p>
+
+</blockquote>
+
+<h3 id="supercomputers-vs-computing-clusters">Supercomputers vs. Computing Clusters</h3>
+
+<p>In the early days of HPC, a “supercomputer” was typically a single, monolithic machine with custom vector processors.<br />
+Today, the vast majority of systems are <strong>clusters</strong>.</p>
+
+<ul>
+  <li><strong>Cluster:</strong> A collection of many individual computers, so-called <em>nodes</em>, connected by a high-bandwidth network. Early clusters were built from single-core SISD machines, but modern nodes are almost always MIMD systems.</li>
+  <li><strong>Node:</strong> A single computer within the cluster. It has its own processors (CPUs), memory (RAM), and often accelerators (GPUs). A typical compute node in a current cluster might have two CPUs with multiple cores each. <strong>??????</strong></li>
+  <li><strong>Workload Manager (Scheduler):</strong> Software that manages the entire cluster, such as SLURM or PBS. It allocates resources, handles the job queue, and decides when and where jobs run. When you submit a job, the scheduler reserves a set of nodes for a specific time.</li>
+</ul>
+
+<h3 id="network-topology-for-clusters">Network Topology for Clusters</h3>
+
+<p>Since a cluster is a collection of nodes, the characteristics of the connections between them, namely, the bandwidth and the <strong>network topology</strong>, is critical to performance.<br />
+If a program requires frequent communication between nodes, a slow or inefficient network will cause major bottlenecks.</p>
+
+<p>Common HPC topologies include:</p>
+
+<ul>
+  <li>
+    <p><strong>Mesh:</strong> Nodes are arranged in a two- or three-dimensional grid, with each node connected to its nearest neighbors. Figure 1 shows examples of a 2D mesh, a 3D mesh, and a 2D torus (where the edges wrap around to connect boundaries, forming a torus).</p>
+
+    <p><img src="../fig/11_mesh.png" alt="Schematic figure of mesh topology" class="image-with-shadow" width="500px" /></p>
+    <p style="text-align: center;">Figure 1: 2D and 3D meshes: a) 2D mesh, b) 3D mesh, c) 2D torus.</p>
+  </li>
+  <li>
+    <p><strong>Fat Tree:</strong> A hierarchical tree structure with “fatter” (higher-bandwidth) links closer to the root to prevent congestion when many nodes communicate at once (Figure 2).</p>
+
+    <p><img src="../fig/11_fattree.png" alt="Schematic figure of fat tree topology" class="image-with-shadow" width="500px" /></p>
+    <p style="text-align: center;">Figure 2: Fat tree topology.</p>
+  </li>
+</ul>
+
+<p>Less common HPC topologies include bus, ring, star, hypercube, fully connected, crossbar, and multistage interconnection networks.</p>
+
+<blockquote class="callout">
+  <h2 id="never-run-computations-on-the-login-node">Never Run Computations on the Login Node!</h2>
+  <p>When you connect to an HPC cluster, you land on a <em>login node</em>. This shared resource is for compiling code <strong>??????</strong>, managing files, and submitting jobs to the workload manager, but not for heavy computation.<br />
+Running an intensive program on the login node will slow it down for everyone, and is a classic mistake for new users.<br />
+Submit your job through the workload manager (e.g., <code class="language-plaintext highlighter-rouge">sbatch</code> in SLURM) so it runs on compute nodes.</p>
+
+</blockquote>
+
+<h3 id="file-system">File System</h3>
+
+<p>HPC clusters typically provide multiple storage locations, each serving different purposes:</p>
+
+<ul>
+  <li><strong>Home directories:</strong> Personal storage for each user, usually with limited capacity. Suitable for scripts, configuration files, and small datasets.</li>
+  <li><strong>Scratch:</strong> Temporary high-capacity storage for active jobs. Not backed up and typically cleared after job completion. Ideal for:
+    <ul>
+      <li>Jobs requiring large storage during execution</li>
+      <li>Datasets too large for personal storage but not needed permanently</li>
+      <li>Jobs needing higher-performance storage than personal directories</li>
+    </ul>
+  </li>
+  <li><strong>Shared:</strong> Storage accessible to multiple users, often for research groups. Commonly used as a shared working directory and generally backed up regularly.</li>
+</ul>
+
+<blockquote class="callout">
+  <h2 id="other-types-of-storage">Other types of storage</h2>
+  <p>Large HPC facilities may have more complex storage organization. For example, there may exist <em>project</em> and <em>archive</em> storages, dedicated to storing large volumes of data that are not accessed often and can tolerate large lags of access time. One of the slowest, but also cheapest and most reliable storage types are magnetic tape libraries. They are commonly used for storing archival (processed with obsolete versions of pipelines) data releases of astronomical surveys, and this system is likely to be implemented for LSST as well.
+Some HPC systems also have an archive tier that is really slow—think tape libraries—intended for “stick it in a vault, retrieve once every six months” kind of usage</p>
+
+</blockquote>
+
+<p><strong>?????</strong>
+\cite{https://www.hpc.iastate.edu/guides/nova/storage#:~:text=Home%20directories%20(/home),used%20for%20high%20volume%20access.})
+\cite{https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=140938}</p>
+
+<h2 id="which-computer-for-which-task">Which computer for which task?</h2>
+<ul>
+  <li>If you have an algorithm that requires the output from step A to start step B… (sequential code)</li>
+  <li>If you have an algorithm that performs the same operation on a large volume of homogeneous data… (parallelizable code)</li>
+  <li>If you have an algorithm that operates on vectors or matrices… (vectorization)</li>
+</ul>
+
+
+
+
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li><p>Keypoint 1</p>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/10-section1-intro/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/12-lsst-hpc/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+
+      
+      
+
+
+
+
+
+
+<footer>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6 license" id="license-info" align="left">
+	
+        Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> 2025 by <a href="/CITATION">the authors</a>.
+	
+    </div>
+    <div class="col-md-6 help-links" align="right">
+	
+	<a href="/edit//_episodes/11-hpc-intro.md" data-checker-ignore>Edit on GitHub</a>
+	
+	/
+	<a href="/blob//CONTRIBUTING.md" data-checker-ignore>Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob//CITATION" data-checker-ignore>Cite</a>
+	/
+	<a href="mailto:shr.razim@gmail.com">Contact</a>
+    </div>
+  </div>
+  <p class="text-muted text-right">
+    <small><i>Using <a href="https://github.com/carpentries/carpentries-theme/">The Carpentries theme</a> &mdash; Site last built on: 2025-08-14 17:22:32 -0700.</i></small>
+  </p>
+</footer>
+
+      
+    </div>
+    
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/lesson.js"></script>
+
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(["setDomains", ["*.lessons.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io"]]);
+  _paq.push(["setDoNotTrack", true]);
+  _paq.push(["disableCookies"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src='//cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+<script src="/assets/js/anchor.min.js"></script>
+<script>
+    anchors.add();
+</script>
+
+  </body>
+</html>
