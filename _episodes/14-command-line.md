@@ -122,7 +122,7 @@ $ cd hpc_course
 ```
 
 ## Printing to the screen
-Sometime you want to write a message to the screen. This can be done with the `echo` command with the fomat `echo <thing to print>`. For example, to print "hello world":
+Sometime you want to write a message to the screen. This can be done with the `echo` command with the format `echo <thing to print>`. For example, to print "hello world":
 
 ```bash
 $ echo "hello world"
@@ -224,7 +224,7 @@ hello_world_copy.sh  hello_world.sh
 {: .callout}
 
 ### deleting files
-You may accidentally create file and want to delete it. This can be done with the `rm` command which stands for remove. Be careful, the `rm` command permantly deletes a file - this is not like putting it in the trash can or recycle bin where you can recover it. For that reason, we recommend you use the `-i` flag which double checks with you before it deletes a file. Now we can remove our hello_world_3.sh file.
+You may accidentally create file and want to delete it. This can be done with the `rm` command which stands for remove. Be careful, the `rm` command permanently deletes a file - this is not like putting it in the trash can or recycle bin where you can recover it. For that reason, we recommend you use the `-i` flag which double checks with you before it deletes a file. Now we can remove our hello_world_3.sh file.
 
 ```bash
 $ cd code
@@ -268,7 +268,7 @@ total 8
 -rw-rw-r-- 1 edu02 edu02 32 Aug 16 06:31 hello_universe.sh
 -rw-rw-r-- 1 edu02 edu02 28 Aug 16 06:25 hello_world.sh
 ```
-The output has the following format `<type><permissions> <link> <owner> <group> <size> <date modified> <name>`. The first character is the type - we will skip this and go directly to the 9 characters after that. The first three are the permissions for the owner. They will always be listed in the order read, write, and execute. If the letter is there than that permission is enabled. For instance if the first three charcters were `rw-` then the owner would have permission to read and write a file or directory but not permission to execute it. The next three characters are the groups permissions. Anyone who belongs to the group listed in the fourth column is assigned these permissions. The permissions work the same way as the owner's permissions. For instance, if the middle three characters are `r-x` then anyone in the group has permission to view the file and to execute it, but not to modify it. Finally, the last three charcters are for everyone else. 
+The output has the following format `<type><permissions> <link> <owner> <group> <size> <date modified> <name>`. The first character is the type - we will skip this and go directly to the 9 characters after that. The first three are the permissions for the owner. They will always be listed in the order read, write, and execute. If the letter is there than that permission is enabled. For instance if the first three characters were `rw-` then the owner would have permission to read and write a file or directory but not permission to execute it. The next three characters are the groups permissions. Anyone who belongs to the group listed in the fourth column is assigned these permissions. The permissions work the same way as the owner's permissions. For instance, if the middle three characters are `r-x` then anyone in the group has permission to view the file and to execute it, but not to modify it. Finally, the last three characters are for everyone else. 
 
 > ## What groups do I belong to?
 > To figure out what groups you are part of (which can be useful to understand if you have permission to do something) you can type 
@@ -333,7 +333,7 @@ $ top
 The important parts of the output are the PID (process id), USER (who is running the process), %CPU (what percentage of the CPU is being used by that process), %MEM (what percentage of the memory is being used by that process), TIME (how long has the process been running), and COMMAND (what is the command that was run). If you are worried something you did is taking too long or the computer is running slower than you expect, running `top` is a really good way to get an overview of who is doing what on the system. Note that this will continue to run until you tell it to stop. Type `q` to exit.
 
 ### Environment variables
-Sometimes you have files and/or paths that you want multiple scripts (in different files) to point to. Instead of hard-coding these in every file, you can create an environment variable that each script can look at to get the file or path name. This means that if you decide to change the path or file, you just have to do it in one place instead of multiple places where its easy to miss one. To view an environment variable that has already been created, you can use `echo` and the environment variable, preceeded by the `$`. Environment variables are conventionally all upper case. For example, one environment variable that is commonly used is the `PATH` variable. This tells your shell which directories and sub directories to search to find a command you type. Let us look at what is in our `PATH` variable by default:
+Sometimes you have files and/or paths that you want multiple scripts (in different files) to point to. Instead of hard-coding these in every file, you can create an environment variable that each script can look at to get the file or path name. This means that if you decide to change the path or file, you just have to do it in one place instead of multiple places where its easy to miss one. To view an environment variable that has already been created, you can use `echo` and the environment variable, preceded by the `$`. Environment variables are conventionally all upper case. For example, one environment variable that is commonly used is the `PATH` variable. This tells your shell which directories and sub directories to search to find a command you type. Let us look at what is in our `PATH` variable by default:
 ```bash
 $ echo $PATH
 ```
@@ -341,7 +341,7 @@ $ echo $PATH
 /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
 ```
 
-To create an environemnt variable you use the `export` keyword with the syntax `export ENV_VARIABLE=value`:
+To create an environment variable you use the `export` keyword with the syntax `export ENV_VARIABLE=value`:
 ```bash
 $ export DATA_DIR=/home/edu02/hpc_workshop/data
 $ echo $DATA_DIR
@@ -349,7 +349,7 @@ $ echo $DATA_DIR
 ```output
 /home/edu02/hpc_workshop/data
 ```
-This creates the variable for an individual shell window. If you exit that window the variable disappears. If you want to make a permenant variable, you can copy and paste the entire export command into your `.bashrc` or `.bash_profile` file. This is a file that lives in your home directory and is executed every time you open a shell window.
+This creates the variable for an individual shell window. If you exit that window the variable disappears. If you want to make a permanent variable, you can copy and paste the entire export command into your `.bashrc` or `.bash_profile` file. This is a file that lives in your home directory and is executed every time you open a shell window.
 
 > ## Help! I over wrote my PATH variable and now nothing works
 > The `PATH` variable tells your shell where to find all of its commands. If you overwrite this, a lot of things break. For this reason you usually append or prepend to your `PATH` variable rather than overwriting it entirely. If you overwrite it you can always close the shell window and reopen it. To append a directory to your `PATH` variable use the `:` between `PATH` and the new directory. For example, to add our `code` directory to the end of our path we can type:
@@ -360,7 +360,7 @@ where `edu02` is replaced with your Bura user name.
 {: .callout}
 
 ## Getting files to and from the HPC
-HPCs are a great resouce for computing - but they are not a long term storage solution. You will want to move the files from the HPC to a file system that you control. You may also want to prototype a script locally and then move it to the HPC and run it. There are three ways you can move files back and forth: `scp`, `rsync`, and using GitHub (or other version control).
+HPCs are a great resource for computing - but they are not a long term storage solution. You will want to move the files from the HPC to a file system that you control. You may also want to prototype a script locally and then move it to the HPC and run it. There are three ways you can move files back and forth: `scp`, `rsync`, and using GitHub (or other version control).
 
 `scp` stands for secure copy. The command format is `scp <what you want to copy> <where to put it>` and these paths are always specified from where you are. Because you will be going from one system to another - one of the locations will include both the address to the system and the path, separated by a colon. For this part, we will exit Bura. You can do that by typing `exit`.
 
