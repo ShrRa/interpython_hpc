@@ -18,7 +18,7 @@ keypoints:
 ## Introduction
 
 Astronomy has always been a data-hungry area. From the discovery of Neptune to the state-of-the-art cosmological simulations, such
-as Ilustris or FLAMINGO, we make discovery by working with datasets that are at the border of our processing capabilities, or, sometimes,
+as [Illustris](https://www.illustris-project.org/) or [FLAMINGO](https://flamingo.strw.leidenuniv.nl/), we make discovery by working with datasets that are at the border of our processing capabilities, or, sometimes,
 outside of these borders. To make our software work at the limit of what is possible, to churn gigabytes of observations or millions of simulated particles,
 we have to optimize our code as much as possible, pay attention to how we use available RAM and processors, and, eventually, look for more powerful computers than what
 we can fit on our desk. 
