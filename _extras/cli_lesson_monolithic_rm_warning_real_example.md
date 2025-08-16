@@ -17,13 +17,6 @@ keypoints:
 
 The Command-line Interface (CLI) is a text-based interface for interacting directly with the operating system by executing commands. This contrasts with the Graphical User Interface (GUI) you might be familiar with, where instructions are sent to the computer via a point-and-click mechanism. The most common shells are Bash and Zsh, typically used in Unix-based operating systems.
 
-Shell scripting can be very useful in science, including:
-
-- **Reproducibility** – Shell scripts can be saved and re-executed at a later date. Commands executed in the shell are also saved and can be referred to later.
-- **Throughput** – Many tasks in science are repetitive. For example, if we were conducting a calculation on 100 samples and wanted to do some simple statistics on reads, we could use loops to perform this task on all sets of reads. This is much quicker than using a GUI.
-- **Integration** – Shell scripting allows you to integrate several programs into workflows.
-- **Efficiency** – GUIs can be resource-intensive. Using the shell frees resources that would otherwise be used for the GUI.
-
 At this point in the lesson, we've just logged into the system. Nothing has happened yet, and we're not going to be able to do anything until we learn a few basic commands. By the end of this lesson, you will know how to "move around" the system and look at what's there.
 
 When you log in to an HPC system or Linux-based server, you’ll be greeted by a prompt like:
@@ -248,22 +241,6 @@ $ mkdir hpc-test
 $ cd hpc-test
 ```
 
-### Creating and Editing Text Files
-
-Use `nano`:
-```bash
-$ nano draft.txt
-```
-- `Ctrl + O` — Save
-- `Ctrl + X` — Exit
-- `Ctrl + K` — Cut line
-- `Ctrl + U` — Paste line
-
-Check the file:
-```bash
-$ ls
-draft.txt
-```
 
 ---
 
