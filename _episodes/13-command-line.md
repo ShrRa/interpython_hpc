@@ -110,6 +110,15 @@ $ ls
 $ cd hpc_course
 ```
 
+## Printing to the screen
+Sometime you want to write a message to the screen. This can be done with the `echo` command with the fomat `echo <thing to print>`. For example, to print "hello world":
+
+```bash
+$ echo "hello world"
+```
+```output
+> hello world
+```
 
 ## File Manipulation
 Let's create a simple script that prints "hello world" to the screen. We will use the editor nano. The great thing about nano is that it tells you how to save and exit in the screen, it is also ideal for ssh as it opens directly in the shell window you are using. 
@@ -219,7 +228,11 @@ $ du -h /home/edu02
 > Help! you forgot to add a directory and now it is printing the size of every file. `ctl+c` will interrupt the command and return your cursor and command line.
 {: .callout}
 
-Another really useful command is seeing what processes are running and who is running them. You can do with the `top` command. The important parts of the output are the PID (process id), USER (who is running the process), %CPU (what percentage of the CPU is being used by that process), %MEM (what percentage of the memory is being used by that process), TIME (how long has the process been running), and COMMAND (what is the command that was run). If you are worried something you did is taking too long or the computer is running slower than you expect, running `top` is a really good way to get an overview of who is doing what on the system. Note that this will continue to run until you tell it to stop. Type `q` to exit.
+Another really useful command is seeing what processes are running and who is running them. You can do with the `htop` command. 
+```bash
+$ htop
+```
+The important parts of the output are the PID (process id), USER (who is running the process), %CPU (what percentage of the CPU is being used by that process), %MEM (what percentage of the memory is being used by that process), TIME (how long has the process been running), and COMMAND (what is the command that was run). If you are worried something you did is taking too long or the computer is running slower than you expect, running `htop` is a really good way to get an overview of who is doing what on the system. Note that this will continue to run until you tell it to stop. Type `q` to exit.
 
 ## Getting files to and from the HPC
 HPCs are a great resouce for computing - but they are not a long term storage solution. You will want to move the files from the HPC to a file system that you control. You may also want to prototype a script locally and then move it to the HPC and run it. There are three ways you can move files back and forth: `scp`, `rsync`, and using GitHub (or other version control).
@@ -250,14 +263,13 @@ Finally, if you are using version control to track your development and have a r
 >{: .solution}
 {: .challenge}
 
-## Printing to the screen
-Sometime you want to write a message to the screen. This can be done with the `echo` command with the fomat `echo <thing to print>`. For example, to print "hello world":
-
-```bash
-$ echo "hello world"
-```
-```output
-> hello world
-```
-
+> ## Other really useful commands that we do not have time to cover
+> As you start using an HPC, you might want to check out these commands:
+> learning about different command: `man`
+> Viewing files: `head`, `tail`, `less`, `cat`
+> Finding things: `grep`, `find`
+> Changing ownership: `chown`
+> System management: `df`, `free -m`, `ps`, `kill`
+> 
+{: .callout}
 {% include links.md %}
