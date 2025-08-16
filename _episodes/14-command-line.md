@@ -49,6 +49,12 @@ $ ls
 ```output
  ekran.txt     mc.slurm   program.c    sc JobArr.slurm  mpi.slurm  program.exe  sc.slurm
 ```
+You can execute this command not only to list all items in your current directory, but in other directories as well. For this, just add the path to the needed directory after the command:
+
+~~~
+$ ls /home
+~~~
+{: .language-bash}
 
 By default, `ls` does not show you any directories or files starting with `.`. These are called hidden files and directories. If you want to see everything, even the hidden files, you can use the `-a` flag (for all).
 ```bash
@@ -289,7 +295,7 @@ $ ls -l hello_world.sh
 -rw-rw-r-x 1 edu02 edu02 28 Aug 16 06:25 hello_world.sh
 ```
 > ## Exercise
-> What are the permissions on the training.sh? Who owns the file? What group does it belong to? Modify the permissions to remove the groups ability to read the file. Double check that the permissions changed. Then add the permissions back.
+> What are the permissions on the `hello_universe.sh`? Who owns the file? What group does it belong to? Modify the permissions to remove the groups ability to read the file. Double check that the permissions changed. Then add the permissions back.
 >> ## Solution
 >> ~~~
 >> $ ls -l hello_universe.sh
@@ -306,6 +312,10 @@ $ ls -l hello_world.sh
 >>{: .output}
 >{: .solution}
 {: .challenge}
+
+> ## Ethical usage of HPCs
+> Depending on the permissions set, you may see directories belonging to other users, and sometimes access their content. Simultaneously, other users may have access to your files. Keep this in mind when storing non-public data, such as observations and data releases that are still protected by Data Rights agreements, on third-party computational facilities. Similarly, be mindful when browsing the directories open to you of the possibility that some reading and writing permissions might have been set by mistake.
+{: .callout}
 
 ## Understanding what is happening on the whole system
 Later in this lesson you will learn how to monitor specific tasks that you run on the HPC. Sometimes you want information about the file system or what processes are running outside of the HPC task manager.
@@ -338,10 +348,10 @@ Sometimes you have files and/or paths that you want multiple scripts (in differe
 $ echo $PATH
 ```
 ```output
-/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/edu02/.local/bin:/home/edu02/bin
 ```
 
-To create an environment variable you use the `export` keyword with the syntax `export ENV_VARIABLE=value`:
+To create an environment variable, you use the `export` keyword with the syntax `export ENV_VARIABLE=value`:
 ```bash
 $ export DATA_DIR=/home/edu02/hpc_workshop/data
 $ echo $DATA_DIR
@@ -349,20 +359,27 @@ $ echo $DATA_DIR
 ```output
 /home/edu02/hpc_workshop/data
 ```
-This creates the variable for an individual shell window. If you exit that window the variable disappears. If you want to make a permanent variable, you can copy and paste the entire export command into your `.bashrc` or `.bash_profile` file. This is a file that lives in your home directory and is executed every time you open a shell window.
+This creates the variable for an individual shell window. If you exit that window, the variable disappears. If you want to make a permanent variable, you can copy and paste the entire export command into your `.bashrc` or `.bash_profile` file. This is an invisible file that lives in your home directory and is executed every time you open a shell window; since these files are invisible, you need to use
+`ls` with an `-a` flag to see them, and to edit them, you have to add a dot before the file name, e.g. `nano ~/.bashrc`.
+
+> ## Does creating a variable create the directory?
+> No matter whether you defined the variable only for the duration of the terminal session or in your `.bashrc` file, it is only a variable. The directory itself does not exist unless you
+> run `mkdir` command. Try executing `cd $DATA_DIR` - you will get an error, notifying you that this directory does not exist.
+{: .callout}
 
 > ## Help! I over wrote my PATH variable and now nothing works
-> The `PATH` variable tells your shell where to find all of its commands. If you overwrite this, a lot of things break. For this reason you usually append or prepend to your `PATH` variable rather than overwriting it entirely. If you overwrite it you can always close the shell window and reopen it. To append a directory to your `PATH` variable use the `:` between `PATH` and the new directory. For example, to add our `code` directory to the end of our path we can type:
+> The `PATH` variable tells your shell where to find all of its commands. If you overwrite this, a lot of things break. For this reason you usually append or prepend to your `PATH` variable rather than overwriting it entirely. If you overwrite it you can always close the shell window and reopen it. To append a directory to your `PATH` variable use the `:` between `PATH` and the new directory. For example, to add a `code` directory to the end of our path we can type:
 > ```bash
 > $ export PATH=$PATH:/home/edu02/hpc_workshop/code
 > ```
-where `edu02` is replaced with your Bura user name.
+> where `edu02` is replaced with your Bura user name.
+> Even if this directory does not exist (as it is in our case), nothing breaks, however, the shell will search for the available commands in these non-existing directories as well every time you run a command. 
 {: .callout}
 
 ## Getting files to and from the HPC
 HPCs are a great resource for computing - but they are not a long term storage solution. You will want to move the files from the HPC to a file system that you control. You may also want to prototype a script locally and then move it to the HPC and run it. There are three ways you can move files back and forth: `scp`, `rsync`, and using GitHub (or other version control).
 
-`scp` stands for secure copy. The command format is `scp <what you want to copy> <where to put it>` and these paths are always specified from where you are. Because you will be going from one system to another - one of the locations will include both the address to the system and the path, separated by a colon. For this part, we will exit Bura. You can do that by typing `exit`.
+`scp` stands for secure copy. The command format is `scp <what you want to copy> <where to put it>` and these paths are always specified from where you are. Because you will be going from one system to another - one of the locations will include both the address to the system and the path, separated by a colon. For this part, we will exit Bura. Type `exit` to return to your local shell.
 
 Now we will use `scp` to copy our `hello_world.sh` script to our local directory (`.`). After executing the `scp` command you will be asked for your password. Use your ssh password. 
 ```bash
