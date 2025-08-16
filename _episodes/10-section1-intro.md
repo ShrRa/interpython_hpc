@@ -7,9 +7,9 @@ exercises: 0
 questions:
 - "What are the topics covered in Section 1?"
 objectives:
-- ""
+- "To overview the topics of the Section 1."
 keypoints:
-- ""
+- "The topics covered in this section are HPC intro, Bura HPC facility and Slurm workload manager."
 
 This section covers the introduction to HPC computing:
 
