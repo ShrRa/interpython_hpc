@@ -38,7 +38,7 @@ The `pwd` command stands for "print working directory". You can always use this 
 $ pwd
 ```
 ```output
-> edu02
+ /home/edu02
 ```
 
 ### What is in my directory?
@@ -47,8 +47,7 @@ The `ls` command is short for listing - this lists all of the files and director
 $ ls
 ```
 ```output
-> ekran.txt     mc.slurm   program.c    sc
-> JobArr.slurm  mpi.slurm  program.exe  sc.slurm
+ ekran.txt     mc.slurm   program.c    sc JobArr.slurm  mpi.slurm  program.exe  sc.slurm
 ```
 
 By default, `ls` does not show you any directories or files starting with `.`. These are called hidden files and directories. If you want to see everything, even the hidden files, you can use the `-a` flag (for all).
@@ -56,8 +55,7 @@ By default, `ls` does not show you any directories or files starting with `.`. T
 $ ls -a
 ```
 ```output
-> .   .bash_history  JobArr.slurm  mpi.slurm  program.exe  sc.slurm
-> ..  ekran.txt      mc.slurm      program.c  sc
+.  ..  .bash_history  ekran.txt  JobArr.slurm  mc.slurm  mpi.slurm  program.c  program.exe  sc  sc.slurm
 ```
 
 Another useful option is `-F` flag - this adds symbols to the output to identify different types of entries. For example it will put a `/` after directories. 
@@ -85,16 +83,19 @@ $ cd hpc_course
 To move backwards (or up) a directory (for example to move back to your home directory) use `cd ../`
 
 > ## Exercise
-> Move into your `hpc_course` directory. Verify that you are in the correct directory, then create two new directories: code and data. Verify that your directories have been created.
+> If you have not already done so, move into your `hpc_course` directory. Verify that you are in the correct directory, then create two new directories: code and data. Verify that your directories have been created.
 >> ## Solution
 >> ~~~
->> ```bash
->> cd hpc_course
->> pwd
->> mkdir code
->> mkdir data
->> ls
->> ```
+>> if you haven't already, move into your hpc_course directory. 
+>> $ cd hpc_course
+>>
+>> $ pwd
+>> /home/edu02/hpc_course
+
+>> $ mkdir code
+>> $ mkdir data
+>> $ ls
+>> code  data
 >> ~~~
 >>{: .output}
 > {: .solution}
@@ -108,9 +109,15 @@ To move backwards (or up) a directory (for example to move back to your home dir
 Once you have gone into a directory, how do you get out? `../` is the shells way of saying "go back a directory". For example, we are currently in the `hpc_course` directory. If you type `cd ../` you will be in your home directory.
 ```bash
 $ pwd
+ /home/edu02/hpc_course
+
 $ cd ../
 $ pwd
+/home/edu02
+
 $ ls
+ekran.txt  hpc_course  JobArr.slurm  mc.slurm  mpi.slurm  program.c  program.exe  sc  sc.slurm
+
 $ cd hpc_course
 ```
 
@@ -121,7 +128,7 @@ Sometime you want to write a message to the screen. This can be done with the `e
 $ echo "hello world"
 ```
 ```output
-> hello world
+ hello world
 ```
 
 ## File Manipulation
@@ -142,9 +149,16 @@ Shell scripts are text files that contain shell commands. Our first shell script
 ```bash
 $ nano shell_example.sh
 ```
+```output
+hello world
+```
+
 In the window that pops up, let's type `echo "hello world"` and save and exit. To run your shell script, type:
 ```bash
 $ source shell_example.sh
+```
+```output
+hello world
 ```
 
 ### Pausing for a minute
@@ -159,17 +173,15 @@ This will wait 5 seconds and then return your cursor to the command line.
 > ## Exercise
 > Use nano to edit your shell_example.sh file to sleep for 2 seconds after it prints "hello world"
 >> ## Solution
->> ```bash
->> nano shell_example.sh
->> ```
+>> ~~~
+>> $ nano shell_example.sh
 >> add as a new line
->>```bash
 >> sleep 2
->>``
+>>
 >> Test your new script
->> ```bash
->> source shell_example.sh
->> ```
+>> $ source shell_example.sh
+>> hello world
+>> ~~~
 >> {: .output}
 >{: .solution}
 {: .challenge}
@@ -182,18 +194,30 @@ $ mv shell_example.sh code
 `mv` can also be used to rename a file, you can think of this as moving it from one file name to another filename. In this case where-you-want-to-move-it is the new name of the file. Let's rename the file to something more descriptive `hello_world.sh`. Don't forget we moved the file to our code directory, so we have to go there first before we can rename it.
 ```bash
 $ ls
+code  data
+
 $ cd code
 $ ls
+shell_example.sh
+
 $ mv shell_example.sh hello_world.sh
+$ ls
+shell_example.sh
 ```
 Instead of moving or renaming a file, you can create a copy of the file with the `cp` command. The format is the same as `mv`
 ```bash
 $ cp hello_world.sh hello_world_copy.sh
+$ ls
+```
+```output
+hello_world_copy.sh  hello_world.sh
 ```
 > ## including paths in cp and mv
 > You do not always have to be in a directory to copy or move a file. If the file you want to move is not in your current directory, you can refer to the file you want to move with both the path from your current directory and the filename. Similarly, where you want to move a file can also include a path. Let's say I was in my `hpc_course` directory and I want to copy my hello_world.sh file to hello_world_3.sh. The format looks like this: 
 > ```bash
 > $ pwd
+> /home/edu02/hpc_course/code
+> 
 > $ cd ../
 > $ cp code/hello_world.sh code/hello_world_3.sh
 > ```
@@ -204,21 +228,30 @@ You may accidentally create file and want to delete it. This can be done with th
 
 ```bash
 $ cd code
+$ ls 
+hello_world_copy.sh  hello_world.sh  hello_world_3.sh
+
 $ rm -i hello_world_3.sh
+rm: remove regular file ‘hello_world_3.sh’? y
+
+$ ls
+hello_world_copy.sh  hello_world.sh
 ```
 
 > ## Exercise
-> Use nano to edit your hello_world_copy.sh file to print something else. Rename your file to something descriptive of what it prints. 
+> Use nano to edit your hello_world_copy.sh file to print something else. Rename your file to something descriptive of what it prints. Run your new code.
 >> ## Solution
 >> ~~~
->> ```bash
 >> nano hello_world_copy.sh
->> ```
->> change "hello world" to "training script"
+>> 
+>> change "hello world" to "hello universe!"
 >> Save and exit
->> ```
->> ```bash
->> mv hello_world_copy.sh training.sh
+>> 
+>> mv hello_world_copy.sh hello_universe.sh
+>> $ ls
+>> hello_universe.sh  hello_world.sh
+>>
+>> $ source hello_universe.sh
 >> ~~~
 >> {: .output}
 >{: .solution}
@@ -231,7 +264,9 @@ Different files on different systems belong to different people and you don't wa
 $ ls -l
 ```
 ```output
-> TODO
+total 8
+-rw-rw-r-- 1 edu02 edu02 32 Aug 16 06:31 hello_universe.sh
+-rw-rw-r-- 1 edu02 edu02 28 Aug 16 06:25 hello_world.sh
 ```
 The output has the following format `<type><permissions> <link> <owner> <group> <size> <date modified> <name>`. The first character is the type - we will skip this and go directly to the 9 characters after that. The first three are the permissions for the owner. They will always be listed in the order read, write, and execute. If the letter is there than that permission is enabled. For instance if the first three charcters were `rw-` then the owner would have permission to read and write a file or directory but not permission to execute it. The next three characters are the groups permissions. Anyone who belongs to the group listed in the fourth column is assigned these permissions. The permissions work the same way as the owner's permissions. For instance, if the middle three characters are `r-x` then anyone in the group has permission to view the file and to execute it, but not to modify it. Finally, the last three charcters are for everyone else. 
 
@@ -239,6 +274,7 @@ The output has the following format `<type><permissions> <link> <owner> <group> 
 > To figure out what groups you are part of (which can be useful to understand if you have permission to do something) you can type 
 > ```bash
 > $ groups
+> edu02
 > ```
 {: .callout}
 
@@ -246,18 +282,26 @@ You modify the permissions on a file or directory using the `chmod` command. You
 
 ```bash
 $ ls -l hello_world.sh
+-rw-rw-r-- 1 edu02 edu02 28 Aug 16 06:25 hello_world.sh
+
 $ chmod o+x hello_world.sh
 $ ls -l hello_world.sh
+-rw-rw-r-x 1 edu02 edu02 28 Aug 16 06:25 hello_world.sh
 ```
 > ## Exercise
 > What are the permissions on the training.sh? Who owns the file? What group does it belong to? Modify the permissions to remove the groups ability to read the file. Double check that the permissions changed. Then add the permissions back.
 >> ## Solution
 >> ~~~
->> ```bash
->> $ chmod g-r training.sh
->> $ ls -l
->> $ chmod g+r training.sh
->> ```
+>> $ ls -l hello_universe.sh
+>> -rw-rw-r-- 1 edu02 edu02 32 Aug 16 06:31 hello_universe.sh
+>>
+>> $ chmod g-r hello_universe.sh
+>> $ ls -l hello_universe.sh
+>> -rw--w-r-- 1 edu02 edu02 32 Aug 16 06:31 hello_universe.sh
+>> 
+>> $ chmod g+r hello_universe.sh
+>> $ ls -l hello_universe.sh
+>> -rw-rw-r-- 1 edu02 edu02 32 Aug 16 06:31 hello_universe.sh
 >> ~~~
 >>{: .output}
 >{: .solution}
@@ -272,7 +316,10 @@ When you are working on an HPC you are using a shared resource. It can be helpfu
 $ du -h /home/edu02
 ```
 ```output
-> 40K	/home/edu02
+8.0K	/home/edu02/hpc_course/code
+0	/home/edu02/hpc_course/data
+8.0K	/home/edu02/hpc_course
+52K	/home/edu02
 ```
 > ## Interrupting a command
 > Help! you forgot to add a directory and now it is printing the size of every file. `ctl+c` will interrupt the command and return your cursor and command line.
@@ -290,10 +337,17 @@ Sometimes you have files and/or paths that you want multiple scripts (in differe
 ```bash
 $ echo $PATH
 ```
+```output
+/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+```
 
 To create an environemnt variable you use the `export` keyword with the syntax `export ENV_VARIABLE=value`:
 ```bash
 $ export DATA_DIR=/home/edu02/hpc_workshop/data
+$ echo $DATA_DIR
+```
+```output
+/home/edu02/hpc_workshop/data
 ```
 This creates the variable for an individual shell window. If you exit that window the variable disappears. If you want to make a permenant variable, you can copy and paste the entire export command into your `.bashrc` or `.bash_profile` file. This is a file that lives in your home directory and is executed every time you open a shell window.
 
@@ -312,11 +366,11 @@ HPCs are a great resouce for computing - but they are not a long term storage so
 
 Now we will use `scp` to copy our `hello_world.sh` script to our local directory (`.`). After executing the `scp` command you will be asked for your password. Use your ssh password. 
 ```bash
-$ scp edu02@172.16.55.121:/home/edu02/hpc_course/hello_world.sh .
+$ scp edu02@172.16.55.121:/home/edu02/hpc_course/code/hello_world.sh .
 ```
 ```output
-> edu02@172.16.55.121's password: 
-> hello_world.sh                                     100%  130     0.1KB/s   00:01
+ edu02@172.16.55.121's password: 
+ hello_world.sh                                     100%  130     0.1KB/s   00:01
 ```
 
 
@@ -330,13 +384,11 @@ Finally, if you are using version control to track your development and have a r
 > Use `scp` or `rsync` to move the files you downloaded for this course to Bura.
 >> ## Solution
 >> ~~~
->> ```bash
->> $ TODO
->> ```
->> ~~~[
+>> $ TODO: FILL IN HERE MEET
+>> ~~~
 >> {: .output}
 >{: .solution}
-{: .challenge}]()
+{: .challenge}()
 
 > ## Other really useful commands that we do not have time to cover
 > As you start using an HPC, you might want to check out these commands:
@@ -345,7 +397,7 @@ Finally, if you are using version control to track your development and have a r
 > Finding things: `grep`, `find`
 > Changing ownership: `chown`
 > System management: `df`, `free -m`, `ps`, `kill`
-> 
+> See the Command Line Interface (CLI) in the Extras menu for even more!
 {: .callout}
 {% include links.md %}
 
