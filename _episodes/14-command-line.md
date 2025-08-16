@@ -28,6 +28,10 @@ You have already opened a shell to ssh into bura. Now that your shell is pointin
 ## File Navigation
 When you view your file system via a graphical interface, you are used to clicking on one folder to look inside and then clicking on another folder inside that one. This folder (or directory) structure is called a directory tree. In the same way that you can click to navigate around your file system, you can type commands into the shell.
 
+Bura is set up with a top level folder or directory `/`. There are a lot of directories in the the `/` directory including `bin`, `home`, and `include`. Our individual user directories are contained within the `home` directory. This figure shows what that directory structure looks like.
+
+![Directory Structure of Bura](../assets/img/hpc_file_system_figure.jpg){: .image-with-shadow width="700px"}
+
 ### What directory am I in?
 The `pwd` command stands for "print working directory". You can always use this command to ask the shell "where am I?" (you will be surprised how often this comes up).
 ```bash
@@ -121,11 +125,56 @@ $ echo "hello world"
 ```
 
 ## File Manipulation
-Let's create a simple script that prints "hello world" to the screen. We will use the editor nano. The great thing about nano is that it tells you how to save and exit in the screen, it is also ideal for ssh as it opens directly in the shell window you are using. 
+### Shell scripts
+Let's create a simple script that prints "hello world" to the screen. 
+Just like you can write a script in python that executes a series of python commands, you can write a shell script: a text file  that contains a series of shell commands. Shell scripting can be very useful in science, including:
+- **Reproducibility** – Shell scripts can be saved and re-executed at a later date. Commands executed in the shell are also saved and can be referred to later. 
+- **Throughput** – Many tasks in science are repetitive. For example, if we were conducting a calculation on 100 samples and wanted to do some simple statistics on reads, we could use loops to perform this task on all sets of reads. This is much quicker than using a GUI.
+- **Integration** – Shell scripting allows you to integrate several programs into workflows.
+- **Efficiency** – GUIs can be resource-intensive. Using the shell frees resources that would otherwise be used for the GUI.
+
+Shell scripts are text files that contain shell commands. Our first shell script will print "hello world" to the screen, wait 2 seconds and then exit. We will use the text editor nano. The great thing about nano is that it tells you how to save and exit in the screen, it is also ideal for ssh as it opens directly in the shell window you are using. Here are the most commonly used nano commands:
+- `Ctrl + O` — Save
+- `Ctrl + X` — Exit
+- `Ctrl + K` — Cut line
+- `Ctrl + U` — Paste line
+
 ```bash
 $ nano shell_example.sh
 ```
-In the window that pops up, let's type `echo "hello world`. Then press control-o to save (Write out) and control-x to exit. 
+In the window that pops up, let's type `echo "hello world"` and save and exit. To run your shell script, type:
+```bash
+$ source shell_example.sh
+```
+
+### Pausing for a minute
+Sometimes you want your shell script to wait for a little while for a process to finish before it continues with the rest of the commands. The `sleep` command suspends execution for a specified number of seconds. For example, if you wanted to pause for 5 seconds, you can type:
+
+```bash
+$ sleep 5
+```
+
+This will wait 5 seconds and then return your cursor to the command line.
+
+> ## Exercise
+> Use nano to edit your shell_example.sh file to sleep for 2 seconds after it prints "hello world"
+>> ## Solution
+>> ```bash
+>> nano shell_example.sh
+>> ```
+>> add as a new line
+>>```bash
+>> sleep 2
+>>``
+>> Test your new script
+>> ```bash
+>> source shell_example.sh
+>> ```
+>> {: .output}
+>{: .solution}
+{: .challenge}
+
+
 Oops - we just create that script in our top level directory and it belongs in our code directory (because it is a piece of code). We can move the file to the code directory with the `mv` command. The format is `mv` thing-you-want-to-move where-you-want-to-move-it
 ```bash
 $ mv shell_example.sh code
@@ -218,6 +267,7 @@ $ ls -l hello_world.sh
 Later in this lesson you will learn how to monitor specific tasks that you run on the HPC. Sometimes you want information about the file system or what processes are running outside of the HPC task manager.
 When you are working on an HPC you are using a shared resource. It can be helpful to know how much of that resource you are using. You can do this with the `du -h <directory>` command. The -h makes the output format human readable (e.g. the size is in Kb, Mb, Gb). First, we will look at the size of our home directory.
 
+### How much space am I using?
 ```bash
 $ du -h /home/edu02
 ```
@@ -228,11 +278,32 @@ $ du -h /home/edu02
 > Help! you forgot to add a directory and now it is printing the size of every file. `ctl+c` will interrupt the command and return your cursor and command line.
 {: .callout}
 
-Another really useful command is seeing what processes are running and who is running them. You can do with the `htop` command. 
+### What processes are running and how are they using the HPC?
+Another really useful command is seeing what processes are running and who is running them. You can do with the `top` command. 
 ```bash
-$ htop
+$ top
 ```
-The important parts of the output are the PID (process id), USER (who is running the process), %CPU (what percentage of the CPU is being used by that process), %MEM (what percentage of the memory is being used by that process), TIME (how long has the process been running), and COMMAND (what is the command that was run). If you are worried something you did is taking too long or the computer is running slower than you expect, running `htop` is a really good way to get an overview of who is doing what on the system. Note that this will continue to run until you tell it to stop. Type `q` to exit.
+The important parts of the output are the PID (process id), USER (who is running the process), %CPU (what percentage of the CPU is being used by that process), %MEM (what percentage of the memory is being used by that process), TIME (how long has the process been running), and COMMAND (what is the command that was run). If you are worried something you did is taking too long or the computer is running slower than you expect, running `top` is a really good way to get an overview of who is doing what on the system. Note that this will continue to run until you tell it to stop. Type `q` to exit.
+
+### Environment variables
+Sometimes you have files and/or paths that you want multiple scripts (in different files) to point to. Instead of hard-coding these in every file, you can create an environment variable that each script can look at to get the file or path name. This means that if you decide to change the path or file, you just have to do it in one place instead of multiple places where its easy to miss one. To view an environment variable that has already been created, you can use `echo` and the environment variable, preceeded by the `$`. Environment variables are conventionally all upper case. For example, one environment variable that is commonly used is the `PATH` variable. This tells your shell which directories and sub directories to search to find a command you type. Let us look at what is in our `PATH` variable by default:
+```bash
+$ echo $PATH
+```
+
+To create an environemnt variable you use the `export` keyword with the syntax `export ENV_VARIABLE=value`:
+```bash
+$ export DATA_DIR=/home/edu02/hpc_workshop/data
+```
+This creates the variable for an individual shell window. If you exit that window the variable disappears. If you want to make a permenant variable, you can copy and paste the entire export command into your `.bashrc` or `.bash_profile` file. This is a file that lives in your home directory and is executed every time you open a shell window.
+
+> ## Help! I over wrote my PATH variable and now nothing works
+> The `PATH` variable tells your shell where to find all of its commands. If you overwrite this, a lot of things break. For this reason you usually append or prepend to your `PATH` variable rather than overwriting it entirely. If you overwrite it you can always close the shell window and reopen it. To append a directory to your `PATH` variable use the `:` between `PATH` and the new directory. For example, to add our `code` directory to the end of our path we can type:
+> ```bash
+> $ export PATH=$PATH:/home/edu02/hpc_workshop/code
+> ```
+where `edu02` is replaced with your Bura user name.
+{: .callout}
 
 ## Getting files to and from the HPC
 HPCs are a great resouce for computing - but they are not a long term storage solution. You will want to move the files from the HPC to a file system that you control. You may also want to prototype a script locally and then move it to the HPC and run it. There are three ways you can move files back and forth: `scp`, `rsync`, and using GitHub (or other version control).
@@ -247,7 +318,11 @@ $ scp edu02@172.16.55.121:/home/edu02/hpc_course/hello_world.sh .
 > edu02@172.16.55.121's password: 
 > hello_world.sh                                     100%  130     0.1KB/s   00:01
 ```
+
+
 Another option for moving files is `rsync`. This actually checks that the file or directory has been updated and only moves new things. The format is the same as `scp`: `rsync <what you want to copy> <where to put it>`.
+
+Another option for moving files is the file transfer protocol `ftp` and secure file transfer protocol or `sftp`. This allows you to actually log onto the HPC and upload files from your machine or download them from the HPC to your local machine. To use `sftp` basic syntax is `sftp user@address`. You will then be promted for your password. Once you are logged in you can interact with the shell with basic commands like `ls` and `cd`. To download a file from the HPC to your local computer type `get <filename>`. To upload a file from your local machine to the HPC, type `put <filename>`
 
 Finally, if you are using version control to track your development and have a remote server (e.g. GitHub, Bitbucket). Then you can use this to create another copy of your repository on the HPC and transfer files via the remote server.
 
