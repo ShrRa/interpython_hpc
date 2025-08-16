@@ -1,0 +1,981 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="last-modified" content="2025-08-14 17:22:32 -0700">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta "search-domain" used for google site search function google_search() -->
+    <meta name="search-domain" value="">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/lesson.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+     <link rel="stylesheet" type="text/css" href="/assets/css/fonts.css" />
+    
+    <link rel="license" href="#license-info" />
+
+    
+
+
+
+    <!-- Favicons for everyone -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/favicons/incubator/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/favicons/incubator/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/favicons/incubator/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/favicons/incubator/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/assets/favicons/incubator/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/favicons/incubator/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/assets/favicons/incubator/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/favicons/incubator/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/assets/favicons/incubator/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="The Carpentries Incubator - Introduction to High Performance Computing for astronomical software development"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="/assets/favicons/incubator/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="/assets/favicons/incubator/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="/assets/favicons/incubator/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="/assets/favicons/incubator/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="/assets/favicons/incubator/mstile-310x310.png" />
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+  <title>
+  Performance analysis tools &ndash; Introduction to High Performance Computing for astronomical software development
+  </title>
+
+  </head>
+  <body>
+    
+
+
+
+
+
+
+
+<div class="panel panel-default life-cycle">
+  <div id="life-cycle" class="panel-body pre-alpha">
+    This lesson is still being designed and assembled (Pre-Alpha version)
+  </div>
+</div>
+
+
+
+
+
+    <div class="container">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      
+      
+      <a href="/index.html" class="pull-left">
+        <img class="navbar-logo" src="/assets/img/incubator-logo-blue.svg" alt="The Carpentries Incubator logo" />
+      </a>
+      
+
+      
+      <a class="navbar-brand" href="/index.html">Home</a>
+
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+
+	
+        <li><a href="/CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+
+        
+	
+        <li><a href="/setup.html">Setup</a></li>
+
+        
+        
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+            
+            <li><a href="/00-setting-the-scene/index.html">Setting the Scene</a></li>
+            
+            
+            <li><a href="/10-section1-intro/index.html">Section 1: HPC basics</a></li>
+            
+            
+            <li><a href="/11-hpc-intro/index.html">HPC Intro</a></li>
+            
+            
+            <li><a href="/12-lsst-hpc/index.html">LSST HPC facilities and opportunities</a></li>
+            
+            
+            <li><a href="/13-bura-access/index.html">Bura access</a></li>
+            
+            
+            <li><a href="/14-command-line/index.html">Command line basics</a></li>
+            
+            
+            <li><a href="/15-bura-setup/index.html">Bura Setup</a></li>
+            
+            
+            <li><a href="/15-slurm/index.html">Introduction to Slurm workload manager</a></li>
+            
+            
+            <li><a href="/20-section2-intro/index.html">Section 2: HPC Bura</a></li>
+            
+            
+            <li><a href="/21-cpu-sequential/index.html">Intro code examples</a></li>
+            
+            
+            <li><a href="/22-cpu-parallel/index.html">Parallelising our code for CPU</a></li>
+            
+            
+            <li><a href="/23-gpu-implementation/index.html">Implementing code examples for running on GPU</a></li>
+            
+            
+            <li><a href="/24-resource-requirements/index.html">Resource requirements</a></li>
+            
+            
+            <li><a href="/25-resource-monitoring-example/index.html">Resource optimization</a></li>
+            
+            
+            <li><a href="/26-performance-analysis/index.html">Performance analysis tools</a></li>
+            
+            
+            <li><a href="/30-wrap-up/index.html">Wrap-up</a></li>
+            
+            
+            <li><a href="/cli_lesson_monolithic_rm_warning_real_example/index.html">Command line interface (CLI) </a></li>
+            
+	    <li role="separator" class="divider"></li>
+            <li><a href="/aio/index.html">All in one page (Beta)</a></li>
+          </ul>
+        </li>
+        
+	
+
+	
+	
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Extras <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/reference.html">Reference</a></li>
+            
+            
+            
+              <li><a href="/about/index.html">About</a></li>
+            
+            
+            
+            
+              <li><a href="/git-intro/index.html">Additional Material: Git Intro</a></li>
+            
+            
+            
+            
+              <li><a href="/figures/index.html">Figures</a></li>
+            
+            
+            
+            
+              <li><a href="/guide/index.html">Instructor Notes</a></li>
+            
+            
+            
+            
+              <li><a href="/common-issues/index.html">Common Issues, Fixes & Tips</a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href=""></a></li>
+            
+            
+            
+            
+              <li><a href="/quiz/index.html">Quiz</a></li>
+            
+            
+          </ul>
+        </li>
+	
+
+	
+        <li><a href="/LICENSE.html">License</a></li>
+	
+	<li><a href="/edit//_episodes/26-performance-analysis.md" data-checker-ignore>Improve this page <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></li>
+	
+      </ul>
+      <form class="navbar-form navbar-right" role="search" id="search" onsubmit="google_search(); return false;">
+        <div class="form-group">
+          <input type="text" id="google-search" placeholder="Search..." aria-label="Google site search">
+        </div>
+      </form>
+    </div>
+  </div>
+</nav>
+
+      
+
+
+<div class="alert alert-info text-center" role="alert">
+  This lesson is part of
+  <a href="https://github.com/carpentries-incubator/proposals/#the-carpentries-incubator" data-checker-ignore>
+    The Carpentries Incubator</a>, a place to share and use each other's
+  Carpentries-style lessons. <strong>This lesson has not been reviewed by and is
+  not endorsed by The Carpentries</strong>.
+</div>
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/25-resource-monitoring-example/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+    <h3 class="maintitle"><a href="/">Introduction to High Performance Computing for astronomical software development</a></h3>
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/30-wrap-up/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+<article>
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <h1 class="maintitle">Performance analysis tools</h1>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<blockquote class="objectives">
+  <h2>Overview</h2>
+
+  <div class="row">
+    <div class="col-md-3">
+      <strong>Teaching:</strong> 30 min
+      <br/>
+      <strong>Exercises:</strong> 10 min
+    </div>
+    <div class="col-md-9">
+      <strong>Questions</strong>
+      <ul>
+	
+	<li>
+</li>
+	
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-9">
+      <strong>Objectives</strong>
+      <ul>
+	
+      </ul>
+    </div>
+  </div>
+
+</blockquote>
+
+<h2 id="resource-monitoring-and-performance-analysis">Resource Monitoring and Performance Analysis</h2>
+
+<h3 id="monitoring-job-performance">Monitoring Job Performance</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="c">#SBATCH --partition=gpu</span>
+<span class="c">#SBATCH --gpus=1</span>
+<span class="c">#SBATCH --job-name=ResourceMonitor</span>
+<span class="c">#SBATCH --output=ResourceMonitor_%j.out</span>
+<span class="c">#SBATCH --time=00:10:00  # 10 minutes max (5 for monitoring + buffer)</span>
+
+<span class="c"># --------- Configuration ---------</span>
+<span class="nv">LOG_FILE</span><span class="o">=</span><span class="s2">"resource_monitor.log"</span>
+<span class="nv">INTERVAL</span><span class="o">=</span>30    <span class="c"># Interval between logs in seconds</span>
+<span class="nv">DURATION</span><span class="o">=</span>60   <span class="c"># Total duration in seconds (5 minutes)</span>
+<span class="nv">ITERATIONS</span><span class="o">=</span><span class="k">$((</span>DURATION <span class="o">/</span> INTERVAL<span class="k">))</span>
+
+<span class="c"># --------- Start Monitoring ---------</span>
+<span class="nb">echo</span> <span class="s2">"Starting Resource Monitoring for </span><span class="nv">$DURATION</span><span class="s2"> seconds (~</span><span class="k">$((</span>DURATION/60<span class="k">))</span><span class="s2"> minutes)..."</span>
+<span class="nb">echo</span> <span class="s2">"Logging to: </span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"------ Monitoring Started at </span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2"> ------"</span> <span class="o">&gt;&gt;</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+
+<span class="c"># --------- System Info Check ---------</span>
+<span class="nb">echo</span> <span class="s2">"==== System Info Check ===="</span> | <span class="nb">tee</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"Hostname: </span><span class="si">$(</span><span class="nb">hostname</span><span class="si">)</span><span class="s2">"</span> | <span class="nb">tee</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+
+<span class="c"># Check NVIDIA driver and GPU presence</span>
+<span class="k">if </span><span class="nb">command</span> <span class="nt">-v</span> nvidia-smi &amp;&gt; /dev/null<span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"✅ nvidia-smi is available."</span> | <span class="nb">tee</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+    <span class="k">if </span>nvidia-smi &amp;&gt;&gt; <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span><span class="p">;</span> <span class="k">then
+        </span><span class="nb">echo</span> <span class="s2">"✅ GPU detected and driver is working."</span> | <span class="nb">tee</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+    <span class="k">else
+        </span><span class="nb">echo</span> <span class="s2">"⚠️ NVIDIA-SMI failed. Check GPU node or driver issues."</span> | <span class="nb">tee</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+    <span class="k">fi
+else
+    </span><span class="nb">echo</span> <span class="s2">"❌ nvidia-smi is not installed."</span> | <span class="nb">tee</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+<span class="k">fi
+
+</span><span class="nb">echo</span> <span class="s2">"Checking for NVIDIA GPU presence on PCI bus..."</span> | <span class="nb">tee</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+<span class="k">if </span>lspci | <span class="nb">grep</span> <span class="nt">-i</span> nvidia &amp;&gt;&gt; <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span><span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"✅ NVIDIA GPU found on PCI bus."</span> | <span class="nb">tee</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+<span class="k">else
+    </span><span class="nb">echo</span> <span class="s2">"❌ No NVIDIA GPU detected on this node."</span> | <span class="nb">tee</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+<span class="k">fi
+
+</span><span class="nb">echo</span> <span class="s2">""</span> | <span class="nb">tee</span> <span class="nt">-a</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+
+<span class="c"># --------- Trap CTRL+C for Clean Exit ---------</span>
+<span class="nb">trap</span> <span class="s2">"echo 'Stopping monitoring...'; echo '------ Monitoring Ended at </span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2"> ------' &gt;&gt; </span><span class="se">\"</span><span class="nv">$LOG_FILE</span><span class="se">\"</span><span class="s2">; exit"</span> SIGINT SIGTERM
+
+<span class="c"># --------- Monitoring Loop ---------</span>
+<span class="k">for</span> <span class="o">((</span><span class="nv">i</span><span class="o">=</span>1<span class="p">;</span> i&lt;<span class="o">=</span>ITERATIONS<span class="p">;</span> i++<span class="o">))</span><span class="p">;</span> <span class="k">do
+    </span><span class="nb">echo</span> <span class="s2">"========================== </span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2"> =========================="</span> <span class="o">&gt;&gt;</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+
+    <span class="c"># GPU usage monitoring</span>
+    <span class="nb">echo</span> <span class="s2">"--- GPU Usage (nvidia-smi) ---"</span> <span class="o">&gt;&gt;</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+    nvidia-smi 2&gt;&amp;1 | <span class="nb">grep</span> <span class="nt">-v</span> <span class="s2">"libnvidia-ml.so"</span> <span class="o">&gt;&gt;</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+    <span class="nb">echo</span> <span class="s2">""</span> <span class="o">&gt;&gt;</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+
+    <span class="c"># CPU and Memory monitoring</span>
+    <span class="nb">echo</span> <span class="s2">"--- CPU and Memory Usage (top) ---"</span> <span class="o">&gt;&gt;</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+    top <span class="nt">-b</span> <span class="nt">-n</span> 1 | <span class="nb">head</span> <span class="nt">-20</span> <span class="o">&gt;&gt;</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+    <span class="nb">echo</span> <span class="s2">""</span> <span class="o">&gt;&gt;</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+
+    <span class="nb">sleep</span> <span class="nv">$INTERVAL</span>
+<span class="k">done
+
+</span><span class="nb">echo</span> <span class="s2">"------ Monitoring Ended at </span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span><span class="s2"> ------"</span> <span class="o">&gt;&gt;</span> <span class="s2">"</span><span class="nv">$LOG_FILE</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"✅ Resource monitoring completed."</span>
+</code></pre></div></div>
+<hr />
+
+<h2 id="understanding-outputs---top---cpu-and-memory-monitoring">Understanding Outputs - <code class="language-plaintext highlighter-rouge">top</code> - CPU and Memory Monitoring</h2>
+
+<h3 id="example-output">Example Output:</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--- CPU and Memory Usage (top) ---
+top - 17:53:49 up 175 days,  9:41,  0 users,  load average: 1.01, 1.06, 1.08
+Tasks: 765 total,   1 running, 764 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  2.2 us,  0.1 sy,  0.0 ni, 97.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem : 515188.2 total, 482815.2 free,  17501.5 used,  14871.5 buff/cache
+MiB Swap:   4096.0 total,   4072.2 free,     23.8 used. 493261.3 avail Mem
+</code></pre></div></div>
+
+<h3 id="explanation">Explanation:</h3>
+
+<h4 id="header-line---system-uptime-and-load-average">Header Line - System Uptime and Load Average</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>top - 17:53:49 up 175 days,  9:41,  0 users,  load average: 1.01, 1.06, 1.08
+</code></pre></div></div>
+
+<ul>
+  <li><strong>17:53:49</strong> - Current time.</li>
+  <li><strong>up 175 days, 9:41</strong> - How long the system has been running.</li>
+  <li><strong>0 users</strong> - Number of users logged in.</li>
+  <li>
+    <p><strong>load average</strong> - System load over 1, 5, and 15 minutes.</p>
+
+    <ul>
+      <li>A load of 1.00 means one CPU core is fully utilized.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="task-summary">Task Summary</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tasks: 765 total,   1 running, 764 sleeping,   0 stopped,   0 zombie
+</code></pre></div></div>
+
+<ul>
+  <li><strong>765 total</strong> - Total processes.</li>
+  <li><strong>1 running</strong> - Actively running.</li>
+  <li><strong>764 sleeping</strong> - Waiting for input or tasks.</li>
+  <li><strong>0 stopped</strong> - Stopped processes.</li>
+  <li><strong>0 zombie</strong> - Zombie processes (defunct).</li>
+</ul>
+
+<h4 id="cpu-usage">CPU Usage</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%Cpu(s):  2.2 us,  0.1 sy,  0.0 ni, 97.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>us</strong></td>
+      <td>User CPU time - 2.2%</td>
+    </tr>
+    <tr>
+      <td><strong>sy</strong></td>
+      <td>System (kernel) time - 0.1%</td>
+    </tr>
+    <tr>
+      <td><strong>ni</strong></td>
+      <td>Nice (priority) - 0.0%</td>
+    </tr>
+    <tr>
+      <td><strong>id</strong></td>
+      <td>Idle - 97.7%</td>
+    </tr>
+    <tr>
+      <td><strong>wa</strong></td>
+      <td>Waiting for I/O - 0.0%</td>
+    </tr>
+    <tr>
+      <td><strong>hi</strong></td>
+      <td>Hardware interrupts - 0.0%</td>
+    </tr>
+    <tr>
+      <td><strong>si</strong></td>
+      <td>Software interrupts - 0.0%</td>
+    </tr>
+    <tr>
+      <td><strong>st</strong></td>
+      <td>Steal time (virtualization) - 0.0%</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="memory-usage">Memory Usage</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MiB Mem : 515188.2 total, 482815.2 free,  17501.5 used,  14871.5 buff/cache
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>total</strong></td>
+      <td>Total RAM (515188.2 MiB)</td>
+    </tr>
+    <tr>
+      <td><strong>free</strong></td>
+      <td>Free RAM (482815.2 MiB)</td>
+    </tr>
+    <tr>
+      <td><strong>used</strong></td>
+      <td>Used by programs (17501.5 MiB)</td>
+    </tr>
+    <tr>
+      <td><strong>buff/cache</strong></td>
+      <td>Disk cache and buffers (14871.5 MiB)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="swap-usage">Swap Usage</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MiB Swap:   4096.0 total,   4072.2 free,     23.8 used. 493261.3 avail Mem
+</code></pre></div></div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Field</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>total</strong></td>
+      <td>Swap space available (4096 MiB)</td>
+    </tr>
+    <tr>
+      <td><strong>free</strong></td>
+      <td>Free swap (4072.2 MiB)</td>
+    </tr>
+    <tr>
+      <td><strong>used</strong></td>
+      <td>Swap used (23.8 MiB)</td>
+    </tr>
+    <tr>
+      <td><strong>avail Mem</strong></td>
+      <td>Available memory for new tasks (493261.3 MiB)</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>These explanations cover the descriptions of each of the different parameters given by the <code class="language-plaintext highlighter-rouge">top</code> output.</li>
+</ul>
+
+<h3 id="performance-comparison-script">Performance Comparison Script</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="c1"># Extracted timings from the printed output
+</span><span class="n">methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Sequential (CPU)'</span><span class="p">,</span> <span class="s">'MPI (PCPU)'</span><span class="p">,</span> <span class="s">'CUDA (GPU)'</span><span class="p">]</span>
+<span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="mf">70.430</span><span class="p">,</span> <span class="mf">13.507</span><span class="p">,</span> <span class="mf">0.341</span><span class="p">]</span> <span class="c1"># Replace the times with the times printed by running the above scripts
+</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">bar</span><span class="p">(</span><span class="n">methods</span><span class="p">,</span> <span class="n">times</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'blue'</span><span class="p">,</span> <span class="s">'green'</span><span class="p">,</span> <span class="s">'red'</span><span class="p">])</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Execution Time (seconds)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Performance Comparison: CPU vs MPI vs GPU'</span><span class="p">)</span>
+
+<span class="c1"># Add labels above bars
+</span><span class="k">for</span> <span class="n">bar</span><span class="p">,</span> <span class="n">time</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">times</span><span class="p">):</span>
+    <span class="n">plt</span><span class="p">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="p">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="p">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">bar</span><span class="p">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+             <span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="p">.</span><span class="mi">3</span><span class="n">f</span><span class="si">}</span><span class="s">s'</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">'bottom'</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="p">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">'performance_comparison.png'</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">'tight'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<blockquote class="challenge">
+  <h2 id="exercise-resource-efficiency-analysis">Exercise: Resource Efficiency Analysis</h2>
+  <p>Run the above python script to create a comparitive analysis between the different methods you used in this tutorial to understand the efficiency of different resources</p>
+</blockquote>
+
+<blockquote class="solution">
+  <h2 id="example-solution">Example Solution</h2>
+  <p><img src="../fig/comparision_cpu_gpu.png" alt="Performance Comparison" /></p>
+
+  <p>This plot shows the execution time comparison between CPU, MPI, and GPU implementations.</p>
+
+</blockquote>
+
+<h2 id="best-practices-and-common-pitfalls">Best Practices and Common Pitfalls</h2>
+
+<h3 id="resource-allocation-best-practices">Resource Allocation Best Practices</h3>
+
+<ol>
+  <li><strong>Match resources to workload requirements</strong>
+    <ul>
+      <li>Don’t request more resources than you can use</li>
+      <li>Consider memory requirements carefully</li>
+      <li>Use appropriate partitions/queues</li>
+    </ul>
+  </li>
+  <li><strong>Test with small jobs first</strong>
+    <ul>
+      <li>Validate your scripts with shorter runs</li>
+      <li>Check resource utilization before scaling up</li>
+    </ul>
+  </li>
+  <li><strong>Monitor and optimize</strong>
+    <ul>
+      <li>Use profiling tools to identify bottlenecks</li>
+      <li>Adjust resource requests based on actual usage</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="common-mistakes-to-avoid">Common Mistakes to Avoid</h3>
+
+<ol>
+  <li><strong>Over-requesting resources</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Bad: Requesting 32 cores for sequential code</span>
+<span class="c">#SBATCH --cpus-per-task=32</span>
+./sequential_program
+   
+<span class="c"># Good: Match core count to parallelization</span>
+<span class="c">#SBATCH --cpus-per-task=1</span>
+./sequential_program
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Memory allocation errors</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Bad: Not specifying memory for memory-intensive jobs</span>
+<span class="c">#SBATCH --partition=defaultq</span>
+   
+<span class="c"># Good: Specify adequate memory</span>
+<span class="c">#SBATCH --partition=defaultq</span>
+<span class="c">#SBATCH --mem=16G</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>GPU job inefficiencies</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Bad: Too many CPU cores for GPU job</span>
+<span class="c">#SBATCH --cpus-per-task=32</span>
+<span class="c">#SBATCH --gpus-per-node=1</span>
+   
+<span class="c"># Good: Balanced CPU-GPU ratio</span>
+<span class="c">#SBATCH --cpus-per-task=4</span>
+<span class="c">#SBATCH --gpus-per-node=1</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<hr />
+<h2 id="summary">Summary</h2>
+
+<p>Resource optimization in HPC involves understanding your workload characteristics and matching them with appropriate resource allocations. Key takeaways:</p>
+
+<ul>
+  <li>Profile your code to understand resource requirements</li>
+  <li>Use sequential jobs for single-threaded applications</li>
+  <li>Leverage parallel computing for scalable workloads</li>
+  <li>Utilize GPUs for massively parallel computations</li>
+  <li>Monitor performance and adjust allocations accordingly</li>
+  <li>Avoid common pitfalls like over-requesting resources</li>
+</ul>
+
+<p>Efficient resource utilization not only improves your job performance but also ensures fair access to shared HPC resources for all users.</p>
+
+<hr />
+
+<blockquote class="prereq">
+  <h2 id="revisit-earlier-exercises">Revisit Earlier Exercises</h2>
+
+  <p>Now that you’ve learned how to submit jobs using Slurm and request computational resources effectively, revisit the following exercises from the earlier lesson:</p>
+
+  <ul>
+    <li><a href="https://meet-vyas-dev.github.io/interpython_hpc/12-code-examples/index.html">Exercise: MPI using <code class="language-plaintext highlighter-rouge">mpi4py</code></a></li>
+    <li><a href="https://meet-vyas-dev.github.io/interpython_hpc/12-code-examples/index.html">Exercise: GPU vector addition with <code class="language-plaintext highlighter-rouge">numba-cuda</code></a></li>
+  </ul>
+
+  <p>Try running them now on your cluster using the appropriate Slurm script and resource flags.</p>
+</blockquote>
+
+<blockquote class="solution">
+  <h2 id="solution-1-slurm-submission-script-for-exercise-mpi-with-mpi4py">Solution 1: Slurm Submission Script for Exercise MPI with <code class="language-plaintext highlighter-rouge">mpi4py</code></h2>
+
+  <p>The following script can be used to submit your MPI-based Python program (<code class="language-plaintext highlighter-rouge">mpi_hpc_ws.py</code>) on an HPC cluster using Slurm:</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH --job-name=mpi_hpc_ws</span>
+<span class="c">#SBATCH --output=mpi_%j.out</span>
+<span class="c">#SBATCH --error=mpi_%j.err</span>
+<span class="c">#SBATCH --partition=defaultq</span>
+<span class="c">#SBATCH --nodes=2</span>
+<span class="c">#SBATCH --ntasks=4</span>
+<span class="c">#SBATCH --time=00:10:00</span>
+<span class="c">#SBATCH --mem=16G</span>
+
+<span class="c"># Load required modules</span>
+module purge
+module load Python/3.9.1
+module list
+
+
+Create a python virtual environment 
+python3 <span class="nt">-m</span> venv name_of_your_venv
+
+Activate your Python environment
+<span class="nb">source </span>name_of_your_venv/bin/activate
+
+<span class="c"># Run the MPI job</span>
+mpirun <span class="nt">-np</span> 4 python mpi_hpc_ws.py
+</code></pre></div>  </div>
+
+  <p>Make sure your virtual environment has <code class="language-plaintext highlighter-rouge">mpi4py</code> installed and that your system has access to the OpenMPI runtime via <code class="language-plaintext highlighter-rouge">mpirun</code>. Adjust the number of nodes and tasks depending on the cluster policies.</p>
+</blockquote>
+
+<blockquote class="solution">
+  <h2 id="solution-2-slurm-submission-script-for-exercise-gpu-with-numba-cuda">Solution 2: Slurm Submission Script for Exercise GPU with <code class="language-plaintext highlighter-rouge">numba-cuda</code></h2>
+
+  <p>The following script can be used to submit a GPU-accelerated Python job (<code class="language-plaintext highlighter-rouge">numba_cuda_test.py</code>) using Slurm:</p>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH --job-name=Numba_Cuda</span>
+<span class="c">#SBATCH --output=Numba_Cuda_%j.out</span>
+<span class="c">#SBATCH --error=Numba_Cuda_%j.err</span>
+<span class="c">#SBATCH --partition=gpu</span>
+<span class="c">#SBATCH --nodes=1</span>
+<span class="c">#SBATCH --ntasks-per-node=1</span>
+<span class="c">#SBATCH --cpus-per-task=4</span>
+<span class="c">#SBATCH --mem=16G</span>
+<span class="c">#SBATCH --gpus-per-node=1</span>
+<span class="c">#SBATCH --time=00:10:00</span>
+
+<span class="c"># --------- Load Environment ---------</span>
+module load Python/3.9.1
+module load cuda/11.2
+module list
+
+<span class="c"># --------- Check whether the GPU is available ---------</span>
+from numba import cuda
+print<span class="o">(</span><span class="s2">"CUDA Available:"</span>, cuda.is_available<span class="o">())</span>
+<span class="c"># Activate virtual environment</span>
+<span class="nb">source</span> <span class="s1">'name_of_venv'</span>/bin/activate <span class="c"># Here name_of_venv refers to the name of your virtual environment without the quotes</span>
+
+<span class="c"># --------- Run the Python Script ---------</span>
+python numba_cuda_test.py
+</code></pre></div>  </div>
+
+  <p>Make sure your virtual environment includes the <code class="language-plaintext highlighter-rouge">numba-cuda</code> python library to access the GPU.</p>
+
+</blockquote>
+
+
+
+
+
+
+<blockquote class="keypoints">
+  <h2>Key Points</h2>
+  <ul>
+    
+    <li>
+</li>
+    
+  </ul>
+</blockquote>
+
+</article>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-1">
+    <h3 class="text-left">
+      
+      <a href="/25-resource-monitoring-example/index.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span><span class="sr-only">previous episode</span></a>
+      
+    </h3>
+  </div>
+  <div class="col-xs-10">
+    
+  </div>
+  <div class="col-xs-1">
+    <h3 class="text-right">
+      
+      <a href="/30-wrap-up/index.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span><span class="sr-only">next episode</span></a>
+      
+    </h3>
+  </div>
+</div>
+
+
+
+      
+      
+
+
+
+
+
+
+<footer>
+  <hr/>
+  <div class="row">
+    <div class="col-md-6 license" id="license-info" align="left">
+	
+        Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> 2025 by <a href="/CITATION">the authors</a>.
+	
+    </div>
+    <div class="col-md-6 help-links" align="right">
+	
+	<a href="/edit//_episodes/26-performance-analysis.md" data-checker-ignore>Edit on GitHub</a>
+	
+	/
+	<a href="/blob//CONTRIBUTING.md" data-checker-ignore>Contributing</a>
+	/
+	<a href="/">Source</a>
+	/
+	<a href="/blob//CITATION" data-checker-ignore>Cite</a>
+	/
+	<a href="mailto:shr.razim@gmail.com">Contact</a>
+    </div>
+  </div>
+  <p class="text-muted text-right">
+    <small><i>Using <a href="https://github.com/carpentries/carpentries-theme/">The Carpentries theme</a> &mdash; Site last built on: 2025-08-14 17:22:32 -0700.</i></small>
+  </p>
+</footer>
+
+      
+    </div>
+    
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/lesson.js"></script>
+
+
+<!-- Matomo -->
+<script>
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(["setDomains", ["*.lessons.carpentries.org","*.datacarpentry.github.io","*.datacarpentry.org","*.librarycarpentry.github.io","*.librarycarpentry.org","*.swcarpentry.github.io"]]);
+  _paq.push(["setDoNotTrack", true]);
+  _paq.push(["disableCookies"]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="https://carpentries.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src='//cdn.matomo.cloud/carpentries.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->
+
+
+<script src="/assets/js/anchor.min.js"></script>
+<script>
+    anchors.add();
+</script>
+
+  </body>
+</html>
