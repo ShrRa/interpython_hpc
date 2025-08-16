@@ -1,13 +1,20 @@
 ---
 title: "HPC Intro"
-teaching: 5
+teaching: 20
 exercises: 0
 questions:
-- "Question 1"
+- "What is sequential and parallel code execution?"
+- "How do computer and network architecture define computational performance for personal and supercomputers?"
+- "What types of parallelization exist?"
+- "How data storage works in HPC?"
 objectives:
-- "Objective 1"
+- "To learn how computer and network architecture affect performance."
+- "To understand how HPC facilities are organized."
 keypoints:
-- "Keypoint 1"
+- "Communication between different computer components, such as memory and arithmetic/logic unit (ALU), and between different nodes (computers) in a cluster, is often the main bottleneck of the system."
+- "Modern supercomputers are usually assembled from the same parts as personal computers, however, the difference is in the numbers of CPUs, GPUs and memory units, and in the way how they are connected to one another."
+- "Data storage organization varies from one HPC facility to another, so it is necessary to consult documentation when starting the work on a new supercomputer or cluster."
+- "Login nodes must not be used for computationally heavy tasks, as it will slow down the work for all users of the cluster."
 ---
 
 Simple, inexpensive computing tasks are typically performed **sequentially**, i.e., instructions are executed one after another in the order they appear in the code. This is the default paradigm in most programming languages. For larger problems that involve many tasks, it is often more efficient to exploit the intrinsically parallel nature of modern processors, which are designed to execute multiple processes simultaneously. Many programming languages, including Python, support parallel execution, where multiple CPU cores perform tasks independently.
@@ -17,7 +24,7 @@ Simple, inexpensive computing tasks are typically performed **sequentially**, i.
 
 As computational demands grow, parallel programming has become increasingly essential. From protein folding in drug discovery to simulations of galaxy formation and evolution, many complex problems in science rely on parallel computing. Parallel programming, hardware architecture, and systems administration intersect in the multidisciplinary field of **high-performance computing (HPC)**. Unlike running code locally on a personal computer, HPC typically involves connecting to a cluster of networked computers, sometimes located all over the world, designed to work together on large-scale tasks.
 
-The efficiency of a supercomputer in application to different tasks depends not only on the number of processors it carries aboard, but also on its **architecture** (or, in case of a cluster, on the **network architecture**). In this episode we'll briefly consider the terminology and classifications used to describe supercomputers of different types.
+The efficiency of a supercomputer in application to different tasks depends not only on the number of processors it carries aboard, but also on its **architecture** (or, in case of a cluster, on the **network architecture**). In this episode, we'll briefly consider the terminology and classifications used to describe supercomputers of different types.
 
 ### Computer Architectures
 
@@ -55,16 +62,12 @@ Three main components have the greatest impact on computational performance:
 
 - **Hard drive:** In contrast to RAM, a computer's hard drive is used for long-term data storage. Hard drives are characterized by both their capacity and performance. Higher-capacity drives can store more data, while higher-performance drives can read and write data faster. Hard disk drives (HDDs) generally offer more capacity for a lower cost, whereas solid state drives (SSDs) provide better performance and reliability.
 
-Processing astronomical data, building models, and running simulations requires significant computational power.  
-The laptop or PC you are using right now likely has between **8 GB** and **32 GB** of RAM, a processor with **4–10 cores**, and a hard drive that can store **256 GB–1 TB** of data.  
-
-But what if you need to process a dataset larger than 1 TB, or load a model into RAM that exceeds 32 GB, or run a simulation that would take a month to complete on your CPU?  
-In that case, you need a bigger computer, or many computers working in parallel.
+Processing astronomical data, building models, and running simulations requires significant computational power. The laptop or PC you are using right now likely has between **8 GB** and **32 GB** of RAM, a processor with **4–10 cores**, and a hard drive that can store **256 GB–1 TB** of data. But what if you need to process a dataset larger than 1 TB, or load a model into RAM that exceeds 32 GB, or run a simulation that would take a month to complete on your CPU?  In that case, you need a bigger computer or many computers working in parallel.
 
 ### Flynn's Taxonomy: A Framework for Parallel Computing
 
-When discussing parallel computing, it is helpful to have a framework for classifying different types of computer architectures.  
-The most widely used is **Flynn's Taxonomy**, proposed in 1966 ([Flynn, 1966](https://ieeexplore.ieee.org/document/1447203)).  
+When discussing parallel computing, it is helpful to have a framework for classifying different types of computer architectures. 
+The most widely used is **Flynn's Taxonomy**, proposed in 1966 ([Flynn, 1966](https://ieeexplore.ieee.org/document/1447203)). 
 It provides a simple vocabulary for describing how computers handle tasks and will help us understand why certain programming models are better suited to certain problems.
 
 Flynn’s taxonomy is based on four terms:
@@ -104,8 +107,7 @@ In addition to these categories, parallel computers can also be organized by mem
 
 ### Supercomputers vs. Computing Clusters
 
-In the early days of HPC, a “supercomputer” was typically a single, monolithic machine with custom vector processors.  
-Today, the vast majority of systems are **clusters**. 
+In the early days of HPC, a “supercomputer” was typically a single, monolithic machine with custom vector processors. Today, the vast majority of systems are **clusters**. 
 
 - **Cluster:** A collection of many individual computers, so-called *nodes*, connected by a high-bandwidth network. Early clusters were built from single-core SISD machines, but modern nodes are almost always MIMD systems. 
 - **Node:** A single computer within the cluster. It has its own processors (CPUs), memory (RAM), and often accelerators (GPUs). 
@@ -113,18 +115,21 @@ Today, the vast majority of systems are **clusters**.
 
 ### Network Topology for Clusters
 
-Since a cluster is a collection of nodes, the characteristics of the connections between them, namely, the bandwidth and the **network topology**, is critical to performance.  
+Since a cluster is a collection of nodes, the characteristics of the connections between them, namely, the bandwidth and the **network topology**, is critical to performance. 
 If a program requires frequent communication between nodes, a slow or inefficient network will cause major bottlenecks.
 
 The most common HPC topologies are **meshes**, where nodes are arranged in a two- or three-dimensional grid, with each node connected to its nearest neighbors. Figure 3 shows examples of a 2D mesh, a 3D mesh, and a 2D torus (where the edges wrap around to connect boundaries, forming a torus).
 
-![Schematic figure of mesh topology](../fig/11_mesh.png){: .image-with-shadow width="500px"} <p style="text-align: center;">Figure 4: 2D and 3D meshes: a) 2D mesh, b) 3D mesh, c) 2D torus.</p>
+![Schematic figure of mesh topology](../fig/11_mesh.png){: .image-with-shadow width="500px"} 
+<p style="text-align: center;">Figure 4: 2D and 3D meshes: a) 2D mesh, b) 3D mesh, c) 2D torus.</p>
 
 Less common HPC topologies include bus, ring, star, hypercube, tree, fully connected, crossbar, and multistage interconnection networks. These topologies are less favorable for general purpose tasks but compute clusters designed for specific use cases may adopt these designs.
 
 HPC networks are also separated into a user-facing **front end** and a computational **back end**. The networked compute nodes like those shown in Figure 4 are part of the back end and cannot be accessed directly by the user. Users instead interact with a *login node* when they conect to an HPC cluster. Here, users can submit jobs to the compute nodes via a workload manager (e.g. `sbatch` in SLURM).
 
-![Front end vs back end](../fig/login-compute-nodes.jpg){: .image-with-shadow width="500px"} <p style="text-align: center;">Figure 5: Separation between cluster front end and back end. Credit: <a href="https://docs.tacc.utexas.edu/basics/conduct/">https://docs.tacc.utexas.edu/basics/conduct/</a>
+![Front end vs back end](../fig/login-compute-nodes.jpg){: .image-with-shadow width="500px"} 
+<p style="text-align: center;">Figure 5: Separation between cluster front end and back end. 
+Credit: <a href="https://docs.tacc.utexas.edu/basics/conduct/">https://docs.tacc.utexas.edu/basics/conduct/</a></p>
 
 > ## Never Run Computations on the Login Node!
 > When you connect to an HPC cluster, you land on a *login node*. This shared resource is for compiling resource-light code, managing files, and submitting jobs to the workload manager, but not for heavy computation.  
@@ -145,19 +150,9 @@ HPC clusters typically provide multiple storage locations, each serving differen
 - **Shared:** Storage accessible to multiple users, often for research groups. Commonly used as a shared working directory and generally backed up regularly.
 
 > ## Other types of storage
-> Large HPC facilities may have more complex storage organization. For example, there may exist *project* and *archive* storages, dedicated to storing large volumes of data that are not accessed often and can tolerate large lags of access time. One of the slowest, but also cheapest and most reliable storage types are magnetic tape libraries. They are commonly used for storing archival (processed with obsolete versions of pipelines) data releases of astronomical surveys, and this system is likely to be implemented for LSST as well.
-> Some HPC systems also have an archive tier that is really slow—think tape libraries—intended for “stick it in a vault, retrieve once every six months” kind of usage
+> Large HPC facilities may have a more complex storage organization. For example, there may exist *project* and *archive* storages, dedicated to storing large volumes of data that are not accessed often and can tolerate large lags of access time. One of the slowest, but also cheapest and most reliable storage types are magnetic tape libraries. They are commonly used for storing archival (processed with obsolete versions of pipelines) data releases of astronomical surveys, and this system is to be implemented for LSST as well. Always refer to the HPC documentation to understand how storage is implemented
+> in this particular facility - see e.g. [Iowa State University](https://www.hpc.iastate.edu/guides/nova/storage) or [Dartmouth](https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=140938) HPC documentation.
 > 
 {: .callout}
-
-<a href="https://www.hpc.iastate.edu/guides/nova/storage">https://www.hpc.iastate.edu/guides/nova/storage</a>.
-
-<a href="https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=140938">https://services.dartmouth.edu/TDClient/1806/Portal/KB/ArticleDet?ID=140938</a>
-
-## Which computer for which task?
-- If you have an algorithm that requires the output from step A to start step B… (sequential code)
-- If you have an algorithm that performs the same operation on a large volume of homogeneous data… (parallelizable code)
-- If you have an algorithm that operates on vectors or matrices… (vectorization)
-
 
 {% include links.md %}
