@@ -91,14 +91,10 @@ extras_order:
   - about
   - git-intro
   - figures
-  - guide
   - common-issues
-  - discuss
-  - protect-main-branch
-  - persistence
-  - 44-software-documentation
-  - 45-lincc-project-template
-  - quiz
+  - cli-extra
+  - nvidia-smi
+  - resource-monitoring-gpu
 # Files and directories that are not to be copied.
 exclude:
   - Makefile
