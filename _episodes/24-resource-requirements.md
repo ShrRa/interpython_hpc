@@ -116,41 +116,40 @@ Once you know your job type, you can select the correct **SLURM partition** (que
 >
 > **Discussion:**  
 > Are some tasks “mixed-type”? Which resources are more critical for performance? How would you prioritize CPU vs GPU vs memory for these workloads?
+> 
+> > ## Solutions
+> >
+> > 1. **Grid of supernova explosion models**  
+> >    - **Type:** CPU-bound (parallel)  
+> >    - **Reason:** Each model is independent; heavy numerical computations per model.  
+> >    - **Node type:** Regular node (multi-core CPU).  
+> >    - **SLURM options:** Use multiple CPUs; each job in the array runs a separate model with `--array=1-100`.
+> > 
+> >  2. **Galactic stellar population simulation**  
+> >    - **Type:** CPU-bound (embarrassingly parallel)  
+> >    - **Reason:** Each spatial grid point is independent; computation-heavy but not memory-intensive.  
+> >    - **Node type:** Regular node or multi-node if very large. CPUs are sufficient.  
+> >    - **SLURM options:** Distribute grid points across CPU cores; use MPI or job arrays with `--ntasks=64`.
+> > 
+> >  3. **2D-Hybrid pipeline for ZTF quasar light curves**  
+> >    - **Type:** CPU-bound (parallel)  
+> >    - **Reason:** Wavelet + cross-band analysis is CPU-only; each batch processed independently.  
+> >    - **Node type:** Regular node (multi-core CPU).  
+> >    - **SLURM options:** Array jobs with `--cpus-per-task` for intra-batch parallelization.
+> > 
+> >  4. **Microlensing light curve fitting**  
+> >    - **Type:** CPU-bound (parallel, varying runtimes)  
+> >    - **Reason:** Each light curve fit is independent; some fits take longer than others.  
+> >    - **Node type:** Regular node or SMP node if shared memory needed for multithreaded fits.  
+> >    - **SLURM options:** Array jobs with `--array=1-999` for fitting all light curves. 
+> > 
+> >  5. **Difference imaging runs with PyTorch / MPI / HTCondor**  
+> >    - **Type:** GPU-accelerated (if using PyTorch) or CPU-bound (MPI/HTCondor alternative)  
+> >    - **Reason:** GPU use accelerates image subtraction; MPI/HTCondor distributes CPU tasks efficiently.  
+> >    - **Node type:** GPU node (for PyTorch) or regular nodes (for MPI/HTCondor).  
+> >    - **SLURM options:** `--gpus` for GPU tasks, `-N`/`-n` for MPI tasks.
+> {: .solutions}
 {: .challenge}
-
-
-> ## Solutions
->
-> 1. **Grid of supernova explosion models**  
->   - **Type:** CPU-bound (parallel)  
->   - **Reason:** Each model is independent; heavy numerical computations per model.  
->   - **Node type:** Regular node (multi-core CPU).  
->   - **SLURM options:** Use multiple CPUs; each job in the array runs a separate model with `--array=1-100`.
->
-> 2. **Galactic stellar population simulation**  
->   - **Type:** CPU-bound (embarrassingly parallel)  
->   - **Reason:** Each spatial grid point is independent; computation-heavy but not memory-intensive.  
->   - **Node type:** Regular node or multi-node if very large. CPUs are sufficient.  
->   - **SLURM options:** Distribute grid points across CPU cores; use MPI or job arrays with `--ntasks=64`.
->
-> 3. **2D-Hybrid pipeline for ZTF quasar light curves**  
->   - **Type:** CPU-bound (parallel)  
->   - **Reason:** Wavelet + cross-band analysis is CPU-only; each batch processed independently.  
->   - **Node type:** Regular node (multi-core CPU).  
->   - **SLURM options:** Array jobs with `--cpus-per-task` for intra-batch parallelization.
->
-> 4. **Microlensing light curve fitting**  
->   - **Type:** CPU-bound (parallel, varying runtimes)  
->   - **Reason:** Each light curve fit is independent; some fits take longer than others.  
->   - **Node type:** Regular node or SMP node if shared memory needed for multithreaded fits.  
->   - **SLURM options:** Array jobs with `--array=1-999` for fitting all light curves. 
->
-> 5. **Difference imaging runs with PyTorch / MPI / HTCondor**  
->   - **Type:** GPU-accelerated (if using PyTorch) or CPU-bound (MPI/HTCondor alternative)  
->   - **Reason:** GPU use accelerates image subtraction; MPI/HTCondor distributes CPU tasks efficiently.  
->   - **Node type:** GPU node (for PyTorch) or regular nodes (for MPI/HTCondor).  
->   - **SLURM options:** `--gpus` for GPU tasks, `-N`/`-n` for MPI tasks.
-{: .solutions}
 ---
 
 {% include links.md %}
