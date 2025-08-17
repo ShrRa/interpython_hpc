@@ -3,12 +3,18 @@ title: "Resource optimization and monitoring for Serial Jobs"
 start: False
 teaching: 30
 exercises: 10
-questions:
-- ""
+- "How do we optimize and monitor resource usage for sequential jobs on an HPC system?"
+- "What tools can we use to profile CPU and memory usage for single-core jobs?"
+- "What are the best practices and common pitfalls when submitting sequential scripts?"
 objectives:
-- ""
+- "Understand how to allocate appropriate resources for sequential (single-core) jobs."
+- "Learn how to monitor CPU and memory usage of sequential jobs on HPC systems."
+- "Use both custom scripts and tools like `htop` to profile and optimize job performance."
 keypoints:
-- ""
+- "Sequential jobs only use a single CPU core, so requesting multiple cores wastes resources."
+- "Monitoring resource usage helps match allocation to actual requirements."
+- "`htop` provides a quick, interactive way to view CPU and memory consumption."
+- "Always start with small test runs and scale resources based on profiling results."
 ---
 
 ## Example
@@ -134,7 +140,7 @@ print("CPU plot saved in 'plots/deflection_angle_cpu.png'")
 
 ### Job Monitoring and Profiling 
 
-We would also want to monitor the resources for the job before we run the job, so we can decide if we allocated the right amount of resources for the job type. For this we will need to create a shell file which logs the CPU and Memory resource usage every five seconds. We can create that file using the code below
+We would also want to monitor the resources for the job when we run the job, so we can decide if we allocated the right amount of resources for the job type. For this we will need to create a shell file which logs the CPU and Memory resource usage every five seconds. We can create that file using the code below
 
 ```shell
 #File: monitor_resources.sh
@@ -210,10 +216,120 @@ kill %1
 echo "Job completed at $(date)"
 echo "Resource usage saved to resource_usage_${SLURM_JOB_ID}.log"
 ```
-After we run the script, we can then cat into the resource_usage_${SLURM_JOB_ID}.log to look 
-> ## Exercise: Profile Your Code
+After we run the script, we can then `cat` into the `resource_usage_${SLURM_JOB_ID}.log` file to view the logged CPU and memory usage over time.  
+
+### Viewing the Results
+To quickly view the contents of the log file:
+```bash
+cat resource_usage_${SLURM_JOB_ID}.log
+```
+```text
+Timestamp           | CPU% | Memory(MB)
+2025-08-17 15:32:01 | 95.0 | 1200
+2025-08-17 15:32:06 | 99.2 | 1250
+2025-08-17 15:32:11 | 100  | 1268
+...
+```
+### Interpreting the Results
+
+**CPU%**  
+- For sequential jobs, this should ideally be close to **100%**, indicating that the single CPU core is being fully utilized.  
+- If CPU% is much lower, the program may be waiting on **I/O** (e.g., reading/writing files) or could benefit from **algorithmic optimization**.  
+
+**Memory (MB)**  
+- Shows how much RAM your job is using at each interval.  
+- Compare the **peak memory usage** to the memory you requested with `--mem`.  
+- If memory usage is consistently much **lower than the allocation**, you may safely reduce `--mem` in future runs.  
+- If usage is close to or **exceeds your allocation**, increase `--mem` to prevent job crashes.  
+
+### Quick Reference: Interpreting Resource Usage Patterns
+
+| **Pattern**                     | **Meaning**                                                                 | **Action to Take**                                                                 |
+|---------------------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| **High CPU% (~100%), Low Memory** | Code is compute-bound (CPU is the bottleneck, memory not heavily used).      | Keep memory request low, focus on algorithmic optimizations or parallelization.    |
+| **Low CPU%, Low Memory**         | Code is I/O-bound (waiting on file reads/writes or network communication).   | Optimize data access, use faster storage, or reduce unnecessary file operations.   |
+| **High CPU%, High Memory**       | Code is both compute- and memory-intensive.                                  | Ensure enough memory is requested (`--mem`), and consider algorithm/data structure optimizations. |
+| **Low CPU%, High Memory**        | Code is memory-bound (spending more time managing memory than doing compute). | Increase memory allocation, or optimize memory usage in the code (e.g., chunking large arrays). |
+| **Fluctuating CPU%, Stable Memory** | Workload alternates between compute and idle states.                         | Check for inefficient loops or waiting on external processes; consider restructuring workload. |
+| **Stable CPU%, Growing Memory**   | Memory leak (usage increases steadily without bound).                         | Debug the code, check for objects/arrays not being freed, or optimize memory handling. |
+
+---
+
+### Why This Matters
+- **Efficient allocation**: Avoid over-requesting (slower queue times) or under-requesting (job failures).  
+- **System fairness**: Using only what you need helps the scheduler place your jobs more efficiently.  
+- **Debugging**: Sudden spikes in memory or drops in CPU can reveal inefficiencies or bugs in your program.  
+
+
+## Best Practices and Common Pitfalls for Resource Allocation for Sequential Scripts
+
+### Resource Allocation Best Practices
+
+1. **Request only 1 core**  
+   - Sequential jobs run on a single core, so always set `--cpus-per-task=1`.  
+   - Requesting more cores will not speed up the job and only wastes resources.  
+
+2. **Request memory proportional to workload**  
+   - Estimate memory usage (for data arrays, grids, etc.) and add a small safety margin.  
+   - Example: If job needs ~10 GB, request `--mem=12G`, not `--mem=64G`.  
+
+3. **Use appropriate partitions/queues**  
+   - Submit sequential jobs to the `serial` or `thin` partitions if available, instead of compute-intensive queues.  
+
+4. **Start with test runs**  
+   - Run with smaller problem sizes or shorter times first.  
+   - Check logs and resource usage before scaling to full workloads.  
+
+5. **Monitor and refine**  
+   - Use tools like `htop`, `time`, or resource monitoring scripts to profile performance.  
+   - Adjust memory and runtime allocations based on measured usage.  
+
+### Common Pitfalls for Sequential Jobs
+
+**Over-requesting resources**
+   ```bash
+   # Bad: Requesting 32 cores for sequential code
+   #SBATCH --cpus-per-task=32
+   ./sequential_program
+   
+   # Good: Match core count to parallelization
+   #SBATCH --cpus-per-task=1
+   ./sequential_program
+   ```
+
+## Profiling Sequential Jobs with `htop`
+
+In addition to using our custom `monitor_resources.sh` script, we can use the interactive tool **`htop`** to profile CPU and memory usage in real time.  
+
+### What is `htop`?
+- `htop` is an interactive process viewer, similar to `top`, but more user-friendly.  
+- It shows per-core CPU utilization, memory usage, and active processes in a live updating display.  
+- It allows you to filter processes by user and search for specific jobs (e.g., Python scripts).  
+
+### Running `htop` on HPC 
+1. Load the `htop` module (it is already loaded):  
+```bash
+module load htop
+```
+2. Start `htop` inside an allocated node:
+```bash 
+srun --pty htop
+```
+- The option `--pty` tells SLURM to create a pseudo-terminal for the command.
+
+- This ensures that interactive programs like `htop` (which need a terminal interface) run properly inside the allocated compute node.
+
+3. Useful shortcuts inside htop:
+
+- u → filter by user (see only your jobs).
+- / → search for a process (e.g., type python).
+- F6 → sort by CPU%, memory, or time.
+- q → quit.
+
+
+<!-- > ## Exercise: Profile Your Code
 > Compile and run the sequential code. Use `htop` to monitor resource usage. Identify whether it's CPU-bound or memory-bound
-{: .challenge}
+{: .challenge} -->
 
 {% include links.md %}
 
