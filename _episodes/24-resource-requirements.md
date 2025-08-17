@@ -148,9 +148,10 @@ Once you know your job type, you can select the correct **SLURM partition** (que
 > >    - **Reason:** GPU use accelerates image subtraction; MPI/HTCondor distributes CPU tasks efficiently.  
 > >    - **Node type:** GPU node (for PyTorch) or regular nodes (for MPI/HTCondor).  
 > >    - **SLURM options:** `--gpus` for GPU tasks, `-N`/`-n` for MPI tasks.
+> > 
 > {: .solutions}
+>
 {: .challenge}
----
 
 {% include links.md %}
 
