@@ -98,8 +98,8 @@ Once you know your job type, you can select the correct **SLURM partition** (que
 **Decision chart for Choosing Nodes:**
 ![Decision chart for choosing node types](../fig/Job_Decision_Node_Tree.png)
 
-## Exercise: Classify the Job Type
-
+> ## Exercise: Classify the Job Type
+>
 > Using the decision chart above, classify each of the following HPC tasks into **CPU-bound**, **Memory-bound**, **I/O-bound**, or **GPU-accelerated**, and suggest the most appropriate node type.
 >
 > 1. Running a **grid of supernova explosion models**, varying the star mass, explosion energy, circumstellar density, and radius. Each model runs independently on a separate CPU.  
@@ -149,7 +149,7 @@ Once you know your job type, you can select the correct **SLURM partition** (que
 >   - **Reason:** GPU use accelerates image subtraction; MPI/HTCondor distributes CPU tasks efficiently.  
 >   - **Node type:** GPU node (for PyTorch) or regular nodes (for MPI/HTCondor).  
 >   - **SLURM options:** `--gpus` for GPU tasks, `-N`/`-n` for MPI tasks.
-
+{: .solutions}
 ---
 
 {% include links.md %}
