@@ -210,7 +210,7 @@ kill %1
 echo "Job completed at $(date)"
 echo "Resource usage saved to resource_usage_${SLURM_JOB_ID}.log"
 ```
-After we run the script, we can then 
+After we run the script, we can then cat into the resource_usage_${SLURM_JOB_ID}.log to look 
 > ## Exercise: Profile Your Code
 > Compile and run the sequential code. Use `htop` to monitor resource usage. Identify whether it's CPU-bound or memory-bound
 {: .challenge}

@@ -20,24 +20,42 @@ keypoints:
 
 ## Parallel CPU Programming
 
-In the previous section, we saw how to make our code faster for sequential jobs. However, there are certain cases where no matter how much you optimize, a single process remains a bottleneck. These are tasks that are "embarrassingly parallel"—independent jobs that don't need to communicate with each other.
+In the previous section, we saw how to make our code faster for sequential jobs. However, there are certain cases where no matter how much you optimize, a single process remains a bottleneck. These are tasks that are "embarrassingly parallel" - independent jobs that don't need to communicate with each other.
 
 A perfect example from astronomy is finding the rotation period of stars from their light curves (measurements of brightness over time). Analyzing one star is quick, but analyzing data from thousands or millions of stars sequentially can take days or weeks. This is where parallel computing becomes essential.
 
-### The Problem: One at a Time vs. All at Once (Real World Analogy of the example)
+### Real World Analogy of using sequential vs parallel with an example
 Imagine you are a librarian who needs to reshelve 500 books.
 
 Sequential Approach: You take the first book, walk to its correct shelf, place it, and walk back. You repeat this process 499 more times. Your total time is the sum of the time it takes for all 500 individual trips.
 
 Parallel Approach: You hire a team of assistants. You give a stack of books to each person. They all go and shelve their books at the same time. The total time is now roughly the time it takes the slowest assistant to finish their stack, which is much faster than doing it all yourself.
 
-Analyzing light curves is like reshelving those books. We can either do it one by one (sequentially) or assign multiple light curves to different CPU cores to be analyzed simultaneously (in parallel).
+In the case on Astronomy, analyzing light curves (time and brightness data of objects in the night sky) is like reshelving those books. We can either do it one by one (sequentially) or assign multiple light curves to different CPU cores to be analyzed simultaneously (in parallel).
 
 ![Serial vs. Parallel Performance Comparison](../fig/serial_parallel_comparision.png)
 
-### Introduction to OpenMP and MPI
+When we test the code with different numbers of light curves and calculate its most likely period using a standard astronomical algorithm called the Lomb-Scargle periodogram., we see the following:
 
-#### Parallel programming on CPUs is primarily achieved through two widely-used models:
+- For smaller numbers (10, 50, 100, 200, 500, 1000, 5000),  
+  the execution time is almost the same for both sequential and parallel runs which are denoted by the blue and the orange lines respectively.  
+- This happens because starting and managing parallel jobs has a small extra cost (called *overhead*).  
+
+- As the number of light curves grows larger (beyond 5000),  
+  the benefit of parallelization becomes clear.  
+
+- In the plot:
+  - **Sequential time** keeps increasing steadily as the workload grows.  
+  - **Parallel time** stays much flatter, showing that multiple processes share the work efficiently.  
+
+> ###Takeaway:  
+> For small tasks, parallelization does not save time (and may even cost a little extra).  
+> But as the workload grows, parallelization provides a much more efficient workflow.
+{: .callout}
+
+## Parallel Programming on CPUs
+
+Parallel programming on CPUs is primarily achieved through two widely-used models:
 
 ### OpenMP (Open Multi-Processing)
 
@@ -245,7 +263,7 @@ if rank == 0:
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=mpi_
+#SBATCH --job-name=mpi_example
 #SBATCH --output=mpi_%j.out
 #SBATCH --error=mpi_%j.err
 #SBATCH --partition=computes_thin
@@ -259,17 +277,94 @@ module list
 # Activate your Python environment
 source /home/edu05/HPC_WS/Slurm_Scripts/interpython/bin/activate
 
-python --version
-
 # OPTION 1: Run using Python script (with logging)
-mpirun -np 4 python  mpi_hpc_ws.py
+mpirun -np 4 python  mpi_example.py
 ```
 
 Make sure your virtual environment has `mpi4py` installed and that your system has access to the OpenMPI runtime via `mpirun`. Adjust the number of nodes and tasks depending on the cluster policies.
 
-> ## Exercise: 
-> Modify serial array summation using OpenMP (C) or `multiprocessing` (Python).
+> ## Exercise 1: Gather lists instead of numbers
+>
+> Modify the code so that instead of collecting `rank ** 2`,  
+> each process sends a **list of numbers** from `0` to `rank`.  
+>
+> Example (4 processes):
+> - Rank 0 sends `[0]`  
+> - Rank 1 sends `[0, 1]`  
+> - Rank 2 sends `[0, 1, 2]`  
+> - Rank 3 sends `[0, 1, 2, 3]`  
+>
+> The root process should gather and print:
+>
+> ```text
+> [[0], [0, 1], [0, 1, 2], [0, 1, 2, 3]]
+> ```
 {: .challenge}
+
+> ## Solution
+>
+> ```python
+> from mpi4py import MPI
+>
+> comm = MPI.COMM_WORLD
+> rank = comm.Get_rank()
+>
+> # Each process creates a list from 0 to rank
+> data = list(range(rank + 1))
+>
+> # Gather lists at the root
+> all_data = comm.gather(data, root=0)
+>
+> if rank == 0:
+>     print(all_data)
+> ```
+{: .solution}
+
+---
+
+> ## Exercise 2: Broadcast after gather
+>
+> Currently, only the root process (rank 0) collects the data.  
+> Modify the code so that after gathering, the root process  
+> **broadcasts** the complete list back to all processes.  
+>
+> Hint: Use `comm.bcast()` after `comm.gather()`.  
+>
+> - What happens if each process prints the result after the broadcast?
+{: .challenge}
+
+> ## Solution
+>
+> ```python
+> from mpi4py import MPI
+>
+> comm = MPI.COMM_WORLD
+> rank = comm.Get_rank()
+>
+> # Each process sends rank squared
+> data = rank ** 2
+>
+> # Gather at root
+> gathered = comm.gather(data, root=0)
+>
+> # Broadcast the gathered list from root to all processes
+> result = comm.bcast(gathered, root=0)
+>
+> print(f"Process {rank} received: {result}")
+> ```
+>
+> Example output (4 processes):
+>
+> ```text
+> Process 0 received: [0, 1, 4, 9]
+> Process 1 received: [0, 1, 4, 9]
+> Process 2 received: [0, 1, 4, 9]
+> Process 3 received: [0, 1, 4, 9]
+> ```
+>
+> Now **all processes** have the final list, not just the root.
+{: .solution}
+
 
 > ## References:
 > - [OpenMP Tutorials](https://www.openmp.org/resources/tutorials-articles/)

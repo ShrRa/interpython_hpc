@@ -14,26 +14,36 @@ keypoints:
 ## Motivation for HPC Coding
 
 Modern computers are fast, however, the volumes of our data and the complexity of our algorithms can easily eat all computational resources and demand more. While most users begin with simple serial code, which runs sequentially on one processor (or rather on a single core), at some point it stops being enough. 
-Maybe we want to model the entire Milky Way using the next big data release from our favorite astronomical survey, or execute high-resolution hydrodinamical simulation, or perform time-critical analysis for follow-up observations, and what took minutes or hours now would take months or years. 
+Maybe we want to model the entire Milky Way using the next big data release from our favorite astronomical survey, or execute high-resolution hydrodynamical simulation, or perform time-critical analysis for follow-up observations, and what took minutes or hours now would take months or years. 
 
 So what can we do? There are two main approaches:
 
-- Make the code faster.
+- Approach 1: Make the code faster.
 
   -- Use a better algorithm (which is always the preferred way, which, however, may take lots of time and expertise to implement).
 
   -- Restructure your code so the CPU works more efficiently, by using vectorization (doing many operations at once inside a single CPU core in a SIMD manner, utilizing internal CPU architecture optimized for this mode of operation) or parallelization (splitting work across multiple cores or machines).
 
-- Get more computational power.
+- Approach 2: Get more computational power.
 
   -- Upgrade to a faster processor (with a higher clock speed).
 
   -- Use hardware with more processors to implement highly parallelized code. It can be a supercomputer with multiple CPU cores, or a computer with GPUs with thousands of smaller cores.
 
+Before we move on to large-scale supercomputing, let’s first look at a much smaller but very common situation:  
+**how a simple piece of code can be written in different ways, and how that affects performance. (Approach 1)**
+
+Even if we’re only summing the numbers in a big array, the way we write the code can make a big difference.  
+A naïve approach (using a `for` loop) processes one element at a time, while more efficient approaches can take advantage of the CPU’s ability to perform many operations at once.
+
+This idea — *doing more work in the same amount of time by restructuring code* — is the foundation of high-performance computing.  
+
+We’ll start with this simple example to see how writing smarter code (vectorization) can already give us a big speed-up, even before we try parallelization or supercomputers.
+
+
 ## Serial vs. Vectorized Code
 
-Let’s look at a simple example: summing the elements of a large array. An obvious way to implement this is by using a `for` loop. With this
-implementation, each iteration runs only after the previous one has finished.
+Let’s look at a simple example: summing the elements of a large array. As mentioned above an obvious way to implement this is by using a `for` loop. With this implementation, each iteration runs only after the previous one has finished.
 
 ~~~
 import numpy as np
