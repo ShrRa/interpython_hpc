@@ -118,6 +118,7 @@ Once you know your job type, you can select the correct **SLURM partition** (que
 > Are some tasks “mixed-type”? Which resources are more critical for performance? How would you prioritize CPU vs GPU vs memory for these workloads?
 {: .challenge}
 
+
 > ## Solutions
 >
 > 1. **Grid of supernova explosion models**  

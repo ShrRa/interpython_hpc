@@ -3,6 +3,7 @@ title: "Resource optimization and monitoring for Serial Jobs"
 start: False
 teaching: 30
 exercises: 10
+questions:
 - "How do we optimize and monitor resource usage for sequential jobs on an HPC system?"
 - "What tools can we use to profile CPU and memory usage for single-core jobs?"
 - "What are the best practices and common pitfalls when submitting sequential scripts?"
@@ -138,6 +139,8 @@ print("CPU plot saved in 'plots/deflection_angle_cpu.png'")
  ~~~
  {: .output}
 
+This code simulates gravitational lensing by computing how much light bends when passing near massive objects. It first defines key physical constants, then creates two grids: one for object masses (in solar masses) and one for impact parameters (the distance of closest approach). For every combination of mass and impact parameter, it calculates the deflection angle using the gravitational lensing formula and stores the results in a 2D array. The code measures and prints the runtime to highlight sequential execution speed, saves the computed data for reuse, and finally generates a log-scaled color plot showing how deflection varies with mass and distance, which is stored as an image for visualization.
+
 ### Job Monitoring and Profiling 
 
 We would also want to monitor the resources for the job when we run the job, so we can decide if we allocated the right amount of resources for the job type. For this we will need to create a shell file which logs the CPU and Memory resource usage every five seconds. We can create that file using the code below
@@ -172,6 +175,18 @@ do
     sleep 5
 done
 ```
+
+Here we used 3 new commads 
+
+- `ps` (process status):
+    - The ps command lists processes running on the system. Here, ps -u $USER restricts the list to processes started by the current user. The option -o %cpu,rss,comm customizes the output to show only CPU usage percentage (%cpu), resident memory size in kilobytes (rss), and the command name (comm) like "python".
+
+- `awk`:
+    - awk is a text processing tool that reads each line of input and allows us to filter or reformat it. In this script, we tell awk to only process lines where the third field (the command name) is "python". It then prints the current timestamp (strftime), the CPU percentage, and memory converted from kilobytes to megabytes ($2/1024).
+
+- `sleep`:
+    - The sleep command pauses execution for a given number of seconds. Here, sleep 5 makes the script wait 5 seconds before checking the processes again, ensuring we don’t overload the system with constant checks and providing a readable sampling interval.
+    
 We can now include a command to run this file in the slurm job script that we will use to run the sequential example on BURA. 
 
 ### Sequential Job Script for the Example
