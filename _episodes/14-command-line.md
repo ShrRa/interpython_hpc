@@ -20,10 +20,10 @@ keypoints:
 
 ## Introducing the Shell
 
-The shell or command line is a way to interact with a computer by typing text commands into a terminal or console window. This is in contrast to using a graphical user interface (GUI) with buttons and menus. Although many of the same tasks can be performed with both a shell interface or a GUI interface, the shell gives the most basic and universal access because it does not require any graphics. 
+The **shell** or **command line** is a way to interact with a computer by typing text commands into a terminal or console window. This is in contrast to using a **graphical user interface (GUI)** with buttons and menus. Although many of the same tasks can be performed with both a shell interface or a GUI interface, the shell gives the most basic and universal access because it does not require any graphics. 
 Whether you're navigating a High Performance Computing (HPC) repo, inspecting  files, or debugging processing failures, these shell commands will be indispensable.
 
-You have already opened a shell to ssh into bura. Now that your shell is pointing to the bura file system, we will learn how to navigate it, manipulate files, and interrogate the machine for information about you, the file system, and the tasks it is running.
+You have already opened a shell to ssh into Bura. Now that your shell is pointing to the Bura file system, we will learn how to navigate it, manipulate files, and interrogate the machine for information about you, the file system, and the tasks it is running.
 
 ## File Navigation
 When you view your file system via a graphical interface, you are used to clicking on one folder to look inside and then clicking on another folder inside that one. This folder (or directory) structure is called a directory tree. In the same way that you can click to navigate around your file system, you can type commands into the shell.
