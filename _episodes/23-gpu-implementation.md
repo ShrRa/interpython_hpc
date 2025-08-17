@@ -205,7 +205,7 @@ In the **Numba example**, we see how CUDA works at a low level:
 
 This approach is very close to how CUDA is programmed in C/C++. It teaches us about **threads, blocks, and memory transfers**, which are the fundamental ideas of CUDA programming.
 
-### Approach 2: Add vectors utlising CUDA using the numba python library 
+### Approach 2: Add vectors using Torch
 
 ~~~
 import torch
