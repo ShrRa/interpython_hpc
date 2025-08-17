@@ -206,7 +206,7 @@ $ nano requirements.txt
 
 Now, copy and paste the following list of packages into the `nano` editor by pressing `Shift` + `Insert`.
 
-```bash
+```text
 contourpy==1.3.2
 cycler==0.12.1
 fonttools==4.59.0

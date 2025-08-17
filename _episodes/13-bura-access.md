@@ -48,7 +48,7 @@ distributed filesystem.
 Bura is designed to provide a multi-user, powerful general-purpose computing environment that 
 can be used for a wide range of applications.  
 
-It uses the [LMOD system](https://lmod.readthedocs.io/en/latest/_) to dynamically manage user 
+It uses the [LMOD system](https://lmod.readthedocs.io/en/latest/) to dynamically manage user 
 environmental modules.  This is used to manage user environment variables as well as software 
 dependencies such as Python versions.
 

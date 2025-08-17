@@ -20,6 +20,21 @@ keypoints:
 
 ## Parallel CPU Programming
 
+In the previous section, we saw how to make our code faster for sequential jobs. However, there are certain cases where no matter how much you optimize, a single process remains a bottleneck. These are tasks that are "embarrassingly parallel"—independent jobs that don't need to communicate with each other.
+
+A perfect example from astronomy is finding the rotation period of stars from their light curves (measurements of brightness over time). Analyzing one star is quick, but analyzing data from thousands or millions of stars sequentially can take days or weeks. This is where parallel computing becomes essential.
+
+### The Problem: One at a Time vs. All at Once (Real World Analogy of the example)
+Imagine you are a librarian who needs to reshelve 500 books.
+
+Sequential Approach: You take the first book, walk to its correct shelf, place it, and walk back. You repeat this process 499 more times. Your total time is the sum of the time it takes for all 500 individual trips.
+
+Parallel Approach: You hire a team of assistants. You give a stack of books to each person. They all go and shelve their books at the same time. The total time is now roughly the time it takes the slowest assistant to finish their stack, which is much faster than doing it all yourself.
+
+Analyzing light curves is like reshelving those books. We can either do it one by one (sequentially) or assign multiple light curves to different CPU cores to be analyzed simultaneously (in parallel).
+
+![Serial vs. Parallel Performance Comparison](../fig/serial_parallel_comparision.png)
+
 ### Introduction to OpenMP and MPI
 
 #### Parallel programming on CPUs is primarily achieved through two widely-used models:
@@ -166,9 +181,11 @@ if rank == 0:
 
 > ## Explanation of the code
 >
-> This example demonstrates a basic use of `mpi4py` to perform a **gather operation** using the `MPI.COMM_WORLD` communicator.
+> This example demonstrates a basic use of `mpi4py` to perform a **gather operation** (collection of results) using the `MPI.COMM_WORLD` communicator which shows how multiple programs (called *processes*) can work together and then share their results.  
+> When you run a program with MPI, you are actually running **many copies of the same program at once**. Each copy gets a number, called its **rank**.  
+- If there are 4 processes, their ranks will be 0, 1, 2, and 3.  
 >
-> Each process:
+> In the code each process:
 >
 > - Determines its **rank** (an integer from 0 to N-1, where N is the number of processes).
 > - Computes `rank ** 2` (the square of its rank).
@@ -185,41 +202,67 @@ if rank == 0:
 >
 > The root process (rank 0) gathers all results and prints:
 >
-> ```text
+> ~~~
 > [0, 1, 4, 9]
-> ```
+> ~~~
+{: .output}
 >
 > - Other ranks do not print anything.
 >
 > This example illustrates **point-to-root communication** which is useful when one process needs to collect and process results from all workers.
+> 
+> Since the terms in bold letters are introduced for the first time, here is an indepth definition which can be referred to for understanding the code 
+>
+> ### Terminology
+>
+> - **Process**:  
+>  A single copy of your program that runs at the same time as the others.  
+>  *Analogy: Imagine four students all solving the same type of math problem at once.*
+>
+> - **Rank**:  
+>  The ID number for each process (starting at 0).  
+>  *Analogy: Just like students in a classroom might be numbered 0, 1, 2, 3 so the teacher knows who is who.*
+>
+> - **Communicator (`MPI.COMM_WORLD`)**:  
+>  The group of all processes that can talk to each other.  
+>  *Analogy: Think of it as a big group chat that includes everyone.*
+>
+> - **Gather**:  
+>  A way for many processes to send their results to one chosen process.  
+>  *Analogy: Everyone puts their homework into the teacher’s basket, and the teacher collects them.*
+>
+> - **Root process**:  
+>  The process that receives and collects information (by default, rank 0).  
+>  *Analogy: The teacher who collects the homework and shows the class the results.*
+>
+> - **Point-to-root communication**:  
+>  A communication pattern where many processes send information to one process.  
+>  *Analogy: All students talk to the teacher, but not to each other.*
+>
 {: .discussion}
 
 ## Slurm Script to execute the code 
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=mpi_hpc_ws
+#SBATCH --job-name=mpi_
 #SBATCH --output=mpi_%j.out
 #SBATCH --error=mpi_%j.err
-#SBATCH --partition=defaultq
+#SBATCH --partition=computes_thin
 #SBATCH --nodes=2
 #SBATCH --ntasks=4
 #SBATCH --time=00:10:00
 #SBATCH --mem=16G
 
 # Load required modules
-module purge # Remove the list of pre loaded modules
-module load Python/3.9.1 
-module list # List the modules
- 
-# Create a python virtual environment 
-python3 -m venv name_of_your_venv
- 
+module list 
 # Activate your Python environment
-source name_of_your_venv/bin/activate
+source /home/edu05/HPC_WS/Slurm_Scripts/interpython/bin/activate
 
-# Run the MPI job
-mpirun -np 4 python mpi_hpc_ws.py
+python --version
+
+# OPTION 1: Run using Python script (with logging)
+mpirun -np 4 python  mpi_hpc_ws.py
 ```
 
 Make sure your virtual environment has `mpi4py` installed and that your system has access to the OpenMPI runtime via `mpirun`. Adjust the number of nodes and tasks depending on the cluster policies.
@@ -235,3 +278,69 @@ Make sure your virtual environment has `mpi4py` installed and that your system h
 ---
 
 {% include links.md %}
+
+<!-- import numpy as np
+import matplotlib.pyplot as plt
+from astropy.timeseries import LombScargle
+import time
+from joblib import Parallel, delayed
+
+# ----- 1. Generate synthetic light curves -----
+def generate_light_curve(period, duration=30, points=300, noise_level=0.2):
+    time = np.linspace(0, duration, points)
+    flux = np.sin(2 * np.pi * time / period) + np.random.normal(0, noise_level, points)
+    return time, flux
+
+# ----- 2. Period finding using Lomb-Scargle -----
+def find_period(time, flux, min_period=0.5, max_period=10.0):
+    frequency, power = LombScargle(time, flux).autopower(minimum_frequency=1/max_period,
+                                                         maximum_frequency=1/min_period)
+    best_period = 1 / frequency[np.argmax(power)]
+    return best_period
+
+# ----- 3. Wrapper for serial and parallel testing -----
+def run_serial(light_curves):
+    start = time.time()
+    results = [find_period(t, f) for t, f in light_curves]
+    end = time.time()
+    return end - start, results
+
+def run_parallel(light_curves, n_jobs=-1):
+    start = time.time()
+    results = Parallel(n_jobs=n_jobs)(delayed(find_period)(t, f) for t, f in light_curves)
+    end = time.time()
+    return end - start, results
+
+# ----- 4. Benchmarking -----
+def benchmark():
+    num_curves_list = [10, 50, 100, 200, 300, 500]
+    serial_times = []
+    parallel_times = []
+
+    for n in num_curves_list:
+        # Generate multiple light curves with random periods
+        periods = np.random.uniform(1.0, 5.0, size=n)
+        light_curves = [generate_light_curve(p) for p in periods]
+
+        t_serial, _ = run_serial(light_curves)
+        t_parallel, _ = run_parallel(light_curves)
+
+        serial_times.append(t_serial)
+        parallel_times.append(t_parallel)
+        print(f"{n} curves: Serial={t_serial:.2f}s, Parallel={t_parallel:.2f}s")
+
+    # ----- 5. Plotting -----
+    plt.figure(figsize=(10, 6))
+    plt.plot(num_curves_list, serial_times, 'o-', label='Serial')
+    plt.plot(num_curves_list, parallel_times, 'o-', label='Parallel')
+    plt.xlabel("Number of Light Curves")
+    plt.ylabel("Execution Time (seconds)")
+    plt.title("Serial vs Parallel Execution Time for Period Finding")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+# Run the benchmark
+if __name__ == "__main__":
+    benchmark() -->

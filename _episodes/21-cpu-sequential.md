@@ -30,8 +30,6 @@ So what can we do? There are two main approaches:
 
   -- Use hardware with more processors to implement highly parallelized code. It can be a supercomputer with multiple CPU cores, or a computer with GPUs with thousands of smaller cores.
 
-![Serial vs. Parallel Performance Comparison](../fig/serial_parallel_comparision.png)
-
 ## Serial vs. Vectorized Code
 
 Let’s look at a simple example: summing the elements of a large array. An obvious way to implement this is by using a `for` loop. With this

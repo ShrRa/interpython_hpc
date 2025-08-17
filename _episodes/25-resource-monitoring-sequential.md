@@ -5,6 +5,8 @@ teaching: 30
 exercises: 10
 questions:
 - ""
+objectives:
+- ""
 keypoints:
 - ""
 ---
@@ -130,41 +132,85 @@ print("CPU plot saved in 'plots/deflection_angle_cpu.png'")
  ~~~
  {: .output}
 
+### Job Monitoring and Profiling 
+
+We would also want to monitor the resources for the job before we run the job, so we can decide if we allocated the right amount of resources for the job type. For this we will need to create a shell file which logs the CPU and Memory resource usage every five seconds. We can create that file using the code below
+
+```shell
+#File: monitor_resources.sh
+#!/bin/bash
+# Monitor CPU% and Memory usage of Python processes for the user (you)
+# Saves results in a log file
+
+OUTFILE="resource_usage_${SLURM_JOB_ID}.log"
+
+# Create a header row for the log file
+echo "Timestamp | CPU% | Memory(MB)" > "$OUTFILE"
+
+# Repeat until stopped
+while true
+do
+    # ps: shows running processes
+    # -u $USER : only show processes owned by you
+    # -o %cpu,rss,comm : output CPU%, memory (RSS in KB), and command name
+    ps -u $USER -o %cpu,rss,comm \
+    | awk '
+        $3=="python" {                   # Only lines where command is "python"
+            # strftime formats current date/time
+            # $1 is CPU%, $2 is memory in KB — divide by 1024 for MB
+            print strftime("%Y-%m-%d %H:%M:%S"), "|", $1, "|", $2/1024
+        }
+    ' >> "$OUTFILE"
+
+    # sleep: pause for 5 seconds before checking again
+    sleep 5
+done
+```
+We can now include a command to run this file in the slurm job script that we will use to run the sequential example on BURA. 
 
 ### Sequential Job Script for the Example
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=HPC_WS_SCPU # Provide a name for the job 
-#SBATCH --output=HPC_WS_SCPU_%j.out # Request the output file along with the job number
-#SBATCH --error=HPC_WS_SCPU_%j.err # Request the error file along with the job number
-#SBATCH --partition=serial
-#SBATCH --nodes=1 # Request one CPU node
-#SBATCH --ntasks=1 # Request 1 core from the CPU node
-#SBATCH --time=-01:00:00 # Set time limit for the job
-#SBATCH --mem=16G #Request 16GB memory 
+#SBATCH --job-name=SCPU
+#SBATCH --output=SCPU_%j.out
+#SBATCH --error=SCPU_%j.err
+#SBATCH --partition=computes_thin
+#SBATCH --nodes=1
+#SBATCH --ntasks=1          
+#SBATCH --time=00:10:00
+#SBATCH --mem=16G
 
-# Load required modules
-module purge # Remove the list of pre loaded modules
-module load Python/3.9.1
+# ----------------------------
+# Print the list of the loaded modules
+# ----------------------------
 module list
 
-# Create a python virtual environment 
-python3 -m venv name_of_your_venv
+# ----------------------------
+# Activate Python environment
+# ----------------------------
+source interpython/bin/activate
+python --version
 
-# Activate your Python environment
-source name_of_your_venv/bin/activate
+# ----------------------------
+# Start the resource monitor
+# ----------------------------
+# The monitor_resources.sh script must be in the same directory
+ bash monitor_resources.sh &
+# ----------------------------
+# Run the main sequential job
+# ----------------------------
+ python Gravitational_Lensing_SCPU.py
 
-echo "Starting Gravitational Lensing Deflection calculation of Sequential CPU..."
-echo "Job ID: $SLURM_JOB_ID"
-echo "Node: $SLURM_NODELIST"
-
-# Run the Python script (with logging)
-python Gravitational_Deflection_Angle_SCPU.py
+# ----------------------------
+# Stop the monitor after the job finishes
+# ----------------------------
+kill %1
 
 echo "Job completed at $(date)"
+echo "Resource usage saved to resource_usage_${SLURM_JOB_ID}.log"
 ```
-
+After we run the script, we can then 
 > ## Exercise: Profile Your Code
 > Compile and run the sequential code. Use `htop` to monitor resource usage. Identify whether it's CPU-bound or memory-bound
 {: .challenge}

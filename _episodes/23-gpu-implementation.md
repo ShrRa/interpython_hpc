@@ -17,13 +17,38 @@ keypoints:
 - "High-level libraries like Numba and CuPy make GPU acceleration accessible from Python."
 ---
 
+## GPU Programming 
+
+In the previous section, we saw how we can get a significant speedup by parallelizing tasks across a few CPU cores. This is like turning a solo job into a small team effort. But what happens when the calculations within each task are incredibly demanding? For problems involving massive datasets, like complex simulations or training deep learning models, even a dozen CPU cores can struggle to finish in a reasonable time. This is where we need to move from a small team to a massive army of workers: GPUs.
+
 ## GPU Programming Concepts
 
 GPUs, or Graphics Processing Units, are composed of thousands of lightweight processing cores that are optimized for handling multiple operations simultaneously. This parallel architecture makes them particularly effective for data-parallel problems, where the same operation is performed independently across large datasets such as matrix multiplications, vector operations, or image processing tasks.
 
 Originally designed to accelerate the rendering of complex graphics and visual effects in computer games, GPUs are inherently well-suited for high-throughput computations involving large tensors and multidimensional arrays. Their architecture enables them to perform numerous arithmetic operations in parallel, which has made them increasingly valuable in scientific computing, deep learning, and simulations.
 
-Even without explicit parallel programming, many modern libraries and frameworks (such as TensorFlow, PyTorch, and CuPy) can automatically leverage GPU acceleration to significantly improve performance. However, to fully exploit the computational power of GPUs, especially in high-performance computing (HPC) environments, explicit parallelization is often employed.
+Even without explicit parallel programming, many modern libraries and frameworks (such as TensorFlow, PyTorch, and CuPy) can automatically leverage GPU acceleration to significantly improve performance. However, to fully exploit the computational power of GPUs, especially in high-performance computing (HPC) environments, explicit parallelization is often employed. 
+
+### CPU vs GPU Architecture
+
+The fundamental difference lies in their design philosophy. CPUs are optimized for low latency on sequential tasks, while GPUs are built for high throughput on parallel tasks.
+
+- CPUs: Few powerful cores, better for sequential tasks.
+- GPUs: Many lightweight cores, ideal for parallel workloads.
+
+> ## Figure Suggestion: 
+> Diagram comparing CPU vs GPU architecture, e.g., from [CUDA C Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html)
+{: .callout}
+
+## Comparing CPU and GPU Approaches
+
+| Feature      | CPU (OpenMP/MPI)          | GPU (CUDA)                  |
+|--------------|---------------------------|-----------------------------|
+| Cores        | Few (2–64)                | Thousands (1024–10000+)     |
+| Memory       | Shared / distributed      | Device-local (needs transfer)|
+| Programming  | Easier to debug           | Requires more setup         |
+| Performance  | Good for logic-heavy tasks| Excellent for large, data-parallel problems |
+
 
 ## Introduction to CUDA
 
@@ -75,16 +100,21 @@ CUDA allows developers to write C, C++, Fortran, and Python code that runs on th
 
 ### Checking CUDA availability before running code
 
-```python
-import cuda
+~~~
+from numba import cuda
 
 if cuda.is_available():
     print("CUDA is available!")
     print(f"Detected GPU: {cuda.get_current_device().name}")
 else:
     print("CUDA is NOT available.")
-```
-
+~~~
+{: .language-python}
+~~~
+CUDA is available!
+Detected GPU: b'NVIDIA GeForce RTX 3060 Laptop GPU'
+~~~
+{: .output}
 ---
 
 ## High-Level Libraries for Portability
@@ -97,7 +127,7 @@ High-level libraries allow easier GPU programming in Python:
 
 ### Example: Add vectors utlising CUDA using the numba python library 
 
-```python
+~~~
 from numba_cuda import cuda
 import numpy as np
 import time
@@ -135,8 +165,13 @@ d_c.copy_to_host(out=c)
 # Verify results
 print("First 5 results:", c[:5])
 print("Time taken on GPU:", gpu_time, "seconds")
-```
-
+~~~
+{: .language-python}
+~~~
+CUDA is available!
+Detected GPU: b'NVIDIA GeForce RTX 3060 Laptop GPU'
+~~~
+{: .output}
 ## Slurm Script to execute the code 
 
 The following script can be used to submit a GPU-accelerated Python job (`numba_cuda_test.py`) using Slurm:
@@ -179,24 +214,6 @@ Make sure your virtual environment includes the `numba-cuda` python library to a
 > - [CuPy Documentation](https://docs.cupy.dev/)
 {: .checklist}
 ---
-
-### CPU vs GPU Architecture
-
-- CPUs: Few powerful cores, better for sequential tasks.
-- GPUs: Many lightweight cores, ideal for parallel workloads.
-
-> ## Figure Suggestion: 
-> Diagram comparing CPU vs GPU architecture, e.g., from [CUDA C Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html)
-{: .callout}
-
-## Comparing CPU and GPU Approaches
-
-| Feature      | CPU (OpenMP/MPI)          | GPU (CUDA)                  |
-|--------------|---------------------------|-----------------------------|
-| Cores        | Few (2–64)                | Thousands (1024–10000+)     |
-| Memory       | Shared / distributed      | Device-local (needs transfer)|
-| Programming  | Easier to debug           | Requires more setup         |
-| Performance  | Good for logic-heavy tasks| Excellent for large, data-parallel problems |
 
 > ## Exercise: 
 > Show which parts of the code execute on GPU vs CPU (host vs device). Read about concepts like memory copy and kernel launch.
