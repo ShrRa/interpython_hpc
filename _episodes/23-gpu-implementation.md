@@ -97,6 +97,35 @@ CUDA allows developers to write C, C++, Fortran, and Python code that runs on th
 - Load the GPU program and execute, caching data on-chip for performance.
 - Copy the results from device memory to host memory, also called device-to-host transfer.
 
+## CUDA Libraries in Python
+
+When programming GPUs from Python, we can choose between different levels of abstraction.  
+Some libraries hide most of the CUDA details, while others give us fine-grained control.  
+This choice depends on whether you want quick prototyping, large-scale training, or custom GPU kernels.
+
+### High-Level CUDA Libraries
+These libraries handle most CUDA operations automatically.  
+They are easiest to use when your goal is training models or working with arrays without writing GPU kernels.
+
+- **PyTorch**: Deep learning framework with dynamic computation graphs; move data to GPU with `.to("cuda")`.  
+- **TensorFlow**: Deep learning framework with built-in GPU acceleration; runs on GPU automatically if available.  
+- **JAX**: NumPy-like library from Google; uses XLA to JIT-compile code for CPU, GPU (CUDA), and TPU backends.
+
+### Mid-Level CUDA Libraries
+These provide a familiar NumPy-like interface but allow more explicit GPU control when needed.
+
+- **CuPy**: Drop-in replacement for NumPy arrays; runs operations on the GPU and also supports writing custom CUDA kernels.
+
+### Low-Level CUDA Libraries
+These libraries give you the most control. You can write your own GPU kernels and manage device memory directly.
+
+- **Numba**: JIT compiler for Python; allows writing custom CUDA kernels using `@cuda.jit`.
+
+---
+
+## Implementing the libraries to use CUDA 
+
+We will now implement vector addition for an input array of one million elements using two approaches: a high-level library (PyTorch) and a low-level library (Numba). These libraries were already installed during the Bura Setup stage of the environment configuration.
 
 ### Checking CUDA availability before running code
 
@@ -117,18 +146,10 @@ Detected GPU: b'NVIDIA GeForce RTX 3060 Laptop GPU'
 {: .output}
 ---
 
-## High-Level Libraries for Portability
-
-High-level libraries allow easier GPU programming in Python:
-
-- **Numba**: JIT compiler for Python; supports GPU via `@cuda.jit`
-- **CuPy**: NumPy-like API for NVIDIA GPUs
-- **Dask**: Parallel computing with familiar APIs
-
-### Example: Add vectors utlising CUDA using the numba python library 
+### Approach 1: Add vectors utlising CUDA using the numba python library 
 
 ~~~
-from numba_cuda import cuda
+from numba import cuda
 import numpy as np
 import time
 
@@ -139,7 +160,7 @@ def add_vectors(a, b, c):
         c[i] = a[i] + b[i]
 
 # Setup input arrays
-N = 1_000_000
+N = 1000
 a = np.arange(N, dtype=np.float32)
 b = np.arange(N, dtype=np.float32)
 c = np.zeros_like(a)
@@ -172,15 +193,63 @@ CUDA is available!
 Detected GPU: b'NVIDIA GeForce RTX 3060 Laptop GPU'
 ~~~
 {: .output}
+
+### Code Explanation
+
+In the **Numba example**, we see how CUDA works at a low level:
+- We first define a GPU kernel using `@cuda.jit`. This kernel runs on the GPU and performs vector addition element by element.  
+- The function `cuda.grid(1)` gives each thread a unique index `i`. Each GPU thread computes one element of the result.  
+- We must explicitly **copy data** from host (CPU) memory to device (GPU) memory with `cuda.to_device`.  
+- We also configure how many **threads per block** and how many **blocks per grid** to use before launching the kernel.  
+- Finally, we copy the results back from device to host memory.  
+
+This approach is very close to how CUDA is programmed in C/C++. It teaches us about **threads, blocks, and memory transfers**, which are the fundamental ideas of CUDA programming.
+
+### Approach 2: Add vectors utlising CUDA using the numba python library 
+
+~~~
+import torch
+import time
+
+# Setup input tensors on GPU
+N = 1_000_000
+a = torch.arange(N, dtype=torch.float32, device="cuda")
+b = torch.arange(N, dtype=torch.float32, device="cuda")
+
+# Run vector addition on GPU
+start = time.time()
+c = a + b
+torch.cuda.synchronize()  # Wait for GPU to finish
+gpu_time = time.time() - start
+
+print("First 5 results:", c[:5].cpu().numpy())  # move back to CPU for display
+print("Time taken on GPU (PyTorch):", gpu_time, "seconds")
+~~~
+{: .language-python}
+~~~
+First 5 results: [0. 2. 4. 6. 8.]
+Time taken on GPU (PyTorch): 0.03913474082946777 seconds
+~~~
+{: .output}
+
+### Code Explanation
+
+In the **PyTorch example**, the same operation looks much simpler:
+- We create tensors directly on the GPU by specifying `device="cuda"`.  
+- Adding them with `c = a + b` automatically runs the computation on the GPU.  
+- We call `torch.cuda.synchronize()` to make sure the GPU finishes before timing.  
+- If we want to print results, we copy them back to the CPU with `.cpu().numpy()`.  
+
+Here, PyTorch **hides all CUDA details**. We don’t need to worry about threads, blocks, or explicit memory transfers — the library manages them for us.  
 ## Slurm Script to execute the code 
 
 The following script can be used to submit a GPU-accelerated Python job (`numba_cuda_test.py`) using Slurm:
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=Numba_Cuda
-#SBATCH --output=Numba_Cuda_%j.out
-#SBATCH --error=Numba_Cuda_%j.err
+#SBATCH --job-name=cuda_libraries
+#SBATCH --output=cuda_%j.out
+#SBATCH --error=cuda_%j.err
 #SBATCH --partition=gpu
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
@@ -190,39 +259,82 @@ The following script can be used to submit a GPU-accelerated Python job (`numba_
 #SBATCH --time=00:10:00
 
 # --------- Load Environment ---------
-module load Python/3.9.1
-module load cuda/11.2
 module list
 
-# --------- Check whether the GPU is available ---------
-from numba import cuda
-print("CUDA Available:", cuda.is_available())
 # Activate virtual environment
-source 'name_of_venv'/bin/activate # Here name_of_venv refers to the name of your virtual environment without the quotes
+source interpython/bin/activate # Here name_of_venv refers to the name of your virtual environment without the quotes
 
 # --------- Run the Python Script ---------
- python numba_cuda_test.py
+python numba_cuda_test.py & 
+python pytorch_cuda_test.py 
 ```
-Make sure your virtual environment includes the `numba-cuda` python library to access the GPU. 
 
-> ## Exercise: 
-> Write a Numba or CuPy version of vector addition and compare speed with NumPy.
+> ## Exercise: Vector Multiplication on the GPU
+>
+> In the previous examples, we added two vectors together using **Numba** and **PyTorch**.  
+> Now, modify both codes so that they **multiply** two vectors element by element instead of adding them.  
+>
+> - For **Numba**: change the CUDA kernel so that each thread multiplies elements instead of adding them.  
+> - For **PyTorch**: replace the addition operation with multiplication.  
+>
+> Try running your code and compare the results.
 {: .challenge}
+
+> > ## Solution
+> >
+> > **Numba solution:**
+> > ~~~python
+> > from numba import cuda
+> > import numpy as np
+> >
+> > @cuda.jit
+> > def multiply_vectors(a, b, c):
+> >     i = cuda.grid(1)
+> >     if i < a.size:
+> >         c[i] = a[i] * b[i]
+> >
+> > N = 10
+> > a = np.arange(N, dtype=np.float32)
+> > b = np.arange(N, dtype=np.float32)
+> > c = np.zeros_like(a)
+> >
+> > d_a = cuda.to_device(a)
+> > d_b = cuda.to_device(b)
+> > d_c = cuda.device_array_like(a)
+> >
+> > threads_per_block = 256
+> > blocks_per_grid = (N + threads_per_block - 1) // threads_per_block
+> >
+> > multiply_vectors[blocks_per_grid, threads_per_block](d_a, d_b, d_c)
+> > d_c.copy_to_host(out=c)
+> >
+> > print("Result (Numba):", c)
+> > ~~~
+> > {: .language-python}
+> >
+> > **PyTorch solution:**
+> > ~~~python
+> > import torch
+> >
+> > N = 10
+> > a = torch.arange(N, dtype=torch.float32, device="cuda")
+> > b = torch.arange(N, dtype=torch.float32, device="cuda")
+> >
+> > c = a * b
+> >
+> > print("Result (PyTorch):", c.cpu().numpy())
+> > ~~~
+> > {: .language-python}
+> >
+> > Both codes now perform **element-wise multiplication** instead of addition.
+{: .solution}
+
 
 > ## References:
 > - [Numba-CUDA Docs](https://nvidia.github.io/numba-cuda/)
 > - [CuPy Documentation](https://docs.cupy.dev/)
+> - [NVIDIA CUDA Samples](https://github.com/NVIDIA/cuda-samples)
 {: .checklist}
----
-
-> ## Exercise: 
-> Show which parts of the code execute on GPU vs CPU (host vs device). Read about concepts like memory copy and kernel launch.
-{: .challenge}
-
-> **Reference**: [NVIDIA CUDA Samples](https://github.com/NVIDIA/cuda-samples)
-{: .checklist}
-
----
 
 ## Summary
 
@@ -235,3 +347,7 @@ Make sure your virtual environment includes the `numba-cuda` python library to a
 ---
 
 {% include links.md %}
+
+<!-- > ## Exercise: 
+> Show which parts of the code execute on GPU vs CPU (host vs device). Read about concepts like memory copy and kernel launch.
+{: .challenge} -->

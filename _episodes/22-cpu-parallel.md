@@ -275,7 +275,7 @@ if rank == 0:
 # Load required modules
 module list 
 # Activate your Python environment
-source /home/edu05/HPC_WS/Slurm_Scripts/interpython/bin/activate
+source interpython/bin/activate
 
 # OPTION 1: Run using Python script (with logging)
 mpirun -np 4 python  mpi_example.py
