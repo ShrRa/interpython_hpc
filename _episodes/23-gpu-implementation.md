@@ -270,16 +270,13 @@ python pytorch_cuda_test.py
 ```
 
 > ## Exercise: Vector Multiplication on the GPU
->
 > In the previous examples, we added two vectors together using **Numba** and **PyTorch**.  
 > Now, modify both codes so that they **multiply** two vectors element by element instead of adding them.  
 >
-> - For **Numba**: change the CUDA kernel so that each thread multiplies elements instead of adding them.  
-> - For **PyTorch**: replace the addition operation with multiplication.  
+>  - For **Numba**: change the CUDA kernel so that each thread multiplies elements instead of adding them.  
+>  - For **PyTorch**: replace the addition operation with multiplication.  
 >
 > Try running your code and compare the results.
-{: .challenge}
-
 > > ## Solution
 > >
 > > **Numba solution:**
@@ -327,8 +324,9 @@ python pytorch_cuda_test.py
 > > {: .language-python}
 > >
 > > Both codes now perform **element-wise multiplication** instead of addition.
-{: .solution}
-
+> {: .solution}
+>
+{: .challenge}
 
 > ## References:
 > - [Numba-CUDA Docs](https://nvidia.github.io/numba-cuda/)
