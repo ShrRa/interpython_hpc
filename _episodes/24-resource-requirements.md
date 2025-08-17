@@ -95,8 +95,9 @@ Once you know your job type, you can select the correct **SLURM partition** (que
   - In an SMP system, multiple CPUs (cores) share the same physical memory and can access it at the same speed. This architecture is ideal when tasks need frequent access to a common memory space without the communication overhead of distributed systems.
 - **GPU Node**: For massively parallel computations on GPUs (e.g., CUDA, TensorFlow, PyTorch).
 
-**Decision chart for Choosing Nodes:**
 ![Decision chart for choosing node types](../fig/Job_Decision_Node_Tree.png)
+<p style="text-align: center;">Decision chart for Choosing Nodes</p>
+
 
 > ## Exercise: Classify the Job Type
 >
