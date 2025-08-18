@@ -5,6 +5,13 @@ title: "Common Issues, Fixes & Tips"
 Here is a list of issues previous participants of the course encountered
 and some tips to help you with troubleshooting.
 
+## Bura login issues
+
+### SSH login 'freezes'
+Try running `sudo openfortivpn -v`. This will launch `openfortivpn` in a verbose mode. If it results in an error, try it a few times with 10-20 seconds breaks, till you 
+see `INFO: Tunnel is up and running` message.
+Then, _without closing this terminal window_, open a new one. In this new tab, run `ssh eduxx@172...121`. The first terminal window will keep the ssh connection alive, and the second window is where you'll be able to interact with Bura. If this tab freezes, you can close it and then do `ssh` in another new terminal tab. To close the connection, go to the terminal tab with  `openfortivpn` and type `Ctrl+C`.
+
 ## Command Line/Git Bash Issues
 
 ### Python Hangs in Git Bash
