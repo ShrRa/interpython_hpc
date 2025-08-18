@@ -122,6 +122,13 @@ def add_arrays(b, c):
  # Print first few values to verify
  print(a[:10])
 ```
+In this code snippet, we first define an `add_arrays` function that sums two lists element-wise, 
+and then in the main part of the script we define `b` and `c` lists and execute `add_arrays` function. We are treating Python _lists_ as _C arrays_ here,
+in the sense that we are doing something unusual for Python when we first define an empty 'placeholder' `a`, and then assign new values to each element of the list in
+the `for` loop. The reason we are doing this and not `a.append(b[i] + c[i])` is because we want to preserve each step of the original `C` code, and in `C` and `C++` 
+there is no possibility to do something like `append` to the `C` or `C++` _plain_ array 
+(although there are variable types that allow this behavior, allocating memory in advance is much more efficient). 
+
 > ## Explanation of the C code
 >
 > - `#include <omp.h>`: Includes the OpenMP API header needed for all OpenMP functions and directives.
