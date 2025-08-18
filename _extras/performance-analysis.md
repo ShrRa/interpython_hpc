@@ -1,12 +1,11 @@
 ---
 title: "Performance analysis tools"
-start: False
 teaching: 30
 exercises: 10
 questions:
-- ""
+- "How can we monitor resource allocation in HPC setting?"
 keypoints:
-- ""
+- "Slurm, `top` and Python libraries can be used for resource monitoring."
 ---
 
 ## Resource Monitoring and Performance Analysis
