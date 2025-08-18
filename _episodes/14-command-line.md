@@ -90,7 +90,9 @@ To move backwards (or up) a directory (for example to move back to your home dir
 
 > ## Exercise
 > If you have not already done so, move into your `hpc_course` directory. Verify that you are in the correct directory, then create two new directories: code and data. Verify that your directories have been created.
+> 
 >> ## Solution
+>> 
 >> If you haven't already, move into your hpc_course directory. 
 >> ~~~
 >> $ cd hpc_course
@@ -104,6 +106,7 @@ To move backwards (or up) a directory (for example to move back to your home dir
 >> code  data
 >> ~~~
 >>{: .language-bash}
+>>
 > {: .solution}
 {: .challenge}
 
@@ -315,6 +318,7 @@ $ ls -l hello_world.sh
 >> -rw-rw-r-- 1 edu02 edu02 32 Aug 16 06:31 hello_universe.sh
 >> ~~~
 >> {: .language-bash}
+>> 
 >{: .solution}
 {: .challenge}
 
@@ -425,7 +429,8 @@ Finally, if you are using version control to track your development and have a r
 >> ~~~
 >> unzip Workshop_Materials.zip 
 >> ~~~
->> {: .language-bash} 
+>> {: .language-bash}
+>> 
 >> The output should be similar to this:
 >> ~~~
 >> Archive:  Workshop_Materials.zip
@@ -437,7 +442,8 @@ Finally, if you are using version control to track your development and have a r
 >> ~~~
 >> {: .output}
 >> Run `ls` command to verify that you have the materials where you want them, and you're ready for the next day episodes!
-> {: .solution} 
+>> 
+> {: .solution}
 {: .challenge}
 
 > ## Other really useful commands that we do not have time to cover
