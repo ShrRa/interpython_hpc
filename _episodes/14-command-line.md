@@ -219,7 +219,7 @@ $ ls
 hello_world_copy.sh  hello_world.sh
 ```
 > ## including paths in cp and mv
-> You do not always have to be in a directory to copy or move a file. If the file you want to move is not in your current directory, you can refer to the file you want to move with both the path from your current directory and the filename. Similarly, where you want to move a file can also include a path. Let's say I was in my `hpc_course` directory and I want to copy my hello_world.sh file to hello_world_3.sh. The format looks like this: 
+> You do not always have to be in a directory to copy or move a file. If the file you want to move is not in your current directory, you can refer to the file you want to move with both the path from your current directory and the filename. Similarly, where you want to move a file can also include a path. Let's say I was in my `hpc_course` directory and I want to copy my `hello_world.sh` file to `hello_world_3.sh`. The format looks like this: 
 > ```bash
 > $ pwd
 > /home/edu02/hpc_course/code
@@ -230,7 +230,7 @@ hello_world_copy.sh  hello_world.sh
 {: .callout}
 
 ### deleting files
-You may accidentally create file and want to delete it. This can be done with the `rm` command which stands for remove. Be careful, the `rm` command permanently deletes a file - this is not like putting it in the trash can or recycle bin where you can recover it. For that reason, we recommend you use the `-i` flag which double checks with you before it deletes a file. Now we can remove our hello_world_3.sh file.
+You may accidentally create file and want to delete it. This can be done with the `rm` command which stands for remove. Be careful, the `rm` command permanently deletes a file - this is not like putting it in the trash can or recycle bin where you can recover it. For that reason, we recommend you use the `-i` flag which double checks with you before it deletes a file. Now we can remove our `hello_world_3.sh` file.
 
 ```bash
 $ cd code
@@ -245,7 +245,7 @@ hello_world_copy.sh  hello_world.sh
 ```
 
 > ## Exercise
-> Use nano to edit your hello_world_copy.sh file to print something else. Rename your file to something descriptive of what it prints. Run your new code.
+> Use nano to edit your `hello_world_copy.sh` file to print something else. Rename your file to something descriptive of what it prints. Run your new code.
 >> ## Solution
 >> ~~~
 >> nano hello_world_copy.sh
@@ -253,7 +253,7 @@ hello_world_copy.sh  hello_world.sh
 >> {: .language-bash}
 >> Change "hello world" to "hello universe!", then save and exit.
 >> ~~~
->> mv hello_world_copy.sh hello_universe.sh
+>> $ mv hello_world_copy.sh hello_universe.sh
 >> $ ls
 >> ~~~
 >> {: .language-bash}
@@ -300,7 +300,7 @@ $ ls -l hello_world.sh
 -rw-rw-r-x 1 edu02 edu02 28 Aug 16 06:25 hello_world.sh
 ```
 > ## Exercise
-> What are the permissions on the `hello_universe.sh`? Who owns the file? What group does it belong to? Modify the permissions to remove the groups ability to read the file. Double check that the permissions changed. Then add the permissions back.
+> What are the permissions on the `hello_universe.sh`? Who owns the file? What group does it belong to? Modify the permissions to remove the group's ability to read the file. Double-check that the permissions changed. Then add the permissions back.
 >> ## Solution
 >> ~~~
 >> $ ls -l hello_universe.sh
@@ -422,7 +422,7 @@ Finally, if you are using version control to track your development and have a r
 >  - Changing ownership: `chown`
 >  - System management: `df`, `free -m`, `ps`, `kill`
 > 
-> See the [Command Line Interface (CLI)]('../_extras/cli-extra.md') in the Extras menu for even more!
+> See the [Command Line Interface (CLI)](../_extras/cli-extra.md) in the Extras menu for even more!
 {: .callout}
 
 {% include links.md %}
