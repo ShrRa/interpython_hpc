@@ -397,15 +397,18 @@ Another option for moving files is the file transfer protocol `ftp` and secure f
 
 Finally, if you are using version control to track your development and have a remote server (e.g. GitHub, Bitbucket). Then you can use this to create another copy of your repository on the HPC and transfer files via the remote server.
 
+
 > ## Exercise
 > Use `scp` or `rsync` to move the files you downloaded for this course to Bura.
->> ## Solution
+> 
+<!-- >> ## Solution
 >> ~~~
 >> $ TODO: FILL IN HERE MEET
 >> ~~~
+>> {: .language-bash}
 >> {: .output}
->{: .solution}
-{: .challenge}()
+> {: .solution} -->
+{: .challenge}
 
 > ## Other really useful commands that we do not have time to cover
 > As you start using an HPC, you might want to check out these commands:
@@ -416,6 +419,7 @@ Finally, if you are using version control to track your development and have a r
 > System management: `df`, `free -m`, `ps`, `kill`
 > See the Command Line Interface (CLI) in the Extras menu for even more!
 {: .callout}
+> 
 {% include links.md %}
 
 
