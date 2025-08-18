@@ -82,10 +82,10 @@ When you run work on an HPC cluster, your job’s **type** determines how it wil
 
 Once you know your job type, you can select the correct **SLURM partition** (queue) and request the right resources:  
 
-| Job Type   | SLURM Partition | Key SLURM Options              | Example Use Case            |
+| Job Type   | SLURM Partition  | Key SLURM Options             | Example Use Case            |
 |------------|------------------|-------------------------------|-----------------------------|
-| Serial     | `serial`         | `--partition`, no MPI         | Single-thread tensor calc   |
-| Parallel   | `defaultq`       | `-N`, `-n`, `mpirun`          | MPI simulation              |
+| Serial     | `computes_thin`  | `--partition`, no MPI         | Single-thread tensor calc   |
+| Parallel   | `computes_thin`  | `-N`, `-n`, `mpirun`          | MPI simulation              |
 | GPU        | `gpu`            | `--gpus`, `--cpus-per-task`   | Deep learning training      |
 
 

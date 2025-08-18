@@ -22,25 +22,6 @@ keypoints:
 
 Parallel jobs can utilize multiple CPU cores across one or more nodes to accelerate computation.
 
-### Parallel Job Script Explained
-
-```bash
-#!/bin/bash
-#SBATCH -J jobname                    # Job name
-#SBATCH -o outfile.%J                 # Output file
-#SBATCH -e errorfile.%J               # Error file
-#SBATCH --partition=defaultq          # Parallel job queue
-#SBATCH -N 2                          # Number of compute nodes
-#SBATCH -n 24                         # Total number of CPU cores per node
-mpirun -np 48 ./mpi_program           # Run with 48 MPI processes (2 nodes × 24 cores)
-```
-
-**Changes from the sequential script:**
-- `#SBATCH --partition=defaultq` : Sets to the default partition
-- `#SBATCH -N 2`: Requests 2 compute nodes
-- `#SBATCH -n 24`: Specifies 24 CPU cores per node
-- `mpirun -np 48`: Launches 48 MPI processes total (2 × 24)
-
 ### Example: Gravitational Deflection Angle Parallel CPU
 
 ~~~
@@ -74,9 +55,9 @@ mass_grid = np.linspace(1, 1000, 10000)  # Solar masses
 impact_grid = np.linspace(1e9, 1e12, 10000)  # meters
 
 # Distribute mass grid among ranks
-chunk_size = len(mass_grid) // size
-start_idx = rank * chunk_size
-end_idx = (rank + 1) * chunk_size if rank != size - 1 else len(mass_grid)
+chunk_size = len(mass_grid) // size # Number of elements assigned to each rank
+start_idx = rank * chunk_size # Starting index for this rank
+end_idx = (rank + 1) * chunk_size if rank != size - 1 else len(mass_grid) # End index (last rank takes the remainder)
 
 local_mass = mass_grid[start_idx:end_idx]
 local_result = np.zeros((len(local_mass), len(impact_grid)))
@@ -175,6 +156,19 @@ do
     sleep 5
 done
 ```
+### Explanation of Changes from the Initial Script
+
+The updated `monitor_resources_parallel.sh` improves the initial `monitor_resources.sh` as follows:
+
+1. **Process filtering**: Added `-u $USER` in `ps` and `$4=="python"` in `awk` to log only the user’s Python MPI processes.  
+2. **Memory conversion**: `rss` is converted from KB to MB (`$3/1024`) for easier readability.  
+3. **Timestamp formatting**: Each log entry includes a human-readable timestamp with `strftime`.  
+4. **Structured output**: Columns are separated with `|` and a header is included for clarity.  
+5. **Header handling**: Uses `>` for the header and `>>` for appending new measurements.  
+6. **Sampling interval**: `sleep 5` ensures a consistent 5-second interval between measurements.
+
+These changes make the script more precise, readable, and tailored for monitoring MPI Python jobs.
+
 
 ### Parallel Job Script for the Example
 
@@ -407,16 +401,18 @@ We can use the same reference used in the sequential section to understand the r
 
 Having understood both the results we can now draw a comparision between both the methods by using the following table
 
-## Comparision between using a shell script and psutil
-| Aspect                  | Shell Script (`monitor_resources_parallel.sh`)    | Python + psutil (Final Script)          |
-|--------------------------|--------------------------------------------------|------------------------------------------|
-| Where it runs            | Separate job alongside the MPI program           | Inside the MPI program itself             |
-| Level of detail          | Per-process (just PID and command name)          | Per-rank, clearly tagged as `[Rank N]`   |
-| Output location          | Written to a separate log file                   | Integrated directly into the job’s stdout|
-| Setup effort             | Requires maintaining an extra monitoring script | Built into the code, no extra setup      |
-| Continuous logging       | Yes, with fixed `sleep` interval                 | Yes, background thread with custom interval |
-| Flexibility              | Works with any process, even non-Python ones     | Requires code access, Python only        |
-| Best use case            | Black-box monitoring on shared HPC systems       | debugging, reproducibility     |
+## Comparison between using a shell script and psutil
+
+| Aspect                  | Shell Script (`monitor_resources_parallel.sh`)   | Python + psutil (Final Script)          |
+|-------------------------|-------------------------------------------------|----------------------------------------|
+| Where it runs            | Separate job alongside the MPI program          | Inside the MPI program itself          |
+| Level of detail          | Per-process (just PID and command name)         | Per-rank, clearly tagged as `[Rank N]` |
+| Output location          | Written to a separate log file                  | Integrated directly into the job’s stdout |
+| Setup effort             | Requires maintaining an extra monitoring script| Built into the code, no extra setup    |
+| Continuous logging       | Yes, with fixed `sleep` interval                | Yes, background thread with custom interval |
+| Flexibility              | Works with any process, even non-Python ones    | Requires code access, Python only      |
+| Best use case            | Black-box monitoring on shared HPC systems      | debugging, reproducibility             |
+
 
 ## Best Practices and Common Pitfalls for Resource Allocation for Parallel Scripts
 
@@ -457,12 +453,12 @@ Having understood both the results we can now draw a comparision between both th
 # Good: Match tasks to measured scalability
 #SBATCH --ntasks=32
 ```
-
 2. **Memory allocation errors**
 ```bash
 # Bad: Forgetting memory requests for large MPI jobs
 #SBATCH --nodes=2
 ./parallel_program
+
 # Good: Explicit memory per node
 #SBATCH --nodes=2
 #SBATCH --mem=64G

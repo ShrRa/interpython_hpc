@@ -46,13 +46,11 @@ Below you can see how the execution time scales up while using the sequential ex
 ![Serial vs. Parallel Performance Comparison](../fig/serial_parallel_comparision.png)
 
 From the plot, we can make the following remarks: 
-- For smaller numbers (10, 50, 100, 200, 500, 1000, 5000),  
-  the execution time is almost the same for both sequential and parallel runs which are denoted by the blue and the orange lines respectively. 
+- For smaller numbers (10, 50, 100, 200, 500, 1000, 5000), the execution time is almost the same for both sequential and parallel runs which are denoted by the blue and the orange lines respectively. 
 
 - This happens because starting and managing parallel jobs has a small extra cost (called *overhead*).  
 
-- As the number of light curves grows larger (beyond 5000),  
-  the benefit of parallelization becomes clear.  
+- As the number of light curves grows larger (beyond 5000), the benefit of parallelization becomes clear.  
 
 - In the plot:
   - **Sequential time** keeps increasing steadily as the workload grows.  
@@ -62,14 +60,14 @@ From the plot, we can make the following remarks:
 > The efficiency of both **light curve processing** and the **Lomb–Scargle algorithm** depends on their computational complexity.  
 > - For many simple data processing tasks, the time required grows roughly as **O(n)**, meaning if you double the number of data points, the computation takes about twice as long.  
 > - Other algorithms are more expensive, following **O(n²)** scaling, where doubling the data points makes the computation **four times longer**.  
-> The **classical Lomb–Scargle periodogram** has a complexity of about **O(n × m)**, where *n* is the number of data points in a light curve and *m* is the number of trial frequencies tested. In practice, this often behaves closer to **O(n²)** for dense frequency searches.  
-> More modern implementations (like the *fast Lomb–Scargle*) use mathematical tricks to reduce the scaling closer to **O(n log n)**, making them far more efficient for very large datasets.  
-> Understanding complexity is crucial: it tells us when parallelization will give modest gains (e.g., for O(n) tasks) and when it becomes essential (e.g., for O(n²) or worse).  
-> **Parallelization reduces effective complexity** by dividing the work across multiple CPU cores.  
-> For example, if a task is **O(n²)** on one processor but can be spread across *p* processors, the effective runtime becomes closer to **O(n² / p)**.  
-> While it doesn’t change the theoretical scaling, it *reduces the constant factor dramatically*, making otherwise infeasible computations practical.  
-> For small tasks, parallelization does not save time (and may even cost a little extra).  
-> But as the workload grows, parallelization provides a much more efficient workflow.
+> - The **classical Lomb–Scargle periodogram** has a complexity of about **O(n × m)**, where *n* is the number of data points in a light curve and *m* is the number of trial frequencies tested. In practice, this often behaves closer to **O(n²)** for dense frequency searches.  
+> - More modern implementations (like the *fast Lomb–Scargle*) use mathematical tricks to reduce the scaling closer to **O(n log n)**, making them far more efficient for very large datasets.  
+> - Understanding complexity is crucial: it tells us when parallelization will give modest gains (e.g., for O(n) tasks) and when it becomes essential (e.g., for O(n²) or worse).  
+> - **Parallelization reduces effective complexity** by dividing the work across multiple CPU cores.  
+>   - For example, if a task is **O(n²)** on one processor but can be spread across *p* processors, the effective runtime becomes closer to **O(n² / p)**.  
+>   - While it doesn’t change the theoretical scaling, it *reduces the constant factor dramatically*, making otherwise infeasible computations practical.  
+> - For small tasks, parallelization does not save time (and may even cost a little extra).  
+> - But as the workload grows, parallelization provides a much more efficient workflow.
 {: .callout}
 
 ## Parallel Programming on CPUs
@@ -357,6 +355,30 @@ Other ranks do not print anything. This example illustrates **point-to-root comm
 >  *Analogy: All students talk to the teacher, but not to each other.*
 >
 {: .callout}
+
+Now we will make a slurm script which we learnt about in the slurm section to run the mpi code we just developed using python. Before we develop the actual script let us remind ourselves of the basics of a slurm script
+
+### Basics of a Slurm Script Explained
+
+```bash
+#!/bin/bash
+#SBATCH -J jobname                    # Job name
+#SBATCH -o outfile.%J                 # Output file
+#SBATCH -e errorfile.%J               # Error file
+#SBATCH --partition=computes_thin     # Parallel job queue
+#SBATCH -N 2                          # Number of compute nodes
+#SBATCH -n 24                         # Total number of CPU cores per node
+mpirun -np 48 ./mpi_program           # Run with 48 MPI processes (2 nodes × 24 cores)
+```
+**Script breakdown:**
+- `#!/bin/bash`: Specifies bash shell for script execution
+- `#SBATCH -J jobname`: Sets a descriptive job name for easy identification in queue
+- `#SBATCH -o outfile.%J`: Redirects standard output to a file with job ID
+- `#SBATCH -e errorfile.%J`: Redirects error messages to separate file
+- `#SBATCH --partition=computes_thin`: Specifies the queue/partition for sequential jobs
+- `#SBATCH -N 2`: Requests 2 compute nodes
+- `#SBATCH -n 24`: Specifies 24 CPU cores per node
+- `mpirun -np 48`: Launches 48 MPI processes total (2 × 24)
 
 ## Slurm Script to execute the code 
 

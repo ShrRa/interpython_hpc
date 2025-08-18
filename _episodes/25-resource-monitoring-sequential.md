@@ -49,25 +49,20 @@ Generate a 2D array where each entry corresponds to the deflection angle for a s
 <!-------------------------------------------- Section-1 ------------------------------------------------------------------>
 ## Sequential Job Optimization
 
-Sequential jobs run on a single CPU core and are suitable for tasks that cannot be parallelized.
+Sequential jobs run on a single CPU core and are suitable for tasks that cannot be parallelized. Before that let us again remind ourselves of the structure of a slurm script
 
-### Sequential Job Script Explained
+### Structure of a Slurm Script for a Sequential Job
 
 ```bash
 #!/bin/bash
 #SBATCH -J jobname                    # Job name for identification
 #SBATCH -o outfile.%J                 # Standard output file (%J = job ID)
 #SBATCH -e errorfile.%J               # Standard error file (%J = job ID)
-#SBATCH --partition=serial            # Use serial queue for single-core jobs
-./[programme executable name]          # Execute your program
+#SBATCH --partition=computes_thin     # Use serial queue for single-core jobs
+#SBATCH --nodes=1                     # Serial jobs only require 1 node
+#SBATCH --ntasks=1                    # Serial jobs will also require only 1 core
+./[programme executable name]         # Execute your program
 ```
-
-**Script breakdown:**
-- `#!/bin/bash`: Specifies bash shell for script execution
-- `#SBATCH -J jobname`: Sets a descriptive job name for easy identification in queue
-- `#SBATCH -o outfile.%J`: Redirects standard output to a file with job ID
-- `#SBATCH -e errorfile.%J`: Redirects error messages to separate file
-- `#SBATCH --partition=serial`: Specifies the queue/partition for sequential jobs
 
 ### Example: Gravitational Deflection Angle Sequential CPU
 ~~~
@@ -183,7 +178,9 @@ do
 done
 ```
 
-Here we used 3 new commads 
+### New Commands and Operators Introduced in this Script
+
+We are using **three shell commands** and **two shell operators**:
 
 - `ps` (process status):
     - The ps command lists processes running on the system. Here, ps -u $USER restricts the list to processes started by the current user. The option -o %cpu,rss,comm customizes the output to show only CPU usage percentage (%cpu), resident memory size in kilobytes (rss), and the command name (comm) like "python".
@@ -193,6 +190,14 @@ Here we used 3 new commads
 
 - `sleep`:
     - The sleep command pauses execution for a given number of seconds. Here, sleep 5 makes the script wait 5 seconds before checking the processes again, ensuring we don’t overload the system with constant checks and providing a readable sampling interval.
+
+- `>` (redirect output, overwrite)
+    - `>` creates or overwrites a file with the command’s output.  
+    - In this script, it is used once to **create the log file and write the header line**, replacing any existing file with the same name.
+
+- `>>` (redirect output, append)
+    - `>>` appends output to an existing file instead of overwriting it.  
+    - In this script, it is used inside the loop to **append each new measurement below the header**, so the log grows over time without losing previous entries.
 
 We can now include a command to run this file in the slurm job script that we will use to run the sequential example on BURA. 
 
@@ -205,7 +210,7 @@ We can now include a command to run this file in the slurm job script that we wi
 #SBATCH --error=serial_%j.err # Name of the error file for the Job
 #SBATCH --partition=computes_thin # Request the appropriate partition for the job 
 #SBATCH --nodes=1 # Request the appropriate number of computing nodes required for the job
-#SBATCH --ntasks=1 # This specifies how many mpi processes will run across the nodes         
+#SBATCH --ntasks=1 # This specifies how many processes will run across the nodes         
 #SBATCH --time=00:10:00 # This specifies the maximum amount of time that the job will run for
 #SBATCH --mem=16G # This specifies the amount of memory which will be allocated for the job
 
