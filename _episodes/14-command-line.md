@@ -403,15 +403,41 @@ Finally, if you are using version control to track your development and have a r
 
 
 > ## Exercise
-> Use `scp` or `rsync` to move the files you downloaded for this course to Bura.
+> For this workshop, we will use some scripts that we prepared in advance.
+> You can download them [here](https://drive.google.com/drive/folders/19hGK1EfXE9QdMC-X2-pz8nlIKTW-Yfi8?usp=drive_link).0
+> Then use `scp` or `rsync` to move the files you downloaded for this course to Bura.
 > 
-<!-- >> ## Solution
+>> ## Solution
+>> Let's say we have the downloaded `zip` archive located in `/home/alex/Downloads` folder. In this case, we need to open a new
+>> terminal tab, and _wihtout_ logging to Bura in this tab execute the `scp` command:
 >> ~~~
->> $ TODO: FILL IN HERE MEET
+>> $ scp Downloads/Workshop_Materials.zip edu02@172.16.55.121:/home/edu02
 >> ~~~
->> {: .language-bash}
+>> {: .language-bash} 
+>> We'll be prompted to type our password, and once it's done, we'll get a message saying that our file is copied:
+>> ~~~
+>> Workshop_Materials.zip                        100%   18KB   1.1MB/s   00:00
+>> ~~~
 >> {: .output}
-> {: .solution} -->
+>> 
+>> Next we should switch to the terminal tab in which we are logged into Bura, and unzip this archive:
+>> 
+>> ~~~
+>> unzip Workshop_Materials.zip 
+>> ~~~
+>> {: .language-bash} 
+>> The output should be similar to this:
+>> ~~~
+>> Archive:  Workshop_Materials.zip
+>>   creating: Workshop_Materials/
+>>   inflating: Workshop_Materials/cuda_check.py
+>>   inflating: Workshop_Materials/cuda_exercise.slurm
+>>   inflating: Workshop_Materials/cuda_libraries.slurm
+>> ...
+>> ~~~
+>> {: .output}
+>> Run `ls` command to verify that you have the materials where you want them, and you're ready for the next day episodes!
+> {: .solution} 
 {: .challenge}
 
 > ## Other really useful commands that we do not have time to cover
