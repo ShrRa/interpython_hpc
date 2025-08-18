@@ -250,18 +250,17 @@ there is no possibility to do something like `append` to the `C` or `C++` _plain
 > }
 > ~~~
 > Can this be parallelized with OpenMP? Why or why not?
+>> ## Solution
+>>
+>> No, this cannot be safely parallelized because each iteration depends on the result of the previous iteration (`a[i-1]`). 
+>> 
+>> OpenMP requires loop iterations to be independent for parallel execution. Here, since each `a[i]` relies on `a[i-1]`, the loop has a **sequential dependency**, also known as a **loop-carried dependency**. 
+>> 
+>> This prevents naive parallelization with OpenMP's `#pragma omp parallel for`.
+>>
+>> However, this type of problem can be parallelized using more advanced techniques like a **parallel prefix sum (scan)** algorithm, which restructures the computation to allow parallel execution in logarithmic steps instead of linear.
+>{: .solution}
 {: .challenge}
-
-> ## Solution
->
-> No, this cannot be safely parallelized because each iteration depends on the result of the previous iteration (`a[i-1]`). 
-> 
-> OpenMP requires loop iterations to be independent for parallel execution. Here, since each `a[i]` relies on `a[i-1]`, the loop has a **sequential dependency**, also known as a **loop-carried dependency**. 
-> 
-> This prevents naive parallelization with OpenMP's `#pragma omp parallel for`.
->
-> However, this type of problem can be parallelized using more advanced techniques like a **parallel prefix sum (scan)** algorithm, which restructures the computation to allow parallel execution in logarithmic steps instead of linear.
-{: .solution}
 
 
 ### MPI (Message Passing Interface)
