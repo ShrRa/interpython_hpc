@@ -20,9 +20,9 @@ keypoints:
 
 ## Parallel CPU Programming
 
-In the previous section, we saw how to make our code faster for sequential jobs. However, there are cases where, no matter how much you optimize, a single process remains a bottleneck. In such cases, we move to parallelization instead of vectorization, especially when computations involve dependencies or irregular structures that cannot be expressed as simple array-wide operations. Some tasks are even `embarrassingly parallel` meaning they consist of completely independent jobs that can run side by side without any communication.
+In the previous section, we saw how to make our code faster for sequential jobs. However, there are cases where, no matter how much you optimize, a single process remains a bottleneck. In such cases, we move to parallelization instead of vectorization, especially when computations involve dependencies or irregular structures that cannot be expressed as simple array-wide operations. Some tasks are even _embarrassingly parallel_ meaning they consist of completely independent jobs that you can run side by side, on different CPU cores or separate computers, without any communication.
 
-A perfect example from astronomy is finding the rotation period of stars from their light curves (measurements of brightness over time). Analyzing one star is quick, but analyzing data from thousands or millions of stars sequentially can take days or weeks. This is where parallel computing becomes essential.
+A perfect example from astronomy is finding stellar variability period from their light curves (measurements of brightness over time). Analyzing one star is quick, but analyzing data from thousands or millions of stars sequentially can take days or weeks. This is where parallel computing becomes essential.
 
 ### Analyzing Light Curves with Sequential and Parallel Execution  
 
