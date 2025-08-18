@@ -366,7 +366,7 @@ if rank == 0:
 >  A communication pattern where many processes send information to one process.  
 >  *Analogy: All students talk to the teacher, but not to each other.*
 >
-{: .discussion}
+{: .callout}
 
 ## Slurm Script to execute the code 
 
@@ -409,36 +409,36 @@ Make sure your virtual environment has `mpi4py` installed and that your system h
 > ```text
 > [[0], [0, 1], [0, 1, 2], [0, 1, 2, 3]]
 > ```
+>> ## Solution
+>> 
+>> ```python
+>> # File Name - mpi_ex1.py
+>> # This script demonstrates the use of MPI gather with lists using mpi4py.
+>> # Each process creates a list of integers from 0 up to its rank,
+>> # and the root process (rank 0) gathers and prints all the lists.
+>> 
+>> # Import the MPI module from mpi4py
+>> from mpi4py import MPI  
+>> 
+>> # Initialize the default communicator (all processes belong to COMM_WORLD)
+>> comm = MPI.COMM_WORLD
+>> 
+>> # Get the rank (unique ID) of the current process
+>> rank = comm.Get_rank()
+>> 
+>> # Each process creates a list of numbers from 0 to its rank
+>> data = list(range(rank + 1))
+>> 
+>> # Gather all lists at the root process (rank 0)
+>> all_data = comm.gather(data, root=0)
+>>
+>> # Only the root process prints the gathered lists
+>> if rank == 0:
+>>    print(all_data)
+>> ```
+>> 
+> {: .solution}
 {: .challenge}
-
-> ## Solution
->
-> ```python
-> # File Name - mpi_ex1.py
-> # This script demonstrates the use of MPI gather with lists using mpi4py.
-> # Each process creates a list of integers from 0 up to its rank,
-> # and the root process (rank 0) gathers and prints all the lists.
-> 
-> # Import the MPI module from mpi4py
-> from mpi4py import MPI  
->
-> # Initialize the default communicator (all processes belong to COMM_WORLD)
-> comm = MPI.COMM_WORLD
-> 
-> # Get the rank (unique ID) of the current process
-> rank = comm.Get_rank()
-> 
-> # Each process creates a list of numbers from 0 to its rank
-> data = list(range(rank + 1))
-> 
-> # Gather all lists at the root process (rank 0)
-> all_data = comm.gather(data, root=0)
-> 
-> # Only the root process prints the gathered lists
-> if rank == 0:
->    print(all_data)
-> ```
-{: .solution}
 
 ---
 
@@ -451,56 +451,55 @@ Make sure your virtual environment has `mpi4py` installed and that your system h
 > Hint: Use `comm.bcast()` after `comm.gather()`.  
 >
 > - What happens if each process prints the result after the broadcast?
+> 
+>> ## Solution
+>>
+>> ```python
+>> # File Name - mpi_ex2.py
+>> # This script demonstrates combining MPI gather and broadcast using mpi4py.
+>> # 1. Each process computes the square of its rank.
+>> # 2. The results are gathered at the root process (rank 0).
+>> # 3. The root process broadcasts the gathered list to all processes.
+>> # 4. Each process prints the final received list.
+>> 
+>> # Import the MPI module from mpi4py
+>> from mpi4py import MPI  
+>> 
+>> # Initialize the default communicator (all processes belong to COMM_WORLD)
+>> comm = MPI.COMM_WORLD
+>> 
+>> # Get the rank (unique ID) of the current process
+>> rank = comm.Get_rank()
+>> 
+>> # Each process computes its rank squared
+>> data = rank ** 2
+>> 
+>> # Gather all squared values at the root process (rank 0)
+>> gathered = comm.gather(data, root=0)
+>> 
+>> # Broadcast the gathered list from the root to all processes
+>> result = comm.bcast(gathered, root=0)
+>> 
+>> # Each process prints the broadcasted result
+>> print(f"Process {rank} received: {result}")
+>> ```
+>
+>> Example output (4 processes):
+>
+>> ```text
+>> Process 0 received: [0, 1, 4, 9]
+>> Process 1 received: [0, 1, 4, 9]
+>> Process 2 received: [0, 1, 4, 9]
+>> Process 3 received: [0, 1, 4, 9]
+>> ```
+>> Now **all processes** have the final list, not just the root.
+> {: .solution}
 {: .challenge}
-
-> ## Solution
->
-> ```python
-> # File Name - mpi_ex2.py
-> # This script demonstrates combining MPI gather and broadcast using mpi4py.
-> # 1. Each process computes the square of its rank.
-> # 2. The results are gathered at the root process (rank 0).
-> # 3. The root process broadcasts the gathered list to all processes.
-> # 4. Each process prints the final received list.
-> 
-> # Import the MPI module from mpi4py
-> from mpi4py import MPI  
-> 
-> # Initialize the default communicator (all processes belong to COMM_WORLD)
-> comm = MPI.COMM_WORLD
-> 
-> # Get the rank (unique ID) of the current process
-> rank = comm.Get_rank()
-> 
-> # Each process computes its rank squared
-> data = rank ** 2
-> 
-> # Gather all squared values at the root process (rank 0)
-> gathered = comm.gather(data, root=0)
-> 
-> # Broadcast the gathered list from the root to all processes
-> result = comm.bcast(gathered, root=0)
-> 
-> # Each process prints the broadcasted result
-> print(f"Process {rank} received: {result}")
-> ```
->
-> Example output (4 processes):
->
-> ```text
-> Process 0 received: [0, 1, 4, 9]
-> Process 1 received: [0, 1, 4, 9]
-> Process 2 received: [0, 1, 4, 9]
-> Process 3 received: [0, 1, 4, 9]
-> ```
->
-> Now **all processes** have the final list, not just the root.
-{: .solution}
 
 > ## References:
 > - [OpenMP Tutorials](https://www.openmp.org/resources/tutorials-articles/)
 > - [mpi4py library Documentation](https://mpi4py.readthedocs.io/en/stable/)
-{: .checklist}
+{: .callout}
 ---
 
 {% include links.md %}
