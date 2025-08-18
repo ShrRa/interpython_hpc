@@ -49,8 +49,11 @@ One of the Croatian in-kind contributions is computing time on the supercomputer
 
 ### Which facility is the right choice for me?
 It may seem logical to go for the largest supercomputer available to you, when you need to run some massive computations, however, in practice, there is a number of aspects to consider.
+
  1) Do you need some specific datasets? While obtaining more computational power is relatively simple (to a certain limit), data transfer is still one of the biggest bottlenecks. Transferring many terabytes of data is often problematic, even for large-scale facilities. If you need to perform data analysis on the whole LSST Data Release, especially if you are working with epoch observations, your choice of HPC is severely limited to a few IDACs that store these datasets. The same problem occurs if you need to crossmatch several large datasets.
+ 
  2) Can your algorithm be implemented on GPUs? If so, is the speed-up crucial? Currently, only a few LSST facilities promise access to GPU computation time, however, institutional clusters are often more advanced in this regard, thanks to the need to serve multiple scientific groups with varying interests. If you are running a Machine Learning algorithm, IDACs are usually not the best choice.
+ 
  3) Do you use `Python`, `C`, or some specific code, e.g. [`GADGET`](https://wwwmpa.mpa-garching.mpg.de/gadget4/)? Installing software packages on HPCs is less straightforward than it is on a personal computer (and even that is rarely as straightforward as we'd like). Before committing to an HPC facility, write a lightweight testing script that will check that all dependencies needed for your project work properly.
 
 {% include links.md %}
