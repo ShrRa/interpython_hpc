@@ -331,7 +331,7 @@ The root process (rank 0) gathers all results and prints:
 
 Other ranks do not print anything. This example illustrates **point-to-root communication** which is useful when one process needs to collect and process results from all workers.
 
-> ### Terminology
+> ## Terminology
 >
 > - **Process**:  
 >  A single copy of your program that runs at the same time as the others.  
@@ -473,9 +473,9 @@ Make sure your virtual environment has `mpi4py` installed and that your system h
 >> # Each process prints the broadcasted result
 >> print(f"Process {rank} received: {result}")
 >> ```
->
+>>
 >> Example output (4 processes):
->
+>>
 >> ```text
 >> Process 0 received: [0, 1, 4, 9]
 >> Process 1 received: [0, 1, 4, 9]
