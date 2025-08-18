@@ -91,19 +91,19 @@ To move backwards (or up) a directory (for example to move back to your home dir
 > ## Exercise
 > If you have not already done so, move into your `hpc_course` directory. Verify that you are in the correct directory, then create two new directories: code and data. Verify that your directories have been created.
 >> ## Solution
+>> If you haven't already, move into your hpc_course directory. 
 >> ~~~
->> if you haven't already, move into your hpc_course directory. 
 >> $ cd hpc_course
 >>
 >> $ pwd
 >> /home/edu02/hpc_course
-
+>> 
 >> $ mkdir code
 >> $ mkdir data
 >> $ ls
 >> code  data
 >> ~~~
->>{: .output}
+>>{: .language-bash}
 > {: .solution}
 {: .challenge}
 
