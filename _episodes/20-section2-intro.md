@@ -21,6 +21,7 @@ We will use the virtual environment that we created in the previous episodes, so
 
 ```bash 
 $ source interpython/bin/activate
+$ module load python/Python-3.10.5
 $ module load mpi/intel-2021.5
 $ module load gcc/gcc-13.2.0
 ```

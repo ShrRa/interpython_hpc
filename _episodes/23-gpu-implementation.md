@@ -69,7 +69,119 @@ CUDA allows developers to write C, C++, Fortran, and Python code that runs on th
 - These threads are organized hierarchically into:
   - Grids of Blocks
   - Blocks of Threads
-- This can be visualised in the following form
+
+Lets look at this hierarchy in detail in the section below
+
+# CUDA Hierarchy
+
+In this section, we’ll explore how **CUDA organizes threads** and how this maps to the **GPU hardware**.  
+
+## 1. CUDA Program Execution 
+
+A CUDA program runs in **two places**:
+
+- **CPU (Host)**:  
+  Handles setup — memory allocation, kernel launches, etc.
+- **GPU (Device)**:  
+  Runs the **kernels** (functions annotated with `__global__`) using thousands of lightweight threads in parallel.
+
+## 2. Hierarchical Organization of Threads
+
+CUDA uses a **hierarchical structure** to manage threads efficiently.  
+There are **three main levels**:
+
+### a) CUDA Thread
+
+- The **smallest execution unit** in CUDA.
+- Each thread runs the **same kernel code** but on **different data**  
+  → This model is called **SIMT** (Single Instruction, Multiple Threads).
+- Each thread has a **unique ID** (`threadIdx`) so it knows *which piece of data* to work on.
+
+---
+
+**Hardware Mapping: CUDA Thread → CUDA Core**
+
+- A **CUDA core** is the **smallest compute unit** on the GPU.  
+  Think of it like a **CPU core**, but **simpler and lighter**.
+
+- Each CUDA core:
+  - Executes one **thread’s instructions** at a time.
+  - Is optimized for **massive parallelism** rather than single-thread speed.
+
+- Unlike CPUs (which have a few very powerful cores),  
+  GPUs have **hundreds or thousands of CUDA cores**,  
+  enabling them to run *many threads simultaneously*.
+
+---
+
+### b) CUDA Thread Block
+
+- Threads are grouped into **blocks**.
+- A **block** can have up to thousands of threads (hardware limit, often 1024).
+- Threads in the same block can:
+  - Share **fast shared memory**.
+  - Synchronize with `__syncthreads()`.
+
+ **Hardware mapping:** A thread block is executed on a **Streaming Multiprocessor (SM)**.
+
+#### Thread Indexing in a Block:
+Each thread has coordinates (`threadIdx.x`, `threadIdx.y`, `threadIdx.z`).  
+Within a 1D setup:
+globalThreadID = blockIdx.x * blockDim.x + threadIdx.x
+
+This formula lets every thread know its **global position** in the grid.
+
+---
+
+### c) CUDA Kernel Grid
+
+- Blocks are grouped into a **grid**.
+- A **grid** can be 1D, 2D, or 3D depending on your problem.
+- The **grid** allows CUDA to scale to **millions of threads**.
+- Threads in *different blocks* cannot use shared memory together,  
+  but they can communicate via **global memory**.
+
+---
+
+**Hardware Mapping: CUDA Grid → Full GPU**
+
+- A **Streaming Multiprocessor (SM)** is the **workhorse unit** of the GPU.  
+  Each SM is a **cluster of CUDA cores** plus supporting hardware.
+
+- Each SM contains:
+  - **Many CUDA cores** (e.g., 64–128, depending on GPU generation).
+  - **Registers** → very fast storage for threads.
+  - **Shared memory** → a small, fast memory space for threads in the same block.
+  - **Schedulers** → decide which threads run next.
+
+- An SM is responsible for running **one or more thread blocks** at a time.
+- Modern GPUs have **tens of SMs**, each with dozens of CUDA cores,  
+  enabling massive parallelism across the grid.
+
+---
+
+## 3. GPU Hardware Mapping
+
+- Each **Streaming Multiprocessor (SM)** runs **multiple blocks** at once.
+- Each **CUDA core** executes **individual threads**.
+- A GPU has **many SMs**, which is why it can run *thousands of threads simultaneously*.
+
+**Mapping (image reference):**
+- Single thread → CUDA core  
+- Thread block → Streaming Multiprocessor (SM)  
+- Grid → Whole GPU
+
+---
+
+## 4. Summary Table
+
+| **Level**     | **Unit**        | **Purpose**                          | **ID Reference**                   | **Hardware Mapping**          |
+| ------------- | --------------- | ------------------------------------ | ---------------------------------- | ----------------------------- |
+| Thread        | 1 thread        | Smallest unit of computation         | `threadIdx`                        | CUDA Core                     |
+| Thread Block  | Group of threads| Shares memory, synchronizes threads  | `blockIdx`, `threadIdx`            | Streaming Multiprocessor (SM) |
+| Grid (Kernel) | Block of blocks | Scales to the entire dataset         | `gridDim`, `blockDim`, `threadIdx` | Full GPU                      |
+
+We can visualise this using the diagrams given below: 
 
 ![CUDA Kernel Execution on GPU](../fig/cuda_kernel_execution.png)
 ![CUDA heirarchy visulation lower level](../fig/cuda_blocks.png)
@@ -96,13 +208,10 @@ CUDA allows developers to write C, C++, Fortran, and Python code that runs on th
 
 ## CUDA Libraries in Python
 
-When programming GPUs from Python, we can choose between different levels of abstraction.  
-Some libraries hide most of the CUDA details, while others give us fine-grained control.  
-This choice depends on whether you want quick prototyping, large-scale training, or custom GPU kernels.
+When programming GPUs from Python, we can choose between different levels of abstraction. Some libraries hide most of the CUDA details, while others give us fine-grained control. This choice depends on whether you want quick prototyping, large-scale training, or custom GPU kernels.
 
 ### High-Level CUDA Libraries
-These libraries handle most CUDA operations automatically.  
-They are easiest to use when your goal is training models or working with arrays without writing GPU kernels.
+These libraries handle most CUDA operations automatically. They are easiest to use when your goal is training models or working with arrays without writing GPU kernels.
 
 - **PyTorch**: Deep learning framework with dynamic computation graphs; move data to GPU with `.to("cuda")`.  
 - **TensorFlow**: Deep learning framework with built-in GPU acceleration; runs on GPU automatically if available.  
@@ -227,13 +336,15 @@ Time taken on GPU: 0.10699796676635742 seconds
 ### Code Explanation
 
 In the **Numba example**, we see how CUDA works at a low level:
-- We first define a GPU kernel using `@cuda.jit`. This kernel runs on the GPU and performs vector addition element by element.  
+- We first define a GPU kernel using `@cuda.jit`. This kernel runs on the GPU and performs vector addition element by element. 
+- The code `@cuda.jit` is a decorator. A decorator in Python is essentially a function that modifies or extends the behavior of another function or class without changing its source code.  
+- Basically it passes function `add_vectors` into the cuda.jit function which turns the python code into low level GPU code. 
 - The function `cuda.grid(1)` gives each thread a unique index `i`. Each GPU thread computes one element of the result.  
 - We must explicitly **copy data** from host (CPU) memory to device (GPU) memory with `cuda.to_device`.  
 - We also configure how many **threads per block** and how many **blocks per grid** to use before launching the kernel.  
 - Finally, we copy the results back from device to host memory.  
 
-This approach is very close to how CUDA is programmed in C/C++. It teaches us about **threads, blocks, and memory transfers**, which are the fundamental ideas of CUDA programming.
+This approach is very close to how CUDA is programmed in C/C++. It teaches us about **threads, blocks, and memory transfers**, which are the fundamental ideas of CUDA programming as we saw in the CUDA heirarchy section.
 
 ### Approach 2: Add vectors using Torch
 
