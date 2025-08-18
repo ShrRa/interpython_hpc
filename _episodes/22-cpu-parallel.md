@@ -20,9 +20,9 @@ keypoints:
 
 ## Parallel CPU Programming
 
-In the previous section, we saw how to make our code faster for sequential jobs. However, there are cases where, no matter how much you optimize, a single process remains a bottleneck. In such cases, we move to parallelization instead of vectorization, especially when computations involve dependencies or irregular structures that cannot be expressed as simple array-wide operations. Some tasks are even `embarrassingly parallel` meaning they consist of completely independent jobs that can run side by side without any communication.
+In the previous section, we saw how to make our code faster for sequential jobs. However, there are cases where, no matter how much you optimize, a single process remains a bottleneck. In such cases, we move to parallelization instead of vectorization, especially when computations involve dependencies or irregular structures that cannot be expressed as simple array-wide operations. Some tasks are even _embarrassingly parallel_ meaning they consist of completely independent jobs that you can run side by side, on different CPU cores or separate computers, without any communication.
 
-A perfect example from astronomy is finding the rotation period of stars from their light curves (measurements of brightness over time). Analyzing one star is quick, but analyzing data from thousands or millions of stars sequentially can take days or weeks. This is where parallel computing becomes essential.
+A perfect example from astronomy is finding stellar variability period from their light curves (measurements of brightness over time). Analyzing one star is quick, but analyzing data from thousands or millions of stars sequentially can take days or weeks. This is where parallel computing becomes essential.
 
 ### Analyzing Light Curves with Sequential and Parallel Execution  
 
@@ -83,6 +83,11 @@ OpenMP is used for shared-memory parallelism. It enables multi-threading where e
 OpenMP was first introduced in October 1997 as a collaborative effort between hardware vendors, software developers, and academia. The goal was to standardize a simple, portable API for shared-memory parallel programming in C, C++, and Fortran. Over time, OpenMP has evolved to support nested parallelism, Single Instruction Multiple Data (vectorization), and offloading to GPUs, while remaining easy to integrate into existing code through compiler directives.
 
 OpenMP is now maintained by the OpenMP Architecture Review Board, which includes organizations like Arm, AMD, IBM, Intel, Cray, HP, Fujitsu, Nvidia, NEC, Red Hat, Texas Instruments, and Oracle Corporation. OpenMP allows you to parallelize loops in C/C++ or Fortran using compiler directives.
+
+> ## No OpenMP for Python?
+> While OpenMP is not supported by Python, there are other Python tools that use similar logic. In many cases, when you need to run complex data processing as efficiently as possible, you can use [multiprocessing](https://docs.python.org/3/library/multiprocessing.html) package that allows you to split your dataset into chunks and send them to be processed by different CPU cores.
+> `multiprocessing` is a higher-level tool than OpenMP, in the sense that it doesn't do any kind of optimization on the level of data structures. When performance is really critical, lower-level tools give you more control, but when you want to speed up a processing of a large table from a week to one night, `multiprocessing` will do the job.
+{: .callout}
 
 > ## Terminology
 > #### Nested Parallelism
