@@ -97,16 +97,39 @@ OpenMP is now maintained by the OpenMP Architecture Review Board, which includes
 
 ### Example: Running a loop in parallel using OpenMP    
 ```c
-#include <omp.h>
-#pragma omp parallel for
-for (int i = 0; i < N; i++) {
-    a[i] = b[i] + c[i];
+#include <stdio.h> // For the standard input-output header file (can be thought of as a python library)
+#include <omp.h> // For the OpenMP header file (can be thought of as a python library)
+
+int main() {
+    int N = 100000;                  // Size of the arrays
+    double b[N], c[N], a[N];         // Input and output arrays are defined with fixed lengths
+
+    // Initialize arrays b and c
+    for (int i = 0; i < N; i++) {
+        b[i] = i * 0.1;
+        c[i] = i * 0.2;
+    }
+
+    // Parallel loop: compute a[i] = b[i] + c[i]
+    #pragma omp parallel for
+    for (int i = 0; i < N; i++) {
+        a[i] = b[i] + c[i];
+    }
+
+    // Print first few values to check
+    for (int i = 0; i < 10; i++) {
+        printf("a[%d] = %f\n", i, a[i]);
+    }
+
+    return 0;
 }
+
 ```
 
 Since C programming is not a prerequisite for this workshop, let's break down the parallel loop code in detail.
 
 **Requirements**:  
+- Add `##include <stdio.h>` to your code
 - Add `#include <omp.h>` to your code
 - Compile with `-fopenmp` flag
 
@@ -150,28 +173,41 @@ there is no possibility to do something like `append` to the `C` or `C++` _plain
 
 > ## Explanation of the C code
 >
-> - `#include <omp.h>`: Includes the OpenMP API header needed for all OpenMP functions and directives.
-> - `#pragma omp parallel for`: A **compiler directive** that tells the compiler to **parallelize the `for` loop** that follows.
-> - The `for` loop itself performs **element-wise addition** of two arrays (`b` and `c`), storing the result in array `a`.
+> - `#include <stdio.h>`: Allows use of `printf` for output.  
+> - `#include <omp.h>`: Includes the OpenMP API header needed for parallel programming.  
+> - `int N = 100000;`: Defines the size of the arrays.  
+> - `double b[N], c[N], a[N];`: Declares three arrays of size `N` (two inputs and one output).  
+> - The first `for` loop initializes arrays `b` and `c` with values (`i * 0.1` and `i * 0.2`).  
+> - `#pragma omp parallel for`: A **compiler directive** that tells the compiler to **parallelize the `for` loop** that follows.  
+> - The second `for` loop computes element-wise addition: `a[i] = b[i] + c[i]`.  
+> - The final `for` loop prints the **first 10 elements** of the result to verify correctness.  
 >
 > ### How OpenMP Executes This
 >
-> 1. OpenMP detects available CPU cores (e.g., 4 or 8).
-> 2. It splits the loop into chunks — one for each thread.
-> 3. Each core runs its chunk **simultaneously** (in parallel).
-> 4. The threads **synchronize automatically** once all work is done.
+> 1. OpenMP detects the available CPU cores (e.g., 4 or 8).  
+> 2. It splits the loop iterations into chunks, assigning each chunk to a different thread.  
+> 3. Each thread executes its assigned portion of the loop **simultaneously** (in parallel).  
+> 4. Once all iterations are done, OpenMP **synchronizes the threads automatically**.  
 >
 > ### Output
 >
-> - The output is stored in array `a`, which will contain the sum of corresponding elements from arrays `b` and `c`. The execution is faster than running the loop sequentially.
+> The output prints the first 10 values of array `a`:  
 >
-> ### Real-World Analogy
+> ```
+> a[0] = 0.000000
+> a[1] = 0.300000
+> a[2] = 0.600000
+> a[3] = 0.900000
+> a[4] = 1.200000
+> a[5] = 1.500000
+> a[6] = 1.800000
+> a[7] = 2.100000
+> a[8] = 2.400000
+> a[9] = 2.700000
+> ```
 >
-> Suppose you need to send 100 emails:
->
-> - **Without OpenMP**: One person sends all 100 emails one by one.
-> - **With OpenMP**: 4 people each send 25 emails **at the same time** — finishing in a quarter of the time.
->
+> - These values come from `a[i] = b[i] + c[i]`, where `b[i] = i * 0.1` and `c[i] = i * 0.2`.  
+> - Example: `a[1] = (1*0.1) + (1*0.2) = 0.1 + 0.2 = 0.3`.  
 {: .discussion}
 
 
@@ -181,8 +217,31 @@ there is no possibility to do something like `append` to the `C` or `C++` _plain
 > Consider this loop:
 > 
 > ~~~c
-> for (int i = 1; i < N; i++) {
->   a[i] = a[i-1] + b[i];
+> #include <stdio.h>
+>
+> int main() {
+>     int N = 100000;            // Size of the arrays
+>     double a[N], b[N];          // Declare input array b and output array a
+>
+>     // Initialize array b
+>     for (int i = 0; i < N; i++) {
+>         b[i] = i * 0.1;
+>     }
+>
+>     // Initialize first element of a
+>     a[0] = b[0];
+>
+>     // Compute cumulative sum: a[i] = a[i-1] + b[i]
+>     for (int i = 1; i < N; i++) { 
+>         a[i] = a[i-1] + b[i]; 
+>     }
+>
+>     // Print first few values to verify
+>     for (int i = 0; i < 10; i++) {
+>         printf("a[%d] = %f\n", i, a[i]);
+>     }
+>
+>     return 0;
 > }
 > ~~~
 > Can this be parallelized with OpenMP? Why or why not?
@@ -207,6 +266,8 @@ MPI is used for distributed-memory parallelism. Processes run on separate memory
 MPI emerged earlier, in the early 1990s, as the need for a standardized message-passing interface became clear in the growing field of distributed-memory computing. Before MPI, various parallel systems used their own vendor-specific libraries, making code difficult to port across machines.
 
 In June 1994, the first official MPI standard (MPI-1) was published by the MPI Forum, a collective of academic institutions, government labs, and industry partners. Since then, MPI has become the de facto standard for scalable parallel computing across multiple nodes, and it continues to evolve with versions like MPI-2, MPI-3, MPI-4, and finally MPI-5 released on June 5 2025 which add support for features like parallel I/O and dynamic process management. 
+
+MPI allows multiple copies of a program, called **processes**, to run simultaneously and coordinate work by **message passing**. Each process has a unique **rank**, which identifies it within a **communicator** (a group of processes that can communicate with each other). We will learn about these methods of MPI using the example below which prints the square of the rank of each process. 
 
 ### Example: Implementation of MPI using the mpi4py library in python
 
@@ -374,8 +435,6 @@ Make sure your virtual environment has `mpi4py` installed and that your system h
 > ```
 {: .solution}
 
-
-
 ---
 
 > ## Exercise 2: Broadcast after gather
@@ -432,9 +491,6 @@ Make sure your virtual environment has `mpi4py` installed and that your system h
 >
 > Now **all processes** have the final list, not just the root.
 {: .solution}
-
-
-
 
 > ## References:
 > - [OpenMP Tutorials](https://www.openmp.org/resources/tutorials-articles/)
