@@ -80,7 +80,16 @@ print(f"Sum: {total}, Time taken: {end - start:.4f} seconds")
  {: .output}
 
 Depending on your processor, this code may take up to a couple of seconds to execute. 
-Summation is one of those operations that can be vectorized. In Python, if we loop over an array element by element, the interpreter has to execute each iteration in Python’s high-level code, which adds overhead and slows things down. In contrast, C is a low-level, compiled language, meaning its instructions are executed directly by the CPU without the overhead of Python’s interpreter. Vectorization in this context means that instead of performing the sum one element at a time in Python, we hand the entire array to a function like `numpy.sum`, which is implemented in optimized C code. This function can take advantage of CPU-level optimizations, such as processing multiple elements at once (using SIMD instructions) and reducing loop overhead. In essence, vectorization allows Python to delegate heavy computations to fast, compiled code, giving a huge speed-up while letting us write clean, high-level Python code.
+
+In Python, operations like summation can be written in two different ways: either by looping over elements one at a time, or by using vectorized operations. When we write a loop in Python, the interpreter has to handle each iteration in high-level Python code. This introduces overhead and makes the operation relatively slow.
+
+In contrast, functions like `numpy.sum` are implemented in optimized C code. C is a low-level, compiled language, which means its instructions run directly on the CPU without the overhead of the Python interpreter. By handing the entire array to `numpy.sum`, we allow the computation to be carried out in C instead of Python.
+
+Vectorization can be formally defined as the process of expressing operations on entire arrays or vectors of data, rather than performing computations element by element. This allows compilers and libraries to use hardware-level optimizations such as SIMD (Single Instruction, Multiple Data) instructions, which process multiple elements simultaneously.
+
+This approach provides significant speed-ups because it reduces loop overhead and leverages efficient, low-level implementations. As a result, vectorization lets us write clean, high-level Python code while still achieving the efficiency of low-level compiled code.
+
+We will now implement the same code using `numpy.sum`
 
 ~~~
 # File Name - vector_numpy.py

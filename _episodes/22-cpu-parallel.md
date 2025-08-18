@@ -20,25 +20,35 @@ keypoints:
 
 ## Parallel CPU Programming
 
-In the previous section, we saw how to make our code faster for sequential jobs. However, there are certain cases where no matter how much you optimize, a single process remains a bottleneck. These are tasks that are "embarrassingly parallel" - independent jobs that don't need to communicate with each other.
+In the previous section, we saw how to make our code faster for sequential jobs. However, there are cases where, no matter how much you optimize, a single process remains a bottleneck. In such cases, we move to parallelization instead of vectorization, especially when computations involve dependencies or irregular structures that cannot be expressed as simple array-wide operations. Some tasks are even `embarrassingly parallel` meaning they consist of completely independent jobs that can run side by side without any communication.
 
 A perfect example from astronomy is finding the rotation period of stars from their light curves (measurements of brightness over time). Analyzing one star is quick, but analyzing data from thousands or millions of stars sequentially can take days or weeks. This is where parallel computing becomes essential.
 
-### Real World Analogy of using sequential vs parallel with an example
-Imagine you are a librarian who needs to reshelve 500 books.
+### Analyzing Light Curves with Sequential and Parallel Execution  
 
-Sequential Approach: You take the first book, walk to its correct shelf, place it, and walk back. You repeat this process 499 more times. Your total time is the sum of the time it takes for all 500 individual trips.
+In astronomy, analyzing **light curves** (the time and brightness data plot of objects in the night sky) is a fundamental task. One common goal is to determine the most likely **period** of variability, which tells us how often an object repeats its brightness changes.  
 
-Parallel Approach: You hire a team of assistants. You give a stack of books to each person. They all go and shelve their books at the same time. The total time is now roughly the time it takes the slowest assistant to finish their stack, which is much faster than doing it all yourself.
+#### The Lomb–Scargle Periodogram  
+To detect periodic signals in light curves, we often use the **Lomb–Scargle periodogram**.  
 
-In the case on Astronomy, analyzing light curves (time and brightness data of objects in the night sky) is like reshelving those books. We can either do it one by one (sequentially) or assign multiple light curves to different CPU cores to be analyzed simultaneously (in parallel).
+- A periodogram is a plot of **power vs. frequency (or period)** that shows how strongly a sinusoidal signal at a given frequency fits the data.  
+- The Lomb–Scargle method is especially important in astronomy because it works well for **unevenly sampled data** — a common situation since telescopes can miss nights due to weather, daylight, or scheduling.  
+- Peaks in the periodogram indicate likely periods of variability, helping us detect signals from variable stars, exoplanets, pulsars, and more.  
+
+#### Sequential vs. Parallel Execution  
+There are two ways to compute the periodogram for many light curves:  
+
+- **Sequential execution**: analyze one light curve at a time, moving through the dataset in order.  
+- **Parallel execution**: split the dataset so that multiple CPU cores each analyze a subset of light curves simultaneously.  
+
+Below you can see how the execution time scales up while using the sequential execution vs the parallel execution for detecting the periods of lightcurves using the **Lomb–Scargle periodogram**
 
 ![Serial vs. Parallel Performance Comparison](../fig/serial_parallel_comparision.png)
 
-When we test the code with different numbers of light curves and calculate its most likely period using a standard astronomical algorithm called the Lomb-Scargle periodogram., we see the following:
-
+From the plot, we can make the following remarks: 
 - For smaller numbers (10, 50, 100, 200, 500, 1000, 5000),  
-  the execution time is almost the same for both sequential and parallel runs which are denoted by the blue and the orange lines respectively.  
+  the execution time is almost the same for both sequential and parallel runs which are denoted by the blue and the orange lines respectively. 
+
 - This happens because starting and managing parallel jobs has a small extra cost (called *overhead*).  
 
 - As the number of light curves grows larger (beyond 5000),  
@@ -48,7 +58,16 @@ When we test the code with different numbers of light curves and calculate its m
   - **Sequential time** keeps increasing steadily as the workload grows.  
   - **Parallel time** stays much flatter, showing that multiple processes share the work efficiently.  
 
-> ###Takeaway:  
+> ## Computational Complexity  
+> The efficiency of both **light curve processing** and the **Lomb–Scargle algorithm** depends on their computational complexity.  
+> - For many simple data processing tasks, the time required grows roughly as **O(n)**, meaning if you double the number of data points, the computation takes about twice as long.  
+> - Other algorithms are more expensive, following **O(n²)** scaling, where doubling the data points makes the computation **four times longer**.  
+> The **classical Lomb–Scargle periodogram** has a complexity of about **O(n × m)**, where *n* is the number of data points in a light curve and *m* is the number of trial frequencies tested. In practice, this often behaves closer to **O(n²)** for dense frequency searches.  
+> More modern implementations (like the *fast Lomb–Scargle*) use mathematical tricks to reduce the scaling closer to **O(n log n)**, making them far more efficient for very large datasets.  
+> Understanding complexity is crucial: it tells us when parallelization will give modest gains (e.g., for O(n) tasks) and when it becomes essential (e.g., for O(n²) or worse).  
+> **Parallelization reduces effective complexity** by dividing the work across multiple CPU cores.  
+> For example, if a task is **O(n²)** on one processor but can be spread across *p* processors, the effective runtime becomes closer to **O(n² / p)**.  
+> While it doesn’t change the theoretical scaling, it *reduces the constant factor dramatically*, making otherwise infeasible computations practical.  
 > For small tasks, parallelization does not save time (and may even cost a little extra).  
 > But as the workload grows, parallelization provides a much more efficient workflow.
 {: .callout}
