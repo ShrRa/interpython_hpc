@@ -158,17 +158,7 @@ done
 ```
 ### Explanation of Changes from the Initial Script
 
-The updated `monitor_resources_parallel.sh` improves the initial `monitor_resources.sh` as follows:
-
-1. **Process filtering**: Added `-u $USER` in `ps` and `$4=="python"` in `awk` to log only the user’s Python MPI processes.  
-2. **Memory conversion**: `rss` is converted from KB to MB (`$3/1024`) for easier readability.  
-3. **Timestamp formatting**: Each log entry includes a human-readable timestamp with `strftime`.  
-4. **Structured output**: Columns are separated with `|` and a header is included for clarity.  
-5. **Header handling**: Uses `>` for the header and `>>` for appending new measurements.  
-6. **Sampling interval**: `sleep 5` ensures a consistent 5-second interval between measurements.
-
-These changes make the script more precise, readable, and tailored for monitoring MPI Python jobs.
-
+The updated `monitor_resources_parallel.sh` improves the initial `monitor_resources.sh` while moving to parallel from sequential jobs by adding another column to display the `pid` or the process id which shows the usage of the CPU% and memory on the different computing nodes requested for our job. This does not show the usage for each indivial copy(rank/number of processes) for the job, but only the total resource usage by the computing nodes. 
 
 ### Parallel Job Script for the Example
 
@@ -231,7 +221,7 @@ Timestamp            | PID   | CPU% | Memory(MB) | Command
 
 ## Monitoring the parallel script using `psutil`
 
-A more convenient approach for job monitoring is to use the Python package `psutil`. It allows us to collect resource usage information from within our script itself.
+A more convenient approach for job monitoring is to use the Python package `psutil`. It allows us to collect resource usage information from within our script itself along with allowing us to accurately track the CPU% and memory usage for each indivial copy(rank/number of processes) instead of just checking the usage of the computing nodes.
 
 ```python
 # File Name - deflection_angle_mpi_monitor.py
@@ -407,7 +397,7 @@ Having understood both the results we can now draw a comparision between both th
 |-------------------------|-------------------------------------------------|----------------------------------------|
 | Where it runs            | Separate job alongside the MPI program          | Inside the MPI program itself          |
 | Level of detail          | Per-process (just PID and command name)         | Per-rank, clearly tagged as `[Rank N]` |
-| Output location          | Written to a separate log file                  | Integrated directly into the job’s stdout |
+| Output location          | Written to a separate log file                  | Integrated directly into the job’s output file |
 | Setup effort             | Requires maintaining an extra monitoring script| Built into the code, no extra setup    |
 | Continuous logging       | Yes, with fixed `sleep` interval                | Yes, background thread with custom interval |
 | Flexibility              | Works with any process, even non-Python ones    | Requires code access, Python only      |

@@ -71,8 +71,8 @@ CUDA allows developers to write C, C++, Fortran, and Python code that runs on th
   - Blocks of Threads
 - This can be visualised in the following form
 
-![CUDA heirarchy visulation lower level](../fig/cuda_blocks.png)
 ![CUDA Kernel Execution on GPU](../fig/cuda_kernel_execution.png)
+![CUDA heirarchy visulation lower level](../fig/cuda_blocks.png)
 <p style="text-align: center;"><a href="https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/">CUDA Kernel Execution</a></p>
 
 <!-- ### Key Features

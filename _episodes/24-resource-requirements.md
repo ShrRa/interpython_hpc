@@ -44,7 +44,7 @@ Each star's model requires intense numerical integration of stellar structure eq
 
 **Real-world astronomy example:**  
 Processing full-sky Cosmic Microwave Background (CMB) maps from **Planck** at high resolution.  
-The HEALPix maps are large, and operations like spherical harmonic transforms require large amounts of RAM to store intermediate matrices. Another example would be to calc
+The HEALPix maps are large, and operations like spherical harmonic transforms require large amounts of RAM to store intermediate matrices.
 
 ---
 
