@@ -181,16 +181,16 @@ $
 > 4. Create and activate a Python virtual environment inside it named `test_env`.
 > 5. Deactivate the environment.
 >
-> ## Solution
->
-> ```bash
-> $ module spider cmake
-> $ mkdir my_test_project
-> $ cd my_test_project
-> $ python -m venv test_env
-> $ source test_env/bin/activate
-> (test_env) $ deactivate
-> ```
+> > ## Solution
+> >
+> > ```bash
+> > $ module spider cmake
+> > $ mkdir my_test_project
+> > $ cd my_test_project
+> > $ python -m venv test_env
+> > $ source test_env/bin/activate
+> > (test_env) $ deactivate
+> > ```
 > {: .solution}
 {: .challenge}
 
@@ -253,6 +253,5 @@ $ module load gcc/gcc-13.2.0
 ```
 
 You are now ready to move on to the next section. This setup ensures that your work is self-contained and reproducible.
-
 
 {% include links.md %}
