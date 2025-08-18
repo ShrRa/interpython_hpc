@@ -249,17 +249,22 @@ hello_world_copy.sh  hello_world.sh
 >> ## Solution
 >> ~~~
 >> nano hello_world_copy.sh
->> 
->> change "hello world" to "hello universe!"
->> Save and exit
->> 
+>> ~~~
+>> {: .language-bash}
+>> Change "hello world" to "hello universe!", then save and exit.
+>> ~~~
 >> mv hello_world_copy.sh hello_universe.sh
 >> $ ls
+>> ~~~
+>> {: .language-bash}
+>> ~~~
 >> hello_universe.sh  hello_world.sh
->>
->> $ source hello_universe.sh
 >> ~~~
 >> {: .output}
+>> ~~~
+>> $ source hello_universe.sh
+>> ~~~
+>> {: .language-bash}
 >{: .solution}
 {: .challenge}
 
@@ -309,7 +314,7 @@ $ ls -l hello_world.sh
 >> $ ls -l hello_universe.sh
 >> -rw-rw-r-- 1 edu02 edu02 32 Aug 16 06:31 hello_universe.sh
 >> ~~~
->>{: .output}
+>> {: .language-bash}
 >{: .solution}
 {: .challenge}
 
@@ -390,7 +395,6 @@ $ scp edu02@172.16.55.121:/home/edu02/hpc_course/code/hello_world.sh .
  hello_world.sh                                     100%  130     0.1KB/s   00:01
 ```
 
-
 Another option for moving files is `rsync`. This actually checks that the file or directory has been updated and only moves new things. The format is the same as `scp`: `rsync <what you want to copy> <where to put it>`.
 
 Another option for moving files is the file transfer protocol `ftp` and secure file transfer protocol or `sftp`. This allows you to actually log onto the HPC and upload files from your machine or download them from the HPC to your local machine. To use `sftp` basic syntax is `sftp user@address`. You will then be promted for your password. Once you are logged in you can interact with the shell with basic commands like `ls` and `cd`. To download a file from the HPC to your local computer type `get <filename>`. To upload a file from your local machine to the HPC, type `put <filename>`
@@ -412,14 +416,15 @@ Finally, if you are using version control to track your development and have a r
 
 > ## Other really useful commands that we do not have time to cover
 > As you start using an HPC, you might want to check out these commands:
-> learning about different command: `man`
-> Viewing files: `head`, `tail`, `less`, `cat`
-> Finding things: `grep`, `find`
-> Changing ownership: `chown`
-> System management: `df`, `free -m`, `ps`, `kill`
-> See the Command Line Interface (CLI) in the Extras menu for even more!
-{: .callout}
+>  - learning about different command: `man`
+>  - Viewing files: `head`, `tail`, `less`, `cat`
+>  - Finding things: `grep`, `find`
+>  - Changing ownership: `chown`
+>  - System management: `df`, `free -m`, `ps`, `kill`
 > 
+> See the [Command Line Interface (CLI)]('../_extras/cli-extra.md') in the Extras menu for even more!
+{: .callout}
+
 {% include links.md %}
 
 
