@@ -169,7 +169,7 @@ commandline prompt.
 > > $ nano
 > > (Click CTRL-X to exit and save the file with a filename of your choice.)
 > > ~~~
->>{: .output}
+>>{: .language-bash}
 >{: .solution}
 {: .challenge}
 
