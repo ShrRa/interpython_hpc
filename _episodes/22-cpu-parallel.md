@@ -84,7 +84,7 @@ OpenMP was first introduced in October 1997 as a collaborative effort between ha
 
 OpenMP is now maintained by the OpenMP Architecture Review Board, which includes organizations like Arm, AMD, IBM, Intel, Cray, HP, Fujitsu, Nvidia, NEC, Red Hat, Texas Instruments, and Oracle Corporation. OpenMP allows you to parallelize loops in C/C++ or Fortran using compiler directives.
 
-> ## Offloading to GPUs
+> ## No OpenMP for Python?
 > While OpenMP is not supported by Python, there are other Python tools that use similar logic. In many cases, when you need to run complex data processing as efficiently as possible, you can use [multiprocessing](https://docs.python.org/3/library/multiprocessing.html) package that allows you to split your dataset into chunks and send them to be processed by different CPU cores.
 > `multiprocessing` is a higher-level tool than OpenMP, in the sense that it doesn't do any kind of optimization on the level of data structures. When performance is really critical, lower-level tools give you more control, but when you want to speed up a processing of a large table from a week to one night, `multiprocessing` will do the job.
 {: .callout}
