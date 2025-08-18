@@ -306,40 +306,31 @@ if rank == 0:
 
 ```
 
-> ## Explanation of the code
->
-> This example demonstrates a basic use of `mpi4py` to perform a **gather operation** (collection of results) using the `MPI.COMM_WORLD` communicator which shows how multiple programs (called *processes*) can work together and then share their results.  
-> When you run a program with MPI, you are actually running **many copies of the same program at once**. Each copy gets a number, called its **rank**.  
-- If there are 4 processes, their ranks will be 0, 1, 2, and 3.  
->
-> In the code each process:
->
-> - Determines its **rank** (an integer from 0 to N-1, where N is the number of processes).
-> - Computes `rank ** 2` (the square of its rank).
-> - Uses `comm.gather()` to send the result to the **root process** (rank 0).
->
-> Only the **root process** gathers the data and prints the complete list.
->
-> ### Example Output (4 processes):
->
-> - Rank 0 computes `0² = 0`
-> - Rank 1 computes `1² = 1`
-> - Rank 2 computes `2² = 4`
-> - Rank 3 computes `3² = 9`
->
-> The root process (rank 0) gathers all results and prints:
->
-> ~~~
-> [0, 1, 4, 9]
-> ~~~
+Let's see what is happening in this code snippet.
+We are using `mpi4py` to perform a **gather operation** (collection of results) using the `MPI.COMM_WORLD` communicator, which shows how multiple programs (called *processes*) can work together and then share their results.  
+When you run a program with MPI, you are actually running **many copies of the same program at once**. Each copy gets a number, called its **rank**, so if there are 4 processes, their ranks will be 0, 1, 2, and 3.  
+
+In the code each process:
+ - Determines its **rank** (an integer from 0 to N-1, where N is the number of processes).
+ - Computes `rank ** 2` (the square of its rank).
+ - Uses `comm.gather()` to send the result to the **root process** (rank 0).
+
+Only the **root process** gathers the data and prints the complete list.
+
+### Example Output (4 processes):
+
+ - Rank 0 computes `0² = 0`
+ - Rank 1 computes `1² = 1`
+ - Rank 2 computes `2² = 4`
+ - Rank 3 computes `3² = 9`
+The root process (rank 0) gathers all results and prints:
+~~~
+[0, 1, 4, 9]
+~~~
 {: .output}
->
-> - Other ranks do not print anything.
->
-> This example illustrates **point-to-root communication** which is useful when one process needs to collect and process results from all workers.
-> 
-> Since the terms in bold letters are introduced for the first time, here is an indepth definition which can be referred to for understanding the code 
->
+
+Other ranks do not print anything. This example illustrates **point-to-root communication** which is useful when one process needs to collect and process results from all workers.
+
 > ### Terminology
 >
 > - **Process**:  
@@ -440,7 +431,6 @@ Make sure your virtual environment has `mpi4py` installed and that your system h
 > {: .solution}
 {: .challenge}
 
----
 
 > ## Exercise 2: Broadcast after gather
 >
