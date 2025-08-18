@@ -95,6 +95,7 @@ extras_order:
   - cli-extra
   - nvidia-smi
   - resource-monitoring-gpu
+  - performance-analysis
 # Files and directories that are not to be copied.
 exclude:
   - Makefile
