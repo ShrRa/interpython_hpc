@@ -375,13 +375,20 @@ python torch_cuda.py
 > > multiply_vectors[blocks_per_grid, threads_per_block](d_a, d_b, d_c)
 > > 
 > > # Copy the result from device (GPU) back to host (CPU)
-> > d_c.copy_to_host(out=c)
+> > d_c.copy_to_host(c)
 > > 
 > > # Print the result
 > > print("Result (Numba):", c)
 > > ~~~
 > > {: .language-python}
 > >
+> > ~~~
+> > /home/alex/miniconda3/envs/interpython_hpc/lib/python3.13/site-packages/numba/cuda/dispatcher.py:536: NumbaPerformanceWarning: Grid size 1 will likely result in GPU under-utilization due to low occupancy.
+> >   warn(NumbaPerformanceWarning(msg))
+> > Result (Numba): [ 0.  1.  4.  9. 16. 25. 36. 49. 64. 81.]
+> > ~~~
+> > {: .output}
+> > 
 > > **PyTorch solution:**
 > > ~~~python
 > > # File Name - torch_multiplication.py
@@ -410,6 +417,11 @@ python torch_cuda.py
 > > ~~~
 > > {: .language-python}
 > >
+> > ~~~
+> > Result (PyTorch): [ 0.  1.  4.  9. 16. 25. 36. 49. 64. 81.]
+> > ~~~
+> > {: .output}
+> > 
 > > Both codes now perform **element-wise multiplication** instead of addition.
 > {: .solution}
 >
