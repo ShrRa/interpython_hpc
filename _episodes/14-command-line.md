@@ -422,7 +422,7 @@ Finally, if you are using version control to track your development and have a r
 >  - Changing ownership: `chown`
 >  - System management: `df`, `free -m`, `ps`, `kill`
 > 
-> See the [Command Line Interface (CLI)](../_extras/cli-extra.md) in the Extras menu for even more!
+> See the [Command Line Interface (CLI)](../cli-extra.md) in the Extras menu for even more!
 {: .callout}
 
 {% include links.md %}
