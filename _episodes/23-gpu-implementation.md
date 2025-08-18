@@ -209,7 +209,7 @@ cuda.synchronize()  # Wait for GPU to finish
 gpu_time = time.time() - start
 
 # Copy result back to host
-d_c.copy_to_host(out=c)
+d_c.copy_to_host(c)
 
 # Verify results
 print("First 5 results:", c[:5])
@@ -217,8 +217,10 @@ print("Time taken on GPU:", gpu_time, "seconds")
 ~~~
 {: .language-python}
 ~~~
-CUDA is available!
-Detected GPU: b'NVIDIA GeForce RTX 3060 Laptop GPU'
+/home/alex/miniconda3/envs/interpython_hpc/lib/python3.13/site-packages/numba/cuda/dispatcher.py:536: NumbaPerformanceWarning: Grid size 4 will likely result in GPU under-utilization due to low occupancy.
+  warn(NumbaPerformanceWarning(msg))
+First 5 results: [0. 2. 4. 6. 8.]
+Time taken on GPU: 0.10699796676635742 seconds
 ~~~
 {: .output}
 
