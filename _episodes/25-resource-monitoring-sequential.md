@@ -71,6 +71,13 @@ Sequential jobs run on a single CPU core and are suitable for tasks that cannot 
 
 ### Example: Gravitational Deflection Angle Sequential CPU
 ~~~
+# File Name - example_serial.py
+# This script computes the gravitational deflection angle of light around a massive object
+# using a nested loop (sequential CPU calculation). It explores a parameter grid of masses
+# and impact parameters, saves the computed results to disk, and generates a color plot
+# of the deflection angles on a logarithmic scale.
+
+# Import NumPy for numerical array operations, time for measuring execution time, os for appending paths, and matplotlib for plotting the results
 import numpy as np
 import time
 import matplotlib.pyplot as plt
@@ -186,49 +193,45 @@ Here we used 3 new commads
 
 - `sleep`:
     - The sleep command pauses execution for a given number of seconds. Here, sleep 5 makes the script wait 5 seconds before checking the processes again, ensuring we don’t overload the system with constant checks and providing a readable sampling interval.
-    
+
 We can now include a command to run this file in the slurm job script that we will use to run the sequential example on BURA. 
 
 ### Sequential Job Script for the Example
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=SCPU
-#SBATCH --output=SCPU_%j.out
-#SBATCH --error=SCPU_%j.err
-#SBATCH --partition=computes_thin
-#SBATCH --nodes=1
-#SBATCH --ntasks=1          
-#SBATCH --time=00:10:00
-#SBATCH --mem=16G
+#SBATCH --job-name=example_serial # Name of the Job 
+#SBATCH --output=serial_%j.out # Name of the output file for the Job
+#SBATCH --error=serial_%j.err # Name of the error file for the Job
+#SBATCH --partition=computes_thin # Request the appropriate partition for the job 
+#SBATCH --nodes=1 # Request the appropriate number of computing nodes required for the job
+#SBATCH --ntasks=1 # This specifies how many mpi processes will run across the nodes         
+#SBATCH --time=00:10:00 # This specifies the maximum amount of time that the job will run for
+#SBATCH --mem=16G # This specifies the amount of memory which will be allocated for the job
 
-# ----------------------------
-# Print the list of the loaded modules
-# ----------------------------
+# Load required modules (This is a sanity check in case jobs are not running as required)
 module list
 
-# ----------------------------
-# Activate Python environment
-# ----------------------------
+# Activate your virtual environment (We have already activated this in terminal so this again a sanity check)
 source interpython/bin/activate
-python --version
 
-# ----------------------------
-# Start the resource monitor
-# ----------------------------
-# The monitor_resources.sh script must be in the same directory
- bash monitor_resources.sh &
-# ----------------------------
-# Run the main sequential job
-# ----------------------------
- python Gravitational_Lensing_SCPU.py
+# Start the resource monitor in the background.
+# The "&" symbol is used so the monitor runs simultaneously with the main job instead of blocking it
+# The monitor_resources.sh script must be in the same directory as the python file and the slurm script.
+bash monitor_resources.sh &
 
-# ----------------------------
-# Stop the monitor after the job finishes
-# ----------------------------
+# Run the main sequential job.
+python example_serial.py
+
+# Stop the resource monitor after the job finishes.
+# "kill %1" is a terminal command which terminates the first background process started in this script. 
+# Which in our case is monitor_resources.sh.
 kill %1
 
+# Print the date and time when the job completed.
 echo "Job completed at $(date)"
+
+# Print the name of the log file which was preapared using the resource monitor script
 echo "Resource usage saved to resource_usage_${SLURM_JOB_ID}.log"
 ```
 After we run the script, we can then `cat` into the `resource_usage_${SLURM_JOB_ID}.log` file to view the logged CPU and memory usage over time.  

@@ -185,16 +185,33 @@ In June 1994, the first official MPI standard (MPI-1) was published by the MPI F
 ### Example: Implementation of MPI using the mpi4py library in python
 
 ```python
-from mpi4py import MPI
+# File Name - mpi_example.py
+# This script demonstrates a simple MPI program using mpi4py.
+# Each process computes the square of its rank and sends the result
+# to the root process (rank 0), which gathers and prints all results.
 
+# Import the MPI module from mpi4py
+from mpi4py import MPI  
+
+# Initialize the default communicator (all processes belong to COMM_WORLD)
 comm = MPI.COMM_WORLD
+
+# Get the rank (unique ID) of the current process
 rank = comm.Get_rank()
+
+# Get the total number of processes running in this communicator
 size = comm.Get_size()
 
+# Each process computes the square of its rank
 data = rank ** 2
+
+# Gather all computed data at the root process (rank 0)
 all_data = comm.gather(data, root=0)
+
+# Only the root process prints the gathered data
 if rank == 0:
     print(all_data)
+
 ```
 
 > ## Explanation of the code
@@ -263,22 +280,23 @@ if rank == 0:
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=mpi_example
-#SBATCH --output=mpi_%j.out
-#SBATCH --error=mpi_%j.err
-#SBATCH --partition=computes_thin
-#SBATCH --nodes=2
-#SBATCH --ntasks=4
-#SBATCH --time=00:10:00
-#SBATCH --mem=16G
+#SBATCH --job-name=mpi_example # Name of the Job 
+#SBATCH --output=mpi_%j.out # Name of the output file for the Job 
+#SBATCH --error=mpi_%j.err # Name of the error file for the Job
+#SBATCH --partition=computes_thin # Request the appropriate partition for the job 
+#SBATCH --nodes=2 # Request the appropriate number of computing nodes required for the job
+#SBATCH --ntasks=4 # This specifies how many mpi processes will run across the nodes
+#SBATCH --time=00:10:00 # This specifies the maximum amount of time that the job will run for
+#SBATCH --mem=16G # This specifies the amount of memory which will be allocated for the job 
 
-# Load required modules
+# Load required modules (This is a sanity check in case jobs are not running as required)
 module list 
-# Activate your Python environment
+
+# Activate your virtual environment (We have already activated this in terminal so this again a sanity check)
 source interpython/bin/activate
 
-# OPTION 1: Run using Python script (with logging)
-mpirun -np 4 python  mpi_example.py
+# Run the Python mpi script, here the -np flag specifies the number of processes (copies) the mpi program will run 
+mpirun -np 4 python mpi_example.py
 ```
 
 Make sure your virtual environment has `mpi4py` installed and that your system has access to the OpenMPI runtime via `mpirun`. Adjust the number of nodes and tasks depending on the cluster policies.
@@ -304,21 +322,33 @@ Make sure your virtual environment has `mpi4py` installed and that your system h
 > ## Solution
 >
 > ```python
-> from mpi4py import MPI
+> # File Name - mpi_ex1.py
+> # This script demonstrates the use of MPI gather with lists using mpi4py.
+> # Each process creates a list of integers from 0 up to its rank,
+> # and the root process (rank 0) gathers and prints all the lists.
+> 
+> # Import the MPI module from mpi4py
+> from mpi4py import MPI  
 >
+> # Initialize the default communicator (all processes belong to COMM_WORLD)
 > comm = MPI.COMM_WORLD
+> 
+> # Get the rank (unique ID) of the current process
 > rank = comm.Get_rank()
->
-> # Each process creates a list from 0 to rank
+> 
+> # Each process creates a list of numbers from 0 to its rank
 > data = list(range(rank + 1))
->
-> # Gather lists at the root
+> 
+> # Gather all lists at the root process (rank 0)
 > all_data = comm.gather(data, root=0)
->
+> 
+> # Only the root process prints the gathered lists
 > if rank == 0:
->     print(all_data)
+>    print(all_data)
 > ```
 {: .solution}
+
+
 
 ---
 
@@ -336,20 +366,32 @@ Make sure your virtual environment has `mpi4py` installed and that your system h
 > ## Solution
 >
 > ```python
-> from mpi4py import MPI
->
+> # File Name - mpi_ex2.py
+> # This script demonstrates combining MPI gather and broadcast using mpi4py.
+> # 1. Each process computes the square of its rank.
+> # 2. The results are gathered at the root process (rank 0).
+> # 3. The root process broadcasts the gathered list to all processes.
+> # 4. Each process prints the final received list.
+> 
+> # Import the MPI module from mpi4py
+> from mpi4py import MPI  
+> 
+> # Initialize the default communicator (all processes belong to COMM_WORLD)
 > comm = MPI.COMM_WORLD
+> 
+> # Get the rank (unique ID) of the current process
 > rank = comm.Get_rank()
->
-> # Each process sends rank squared
+> 
+> # Each process computes its rank squared
 > data = rank ** 2
->
-> # Gather at root
+> 
+> # Gather all squared values at the root process (rank 0)
 > gathered = comm.gather(data, root=0)
->
-> # Broadcast the gathered list from root to all processes
+> 
+> # Broadcast the gathered list from the root to all processes
 > result = comm.bcast(gathered, root=0)
->
+> 
+> # Each process prints the broadcasted result
 > print(f"Process {rank} received: {result}")
 > ```
 >
@@ -364,6 +406,8 @@ Make sure your virtual environment has `mpi4py` installed and that your system h
 >
 > Now **all processes** have the final list, not just the root.
 {: .solution}
+
+
 
 
 > ## References:

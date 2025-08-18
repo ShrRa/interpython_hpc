@@ -44,6 +44,14 @@ mpirun -np 48 ./mpi_program           # Run with 48 MPI processes (2 nodes × 24
 ### Example: Gravitational Deflection Angle Parallel CPU
 
 ~~~
+# File Name - deflection_angle_mpi.py
+# This script computes the gravitational deflection angle of light around a massive object
+# using MPI for parallelization across multiple processes. Each MPI rank computes a chunk
+# of the mass grid, results are gathered at the root process, and a color plot is generated
+# to visualize the deflection angles on a logarithmic scale.
+
+# Import MPI module from mpi4py, NumPy for numerical array operations, time for measuring execution time 
+# Import os for appending paths, and matplotlib for plotting the results
 from mpi4py import MPI
 import numpy as np
 import time
@@ -172,32 +180,46 @@ done
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=PCPU
-#SBATCH --output=PCPU_%j.out
-#SBATCH --error=PCPU_%j.err
-#SBATCH --partition=computes_thin
-#SBATCH --nodes=2
-#SBATCH --ntasks=4
-#SBATCH --time=00:10:00
-#SBATCH --mem=16G
+#SBATCH --job-name=PCPU # Name of the Job
+#SBATCH --output=PCPU_%j.out # Name of the output file for the Job
+#SBATCH --error=PCPU_%j.err # Name of the error file for the Job
+#SBATCH --partition=computes_thin # Request the appropriate partition for the job
+#SBATCH --nodes=2 # Request the appropriate number of computing nodes required for the job
+#SBATCH --ntasks=4 # This specifies how many mpi processes will run across the nodes
+#SBATCH --time=00:10:00 # This specifies the maximum amount of time that the job will run for
+#SBATCH --mem=16G # This specifies the amount of memory which will be allocated for the job
 
-# Load required modules
+# Load required modules (This is a sanity check in case jobs are not running as required)
 module list
 
-# Activate your Python environment
+# Activate your virtual environment (We have already activated this in terminal so this again a sanity check)
 source interpython/bin/activate
 
-# Check your python version
-python --version 
-
-# Start resource monitor in background
+# Start the resource monitor in the background.
+# The "&" symbol is used so the monitor runs simultaneously with the main job instead of blocking it
+# The monitor_resources_parallel.sh script must be in the same directory as the python file and the slurm script.
 bash monitor_resources_parallel.sh &
 
+# Save the process ID (PID) of the resource monitor.
+# In the serial example, we used "kill %1" to stop the first background job.
+# Here we use "$!" to capture the exact PID of the last background process (the monitor), which is safer and more robust. 
+# Unlike "%1", this works even if there are multiple background processes, since it directly targets the correct one.
 MONITOR_PID=$!
 
 echo "Starting MPI job..."
 
-mpirun -np 4 python Gravitational_Lensing_PCPU.py
+# Run the Python mpi script, here the -np flag specifies the number of processes (copies) the mpi program will run 
+mpirun -np 4 python example_parallel.py
+
+# Stop the resource monitor once the job is done.
+# This ensures the monitor doesn’t keep running after the main program finishes.
+kill $MONITOR_PID
+
+# Print the date and time when the job completed.
+echo "Job completed at $(date)"
+
+# Print the name of the log file which was preapared using the resource monitor script
+echo "Resource usage saved to resource_usage_${SLURM_JOB_ID}.log"
 ```
 
 After we run the script, we can then `cat` into the `resource_usage_${SLURM_JOB_ID}.log` file to view the logged CPU and memory usage over time.  
@@ -218,6 +240,16 @@ Timestamp            | PID   | CPU% | Memory(MB) | Command
 A more convenient approach for job monitoring is to use the Python package `psutil`. It allows us to collect resource usage information from within our script itself.
 
 ```python
+# File Name - deflection_angle_mpi_monitor.py
+# This script computes the gravitational deflection angle of light around a massive object
+# using MPI for parallelization across multiple processes. Each rank computes a portion
+# of the mass grid and the results are gathered at the root process. 
+# Additionally, each rank launches a background monitoring thread that periodically logs
+# CPU and memory usage during execution. The root process generates a heatmap plot of the
+# deflection angle results using a logarithmic color scale.
+
+# Import MPI module from mpi4py, NumPy for numerical array operations, time for measuring execution time
+# Import os for appending paths, matplotlib for plotting the results, and psutil for resource monitoring
 from mpi4py import MPI
 import numpy as np
 import time
@@ -227,23 +259,17 @@ import threading
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 
-# -------------------------------
 # MPI setup
-# -------------------------------
 comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
 size = comm.Get_size()
 
-# -------------------------------
 # Constants
-# -------------------------------
 G = 6.67430e-11
 c = 299792458
 M_sun = 1.98847e30
 
-# -------------------------------
 # Monitoring setup
-# -------------------------------
 pid = os.getpid()
 process = psutil.Process(pid)
 
@@ -256,13 +282,10 @@ def monitor(interval=5):
         time.sleep(interval)
 
 # Start monitoring thread (all ranks or just rank 0)
-
 t = threading.Thread(target=monitor, daemon=True)
 t.start()
 
-# -------------------------------
 # Parameter grid (same on all ranks)
-# -------------------------------
 mass_grid = np.linspace(1, 1000, 10000)   # Solar masses
 impact_grid = np.linspace(1e9, 1e12, 10000)  # meters
 
@@ -274,9 +297,7 @@ end_idx = (rank + 1) * chunk_size if rank != size - 1 else len(mass_grid)
 local_mass = mass_grid[start_idx:end_idx]
 local_result = np.zeros((len(local_mass), len(impact_grid)))
 
-# -------------------------------
 # Timing + Computation
-# -------------------------------
 local_start = time.time()
 
 for i, M in enumerate(local_mass):
@@ -286,18 +307,14 @@ for i, M in enumerate(local_mass):
 local_end = time.time()
 print(f"[Rank {rank}] Local compute time: {local_end - local_start:.3f} seconds")
 
-# -------------------------------
 # Gather results
-# -------------------------------
 result = None
 if rank == 0:
     result = np.zeros((len(mass_grid), len(impact_grid)))
 
 comm.Gather(local_result, result, root=0)
 
-# -------------------------------
 # Post-processing + Plotting
-# -------------------------------
 if rank == 0:
     total_time = local_end - local_start
     print(f"[Rank 0] MPI total time (wall time): {total_time:.3f} seconds")

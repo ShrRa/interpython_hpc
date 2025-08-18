@@ -45,15 +45,31 @@ We’ll start with this simple example to see how writing smarter code (vectoriz
 Let’s look at a simple example: summing the elements of a large array. As mentioned above an obvious way to implement this is by using a `for` loop. With this implementation, each iteration runs only after the previous one has finished.
 
 ~~~
-import numpy as np
-import time
+# File Name - serial_code.py
+# This script demonstrates summing a large NumPy array using a Python loop.
+# It highlights the performance cost of looping in Python compared to vectorized operations.
 
+# Import NumPy for numerical array operations and time for measuring execution time
+import numpy as np   
+import time          
+
+# Create a NumPy array of 10 million random values between 0 and 1
 array = np.random.rand(10**7)
+
+# Record the start time
 start = time.time()
+
+# Initialize the total sum
 total = 0.0
+
+# Loop over each element in the array and add it to the total
 for value in array:
      total += value
+
+# Record the end time
 end = time.time()
+
+# Print the final sum and the time taken
 print(f"Sum: {total}, Time taken: {end - start:.4f} seconds")
 ~~~
 {: .language-python}
@@ -67,9 +83,29 @@ Depending on your processor, this code may take up to a couple of seconds to exe
 Summation is one of those operations that can be vectorized. In Python, if we loop over an array element by element, the interpreter has to execute each iteration in Python’s high-level code, which adds overhead and slows things down. In contrast, C is a low-level, compiled language, meaning its instructions are executed directly by the CPU without the overhead of Python’s interpreter. Vectorization in this context means that instead of performing the sum one element at a time in Python, we hand the entire array to a function like `numpy.sum`, which is implemented in optimized C code. This function can take advantage of CPU-level optimizations, such as processing multiple elements at once (using SIMD instructions) and reducing loop overhead. In essence, vectorization allows Python to delegate heavy computations to fast, compiled code, giving a huge speed-up while letting us write clean, high-level Python code.
 
 ~~~
+# File Name - vector_numpy.py
+# This script demonstrates summing a large NumPy array using NumPy's built-in
+# vectorized function np.sum, which is much faster than a manual Python loop.
+
+# Import NumPy for numerical array operations and time for measuring execution time
+import numpy as np   
+import time          
+
+# Create a NumPy array of 10 million random values between 0 and 1
+array = np.random.rand(10**7)
+
+# Record the start time
+start = time.time()
+
+# Compute the sum using NumPy's optimized vectorized function
 total = np.sum(array)
+
+# Record the end time
 end = time.time()
+
+# Print the final sum and the time taken
 print(f"Sum: {total}, Time taken: {end - start:.4f} seconds")
+
 ~~~
 {: .language-python}
 

@@ -127,10 +127,18 @@ We will now implement vector addition for an input array of one million elements
 ### Checking CUDA availability before running code
 
 ~~~
-from numba import cuda
+# File Name - cuda_check.py
+# This script checks whether CUDA is available using Numba
+# and prints the name of the detected GPU if present.
 
+# Import Numba's CUDA module
+from numba import cuda  
+
+# Check if CUDA-capable GPU is available
 if cuda.is_available():
     print("CUDA is available!")
+    
+    # Get information about the current GPU device
     print(f"Detected GPU: {cuda.get_current_device().name}")
 else:
     print("CUDA is NOT available.")
@@ -146,13 +154,30 @@ Detected GPU: b'NVIDIA GeForce RTX 3060 Laptop GPU'
 ### Approach 1: Add vectors utlising CUDA using the numba python library 
 
 ~~~
-from numba import cuda
-import numpy as np
-import time
+# File Name - numba_cuda.py
+# This script demonstrates vector addition on the GPU using Numba's CUDA JIT.
+# 1. Define a CUDA kernel for element-wise vector addition.
+# 2. Allocate and copy input arrays to the GPU.
+# 3. Configure the kernel launch (blocks and threads).
+# 4. Run the kernel on the GPU and measure execution time.
+# 5. Copy results back to the host and verify correctness.
 
+# Import Numba's CUDA module, NumPy for array operations and time to measure execution time
+from numba import cuda   
+import numpy as np        
+import time              
+
+# @cuda.jit is a decorator provided by Numba. 
+# It tells Numba to compile the following function (add_vectors) into a CUDA kernel 
+# that can be executed on the GPU. 
+# This allows Python code to be transformed into low-level GPU code.
+# Therefore @cuda.jit is used to define a CUDA kernel for vector addition
 @cuda.jit
 def add_vectors(a, b, c):
+    # Compute absolute thread index within the entire grid
     i = cuda.grid(1)
+    
+    # Perform addition only if within bounds
     if i < a.size:
         c[i] = a[i] + b[i]
 
@@ -168,8 +193,14 @@ d_b = cuda.to_device(b)
 d_c = cuda.device_array_like(a)
 
 # Configure the kernel
-threads_per_block = 256
-blocks_per_grid = (N + threads_per_block - 1) // threads_per_block
+threads_per_block = 256  
+# Typically, GPUs allow up to 1024 threads per block in 1D (depends on GPU architecture). 
+# Using multiples of 32 is often optimal because of "warps" (groups of 32 threads scheduled together).
+
+blocks_per_grid = (N + threads_per_block - 1) // threads_per_block  
+# Ensure all elements are covered by rounding up.
+# Grid size (total number of threads) = blocks_per_grid * threads_per_block.
+# Hardware limitation: Max grid size depends on GPU (often in the range of 2^31-1 for 1D).
 
 # Launch the kernel
 start = time.time()
@@ -205,22 +236,43 @@ This approach is very close to how CUDA is programmed in C/C++. It teaches us ab
 ### Approach 2: Add vectors using Torch
 
 ~~~
-import torch
-import time
+# File Name - torch_cuda.py
+# This script demonstrates performing vector addition on a GPU using PyTorch.
+# It highlights how PyTorch can leverage CUDA-enabled GPUs to accelerate 
+# array operations compared to CPU execution.
 
-# Setup input tensors on GPU
+# Import PyTorch for GPU-accelerated tensor operations and time for measuring execution time
+import torch        
+import time         
+
+# Define the size of the vectors
 N = 1_000_000
+
+# Create two input tensors 'a' and 'b' directly on the GPU 
+# (dtype=float32 for efficiency, device="cuda" ensures they are allocated on GPU)
 a = torch.arange(N, dtype=torch.float32, device="cuda")
 b = torch.arange(N, dtype=torch.float32, device="cuda")
 
-# Run vector addition on GPU
+# Record the start time before performing the vector addition
 start = time.time()
+
+# Perform element-wise vector addition on the GPU
 c = a + b
-torch.cuda.synchronize()  # Wait for GPU to finish
+
+# Synchronize with the GPU to ensure that all operations have finished
+# (without this, the recorded time may not include the actual GPU computation)
+torch.cuda.synchronize()
+
+# Calculate the total elapsed GPU execution time
 gpu_time = time.time() - start
 
-print("First 5 results:", c[:5].cpu().numpy())  # move back to CPU for display
+# Print the first 5 results of the output vector after moving them back to CPU
+# (useful to verify correctness of computation)
+print("First 5 results:", c[:5].cpu().numpy())
+
+# Print the total time taken for the GPU computation
 print("Time taken on GPU (PyTorch):", gpu_time, "seconds")
+
 ~~~
 {: .language-python}
 ~~~
@@ -244,26 +296,25 @@ The following script can be used to submit a GPU-accelerated Python job (`numba_
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name=cuda_libraries
-#SBATCH --output=cuda_%j.out
-#SBATCH --error=cuda_%j.err
-#SBATCH --partition=gpu
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=16G
-#SBATCH --gpus-per-node=1
-#SBATCH --time=00:10:00
+#SBATCH --job-name=cuda_libraries # Name of the Job 
+#SBATCH --output=cuda_l_%j.out # Name of the output file for the Job 
+#SBATCH --error=cuda_l_%j.err # Name of the error file for the Job
+#SBATCH --partition=gpu # Request the appropriate partition for the job 
+#SBATCH --nodes=1 # Request the appropriate number of computing nodes required for the job
+#SBATCH --cpus-per-task=4 # Request the appropriate number of cpus per computing node required for the job
+#SBATCH --mem=16G # This specifies the amount of memory which will be allocated for the job 
+#SBATCH --gpus-per-node=1 # Request the appropriate number of gpus per computing node required for the job
+#SBATCH --time=00:10:00 # This specifies the maximum amount of time that the job will run for
 
-# --------- Load Environment ---------
+# Load required modules (This is a sanity check in case jobs are not running as required)
 module list
 
-# Activate virtual environment
-source interpython/bin/activate # Here name_of_venv refers to the name of your virtual environment without the quotes
+# Activate your virtual environment (We have already activated this in terminal so this again a sanity check)
+source interpython/bin/activate 
 
-# --------- Run the Python Script ---------
-python numba_cuda_test.py & 
-python pytorch_cuda_test.py 
+# Run the Python example scripts sequentially
+python numba_cuda.py 
+python torch_cuda.py 
 ```
 
 > ## Exercise: Vector Multiplication on the GPU
@@ -278,44 +329,81 @@ python pytorch_cuda_test.py
 > >
 > > **Numba solution:**
 > > ~~~python
-> > from numba import cuda
-> > import numpy as np
-> >
+> > # File Name - numba_multiplication.py
+> > # This script demonstrates element-wise multiplication of two vectors using Numba with CUDA.
+> > # It highlights how GPU kernels can be written in Python using Numba’s @cuda.jit decorator,
+> > # and how memory needs to be managed explicitly between host (CPU) and device (GPU).
+> > 
+> > # Import Numba’s CUDA module to write GPU kernels and NumPy for array creation and manipulation
+> > from numba import cuda   
+> > import numpy as np   
+> > 
+> > # Define a CUDA kernel function for element-wise vector multiplication
 > > @cuda.jit
 > > def multiply_vectors(a, b, c):
+> >     # Calculate the unique thread index within the grid
 > >     i = cuda.grid(1)
+> >    
+> >     # Ensure the thread index does not exceed the array size
 > >     if i < a.size:
-> >         c[i] = a[i] * b[i]
-> >
+> >         c[i] = a[i] * b[i]  # Perform multiplication and store the result
+> > 
+> > # Define the size of the vectors
 > > N = 10
-> > a = np.arange(N, dtype=np.float32)
-> > b = np.arange(N, dtype=np.float32)
+> > 
+> > # Create input arrays on the host (CPU)
+> > a = np.arange(N, dtype=np.float32)   # Vector [0, 1, 2, ..., 9]
+> > b = np.arange(N, dtype=np.float32)   # Vector [0, 1, 2, ..., 9]
+> > 
+> > # Create an output array initialized with zeros on the host
 > > c = np.zeros_like(a)
-> >
+> > 
+> > # Copy input arrays from host (CPU) to device (GPU)
 > > d_a = cuda.to_device(a)
 > > d_b = cuda.to_device(b)
+> > 
+> > # Allocate memory on the device for the output array
 > > d_c = cuda.device_array_like(a)
-> >
+> > 
+> > # Define GPU execution configuration
 > > threads_per_block = 256
-> > blocks_per_grid = (N + threads_per_block - 1) // threads_per_block
-> >
+> > blocks_per_grid = (N + threads_per_block - 1) // threads_per_block  # Ceiling division
+> > 
+> > # Launch the kernel with the specified grid and block dimensions
 > > multiply_vectors[blocks_per_grid, threads_per_block](d_a, d_b, d_c)
+> > 
+> > # Copy the result from device (GPU) back to host (CPU)
 > > d_c.copy_to_host(out=c)
-> >
+> > 
+> > # Print the result
 > > print("Result (Numba):", c)
 > > ~~~
 > > {: .language-python}
 > >
 > > **PyTorch solution:**
 > > ~~~python
+> > # File Name - torch_multiplication.py
+> > # This script demonstrates element-wise multiplication of two vectors using PyTorch on a GPU.
+> > # It shows how to create tensors directly on the GPU, perform the multiplication operation,
+> > # and then transfer the result back to the CPU for display.
+> > 
+> > # Import PyTorch for tensor operations
 > > import torch
 > >
+> > 
+> > # Define the size of the vectors
 > > N = 10
+> > 
+> > # Create a vector of values [0, 1, 2, ..., N-1] stored on the GPU
 > > a = torch.arange(N, dtype=torch.float32, device="cuda")
+> > 
+> > # Create another vector of values [0, 1, 2, ..., N-1] stored on the GPU
 > > b = torch.arange(N, dtype=torch.float32, device="cuda")
-> >
+> > 
+> > # Perform element-wise multiplication directly on the GPU
 > > c = a * b
-> >
+> > 
+> > # Move the result back to the CPU and convert it to a NumPy array for display
 > > print("Result (PyTorch):", c.cpu().numpy())
 > > ~~~
 > > {: .language-python}
@@ -346,3 +434,6 @@ python pytorch_cuda_test.py
 <!-- > ## Exercise: 
 > Show which parts of the code execute on GPU vs CPU (host vs device). Read about concepts like memory copy and kernel launch.
 {: .challenge} -->
+
+
+
