@@ -38,6 +38,12 @@ The Canadian IDAC runs on top of the [Canadian Astronomy Data Centre (CADC)](htt
 ![CANFAR](../fig/canfar.jpg){: .image-with-shadow width="500px"}
 <p style="text-align: center;">CANFAR service of the Canadian IDAC allows you to run notebooks with a project-specific environment. Credit: <a href="https://docs.google.com/presentation/d/18VOG05kuNqeHtp55CPW5xACFWu0Tgox7/edit?slide=id.g37138d149ef_0_109#slide=id.g37138d149ef_0_109">Canadian IDAC RCW presentation</a></p>
 
+### Argentina IDAC
+Argentina IDAC is envisioned to be an LSST data access point primarily for the Argentinian scientists, however, access can be granted to international collaborators upon agreement. It will carry 1024 CPU cores and 8 GPU Nvidia RTX 6000 Pro Blackwell GPUs, with 3.0 TB RAM and 0.75PB of long-term storage, and is currently being assembled with the planned start of operations in early 2026. The IDAC will host catalogues from the LSST Data Releases, with tentative plans to add object cutouts in the future. The job management will be done with Slurm.
+
+### UK Data Facility
+The UK Data Facility is, at the moment, the only IDAC that plans to host full LSST Data Releases, including epoch images, together with some user-generated data products. This IDAC does not provide HPC features out of the box - the interface is going to be very similar to the RSP, with Jupyter Notebooks having up to 4 CPU and 16 GB RAM allocated per user. However, batch analysis or ML capabilities from other UK-based facilities may be provided for certain projects. Currently, the IDAC is in preview mode, with the start of operations planned in the next few months.
+
 ### Croatian SPC (Scientific Processing Center) Bura
 One of the Croatian in-kind contributions is computing time on the supercomputer Bura, which we will use during this workshop. Unlike the previous projects, this facility's primary function isn't data access, but running HPC calculations. This facility has about 7k CPU nodes with about 95 TB of cluster storage space, together with four GPU nodes. We will talk more about Bura in the next episodes.
 
