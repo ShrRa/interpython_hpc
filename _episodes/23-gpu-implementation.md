@@ -75,12 +75,12 @@ CUDA allows developers to write C, C++, Fortran, and Python code that runs on th
 ![CUDA Kernel Execution on GPU](../fig/cuda_kernel_execution.png)
 <p style="text-align: center;"><a href="https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/">CUDA Kernel Execution</a></p>
 
-### Key Features
+<!-- ### Key Features
 
 - **Massive parallelism** with thousands of concurrent threads
 - **Unified memory architecture** for seamless CPU-GPU data access
 - **Built-in libraries** for BLAS, FFT, random number generation, and more (e.g., cuBLAS, cuFFT, cuRAND)
-- **Tooling support** including profilers, debuggers, and performance analyzers (e.g., Nsight, CUDA-GDB)
+- **Tooling support** including profilers, debuggers, and performance analyzers (e.g., Nsight, CUDA-GDB) -->
 
 ### A CUDA program includes:
 

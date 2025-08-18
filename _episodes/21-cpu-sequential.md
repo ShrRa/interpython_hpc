@@ -30,8 +30,7 @@ So what can we do? There are two main approaches:
 
   -- Use hardware with more processors to implement highly parallelized code. It can be a supercomputer with multiple CPU cores, or a computer with GPUs with thousands of smaller cores.
 
-Before we move on to large-scale supercomputing, let’s first look at a much smaller but very common situation:  
-**how a simple piece of code can be written in different ways, and how that affects performance. (Approach 1)**
+Before we move on to large-scale supercomputing, let’s first look at a much smaller but very common situation - how a simple piece of code can be written in different ways, and how that affects performance. (Approach 1)
 
 Even if we’re only summing the numbers in a big array, the way we write the code can make a big difference.  
 A naïve approach (using a `for` loop) processes one element at a time, while more efficient approaches can take advantage of the CPU’s ability to perform many operations at once.
@@ -65,8 +64,7 @@ print(f"Sum: {total}, Time taken: {end - start:.4f} seconds")
  {: .output}
 
 Depending on your processor, this code may take up to a couple of seconds to execute. 
-Summation is one of those operations that can be vectorized. Instead of looping in Python, we can hand the whole array to a function that knows how to perform the sum in optimized `C` code.
-In Python, the `numpy.sum` function does exactly that, using highly optimized vectorization libraries under the hood. Many other NumPy functions also use vectorization—examples include mean, max, dot, and array-wide arithmetic operations.
+Summation is one of those operations that can be vectorized. In Python, if we loop over an array element by element, the interpreter has to execute each iteration in Python’s high-level code, which adds overhead and slows things down. In contrast, C is a low-level, compiled language, meaning its instructions are executed directly by the CPU without the overhead of Python’s interpreter. Vectorization in this context means that instead of performing the sum one element at a time in Python, we hand the entire array to a function like `numpy.sum`, which is implemented in optimized C code. This function can take advantage of CPU-level optimizations, such as processing multiple elements at once (using SIMD instructions) and reducing loop overhead. In essence, vectorization allows Python to delegate heavy computations to fast, compiled code, giving a huge speed-up while letting us write clean, high-level Python code.
 
 ~~~
 total = np.sum(array)

@@ -256,9 +256,9 @@ def monitor(interval=5):
         time.sleep(interval)
 
 # Start monitoring thread (all ranks or just rank 0)
-if rank == 0:
-    t = threading.Thread(target=monitor, daemon=True)
-    t.start()
+
+t = threading.Thread(target=monitor, daemon=True)
+t.start()
 
 # -------------------------------
 # Parameter grid (same on all ranks)
@@ -452,12 +452,12 @@ Having understood both the results we can now draw a comparision between both th
 ./parallel_program
 ```
 
-> ## Exercise: Optimize Parallel Performance
+<!-- > ## Exercise: Optimize Parallel Performance
 > 
 > Run the MPI version of the gravitational lensing code with 2, 4, 8, 16, and 32 processes.
 > Measure wall time for each run and plot speedup vs. process count.
 > Compare results to Amdahl’s Law prediction.
-{: .challenge}
+{: .challenge} -->
 
 {% include links.md %}
 
