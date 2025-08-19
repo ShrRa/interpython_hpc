@@ -436,6 +436,7 @@ Having understood both the results we can now draw a comparision between both th
 ### Common Pitfalls for Parallel Jobs
 
 1. **Over-requesting resources**
+   
 ```bash
 # Bad: Requesting 128 cores for a code that scales only to 32
 #SBATCH --ntasks=128
@@ -443,7 +444,9 @@ Having understood both the results we can now draw a comparision between both th
 # Good: Match tasks to measured scalability
 #SBATCH --ntasks=32
 ```
+
 2. **Memory allocation errors**
+   
 ```bash
 # Bad: Forgetting memory requests for large MPI jobs
 #SBATCH --nodes=2
@@ -455,6 +458,9 @@ Having understood both the results we can now draw a comparision between both th
 ./parallel_program
 ```
 
+---
+{% include links.md %}
+
 <!-- > ## Exercise: Optimize Parallel Performance
 > 
 > Run the MPI version of the gravitational lensing code with 2, 4, 8, 16, and 32 processes.
@@ -462,7 +468,7 @@ Having understood both the results we can now draw a comparision between both th
 > Compare results to Amdahl’s Law prediction.
 {: .challenge} -->
 
-{% include links.md %}
+
 
 
 <!-- ```bash
