@@ -12,13 +12,15 @@ questions:
 objectives:
 - "Put the course in context with future learning."
 keypoints:
-- "Keypoint 1"
+- "This course teaches the basics of HPC, however, the topic itself is vast and may take a long time to master."
 ---
 
-## Summary
 
+With this, we conclude our workshop. We have only scratched the surface of how HPC can be applied to astronomical software development, as HPC is an entire discipline in its own right, spanning algorithm design, optimization, engineering, and software architecture.  But the tools you’ve worked with over the past two days are enough to get started. From here, it is a good idea to read the documentation for the HPC facility you plan to use, experiment with running your own code, and analyze which parts of your workflow can be parallelized and which may become bottlenecks.  
 
-## Further Resources
+Do not hesitate to reach out to us for help with the exercises or with any questions regarding the materials, and keep an eye on the advertisements in the LSST Slack, as we plan to organize a more in-depth workshop on HPC _software development_ in the next few months. 
+
+### Further Resources
 
 Below are some additional resources to help you continue learning:
 
