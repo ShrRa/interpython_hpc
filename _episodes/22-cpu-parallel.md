@@ -455,9 +455,8 @@ Make sure your virtual environment has `mpi4py` installed and that your system h
 
 > ## Exercise 2: Broadcast after gather
 >
-> Currently, only the root process (rank 0) collects the data.  
-> Modify the code so that after gathering, the root process  
-> **broadcasts** the complete list back to all processes.  
+> Currently, only the root process (rank 0) collects the data. 
+> Modify the code so that after gathering, the root process **broadcasts** ('sends') the complete list back to all processes.  
 >
 > Hint: Use `comm.bcast()` after `comm.gather()`.  
 >
