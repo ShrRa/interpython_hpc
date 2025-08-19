@@ -36,7 +36,7 @@ The fundamental difference lies in their design philosophy. CPUs are optimized f
 - CPUs: Few powerful cores, better for sequential tasks.
 - GPUs: Many lightweight cores, ideal for parallel workloads.
 
-![GPU vs CPU architecture](../fig/gpu-vs-cpu.png)
+![GPU vs CPU architecture](../fig/gpu-vs-cpu.png){: .image-with-shadow width="500px"}
 <p style="text-align: center;">Unlike CPU, that has to handle huge variety of tasks and control data flow in a complicated manner, GPUs dedicate more transistors to data operations. Credit: <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html">CUDA C Programming Guide</a></p>
 
 ## Comparing CPU and GPU Approaches
@@ -165,11 +165,6 @@ This formula lets every thread know its **global position** in the grid.
 - Each **CUDA core** executes **individual threads**.
 - A GPU has **many SMs**, which is why it can run *thousands of threads simultaneously*.
 
-**Mapping (image reference):**
-- Single thread → CUDA core  
-- Thread block → Streaming Multiprocessor (SM)  
-- Grid → Whole GPU
-
 ---
 
 ## 4. Summary Table
@@ -182,8 +177,8 @@ This formula lets every thread know its **global position** in the grid.
 
 We can visualise this using the diagrams given below: 
 
-![CUDA Kernel Execution on GPU](../fig/cuda_kernel_execution.png)
-![CUDA heirarchy visulation lower level](../fig/cuda_blocks.png)
+![CUDA Kernel Execution on GPU](../fig/cuda_kernel_execution.png){: .image-with-shadow width="500px"}
+![CUDA heirarchy visulation lower level](../fig/cuda_blocks.png){: .image-with-shadow width="500px"}
 <p style="text-align: center;"><a href="https://developer.nvidia.com/blog/cuda-refresher-cuda-programming-model/">CUDA Kernel Execution</a></p>
 
 <!-- ### Key Features
