@@ -260,7 +260,7 @@ Detected GPU: b'NVIDIA GeForce RTX 3060 Laptop GPU'
 {: .output}
 ---
 
-### Approach 1: Add vectors utlising CUDA using the numba python library 
+### Approach 1: Add vectors using the `numba` Python library 
 
 ~~~
 # File Name - numba_cuda.py
@@ -345,6 +345,14 @@ In the **Numba example**, we see how CUDA works at a low level:
 - Finally, we copy the results back from device to host memory.  
 
 This approach is very close to how CUDA is programmed in C/C++. It teaches us about **threads, blocks, and memory transfers**, which are the fundamental ideas of CUDA programming as we saw in the CUDA heirarchy section.
+
+> ## Python decorators
+> It is entirely possible that even if you've been programming with Python for a long time now, you have never
+> encountered [decorators](https://book.pythontips.com/en/latest/decorators.html) before. They may seem mysterious, however, the idea behind them is quite
+> simple - they are _wrapper_ functions, that accept user-defined function as a parameter. This is possible because in Python, everything is an _object_, including
+> functions, so you can assign them to a variable, pass as a parameter or return from another function. Common application for decorators is logging or performance measurement, or,
+> as we saw above, a conversion to a format that can be executed on a GPU.
+{: .callout}
 
 ### Approach 2: Add vectors using Torch
 
