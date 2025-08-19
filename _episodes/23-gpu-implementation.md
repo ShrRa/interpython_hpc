@@ -338,7 +338,7 @@ In the **Numba example**, we see how CUDA works at a low level:
 - We also configure how many **threads per block** and how many **blocks per grid** to use before launching the kernel.  
 - Finally, we copy the results back from device to host memory.  
 
-This approach is very close to how CUDA is programmed in C/C++. It teaches us about **threads, blocks, and memory transfers**, which are the fundamental ideas of CUDA programming as we saw in the CUDA heirarchy section.
+This approach is very close to how CUDA is programmed in C/C++. Taking care of **threads, blocks, and memory transfers** is mandatory when we are doing programming with a low-level tool, such as CUDA.
 
 > ## Python decorators
 > It is entirely possible that even if you've been programming with Python for a long time now, you have never
