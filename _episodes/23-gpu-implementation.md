@@ -36,9 +36,8 @@ The fundamental difference lies in their design philosophy. CPUs are optimized f
 - CPUs: Few powerful cores, better for sequential tasks.
 - GPUs: Many lightweight cores, ideal for parallel workloads.
 
-> ## Figure Suggestion: 
-> Diagram comparing CPU vs GPU architecture, e.g., from [CUDA C Programming Guide](https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html)
-{: .callout}
+![GPU vs CPU architecture](../fig/gpu-vs-cpu.png)
+<p style="text-align: center;">Unlike CPU, that has to handle huge variety of tasks and control data flow in a complicated manner, GPUs dedicate more transistors to data operations. Credit: <a href="https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html">CUDA C Programming Guide</a></p>
 
 ## Comparing CPU and GPU Approaches
 
