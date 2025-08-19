@@ -25,5 +25,11 @@ $ module load python/Python-3.10.5
 $ module load mpi/intel-2021.5
 $ module load gcc/gcc-13.2.0
 ```
+If you missed to create a virtual environment yesterday, you can create it using the following command:
+
+```bash
+python -m venv interpython
+```
+Once you run this, you can then run the commands mentioned above for activating the virtual environment and loading the modules. 
 
 {% include links.md %}
