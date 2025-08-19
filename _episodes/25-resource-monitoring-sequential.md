@@ -320,7 +320,7 @@ Timestamp           | CPU% | Memory(MB)
    ./sequential_program
    ```
 
-## Profiling Sequential Jobs with `htop`
+<!-- ## Profiling Sequential Jobs with `htop`
 
 In addition to using our custom `monitor_resources.sh` script, we can use the interactive tool **`htop`** to profile CPU and memory usage in real time.  
 
@@ -347,7 +347,7 @@ srun --pty htop
 - u → filter by user (see only your jobs).
 - / → search for a process (e.g., type python).
 - F6 → sort by CPU%, memory, or time.
-- q → quit.
+- q → quit. -->
 
 
 <!-- > ## Exercise: Profile Your Code
